@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xero Report Code Mapping - Interactive Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Xero Report Code Mapping</h1>
+            <p>Interactive Chart of Accounts Validation and Resolution</p>
+        </header>
+
+        <main>
+            <!-- File Upload Section -->
+            <section id="upload-section" class="card">
+                <h2>Upload Files</h2>
+                <div class="upload-grid">
+                    <div class="upload-zone" id="chart-upload">
+                        <div class="upload-content">
+                            <div class="upload-icon">📊</div>
+                            <h3>Chart of Accounts</h3>
+                            <p>Drag & drop CSV or XLSX file here</p>
+                            <input type="file" id="chart-file" accept=".csv,.xlsx" hidden>
+                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('chart-file').click()">
+                                Choose File
+                            </button>
+                        </div>
+                        <div class="file-info" id="chart-info" style="display: none;">
+                            <span class="file-name"></span>
+                            <span class="file-status"></span>
+                        </div>
+                    </div>
+
+                    <div class="upload-zone" id="trial-upload">
+                        <div class="upload-content">
+                            <div class="upload-icon">💰</div>
+                            <h3>Trial Balance</h3>
+                            <p>Drag & drop CSV or XLSX file here</p>
+                            <input type="file" id="trial-file" accept=".csv,.xlsx" hidden>
+                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('trial-file').click()">
+                                Choose File
+                            </button>
+                        </div>
+                        <div class="file-info" id="trial-info" style="display: none;">
+                            <span class="file-name"></span>
+                            <span class="file-status"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="template-select">Template Chart:</label>
+                    <select id="template-select" class="form-control">
+                        <option value="">Select template...</option>
+                        <option value="Company">Company</option>
+                        <option value="Trust">Trust</option>
+                        <option value="SoleTrader">Sole Trader</option>
+                        <option value="Partnership">Partnership</option>
+                        <option value="XeroHandi">Xero Handi</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="industry-input">Industry (Optional):</label>
+                    <input type="text" id="industry-input" class="form-control" placeholder="e.g., Building & Construction">
+                </div>
+
+                <button type="button" id="validate-btn" class="btn btn-primary" disabled>
+                    Validate Files
+                </button>
+            </section>
+
+            <!-- Validation Results Section -->
+            <section id="validation-section" class="card" style="display: none;">
+                <h2>Validation Results</h2>
+                <div id="validation-summary" class="validation-summary">
+                    <!-- Summary will be populated by JavaScript -->
+                </div>
+                <div id="validation-actions" class="validation-actions">
+                    <button type="button" id="proceed-btn" class="btn btn-success" style="display: none;">
+                        Proceed with Mapping
+                    </button>
+                    <button type="button" id="resolve-btn" class="btn btn-warning" style="display: none;">
+                        Resolve Issues
+                    </button>
+                </div>
+            </section>
+
+            <!-- Resolution Interface Section -->
+            <section id="resolution-section" class="card" style="display: none;">
+                <h2>Issue Resolution</h2>
+                <div class="resolution-tabs">
+                    <button type="button" class="tab-btn active" data-tab="integrity">Integrity Issues</button>
+                    <button type="button" class="tab-btn" data-tab="balance">Balance Anomalies</button>
+                </div>
+
+                <div id="integrity-tab" class="tab-content active">
+                    <div class="resolution-controls">
+                        <button type="button" id="accept-all-btn" class="btn btn-success">Accept All Suggestions</button>
+                        <button type="button" id="export-decisions-btn" class="btn btn-secondary">Export Decisions</button>
+                    </div>
+                    <div id="integrity-issues" class="issues-list">
+                        <!-- Issues will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div id="balance-tab" class="tab-content">
+                    <div class="resolution-controls">
+                        <button type="button" id="bulk-reclassify-btn" class="btn btn-warning">Bulk Reclassify</button>
+                    </div>
+                    <div id="balance-anomalies" class="issues-list">
+                        <!-- Anomalies will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Processing Section -->
+            <section id="processing-section" class="card" style="display: none;">
+                <h2>Processing</h2>
+                <div class="processing-content">
+                    <div class="spinner"></div>
+                    <p id="processing-message">Processing files...</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="card" style="display: none;">
+                <h2>Results</h2>
+                <div id="results-content">
+                    <!-- Results will be populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Xero Report Code Mapping Tool</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

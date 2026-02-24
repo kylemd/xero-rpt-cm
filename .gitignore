@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+wheels/
+
+# Virtual environments
+.venv/
+.rcm_env/
+
+# IDE / Editor
+.cursor/
+.vscode/
+*.swp
+*.swo
+
+# Client data (never commit live charts, journals, or trial balances)
+Clients/
+ManualJournal*.csv
+/ChartOfAccounts*.csv
+*Trial_Balance*.xlsx
+
+# Generated outputs (produced per-run alongside client inputs)
+ReportingTree.json
+out.json
+AugmentedChartOfAccounts*
+ChangeOrErrorReport*
+ClarificationLog*
+*_findings.json
+temp_*.txt
+
+# Development reference (archival old codebases, too large for git)
+.dev-info/
+
+# OS
+Thumbs.db
+.DS_Store

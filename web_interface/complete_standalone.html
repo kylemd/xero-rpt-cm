@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xero Report Code Mapping - Complete Standalone Tool</title>
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        /* Upload zones */
+        .upload-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .upload-zone {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+        
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .upload-zone h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .upload-zone p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .file-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #e8f5e8;
+            border-radius: 5px;
+            text-align: left;
+        }
+        
+        .file-name {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .file-status {
+            color: #28a745;
+        }
+        
+        .file-status.error {
+            color: #dc3545;
+        }
+        
+        /* Form elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: #5a6fd8;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover:not(:disabled) {
+            background: #218838;
+        }
+        
+        .btn-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+        
+        .btn-warning:hover:not(:disabled) {
+            background: #e0a800;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-danger:hover:not(:disabled) {
+            background: #c82333;
+        }
+        
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .btn-info:hover:not(:disabled) {
+            background: #138496;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        
+        /* Processing section */
+        .processing-content {
+            text-align: center;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        /* Results section */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .result-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .result-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .result-card p {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Issues section */
+        .resolution-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .tab-btn {
+            padding: 1rem 2rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab-btn:hover {
+            color: #333;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .resolution-controls {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .issues-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .issue-item {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .issue-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .issue-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .issue-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .issue-severity {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .issue-severity.critical {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .issue-severity.high {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .issue-severity.high {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .issue-details {
+            margin-bottom: 1rem;
+        }
+        
+        .issue-details p {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Balance context table */
+        .balance-context {
+            margin: 1rem 0;
+        }
+        
+        .balance-context h4 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .balance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        
+        .balance-table th,
+        .balance-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .balance-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .balance-table .debit {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .balance-table .credit {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        /* Diff view */
+        .diff-view {
+            margin: 1rem 0;
+        }
+        
+        .diff-view h4 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .diff-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .diff-side h5 {
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .code-display {
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        
+        .code-display.original {
+            background: #e8f5e8;
+            border: 1px solid #28a745;
+            color: #155724;
+        }
+        
+        .code-display.current {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+        }
+        
+        /* Issue actions */
+        .issue-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .suggestion-select,
+        .code-select {
+            min-width: 200px;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+        
+        .reason-input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            font-size: 0.9rem;
+        }
+        
+        .reason-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+        
+        /* Messages */
+        .success-message,
+        .error-message,
+        .warning-message {
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .warning-message {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            border-top: 1px solid #eee;
+            margin-top: 2rem;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .upload-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .diff-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .issue-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .suggestion-select,
+            .code-select {
+                min-width: auto;
+            }
+        }
+        
+        .mt-20 {
+            margin-top: 20px;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Xero Report Code Mapping</h1>
+            <p>Complete Standalone Chart of Accounts Processing Tool</p>
+        </header>
+
+        <main>
+            <!-- File Upload Section -->
+            <section id="upload-section" class="card">
+                <h2>Upload Files</h2>
+                <div class="upload-grid">
+                    <div class="upload-zone" id="chart-upload">
+                        <div class="upload-content">
+                            <div class="upload-icon">📊</div>
+                            <h3>Chart of Accounts</h3>
+                            <p>Drag & drop CSV or XLSX file here</p>
+                            <input type="file" id="chart-file" accept=".csv,.xlsx" hidden>
+                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('chart-file').click()">
+                                Choose File
+                            </button>
+                        </div>
+                        <div class="file-info" id="chart-info" style="display: none;">
+                            <span class="file-name"></span>
+                            <span class="file-status"></span>
+                        </div>
+                    </div>
+
+                    <div class="upload-zone" id="trial-upload">
+                        <div class="upload-content">
+                            <div class="upload-icon">💰</div>
+                            <h3>Trial Balance</h3>
+                            <p>Drag & drop CSV or XLSX file here</p>
+                            <input type="file" id="trial-file" accept=".csv,.xlsx" hidden>
+                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('trial-file').click()">
+                                Choose File
+                            </button>
+                        </div>
+                        <div class="file-info" id="trial-info" style="display: none;">
+                            <span class="file-name"></span>
+                            <span class="file-status"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="template-select">Template Chart:</label>
+                    <select id="template-select" class="form-control">
+                        <option value="">Select template...</option>
+                        <option value="Company">Company</option>
+                        <option value="Trust">Trust</option>
+                        <option value="SoleTrader">Sole Trader</option>
+                        <option value="Partnership">Partnership</option>
+                        <option value="XeroHandi">Xero Handi</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="industry-input">Industry (Optional):</label>
+                    <input type="text" id="industry-input" class="form-control" placeholder="e.g., Building & Construction">
+                </div>
+
+                <button type="button" id="process-btn" class="btn btn-primary" disabled>
+                    Process Files
+                </button>
+            </section>
+
+            <!-- Processing Section -->
+            <section id="processing-section" class="card" style="display: none;">
+                <h2>Processing</h2>
+                <div class="processing-content">
+                    <div class="spinner"></div>
+                    <p id="processing-message">Processing files...</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="card" style="display: none;">
+                <h2>Processing Results</h2>
+                <div id="results-content">
+                    <!-- Results will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Issues Section -->
+            <section id="issues-section" class="card" style="display: none;">
+                <h2>Issues Found</h2>
+                <div class="resolution-tabs">
+                    <button type="button" class="tab-btn active" data-tab="balance">Balance Anomalies</button>
+                    <button type="button" class="tab-btn" data-tab="integrity">Integrity Issues</button>
+                </div>
+
+                <div id="balance-tab" class="tab-content active">
+                    <div class="resolution-controls">
+                        <button type="button" id="accept-all-balance-btn" class="btn btn-success">Accept All Suggestions</button>
+                        <button type="button" id="download-adjusted-btn" class="btn btn-primary">Download Adjusted Chart</button>
+                    </div>
+                    <div id="balance-issues" class="issues-list">
+                        <!-- Balance issues will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div id="integrity-tab" class="tab-content">
+                    <div class="resolution-controls">
+                        <button type="button" id="accept-all-integrity-btn" class="btn btn-success">Accept All Suggestions</button>
+                        <button type="button" id="download-adjusted-integrity-btn" class="btn btn-primary">Download Adjusted Chart</button>
+                    </div>
+                    <div id="integrity-issues" class="issues-list">
+                        <!-- Integrity issues will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Xero Report Code Mapping Tool</p>
+            <p><strong>Complete Standalone Version</strong> - No server required, all processing done in your browser</p>
+        </footer>
+    </div>
+
+    <script>
+        class CompleteMapper {
+            constructor() {
+                this.chartFile = null;
+                this.trialFile = null;
+                this.chartData = null;
+                this.trialData = null;
+                this.processedChart = null;
+                this.balanceAnomalies = [];
+                this.integrityIssues = [];
+                this.resolutionDecisions = [];
+                
+                this.initializeEventListeners();
+                this.loadTemplateData();
+            }
+            
+            initializeEventListeners() {
+                // File upload handlers
+                this.setupFileUpload('chart-file', 'chart-upload', 'chart-info');
+                this.setupFileUpload('trial-file', 'trial-upload', 'trial-info');
+                
+                // Button handlers
+                document.getElementById('process-btn').addEventListener('click', () => this.processFiles());
+                document.getElementById('accept-all-balance-btn').addEventListener('click', () => this.acceptAllBalanceSuggestions());
+                document.getElementById('accept-all-integrity-btn').addEventListener('click', () => this.acceptAllIntegritySuggestions());
+                document.getElementById('download-adjusted-btn').addEventListener('click', () => this.downloadAdjustedChart());
+                document.getElementById('download-adjusted-integrity-btn').addEventListener('click', () => this.downloadAdjustedChart());
+                
+                // Tab handlers
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.switchTab(e.target.dataset.tab));
+                });
+                
+                // Form validation
+                document.getElementById('template-select').addEventListener('change', () => this.updateProcessButton());
+            }
+            
+            setupFileUpload(inputId, dropZoneId, infoId) {
+                const input = document.getElementById(inputId);
+                const dropZone = document.getElementById(dropZoneId);
+                const info = document.getElementById(infoId);
+                
+                // Click to upload
+                dropZone.addEventListener('click', () => input.click());
+                
+                // Drag and drop
+                dropZone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    dropZone.classList.add('dragover');
+                });
+                
+                dropZone.addEventListener('dragleave', () => {
+                    dropZone.classList.remove('dragover');
+                });
+                
+                dropZone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('dragover');
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        this.handleFileSelect(files[0], inputId, infoId);
+                    }
+                });
+                
+                // File input change
+                input.addEventListener('change', (e) => {
+                    if (e.target.files.length > 0) {
+                        this.handleFileSelect(e.target.files[0], inputId, infoId);
+                    }
+                });
+            }
+            
+            async handleFileSelect(file, inputId, infoId) {
+                const info = document.getElementById(infoId);
+                const fileName = info.querySelector('.file-name');
+                const fileStatus = info.querySelector('.file-status');
+                
+                // Validate file type
+                const allowedTypes = ['.csv', '.xlsx'];
+                const fileExt = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
+                
+                if (!allowedTypes.includes(fileExt)) {
+                    fileStatus.textContent = 'Invalid file type. Please upload CSV or XLSX.';
+                    fileStatus.className = 'file-status error';
+                    info.style.display = 'block';
+                    return;
+                }
+                
+                // Store file reference
+                if (inputId === 'chart-file') {
+                    this.chartFile = file;
+                } else if (inputId === 'trial-file') {
+                    this.trialFile = file;
+                }
+                
+                // Parse file content
+                try {
+                    const data = await this.parseFile(file);
+                    if (inputId === 'chart-file') {
+                        this.chartData = data;
+                    } else {
+                        this.trialData = data;
+                    }
+                    
+                    // Update UI
+                    fileName.textContent = file.name;
+                    fileStatus.textContent = 'File ready';
+                    fileStatus.className = 'file-status';
+                    info.style.display = 'block';
+                    
+                    // Add remove button
+                    this.addRemoveButton(infoId);
+                    
+                } catch (error) {
+                    fileStatus.textContent = `Error parsing file: ${error.message}`;
+                    fileStatus.className = 'file-status error';
+                    info.style.display = 'block';
+                    return;
+                }
+                
+                this.updateProcessButton();
+            }
+            
+            async parseFile(file) {
+                const fileExt = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
+                
+                if (fileExt === '.csv') {
+                    return new Promise((resolve, reject) => {
+                        Papa.parse(file, {
+                            header: true,
+                            skipEmptyLines: true,
+                            complete: (results) => {
+                                if (results.errors.length > 0) {
+                                    reject(new Error(results.errors[0].message));
+                                } else {
+                                    resolve(results.data);
+                                }
+                            },
+                            error: (error) => reject(error)
+                        });
+                    });
+                } else if (fileExt === '.xlsx') {
+                    return new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            try {
+                                const data = new Uint8Array(e.target.result);
+                                const workbook = XLSX.read(data, { type: 'array' });
+                                const sheetName = workbook.SheetNames[0];
+                                const worksheet = workbook.Sheets[sheetName];
+                                
+                                // Check for Xero format
+                                const firstCell = worksheet['A1'] ? worksheet['A1'].v : '';
+                                const thirdCell = worksheet['A3'] ? worksheet['A3'].v : '';
+                                
+                                let jsonData;
+                                if (firstCell === 'Trial Balance' && thirdCell.toString().startsWith('As at ')) {
+                                    // Xero format - skip first 4 rows
+                                    const range = XLSX.utils.decode_range(worksheet['!ref']);
+                                    range.s.r = 4; // Start from row 5 (0-indexed)
+                                    worksheet['!ref'] = XLSX.utils.encode_range(range);
+                                    jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                                } else {
+                                    jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                                }
+                                
+                                // Convert to objects with headers
+                                if (jsonData.length > 0) {
+                                    const headers = jsonData[0];
+                                    const rows = jsonData.slice(1);
+                                    const result = rows.map(row => {
+                                        const obj = {};
+                                        headers.forEach((header, index) => {
+                                            obj[header] = row[index] || '';
+                                        });
+                                        return obj;
+                                    });
+                                    resolve(result);
+                                } else {
+                                    resolve([]);
+                                }
+                            } catch (error) {
+                                reject(error);
+                            }
+                        };
+                        reader.onerror = () => reject(new Error('Failed to read file'));
+                        reader.readAsArrayBuffer(file);
+                    });
+                }
+            }
+            
+            addRemoveButton(infoId) {
+                const info = document.getElementById(infoId);
+                const existingRemoveBtn = info.querySelector('.remove-file-btn');
+                
+                if (existingRemoveBtn) {
+                    existingRemoveBtn.remove();
+                }
+                
+                const removeBtn = document.createElement('button');
+                removeBtn.type = 'button';
+                removeBtn.className = 'btn btn-danger btn-sm remove-file-btn';
+                removeBtn.textContent = 'Remove';
+                removeBtn.style.marginTop = '10px';
+                removeBtn.onclick = () => this.removeFile(infoId);
+                
+                info.appendChild(removeBtn);
+            }
+            
+            removeFile(infoId) {
+                const info = document.getElementById(infoId);
+                const input = document.getElementById(infoId.replace('-info', '-file'));
+                
+                // Clear file reference
+                if (infoId === 'chart-info') {
+                    this.chartFile = null;
+                    this.chartData = null;
+                } else if (infoId === 'trial-info') {
+                    this.trialFile = null;
+                    this.trialData = null;
+                }
+                
+                // Clear input
+                input.value = '';
+                
+                // Hide info
+                info.style.display = 'none';
+                
+                // Remove remove button
+                const removeBtn = info.querySelector('.remove-file-btn');
+                if (removeBtn) {
+                    removeBtn.remove();
+                }
+                
+                this.updateProcessButton();
+            }
+            
+            updateProcessButton() {
+                const processBtn = document.getElementById('process-btn');
+                const template = document.getElementById('template-select').value;
+                
+                const canProcess = this.chartFile && this.trialFile && template;
+                processBtn.disabled = !canProcess;
+            }
+            
+            loadTemplateData() {
+                // Load template data for processing
+                // This would normally load from template files, but for standalone we'll use basic rules
+                this.templateData = {
+                    'Company': {
+                        'head_mappings': {
+                            'revenue': 'REV.TRA',
+                            'other income': 'REV.OTH',
+                            'expense': 'EXP',
+                            'direct costs': 'EXP.COS',
+                            'current asset': 'ASS.CUR',
+                            'fixed asset': 'ASS.NCA.FIX',
+                            'non-current asset': 'ASS.NCA',
+                            'current liability': 'LIA.CUR',
+                            'non-current liability': 'LIA.NCL',
+                            'equity': 'EQU'
+                        }
+                    }
+                };
+            }
+            
+            async processFiles() {
+                if (!this.chartFile || !this.trialFile) {
+                    this.showError('Please upload both Chart of Accounts and Trial Balance files.');
+                    return;
+                }
+                
+                const template = document.getElementById('template-select').value;
+                if (!template) {
+                    this.showError('Please select a template chart.');
+                    return;
+                }
+                
+                this.showProcessing('Processing files...');
+                
+                try {
+                    // Step 1: Detect balance anomalies
+                    this.updateProgress(20, 'Detecting balance anomalies...');
+                    this.balanceAnomalies = this.detectBalanceAnomalies();
+                    
+                    // Step 2: Process chart with reporting codes
+                    this.updateProgress(40, 'Processing chart of accounts...');
+                    this.processedChart = this.processChartOfAccounts();
+                    
+                    // Step 3: Detect integrity issues
+                    this.updateProgress(60, 'Checking integrity rules...');
+                    this.integrityIssues = this.detectIntegrityIssues();
+                    
+                    // Step 4: Generate results
+                    this.updateProgress(80, 'Generating results...');
+                    this.showResults();
+                    
+                    // Step 5: Show issues if any
+                    this.updateProgress(100, 'Complete!');
+                    if (this.balanceAnomalies.length > 0 || this.integrityIssues.length > 0) {
+                        this.showIssues();
+                    }
+                    
+                } catch (error) {
+                    this.showError(`Processing failed: ${error.message}`);
+                } finally {
+                    this.hideProcessing();
+                }
+            }
+            
+            detectBalanceAnomalies() {
+                const anomalies = [];
+                
+                if (!this.chartData || !this.trialData || this.trialData.length === 0) {
+                    return anomalies;
+                }
+                
+                // Debug: Log available columns
+                console.log('Trial balance columns:', Object.keys(this.trialData[0] || {}));
+                console.log('Chart data columns:', Object.keys(this.chartData[0] || {}));
+                console.log('Sample trial balance row:', this.trialData[0]);
+                console.log('Sample chart row:', this.chartData[0]);
+                
+                // Find balance columns (exclude code, name, type columns)
+                const balanceColumns = Object.keys(this.trialData[0] || {}).filter(col => {
+                    const colLower = col.toLowerCase();
+                    return !colLower.includes('code') && 
+                           !colLower.includes('name') && 
+                           !colLower.includes('type') &&
+                           !colLower.includes('description') &&
+                           !colLower.includes('account') &&  // Exclude "Account" column
+                           (colLower.includes('debit') || 
+                            colLower.includes('credit') || 
+                            colLower.includes('june') || 
+                            colLower.includes('202') || 
+                            colLower.includes('balance'));
+                });
+                
+                if (balanceColumns.length < 2) {
+                    return anomalies;
+                }
+                
+                // Process each account from Chart of Accounts (source of truth)
+                this.chartData.forEach((chartRow, index) => {
+                    const accountCode = this.getAccountCode(chartRow);
+                    const accountName = this.getAccountName(chartRow);
+                    const accountType = this.getAccountType(chartRow);
+                    
+                    if (!accountCode || !accountName || !accountType) return;
+                    
+                    // Find matching trial balance row
+                    const trialRow = this.trialData.find(tr => this.getAccountCode(tr) === accountCode);
+                    if (!trialRow) return; // No trial balance data for this account
+                    
+                    // Get reporting code from chart data
+                    const reportingCode = chartRow['Report Code'] || chartRow['Reporting Code'] || '';
+                    
+                    // Debug: Log account matching for first few accounts
+                    if (index < 3) {
+                        console.log(`Chart Account ${index}:`, {
+                            code: accountCode,
+                            name: accountName,
+                            type: accountType,
+                            reportingCode: reportingCode,
+                            trialRow: trialRow
+                        });
+                    }
+                    
+                    // Skip contra accounts that are expected to have opposite balances
+                    if (this.isContraAccount(accountCode, accountName, reportingCode)) {
+                        return;
+                    }
+                    
+                    // Calculate Dr/(Cr) balance for year-to-date
+                    const debitYTD = this.parseAmount(trialRow['Debit - Year to date'] || 0);
+                    const creditYTD = this.parseAmount(trialRow['Credit - Year to date'] || 0);
+                    const ytdBalance = debitYTD - creditYTD; // Positive = Debit, Negative = Credit
+                    
+                    // Get period balances (already in Dr/(Cr) format)
+                    const periodBalances = balanceColumns.map(col => {
+                        if (col === 'Debit - Year to date' || col === 'Credit - Year to date') {
+                            return null; // Skip these, we'll use calculated YTD
+                        }
+                        return this.parseAmount(trialRow[col] || 0);
+                    }).filter(b => b !== null);
+                    
+                    // Add calculated YTD balance
+                    periodBalances.unshift(ytdBalance);
+                    
+                    // Check for consistent contrary balances
+                    const nonZeroBalances = periodBalances.filter(b => Math.abs(b) > 0.01);
+                    if (nonZeroBalances.length < 2) return;
+                    
+                    const expectedSign = this.getExpectedBalanceSign(accountType);
+                    const contraryCount = nonZeroBalances.filter(b => 
+                        (expectedSign > 0 && b < 0) || (expectedSign < 0 && b > 0)
+                    ).length;
+                    
+                    const contraryPercentage = contraryCount / nonZeroBalances.length;
+                    
+                    // Only flag if it's a significant anomaly (≥75% contrary)
+                    if (contraryPercentage >= 0.75) {
+                        // Create balance history with proper column names
+                        const balanceHistory = this.formatBalanceHistoryWithYTD(periodBalances, balanceColumns, ytdBalance);
+                        
+                        anomalies.push({
+                            account_code: accountCode,
+                            account_name: accountName,
+                            account_type: accountType,
+                            reporting_code: reportingCode,
+                            severity: contraryPercentage === 1 ? 'Critical' : 'High',
+                            recommendation: this.getBalanceRecommendation(accountType, contraryPercentage),
+                            periods_checked: nonZeroBalances.length,
+                            row: index + 1,
+                            suggested_type: this.getSuggestedType(accountType, contraryPercentage),
+                            balance_history: balanceHistory
+                        });
+                    }
+                });
+                
+                return anomalies;
+            }
+            
+            isContraAccount(accountCode, accountName, reportingCode) {
+                // Check if this is a contra account that should have opposite balance
+                // Based on regex patterns: ASS.*.ACC, ASS.*.AMO, LIA.*.UEI
+                const contraPatterns = [
+                    /acc/i,  // Accumulated depreciation
+                    /amo/i,  // Amortization
+                    /uei/i,  // Unexpired interest
+                    /contra/i,
+                    /allowance/i,
+                    /provision/i
+                ];
+                
+                // Check account code and name patterns
+                const nameCodeMatch = contraPatterns.some(pattern => 
+                    pattern.test(accountCode) || pattern.test(accountName)
+                );
+                
+                // Check reporting code patterns
+                if (reportingCode) {
+                    const reportingCodeMatch = /ASS\..*\.(ACC|AMO)|LIA\..*\.UEI/.test(reportingCode);
+                    if (reportingCodeMatch) return true;
+                }
+                
+                return nameCodeMatch;
+            }
+            
+            getAccountCode(row) {
+                // Try multiple possible column names for account code
+                const possibleCodeColumns = [
+                    'Account Code',
+                    'Code',
+                    '*Code',
+                    'Account',
+                    'Account Number'
+                ];
+                
+                // First try exact matches
+                for (const col of possibleCodeColumns) {
+                    if (row[col] && row[col].toString().trim()) {
+                        return row[col].toString().trim();
+                    }
+                }
+                
+                // Then try case-insensitive partial matches
+                const codeColumns = Object.keys(row).filter(col => 
+                    col.toLowerCase().includes('code')
+                );
+                
+                if (codeColumns.length > 0) {
+                    const code = row[codeColumns[0]];
+                    return code ? code.toString().trim() : null;
+                }
+                
+                return null;
+            }
+            
+            getAccountName(row) {
+                // Try multiple possible column names for account name
+                const possibleNameColumns = [
+                    'Account',
+                    'Account Name', 
+                    'Name',
+                    '*Name',
+                    'Account Description',
+                    'Description'
+                ];
+                
+                // First try exact matches
+                for (const col of possibleNameColumns) {
+                    if (row[col] && row[col].toString().trim()) {
+                        return row[col].toString().trim();
+                    }
+                }
+                
+                // Then try case-insensitive partial matches
+                const nameColumns = Object.keys(row).filter(col => {
+                    const colLower = col.toLowerCase();
+                    return (colLower.includes('name') || colLower.includes('account')) && 
+                           !colLower.includes('code') && 
+                           !colLower.includes('type') &&
+                           !colLower.includes('balance') &&
+                           !colLower.includes('debit') &&
+                           !colLower.includes('credit');
+                });
+                
+                if (nameColumns.length > 0) {
+                    const name = row[nameColumns[0]];
+                    return name ? name.toString().trim() : '';
+                }
+                
+                return '';
+            }
+            
+            getAccountType(row) {
+                const typeColumns = Object.keys(row).filter(col => 
+                    col.toLowerCase().includes('type')
+                );
+                return typeColumns.length > 0 ? row[typeColumns[0]] : null;
+            }
+            
+            getExpectedBalanceSign(accountType) {
+                const typeLower = accountType.toLowerCase();
+                if (typeLower.includes('asset') || typeLower.includes('expense')) {
+                    return 1; // Debit (positive)
+                } else if (typeLower.includes('liability') || typeLower.includes('revenue') || typeLower.includes('equity')) {
+                    return -1; // Credit (negative)
+                }
+                return 0; // Unknown
+            }
+            
+            getBalanceRecommendation(accountType, contraryPercentage) {
+                const severity = contraryPercentage === 1 ? 'consistently' : 'mostly';
+                const oppositeType = this.getOppositeType(accountType);
+                return `Account has ${severity} ${this.getOppositeBalanceType(accountType)} balance. Consider reviewing if this should be classified as ${oppositeType} instead of ${accountType}.`;
+            }
+            
+            getOppositeType(accountType) {
+                const typeLower = accountType.toLowerCase();
+                if (typeLower.includes('asset')) {
+                    return 'Liability';
+                } else if (typeLower.includes('liability')) {
+                    return 'Asset';
+                } else if (typeLower.includes('revenue')) {
+                    return 'Expense';
+                } else if (typeLower.includes('expense')) {
+                    return 'Revenue';
+                }
+                return 'Unknown';
+            }
+            
+            getOppositeBalanceType(accountType) {
+                const typeLower = accountType.toLowerCase();
+                if (typeLower.includes('asset') || typeLower.includes('expense')) {
+                    return 'credit';
+                } else if (typeLower.includes('liability') || typeLower.includes('revenue')) {
+                    return 'debit';
+                }
+                return 'opposite';
+            }
+            
+            formatBalanceHistory(balances, balanceColumns) {
+                return balanceColumns.map((col, index) => ({
+                    period: col,
+                    balance: balances[index]
+                }));
+            }
+            
+            formatBalanceHistoryWithYTD(periodBalances, balanceColumns, ytdBalance) {
+                const history = [];
+                
+                // Add calculated YTD balance first
+                history.push({
+                    period: 'Year to Date',
+                    balance: ytdBalance
+                });
+                
+                // Add period balances
+                let balanceIndex = 1; // Skip YTD balance
+                balanceColumns.forEach(col => {
+                    if (col !== 'Debit - Year to date' && col !== 'Credit - Year to date') {
+                        history.push({
+                            period: col,
+                            balance: periodBalances[balanceIndex] || 0
+                        });
+                        balanceIndex++;
+                    }
+                });
+                
+                return history;
+            }
+            
+            parseAmount(value) {
+                if (value === '' || value === null || value === undefined) return 0;
+                
+                // Handle string values with formatting
+                if (typeof value === 'string') {
+                    // Remove commas and handle parentheses for negatives
+                    let cleanValue = value.replace(/,/g, '');
+                    
+                    // Handle Dr/(Cr) format: (322,216.90) = -322216.90
+                    if (cleanValue.startsWith('(') && cleanValue.endsWith(')')) {
+                        cleanValue = '-' + cleanValue.slice(1, -1);
+                    }
+                    
+                    const parsed = parseFloat(cleanValue);
+                    return isNaN(parsed) ? 0 : parsed;
+                }
+                
+                // Handle numeric values
+                return parseFloat(value) || 0;
+            }
+            
+            formatDrCrBalance(balance) {
+                if (balance === 0) return '0.00';
+                
+                const absBalance = Math.abs(balance);
+                const formatted = absBalance.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+                
+                // Format as Dr/(Cr): positive = Dr, negative = (Cr)
+                if (balance > 0) {
+                    return `${formatted} Dr`;
+                } else {
+                    return `(${formatted}) Cr`;
+                }
+            }
+            
+            getSuggestedType(accountType, contraryPercentage) {
+                if (contraryPercentage >= 0.75) {
+                    return this.getOppositeType(accountType);
+                }
+                return accountType;
+            }
+            
+            processChartOfAccounts() {
+                if (!this.chartData) return [];
+                
+                const template = document.getElementById('template-select').value;
+                const industry = document.getElementById('industry-input').value;
+                
+                return this.chartData.map(row => {
+                    const processedRow = { ...row };
+                    
+                    // Add reporting code if not present
+                    if (!processedRow['Reporting Code'] || processedRow['Reporting Code'] === '') {
+                        processedRow['Reporting Code'] = this.generateReportingCode(row, template, industry);
+                    }
+                    
+                    return processedRow;
+                });
+            }
+            
+            generateReportingCode(row, template, industry) {
+                const accountType = row['*Type'] || '';
+                const accountName = row['*Name'] || '';
+                const description = row['Description'] || '';
+                
+                // Basic reporting code generation based on type and name
+                const typeLower = accountType.toLowerCase();
+                const nameLower = accountName.toLowerCase();
+                const descLower = description.toLowerCase();
+                const fullText = `${nameLower} ${descLower}`;
+                
+                // Get head from type
+                const head = this.getHeadFromType(accountType);
+                
+                // Generate specific code based on keywords
+                if (typeLower.includes('revenue') || typeLower.includes('income')) {
+                    if (fullText.includes('interest')) return 'REV.INV.INT';
+                    if (fullText.includes('rent')) return 'REV.OTH.REN';
+                    if (fullText.includes('service')) return 'REV.TRA.SER';
+                    if (fullText.includes('sale') || fullText.includes('goods')) return 'REV.TRA.GOO';
+                    return 'REV.TRA.SER';
+                }
+                
+                // Handle Direct Costs specifically - don't fall back to generic EXP
+                if (typeLower.includes('direct costs') || typeLower.includes('cost of sales')) {
+                    if (fullText.includes('opening') || fullText.includes('wip') || fullText.includes('work in progress')) {
+                        return 'EXP.COS.WPO';
+                    }
+                    if (fullText.includes('closing') || fullText.includes('ending')) {
+                        return 'EXP.COS.WPC';
+                    }
+                    if (fullText.includes('cogs') || fullText.includes('cost of goods')) {
+                        return 'EXP.COS';
+                    }
+                    return 'EXP.COS'; // Stay within COS family
+                }
+                
+                if (typeLower.includes('expense')) {
+                    if (fullText.includes('wage') || fullText.includes('salary')) return 'EXP.EMP.WAG';
+                    if (fullText.includes('rent')) return 'EXP.REN';
+                    if (fullText.includes('electricity') || fullText.includes('power')) return 'EXP.ADM';
+                    if (fullText.includes('phone') || fullText.includes('telephone')) return 'EXP.ADM';
+                    if (fullText.includes('insurance')) return 'EXP.ADM';
+                    if (fullText.includes('depreciation')) return 'EXP.DEP';
+                    if (fullText.includes('interest')) return 'EXP.INT';
+                    if (fullText.includes('vehicle') || fullText.includes('motor')) return 'EXP.VEH';
+                    if (fullText.includes('entertainment')) return 'EXP.ENT';
+                    if (fullText.includes('income tax')) return 'EXP.INC';
+                    return 'EXP.ADM';
+                }
+                
+                if (typeLower.includes('asset')) {
+                    if (fullText.includes('bank') || fullText.includes('cash')) return 'ASS.CUR.BAN';
+                    if (fullText.includes('inventory') || fullText.includes('stock')) {
+                        if (fullText.includes('wip') || fullText.includes('work in progress')) {
+                            return 'ASS.CUR.INY.WIP';
+                        }
+                        return 'ASS.CUR.INY';
+                    }
+                    if (fullText.includes('receivable') || fullText.includes('debtor')) return 'ASS.CUR.REC';
+                    if (fullText.includes('prepayment')) return 'ASS.CUR.PRE';
+                    if (fullText.includes('equipment') || fullText.includes('vehicle')) return 'ASS.NCA.FIX.PLA';
+                    if (fullText.includes('director') || fullText.includes('loan')) return 'ASS.CUR.DIR';
+                    return 'ASS.CUR';
+                }
+                
+                if (typeLower.includes('liability')) {
+                    if (fullText.includes('payable') || fullText.includes('creditor')) return 'LIA.CUR.PAY';
+                    if (fullText.includes('loan') || fullText.includes('debt')) return 'LIA.NCL';
+                    if (fullText.includes('gst') || fullText.includes('tax')) return 'LIA.CUR.TAX';
+                    if (fullText.includes('hire purchase')) return 'LIA.NCL.HPA';
+                    if (fullText.includes('unexpired interest')) return 'LIA.NCL.HPA.UEI';
+                    return 'LIA.CUR';
+                }
+                
+                if (typeLower.includes('equity')) {
+                    if (fullText.includes('share') || fullText.includes('capital')) return 'EQU.SHA';
+                    return 'EQU.CAP';
+                }
+                
+                return head;
+            }
+            
+            getHeadFromType(accountType) {
+                const typeLower = accountType.toLowerCase();
+                
+                if (typeLower.includes('revenue') || typeLower.includes('income')) {
+                    return 'REV.TRA';
+                }
+                if (typeLower.includes('expense')) {
+                    return 'EXP';
+                }
+                if (typeLower.includes('current asset')) {
+                    return 'ASS.CUR';
+                }
+                if (typeLower.includes('fixed asset') || typeLower.includes('non-current asset')) {
+                    return 'ASS.NCA';
+                }
+                if (typeLower.includes('current liability')) {
+                    return 'LIA.CUR';
+                }
+                if (typeLower.includes('non-current liability')) {
+                    return 'LIA.NCL';
+                }
+                if (typeLower.includes('equity')) {
+                    return 'EQU';
+                }
+                
+                return 'EXP'; // Default fallback
+            }
+            
+            detectIntegrityIssues() {
+                const issues = [];
+                
+                if (!this.processedChart) return issues;
+                
+                // Load integrity rules
+                const integrityRules = this.loadIntegrityRules();
+                
+                this.processedChart.forEach((row, index) => {
+                    const accountType = row['*Type'] || row['Type'] || '';
+                    const reportingCode = row['Reporting Code'] || row['Report Code'] || '';
+                    const originalCode = row['Report Code'] || row['Reporting Code'] || '';
+                    
+                    if (!accountType || !reportingCode) return;
+                    
+                    // Check if reporting code is valid for this account type
+                    const allowedCodes = integrityRules[accountType];
+                    if (allowedCodes && !this.isCodeValidForType(reportingCode, allowedCodes)) {
+                        const validOptions = this.getValidOptionsForType(accountType, allowedCodes);
+                        issues.push({
+                            account_code: row['*Code'] || row['Code'] || '',
+                            account_name: row['*Name'] || row['Name'] || '',
+                            account_type: accountType,
+                            current_code: originalCode,
+                            reporting_code: reportingCode,
+                            issue: `Type '${accountType}' does not allow reporting code '${reportingCode}'`,
+                            valid_options: validOptions,
+                            suggested_code: validOptions.length > 0 ? validOptions[0] : this.generateReportingCode(row, document.getElementById('template-select').value, document.getElementById('industry-input').value),
+                            row: index + 1
+                        });
+                    }
+                });
+                
+                return issues;
+            }
+            
+            loadIntegrityRules() {
+                // Based on Account_Types_per_Financial-Reports.json
+                return {
+                    'Revenue': {
+                        allowed_codes: ['REV.TRA', 'REV.TRA.SER', 'REV.TRA.GOO', 'REV.OTH', 'REV.OTH.GAI'],
+                        allowed_prefixes: ['REV.TRA', 'REV.OTH']
+                    },
+                    'Other Income': {
+                        allowed_codes: ['REV.GRA', 'REV.GRA.GOV', 'REV.INV.DIV', 'REV.INV.INT', 'REV.INV.REN', 'REV.NON', 'REV.OTH', 'REV.OTH.CAP', 'REV.OTH.COM', 'REV.OTH.GAI', 'REV.OTH.INV'],
+                        allowed_prefixes: ['REV.GRA', 'REV.INV', 'REV.NON', 'REV.OTH']
+                    },
+                    'Direct Costs': {
+                        allowed_codes: ['EXP.COS', 'EXP.COS.WPO', 'EXP.COS.WPC'],
+                        allowed_prefixes: ['EXP.COS']
+                    },
+                    'Expense': {
+                        allowed_codes: ['EXP', 'EXP.ADM', 'EXP.ADV', 'EXP.DEP', 'EXP.EMP', 'EXP.EMP.WAG', 'EXP.EMP.SUP', 'EXP.ENT', 'EXP.INC', 'EXP.INT', 'EXP.REN', 'EXP.VEH'],
+                        allowed_prefixes: ['EXP']
+                    },
+                    'Current Asset': {
+                        allowed_codes: ['ASS.CUR', 'ASS.CUR.BAN', 'ASS.CUR.CAS', 'ASS.CUR.INY', 'ASS.CUR.PRE', 'ASS.CUR.REC', 'ASS.CUR.UDA', 'ASS.CUR.DIR'],
+                        allowed_prefixes: ['ASS.CUR']
+                    },
+                    'Fixed Asset': {
+                        allowed_codes: ['ASS.NCA.FIX', 'ASS.NCA.FIX.VEH', 'ASS.NCA.FIX.PLA', 'ASS.NCA.FIX.PLA.ACC', 'ASS.NCA.FIX.VEH.ACC'],
+                        allowed_prefixes: ['ASS.NCA.FIX']
+                    },
+                    'Non-current Asset': {
+                        allowed_codes: ['ASS.NCA', 'ASS.NCA.UDA'],
+                        allowed_prefixes: ['ASS.NCA']
+                    },
+                    'Current Liability': {
+                        allowed_codes: ['LIA.CUR', 'LIA.CUR.PAY', 'LIA.CUR.TAX', 'LIA.CUR.TAX.INC', 'LIA.CUR.HPA', 'LIA.CUR.HPA.UEI'],
+                        allowed_prefixes: ['LIA.CUR']
+                    },
+                    'Non-current Liability': {
+                        allowed_codes: ['LIA.NCL', 'LIA.NCL.HPA', 'LIA.NCL.HPA.UEI'],
+                        allowed_prefixes: ['LIA.NCL']
+                    },
+                    'Equity': {
+                        allowed_codes: ['EQU', 'EQU.CAP', 'EQU.SHA'],
+                        allowed_prefixes: ['EQU']
+                    }
+                };
+            }
+            
+            isCodeValidForType(reportingCode, allowedRules) {
+                // Check if code is in allowed_codes
+                if (allowedRules.allowed_codes && allowedRules.allowed_codes.includes(reportingCode)) {
+                    return true;
+                }
+                
+                // Check if code starts with allowed prefix
+                if (allowedRules.allowed_prefixes) {
+                    return allowedRules.allowed_prefixes.some(prefix => 
+                        reportingCode.startsWith(prefix + '.') || reportingCode === prefix
+                    );
+                }
+                
+                return false;
+            }
+            
+            getValidOptionsForType(accountType, allowedRules) {
+                const options = [];
+                
+                // Add specific codes
+                if (allowedRules.allowed_codes) {
+                    options.push(...allowedRules.allowed_codes);
+                }
+                
+                // Add prefix-based suggestions
+                if (allowedRules.allowed_prefixes) {
+                    allowedRules.allowed_prefixes.forEach(prefix => {
+                        if (!options.includes(prefix)) {
+                            options.push(prefix);
+                        }
+                    });
+                }
+                
+                return options;
+            }
+            
+            getCodeDescription(code) {
+                const descriptions = {
+                    // Assets
+                    'ASS': 'Assets',
+                    'ASS.CUR': 'Current assets',
+                    'ASS.CUR.CAS': 'Cash and cash equivalents',
+                    'ASS.CUR.CAS.BAN': 'Bank accounts/(overdraft)',
+                    'ASS.CUR.CAS.FLO': 'Cash floats',
+                    'ASS.CUR.DIR': 'Loans to directors (current)',
+                    'ASS.CUR.INY': 'Inventories',
+                    'ASS.CUR.INY.WIP': 'Work in progress',
+                    'ASS.CUR.LOA': 'Loan assets (current)',
+                    'ASS.CUR.REC': 'Trade and other receivables',
+                    'ASS.CUR.REC.ADA': 'Allowance for doubtful debts',
+                    'ASS.CUR.REC.PRE': 'Prepayments',
+                    'ASS.CUR.REC.TRA': 'Trade receivables',
+                    'ASS.CUR.REL': 'Related party receivables - current',
+                    'ASS.CUR.TER': 'Term deposits (current)',
+                    'ASS.CUR.UDA': 'User defined current asset',
+                    'ASS.CUR.UDA.1': 'User defined current asset 1',
+                    'ASS.CUR.UDA.2': 'User defined current asset 2',
+                    'ASS.CUR.UDA.3': 'User defined current asset 3',
+                    'ASS.NCA': 'Non current assets',
+                    'ASS.NCA.DIR': 'Loans to directors (non-current)',
+                    'ASS.NCA.FIX': 'Fixed assets',
+                    'ASS.NCA.FIX.BUC': 'Buildings at cost',
+                    'ASS.NCA.FIX.BUC.ACC': 'Accumulated depreciation of buildings',
+                    'ASS.NCA.FIX.IMP': 'Impairment of fixed assets',
+                    'ASS.NCA.FIX.LAC': 'Land at cost',
+                    'ASS.NCA.FIX.LAC.REV': 'Land revaluation',
+                    'ASS.NCA.FIX.LEA': 'Leasehold improvements at cost',
+                    'ASS.NCA.FIX.LEA.ACC': 'Accumulated amortisation of leasehold improvements',
+                    'ASS.NCA.FIX.PLA': 'Plant and equipment at cost',
+                    'ASS.NCA.FIX.PLA.ACC': 'Accumulated depreciation of plant and equipment',
+                    'ASS.NCA.FIX.REV': 'Buildings revaluation',
+                    'ASS.NCA.FIX.VEH': 'Vehicles at cost',
+                    'ASS.NCA.FIX.VEH.ACC': 'Accumulated depreciation of vehicles',
+                    'ASS.NCA.INT': 'Intangibles',
+                    'ASS.NCA.INT.AMO': 'Accumulated amortisation of intangibles',
+                    'ASS.NCA.INT.DIS': 'Distribution rights',
+                    'ASS.NCA.INT.DIS.AMO': 'Distribution rights amortisation',
+                    'ASS.NCA.INT.DIS.IMP': 'Distribution rights impairment',
+                    'ASS.NCA.INT.GOO': 'Goodwill',
+                    'ASS.NCA.INT.GOO.IMP': 'Goodwill impairment',
+                    'ASS.NCA.INT.IMP': 'Impairment of intangibles',
+                    'ASS.NCA.INV': 'Financial assets',
+                    'ASS.NCA.INV.PRE': 'Preference shares',
+                    'ASS.NCA.INV.SHA': 'Shares and debentures',
+                    'ASS.NCA.INV.TER': 'Term deposits',
+                    'ASS.NCA.LOA': 'Loan assets (non-current)',
+                    'ASS.NCA.REA': 'Research and development',
+                    'ASS.NCA.REA.IMP': 'Impairment of research and development',
+                    'ASS.NCA.REL': 'Related party receivables - non current',
+                    'ASS.NCA.UDA': 'User defined non current asset',
+                    'ASS.NCA.UDA.1': 'User defined non current asset 1',
+                    'ASS.NCA.UDA.2': 'User defined non current asset 2',
+                    'ASS.NCA.UDA.3': 'User defined non current asset 3',
+                    
+                    // Equity
+                    'EQU': 'Equity/Proprietors\' funds',
+                    'EQU.ADV': 'Owners/Partners funds introduced',
+                    'EQU.ADV.1': 'Owners/Partners funds introduced 1',
+                    'EQU.ADV.2': 'Owners/Partners funds introduced 2',
+                    'EQU.ADV.3': 'Owners/Partners funds introduced 3',
+                    'EQU.ADV.4': 'Owners/Partners funds introduced 4',
+                    'EQU.ADV.5': 'Owners/Partners funds introduced 5',
+                    'EQU.ADV.6': 'Owners/Partners funds introduced 6',
+                    'EQU.ADV.7': 'Owners/Partners funds introduced 7',
+                    'EQU.ADV.8': 'Owners/Partners funds introduced 8',
+                    'EQU.ADV.9': 'Owners/Partners funds introduced 9',
+                    'EQU.ADV.10': 'Owners/Partners funds introduced 10',
+                    'EQU.DRA': 'Owners/Partners drawings',
+                    'EQU.DRA.1': 'Owners/Partners drawings 1',
+                    'EQU.DRA.2': 'Owners/Partners drawings 2',
+                    'EQU.DRA.3': 'Owners/Partners drawings 3',
+                    'EQU.DRA.4': 'Owners/Partners drawings 4',
+                    'EQU.DRA.5': 'Owners/Partners drawings 5',
+                    'EQU.DRA.6': 'Owners/Partners drawings 6',
+                    'EQU.DRA.7': 'Owners/Partners drawings 7',
+                    'EQU.DRA.8': 'Owners/Partners drawings 8',
+                    'EQU.DRA.9': 'Owners/Partners drawings 9',
+                    'EQU.DRA.10': 'Owners/Partners drawings 10',
+                    'EQU.GIF': 'Gifting',
+                    'EQU.PFT': 'Owners/partners profit distribution',
+                    'EQU.PFT.1': 'Owners/partners profit distribution 1',
+                    'EQU.PFT.2': 'Owners/partners profit distribution 2',
+                    'EQU.PFT.3': 'Owners/partners profit distribution 3',
+                    'EQU.PFT.4': 'Owners/partners profit distribution 4',
+                    'EQU.PFT.5': 'Owners/partners profit distribution 5',
+                    'EQU.PFT.6': 'Owners/partners profit distribution 6',
+                    'EQU.PFT.7': 'Owners/partners profit distribution 7',
+                    'EQU.PFT.8': 'Owners/partners profit distribution 8',
+                    'EQU.PFT.9': 'Owners/partners profit distribution 9',
+                    'EQU.PFT.10': 'Owners/partners profit distribution 10',
+                    'EQU.RES': 'Reserves',
+                    'EQU.RES.FOR': 'Foreign currency translation reserve',
+                    'EQU.RES.LRR': 'Livestock revaluation reserve',
+                    'EQU.RES.REV': 'Revaluation reserves',
+                    'EQU.RET': 'Retained earnings/Accumulated funds',
+                    'EQU.RET.CUR': 'Current year earnings',
+                    'EQU.RET.DIV': 'Dividends paid reserve',
+                    'EQU.RET.DIV.ORD': 'Dividends paid on ordinary shares',
+                    'EQU.RET.DIV.PRE': 'Dividends paid on preference shares',
+                    'EQU.SET': 'Settlement sum',
+                    'EQU.SHA': 'Share capital',
+                    'EQU.SHA.ORD': 'Ordinary shares',
+                    'EQU.SHA.ORD.BUY': 'Share buy-back (at nominal value)',
+                    'EQU.SHA.PRE': 'Convertible redeemable preference shares',
+                    'EQU.UDE': 'User defined equity',
+                    'EQU.UDE.1': 'User defined equity 1',
+                    'EQU.UDE.2': 'User defined equity 2',
+                    'EQU.UDE.3': 'User defined equity 3',
+                    
+                    // Expenses
+                    'EXP': 'Expense',
+                    'EXP.ADM': 'Administrative expenses',
+                    'EXP.ADV': 'Advertising & marketing',
+                    'EXP.AMO': 'Amortisation of intangibles expense',
+                    'EXP.AUD': 'Audit fees',
+                    'EXP.BAD': 'Bad debts',
+                    'EXP.BAD.DOU': 'Provision for doubtful debts',
+                    'EXP.CFL': 'Losses applied from prior periods',
+                    'EXP.COS': 'Cost of goods sold',
+                    'EXP.COS.CLO': 'Closing inventory',
+                    'EXP.COS.CLO.FAR': 'Closing livestock',
+                    'EXP.COS.CLO.FAR.BEE': 'Closing livestock - beef cattle',
+                    'EXP.COS.CLO.FAR.DAI': 'Closing livestock - dairy cattle',
+                    'EXP.COS.CLO.FAR.DER': 'Closing livestock - deer',
+                    'EXP.COS.CLO.FAR.GOA': 'Closing livestock - goats',
+                    'EXP.COS.CLO.FAR.HRS': 'Closing livestock - horses',
+                    'EXP.COS.CLO.FAR.PIG': 'Closing livestock - pigs',
+                    'EXP.COS.CLO.FAR.SHE': 'Closing livestock - sheep',
+                    'EXP.COS.OPE': 'Opening inventory',
+                    'EXP.COS.OPE.FAR': 'Opening livestock',
+                    'EXP.COS.OPE.FAR.BEE': 'Opening livestock - beef cattle',
+                    'EXP.COS.OPE.FAR.DAI': 'Opening livestock - dairy cattle',
+                    'EXP.COS.OPE.FAR.DER': 'Opening livestock - deer',
+                    'EXP.COS.OPE.FAR.GOA': 'Opening livestock - goats',
+                    'EXP.COS.OPE.FAR.HRS': 'Opening livestock - horses',
+                    'EXP.COS.OPE.FAR.PIG': 'Opening livestock - pigs',
+                    'EXP.COS.OPE.FAR.SHE': 'Opening livestock - sheep',
+                    'EXP.COS.PUR': 'Purchases',
+                    'EXP.COS.PUR.FAR': 'Direct costs - farming',
+                    'EXP.COS.PUR.FAR.BEE': 'Direct costs - beef cattle',
+                    'EXP.COS.PUR.FAR.DAI': 'Direct costs - dairy cattle',
+                    'EXP.COS.PUR.FAR.DER': 'Direct costs - deer',
+                    'EXP.COS.PUR.FAR.GOA': 'Direct costs - goats',
+                    'EXP.COS.PUR.FAR.HOR': 'Direct costs - horticultural produce',
+                    'EXP.COS.PUR.FAR.HRS': 'Direct costs - horses',
+                    'EXP.COS.PUR.FAR.MIL': 'Direct costs - dairy produce / milk',
+                    'EXP.COS.PUR.FAR.PIG': 'Direct costs - pigs',
+                    'EXP.COS.PUR.FAR.SHE': 'Direct costs - sheep',
+                    'EXP.COS.PUR.FAR.WOO': 'Direct costs - wool',
+                    'EXP.COS.WPC': 'Closing WIP',
+                    'EXP.COS.WPO': 'Opening WIP',
+                    'EXP.DEP': 'Depreciation',
+                    'EXP.DIS': 'Distribution to beneficiary/partner',
+                    'EXP.DIV': 'Dividends paid expense',
+                    'EXP.EMP': 'Employment Costs',
+                    'EXP.EMP.SHA': 'Shareholder salaries',
+                    'EXP.EMP.SUP': 'Superannuation expenses',
+                    'EXP.EMP.WAG': 'Wages and salaries',
+                    'EXP.ENT': 'Entertainment',
+                    'EXP.ENT.NON': 'Non deductible entertainment',
+                    'EXP.EXT': 'Non recurring items',
+                    'EXP.FAR': 'Farm expenses',
+                    'EXP.FAR.ANI': 'Animal health',
+                    'EXP.FAR.CRO': 'Cropping',
+                    'EXP.FAR.FEE': 'Feed',
+                    'EXP.FAR.FER': 'Fertiliser',
+                    'EXP.FAR.PAS': 'Pasture',
+                    'EXP.FBT': 'Fringe Benefit Tax',
+                    'EXP.FOR': 'Foreign currency gains/losses',
+                    'EXP.FOR.RGL': 'Realised foreign currency gains and losses',
+                    'EXP.FOR.UGL': 'Unrealised foreign currency gains and losses',
+                    'EXP.IMP': 'Impairment loss',
+                    'EXP.INC': 'Income tax expense',
+                    'EXP.INS': 'Insurance expenses',
+                    'EXP.INT': 'Interest and finance charges',
+                    'EXP.INV': 'Investment expenses',
+                    'EXP.INV.REN': 'Rental investment expenses',
+                    'EXP.LOS': 'Loss on disposal of property, plant and equipment',
+                    'EXP.NON': 'Other non deductible items',
+                    'EXP.OCC': 'Occupancy expense',
+                    'EXP.OPR': 'Operating expenses',
+                    'EXP.PRO': 'Professional fees',
+                    'EXP.REN': 'Rental and lease payments',
+                    'EXP.REN.OPE': 'Operating lease payments',
+                    'EXP.REP': 'Repairs & maintenance',
+                    'EXP.TRA': 'Travel and accomodation',
+                    'EXP.TRA.INT': 'International travel and accomodation',
+                    'EXP.TRA.NAT': 'National travel and accommodation',
+                    'EXP.UDE': 'User defined expense',
+                    'EXP.UDE.1': 'User defined expense 1',
+                    'EXP.UDE.2': 'User defined expense 2',
+                    'EXP.UDE.3': 'User defined expense 3',
+                    'EXP.UDE.4': 'User defined expense 4',
+                    'EXP.UDE.5': 'User defined expense 5',
+                    'EXP.UTI': 'Utilities',
+                    'EXP.VEH': 'Vehicle expenses',
+                    
+                    // Liabilities
+                    'LIA': 'Liabilities',
+                    'LIA.CUR': 'Current Liabilities',
+                    'LIA.CUR.CHM': 'Chattel mortgage (Current)',
+                    'LIA.CUR.CHM.UEI': 'Chattel mortgage: Unexpired Interest (Current)',
+                    'LIA.CUR.DEF': 'Deferred income',
+                    'LIA.CUR.DEF.GOV': 'Deferred government grants income',
+                    'LIA.CUR.DEF.LEA': 'Deferred lease incentives',
+                    'LIA.CUR.HPA': 'Hire purchase (current)',
+                    'LIA.CUR.HPA.UEI': 'Hire purchase: unexpired interest (current)',
+                    'LIA.CUR.LOA': 'Loans (current)',
+                    'LIA.CUR.LOA.DIR': 'Loans from directors (current)',
+                    'LIA.CUR.LOA.SEC': 'Secured loans (current)',
+                    'LIA.CUR.LOA.SET': 'Loans from beneficiaries/settlors (current)',
+                    'LIA.CUR.LOA.UNS': 'Unsecured loans (current)',
+                    'LIA.CUR.PAY': 'Trade and other payables',
+                    'LIA.CUR.PAY.DIV': 'Dividends payable',
+                    'LIA.CUR.PAY.EMP': 'Employee entitlements (wages, annual leave, etc)',
+                    'LIA.CUR.PAY.PAY': 'PAYG',
+                    'LIA.CUR.PAY.TRA': 'Trade payables',
+                    'LIA.CUR.PRO': 'Provisions',
+                    'LIA.CUR.REL': 'Related party payables - current',
+                    'LIA.CUR.TAX': 'Tax',
+                    'LIA.CUR.TAX.DEF': 'Deferred tax',
+                    'LIA.CUR.TAX.GST': 'Goods and services tax',
+                    'LIA.CUR.TAX.INC': 'Income Tax',
+                    'LIA.CUR.TAX.INC.FRA': 'Franking credits attached to dividends received',
+                    'LIA.CUR.TAX.INC.IMP': 'Imputation credits attached to dividends received',
+                    'LIA.CUR.TAX.INC.OTH': 'Other tax credits',
+                    'LIA.CUR.TAX.INC.PAI': 'Income tax paid',
+                    'LIA.CUR.TAX.INC.REF': 'Income tax refunded',
+                    'LIA.CUR.TAX.INC.TAX': 'Tax credits',
+                    'LIA.CUR.TAX.INC.WTP': 'Witholding tax paid',
+                    'LIA.CUR.UDL': 'User defined current liability',
+                    'LIA.CUR.UDL.1': 'User defined current liability 1',
+                    'LIA.CUR.UDL.2': 'User defined current liability 2',
+                    'LIA.CUR.UDL.3': 'User defined current liability 3',
+                    'LIA.NCL': 'Non current liabilities',
+                    'LIA.NCL.ADV': 'Beneficiary/shareholder advance accounts',
+                    'LIA.NCL.ADV.1': 'Beneficiary/shareholder advance accounts 1',
+                    'LIA.NCL.ADV.2': 'Beneficiary/shareholder advance accounts 2',
+                    'LIA.NCL.ADV.3': 'Beneficiary/shareholder advance accounts 3',
+                    'LIA.NCL.ADV.4': 'Beneficiary/shareholder advance accounts 4',
+                    'LIA.NCL.ADV.5': 'Beneficiary/shareholder advance accounts 5',
+                    'LIA.NCL.ADV.6': 'Beneficiary/shareholder advance accounts 6',
+                    'LIA.NCL.ADV.7': 'Beneficiary/shareholder advance accounts 7',
+                    'LIA.NCL.ADV.8': 'Beneficiary/shareholder advance accounts 8',
+                    'LIA.NCL.ADV.9': 'Beneficiary/shareholder advance accounts 9',
+                    'LIA.NCL.ADV.10': 'Beneficiary/shareholder advance accounts 10',
+                    'LIA.NCL.CHM': 'Chattel mortgage (non-current)',
+                    'LIA.NCL.CHM.UEI': 'Chattel mortgage: less unexpired interest (non-current)',
+                    'LIA.NCL.DRA': 'Beneficiary/shareholder drawings',
+                    'LIA.NCL.DRA.1': 'Beneficiary/shareholder drawings 1',
+                    'LIA.NCL.DRA.2': 'Beneficiary/shareholder drawings 2',
+                    'LIA.NCL.DRA.3': 'Beneficiary/shareholder drawings 3',
+                    'LIA.NCL.DRA.4': 'Beneficiary/shareholder drawings 4',
+                    'LIA.NCL.DRA.5': 'Beneficiary/shareholder drawings 5',
+                    'LIA.NCL.DRA.6': 'Beneficiary/shareholder drawings 6',
+                    'LIA.NCL.DRA.7': 'Beneficiary/shareholder drawings 7',
+                    'LIA.NCL.DRA.8': 'Beneficiary/shareholder drawings 8',
+                    'LIA.NCL.DRA.9': 'Beneficiary/shareholder drawings 9',
+                    'LIA.NCL.DRA.10': 'Beneficiary/shareholder drawings 10',
+                    'LIA.NCL.HPA': 'Hire purchase (non-current)',
+                    'LIA.NCL.HPA.UEI': 'Hire purchase: unexpired interest (non-current)',
+                    'LIA.NCL.LOA': 'Loans (non current)',
+                    'LIA.NCL.LOA.DIR': 'Loans from directors (non current)',
+                    'LIA.NCL.LOA.SEC': 'Secured loans (non current)',
+                    'LIA.NCL.LOA.SET': 'Loans from beneficiaries/settlors (non current)',
+                    'LIA.NCL.LOA.UNS': 'Unsecured loans (non current)',
+                    'LIA.NCL.PFT': 'Beneficiary/shareholder profit distribution',
+                    'LIA.NCL.PFT.1': 'Beneficiary/shareholder profit distribution 1',
+                    'LIA.NCL.PFT.2': 'Beneficiary/shareholder profit distribution 2',
+                    'LIA.NCL.PFT.3': 'Beneficiary/shareholder profit distribution 3',
+                    'LIA.NCL.PFT.4': 'Beneficiary/shareholder profit distribution 4',
+                    'LIA.NCL.PFT.5': 'Beneficiary/shareholder profit distribution 5',
+                    'LIA.NCL.PFT.6': 'Beneficiary/shareholder profit distribution 6',
+                    'LIA.NCL.PFT.7': 'Beneficiary/shareholder profit distribution 7',
+                    'LIA.NCL.PFT.8': 'Beneficiary/shareholder profit distribution 8',
+                    'LIA.NCL.PFT.9': 'Beneficiary/shareholder profit distribution 9',
+                    'LIA.NCL.PFT.10': 'Beneficiary/shareholder profit distribution 10',
+                    'LIA.NCL.REL': 'Related party payables - non current',
+                    'LIA.NCL.UDL': 'User defined non current liability',
+                    'LIA.NCL.UDL.1': 'User defined non current liability 1',
+                    'LIA.NCL.UDL.2': 'User defined non current liability 2',
+                    'LIA.NCL.UDL.3': 'User defined non current liability 3',
+                    
+                    // Revenue
+                    'REV': 'Revenue',
+                    'REV.COM': 'Comprehensive Income',
+                    'REV.COM.CCF': 'Net change in fair value of cashflow hedges taken to equity',
+                    'REV.COM.CFI': 'Cashflow hedges transferred to inventory',
+                    'REV.COM.CFP': 'Cashflow hedges transferred to profit and loss',
+                    'REV.COM.REV': 'Gain/(loss) on revaluation of land and buildings',
+                    'REV.GRA': 'Grants',
+                    'REV.GRA.GOV': 'Government grants',
+                    'REV.INV': 'Investment revenue',
+                    'REV.INV.DIV': 'Dividends',
+                    'REV.INV.INT': 'Interest',
+                    'REV.INV.REN': 'Rents',
+                    'REV.NON': 'Non-taxable income',
+                    'REV.OTH': 'Other revenue',
+                    'REV.OTH.CAP': 'Capital gain on disposal of asset',
+                    'REV.OTH.COM': 'Commissions',
+                    'REV.OTH.GAI': 'Gain on disposal of property, plant & equipment',
+                    'REV.OTH.INV': 'Gain on disposal of investments',
+                    'REV.TRA': 'Trading revenue',
+                    'REV.TRA.FAR': 'Farm income',
+                    'REV.TRA.FAR.BEE': 'Sale of beef cattle',
+                    'REV.TRA.FAR.DAI': 'Sale of dairy cattle',
+                    'REV.TRA.FAR.DER': 'Sale of deer',
+                    'REV.TRA.FAR.GOA': 'Sale of goats',
+                    'REV.TRA.FAR.HOR': 'Sale of horticultural produce',
+                    'REV.TRA.FAR.HRS': 'Sale of horses',
+                    'REV.TRA.FAR.MIL': 'Sale of dairy produce / milk',
+                    'REV.TRA.FAR.PIG': 'Sale of pigs',
+                    'REV.TRA.FAR.SHE': 'Sale of sheep',
+                    'REV.TRA.FAR.WOO': 'Sale of wool',
+                    'REV.TRA.GOO': 'Sale of goods',
+                    'REV.TRA.SER': 'Services',
+                    'REV.UDR': 'User defined revenue',
+                    'REV.UDR.1': 'User defined revenue 1',
+                    'REV.UDR.2': 'User defined revenue 2',
+                    'REV.UDR.3': 'User defined revenue 3'
+                };
+                
+                return descriptions[code] || 'Unknown Code';
+            }
+            
+            showResults() {
+                const section = document.getElementById('results-section');
+                const content = document.getElementById('results-content');
+                
+                const totalIssues = this.balanceAnomalies.length + this.integrityIssues.length;
+                
+                content.innerHTML = `
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <h3>✅ Processing Complete</h3>
+                            <p><strong>Accounts Processed:</strong> ${this.processedChart.length}</p>
+                            <p><strong>Balance Anomalies:</strong> ${this.balanceAnomalies.length}</p>
+                            <p><strong>Integrity Issues:</strong> ${this.integrityIssues.length}</p>
+                        </div>
+                        <div class="result-card">
+                            <h3>📊 Summary</h3>
+                            <p><strong>Total Issues:</strong> ${totalIssues}</p>
+                            <p><strong>Ready for Download:</strong> ${totalIssues === 0 ? 'Yes' : 'Review issues first'}</p>
+                            <p><strong>Status:</strong> ${totalIssues === 0 ? 'Complete' : 'Review Required'}</p>
+                        </div>
+                    </div>
+                    <div class="mt-20">
+                        <button type="button" class="btn btn-primary" onclick="mapper.downloadProcessedChart()">
+                            Download Processed Chart
+                        </button>
+                        ${totalIssues > 0 ? '<button type="button" class="btn btn-warning" onclick="mapper.showIssues()">Review Issues</button>' : ''}
+                    </div>
+                `;
+                
+                section.style.display = 'block';
+            }
+            
+            showIssues() {
+                const section = document.getElementById('issues-section');
+                section.style.display = 'block';
+                
+                this.populateBalanceIssues();
+                this.populateIntegrityIssues();
+            }
+            
+            populateBalanceIssues() {
+                const container = document.getElementById('balance-issues');
+                
+                if (this.balanceAnomalies.length === 0) {
+                    container.innerHTML = '<p class="text-center">No balance anomalies found.</p>';
+                    return;
+                }
+                
+                container.innerHTML = this.balanceAnomalies.map(anomaly => `
+                    <div class="issue-item">
+                        <div class="issue-header">
+                            <div class="issue-title">Account ${anomaly.account_code}: ${anomaly.account_name}</div>
+                            <div class="issue-severity ${anomaly.severity.toLowerCase()}">${anomaly.severity}</div>
+                        </div>
+                        <div class="issue-details">
+                            <p><strong>Current Type:</strong> ${anomaly.account_type}</p>
+                            <p><strong>Reporting Code:</strong> ${anomaly.reporting_code}</p>
+                            <p><strong>Recommendation:</strong> ${anomaly.recommendation}</p>
+                            <p><strong>Periods Checked:</strong> ${anomaly.periods_checked}</p>
+                        </div>
+                        <div class="balance-context">
+                            <h4>Balance History</h4>
+                            <table class="balance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Period</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${anomaly.balance_history.map(bh => `
+                                        <tr>
+                                            <td>${bh.period}</td>
+                                            <td class="${bh.balance < 0 ? 'credit' : 'debit'}">${this.formatDrCrBalance(bh.balance)}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="issue-actions">
+                            <select class="suggestion-select" data-anomaly-id="${anomaly.account_code}">
+                                <option value="">Keep current type</option>
+                                <option value="${anomaly.suggested_type}">Change to ${anomaly.suggested_type}</option>
+                                ${this.getAlternativeTypes(anomaly.account_type).map(alt => 
+                                    `<option value="${alt}">Change to ${alt}</option>`
+                                ).join('')}
+                            </select>
+                            <input type="text" class="reason-input" data-anomaly-id="${anomaly.account_code}" 
+                                   placeholder="Reason for change (optional)" style="flex: 1; margin: 0 10px;">
+                            <button type="button" class="btn btn-warning" onclick="mapper.applyBalanceChange('${anomaly.account_code}')">
+                                Apply Change
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            getAlternativeTypes(currentType) {
+                const alternatives = {
+                    'Current Asset': ['Current Liability', 'Fixed Asset', 'Non-current Asset'],
+                    'Fixed Asset': ['Current Asset', 'Non-current Asset', 'Current Liability'],
+                    'Non-current Asset': ['Current Asset', 'Fixed Asset', 'Non-current Liability'],
+                    'Current Liability': ['Current Asset', 'Non-current Liability'],
+                    'Non-current Liability': ['Current Asset', 'Current Liability'],
+                    'Revenue': ['Other Income', 'Expense'],
+                    'Other Income': ['Revenue', 'Expense'],
+                    'Expense': ['Revenue', 'Other Income', 'Direct Costs'],
+                    'Direct Costs': ['Expense']
+                };
+                return alternatives[currentType] || [];
+            }
+            
+            populateIntegrityIssues() {
+                const container = document.getElementById('integrity-issues');
+                
+                if (this.integrityIssues.length === 0) {
+                    container.innerHTML = '<p class="text-center">No integrity issues found.</p>';
+                    return;
+                }
+                
+                container.innerHTML = this.integrityIssues.map(issue => `
+                    <div class="issue-item">
+                        <div class="issue-header">
+                            <div class="issue-title">Account ${issue.account_code}: ${issue.account_name}</div>
+                            <div class="issue-severity high">Integrity Issue</div>
+                        </div>
+                        <div class="issue-details">
+                            <p><strong>Account Type:</strong> ${issue.account_type}</p>
+                            <p><strong>Original Code:</strong> ${issue.current_code}</p>
+                            <p><strong>Current Code:</strong> ${issue.reporting_code}</p>
+                            <p><strong>Issue:</strong> ${issue.issue}</p>
+                        </div>
+                        <div class="diff-view">
+                            <h4>Code Comparison</h4>
+                            <div class="diff-container">
+                                <div class="diff-side">
+                                    <h5>Original (Input File)</h5>
+                                    <div class="code-display original">${issue.current_code}</div>
+                                </div>
+                                <div class="diff-side">
+                                    <h5>Current (Processed)</h5>
+                                    <div class="code-display current">${issue.reporting_code}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="issue-actions">
+                            <select class="code-select" data-issue-id="${issue.account_code}">
+                                <option value="">Keep current code</option>
+                                ${issue.valid_options.map(option => 
+                                    `<option value="${option}" ${option === issue.suggested_code ? 'selected' : ''}>${option} - ${this.getCodeDescription(option)}</option>`
+                                ).join('')}
+                            </select>
+                            <input type="text" class="reason-input" data-issue-id="${issue.account_code}" 
+                                   placeholder="Reason for choice (optional)" style="flex: 1; margin: 0 10px;">
+                            <button type="button" class="btn btn-success" onclick="mapper.applyIntegrityChange('${issue.account_code}')">
+                                Apply Selected Code
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="mapper.skipIntegrityIssue('${issue.account_code}')">
+                                Skip
+                            </button>
+                            <button type="button" class="btn btn-info" onclick="mapper.markAsCorrect('${issue.account_code}')">
+                                Mark as Correct
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            applyBalanceChange(accountCode) {
+                const select = document.querySelector(`[data-anomaly-id="${accountCode}"]`);
+                const reasonInput = document.querySelector(`input[data-anomaly-id="${accountCode}"]`);
+                const newType = select.value;
+                const reason = reasonInput ? reasonInput.value.trim() : '';
+                
+                if (!newType) {
+                    this.showWarning('No change selected.');
+                    return;
+                }
+                
+                // Find and update the account in processed chart
+                const accountIndex = this.processedChart.findIndex(row => row['*Code'] === accountCode);
+                if (accountIndex !== -1) {
+                    this.processedChart[accountIndex]['*Type'] = newType;
+                    this.processedChart[accountIndex]['Reporting Code'] = this.generateReportingCode(
+                        this.processedChart[accountIndex], 
+                        document.getElementById('template-select').value, 
+                        document.getElementById('industry-input').value
+                    );
+                    
+                    this.resolutionDecisions.push({
+                        type: 'balance',
+                        account_code: accountCode,
+                        old_type: this.balanceAnomalies.find(a => a.account_code === accountCode).account_type,
+                        new_type: newType,
+                        reason: reason || 'No reason provided',
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    // Remove the issue from the page
+                    const issueItem = select.closest('.issue-item');
+                    issueItem.remove();
+                    
+                    this.showSuccess(`Updated account ${accountCode} to ${newType}`);
+                }
+            }
+            
+            applyIntegrityChange(accountCode) {
+                const select = document.querySelector(`[data-issue-id="${accountCode}"]`);
+                const reasonInput = document.querySelector(`input[data-issue-id="${accountCode}"]`);
+                const newCode = select.value;
+                const reason = reasonInput ? reasonInput.value.trim() : '';
+                
+                if (!newCode) {
+                    this.showWarning('No code selected.');
+                    return;
+                }
+                
+                // Find and update the account in processed chart
+                const accountIndex = this.processedChart.findIndex(row => 
+                    (row['*Code'] || row['Code']) === accountCode
+                );
+                if (accountIndex !== -1) {
+                    const oldCode = this.processedChart[accountIndex]['Reporting Code'] || this.processedChart[accountIndex]['Report Code'];
+                    this.processedChart[accountIndex]['Reporting Code'] = newCode;
+                    this.processedChart[accountIndex]['Report Code'] = newCode;
+                    
+                    this.resolutionDecisions.push({
+                        type: 'integrity',
+                        account_code: accountCode,
+                        old_code: oldCode,
+                        new_code: newCode,
+                        reason: reason || 'No reason provided',
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    // Remove the issue from the page
+                    const issueItem = select.closest('.issue-item');
+                    issueItem.remove();
+                    
+                    this.showSuccess(`Updated account ${accountCode} reporting code to ${newCode}`);
+                }
+            }
+            
+            markAsCorrect(accountCode) {
+                // Find the account
+                const accountIndex = this.processedChart.findIndex(row => 
+                    (row['*Code'] || row['Code']) === accountCode
+                );
+                if (accountIndex !== -1) {
+                    const currentCode = this.processedChart[accountIndex]['Reporting Code'] || this.processedChart[accountIndex]['Report Code'];
+                    
+                    this.resolutionDecisions.push({
+                        type: 'integrity',
+                        account_code: accountCode,
+                        action: 'marked_correct',
+                        current_code: currentCode,
+                        reason: 'User marked as correct',
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    // Remove the issue from the page
+                    const issueItem = document.querySelector(`[data-issue-id="${accountCode}"]`).closest('.issue-item');
+                    issueItem.remove();
+                    
+                    this.showSuccess(`Marked account ${accountCode} as correct`);
+                }
+            }
+            
+            skipIntegrityIssue(accountCode) {
+                this.resolutionDecisions.push({
+                    type: 'integrity',
+                    account_code: accountCode,
+                    action: 'skipped',
+                    timestamp: new Date().toISOString()
+                });
+                
+                // Remove the issue from the page
+                const issueItem = document.querySelector(`[data-issue-id="${accountCode}"]`).closest('.issue-item');
+                issueItem.remove();
+            }
+            
+            acceptAllBalanceSuggestions() {
+                const balanceIssues = document.querySelectorAll('#balance-issues .issue-item');
+                let accepted = 0;
+                
+                balanceIssues.forEach(issue => {
+                    const select = issue.querySelector('.suggestion-select');
+                    const accountCode = select.dataset.anomalyId;
+                    const newType = select.value;
+                    
+                    if (newType) {
+                        this.applyBalanceChange(accountCode);
+                        accepted++;
+                    }
+                });
+                
+                this.showSuccess(`Applied ${accepted} balance changes`);
+            }
+            
+            acceptAllIntegritySuggestions() {
+                const integrityIssues = document.querySelectorAll('#integrity-issues .issue-item');
+                let accepted = 0;
+                
+                integrityIssues.forEach(issue => {
+                    const select = issue.querySelector('.code-select');
+                    const accountCode = select.dataset.issueId;
+                    const suggestedCode = select.querySelector('option[selected]')?.value || select.options[1]?.value;
+                    
+                    if (suggestedCode) {
+                        select.value = suggestedCode;
+                        this.applyIntegrityChange(accountCode);
+                        accepted++;
+                    }
+                });
+                
+                this.showSuccess(`Applied ${accepted} integrity changes`);
+            }
+            
+            downloadProcessedChart() {
+                if (!this.processedChart) {
+                    this.showError('No processed chart available for download.');
+                    return;
+                }
+                
+                // Convert to CSV
+                const headers = Object.keys(this.processedChart[0]);
+                const csvContent = [
+                    headers.join(','),
+                    ...this.processedChart.map(row => 
+                        headers.map(header => {
+                            const value = row[header] || '';
+                            // Escape commas and quotes in CSV
+                            if (value.includes(',') || value.includes('"') || value.includes('\n')) {
+                                return `"${value.replace(/"/g, '""')}"`;
+                            }
+                            return value;
+                        }).join(',')
+                    )
+                ].join('\n');
+                
+                // Download as CSV
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', 'AugmentedChartOfAccounts.csv');
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                this.showSuccess('Processed chart downloaded successfully');
+            }
+            
+            downloadAdjustedChart() {
+                this.downloadProcessedChart();
+            }
+            
+            switchTab(tabName) {
+                // Update tab buttons
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+                
+                // Update tab content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+            }
+            
+            showProcessing(message) {
+                const section = document.getElementById('processing-section');
+                const messageEl = document.getElementById('processing-message');
+                
+                messageEl.textContent = message;
+                section.style.display = 'block';
+            }
+            
+            updateProgress(percent, message) {
+                const progressFill = document.getElementById('progress-fill');
+                const messageEl = document.getElementById('processing-message');
+                
+                progressFill.style.width = `${percent}%`;
+                messageEl.textContent = message;
+            }
+            
+            hideProcessing() {
+                document.getElementById('processing-section').style.display = 'none';
+            }
+            
+            showError(message) {
+                this.showMessage(message, 'error');
+            }
+            
+            showSuccess(message) {
+                this.showMessage(message, 'success');
+            }
+            
+            showWarning(message) {
+                this.showMessage(message, 'warning');
+            }
+            
+            showMessage(message, type) {
+                // Remove existing messages
+                document.querySelectorAll('.success-message, .error-message, .warning-message').forEach(el => {
+                    el.remove();
+                });
+                
+                const messageEl = document.createElement('div');
+                messageEl.className = `${type}-message`;
+                messageEl.textContent = message;
+                
+                // Insert after the header, before the main content
+                const header = document.querySelector('header');
+                header.insertAdjacentElement('afterend', messageEl);
+                
+                // Scroll to the message
+                messageEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    if (messageEl.parentNode) {
+                        messageEl.remove();
+                    }
+                }, 5000);
+            }
+        }
+        
+        // Initialize the application
+        const mapper = new CompleteMapper();
+    </script>
+</body>
+</html>

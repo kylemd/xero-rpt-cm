@@ -1,0 +1,24 @@
+﻿Account Type,Expected Head Reporting Code,System Account
+Accounts Payable,LIA.CUR.PAY,TRUE
+Accounts Receivable,ASS.CUR.REC,TRUE
+Current Asset,ASS.CUR,FALSE
+Current Liability,LIA.CUR,FALSE
+Depreciation,EXP.DEP,FALSE
+Direct Costs,EXP.COS,FALSE
+Equity,EQU,FALSE
+Expense,EXP,FALSE
+Fixed Asset,ASS.NCA.FIX,FALSE
+GST,LIA.CUR.TAX.GST,TRUE
+Historical,LIA.CUR,TRUE
+Liability,LIA,FALSE
+Non-current Asset,ASS.NCA,FALSE
+Non-current Liability,LIA.NCL,FALSE
+Other Income,REV.OTH,FALSE
+Overhead,EXP,FALSE
+Prepayment,ASS.CUR.REC,FALSE
+Retained Earnings,EQU.RET,TRUE
+Revenue,REV.TRA,FALSE
+Rounding,LIA.CUR,TRUE
+Sales,REV.TRA,FALSE
+Tracking,LIA.CUR,TRUE
+Unpaid Expense Claims,LIA.CUR.PAY,TRUE

@@ -1,0 +1,229 @@
+﻿Code,Reporting Code,Name,Type,Tax Code,Description,Reporting Name
+200,REV.TRA.GOO,Sales,Revenue,GST on Income,Income from any normal business activity,
+210,REV.TRA.SER,Service Income,Revenue,GST on Income,,
+220,REV.TRA.SER,Consulting Income,Revenue,GST on Income,,
+240,REV.INV.REN,Rental Income,Other income,GST Free Income,Residential rental income,
+250,REV.INV.DIV,Dividends Received,Other income,GST Free Income,Dividend income,
+260,REV.OTH,Other Revenue,Other income,GST on Income,Any other income that does not relate to normal business activities and is not recurring,
+265,REV.GRA.GOV,Government Grants,Other income,GST Free Income,"A grant is a contribution, gift, or subsidy (in cash or kind) bestowed to the entity (grantee) by a government or other organisation (grantor) for specified purposes. Grants are usually conditional upon certain qualifications such as its use and maintenance of specified standards.",
+270,REV.INV.INT,Interest Income,Other income,GST Free Income,Interest income,
+280,REV.OTH.COM,Commissions Received,Other income,GST on Income,,
+281,REV.OTH.CAP,Capital Gain/(Loss) on Disposal of Asset,Other income,BAS Excluded,,
+282,REV.OTH.GAI,Gain/(Loss) on Sale of Non-Current Asset,Other income,BAS Excluded,,
+283,REV.OTH.INV,Gain/(Loss) on Disposal of Investments,Other income,BAS Excluded,,
+284,REV.OTH,Employee Contribution,Other income,BAS Excluded,,
+285,REV.NON,Non Taxable Income,Other income,BAS Excluded,Any income received that is exempt from tax.,
+286,REV.OTH,Trust Distributions Received,Other income,BAS Excluded,,
+288,REV.OTH,Partnership Distributions Received,Other income,BAS Excluded,,
+289,REV.OTH,FBT Reimbursement Income,Other income,BAS Excluded,,
+320,EXP.COS.OPE,Opening Stock,Direct Costs,BAS Excluded,Opening stock levels,
+330,EXP.COS.WPO,Opening WIP,Direct Costs,BAS Excluded,Opening Work In Progress,
+351,EXP.COS.PUR,Purchases,Direct Costs,GST on Expenses,,
+352,EXP.COS,Freight & Delivery,Direct Costs,GST on Expenses,,
+370,EXP.COS.WPC,Closing WIP,Direct Costs,BAS Excluded,Closing Work In Progress,
+380,EXP.COS.CLO,Closing Stock,Direct Costs,BAS Excluded,Closing stock levels,
+392,EXP.FOR.UGL,Unrealised Foreign Currency Gains & Losses,Expense,BAS Excluded,,
+400,EXP.PRO,Accounting Fees,Expense,GST on Expenses,,
+401,EXP.AUD,Audit Fees,Expense,GST on Expenses,,
+402,EXP.ADV,Advertising & Marketing,Expense,GST on Expenses,,
+403,EXP.AMO,Amortisation,Expense,BAS Excluded,,
+404,EXP.BAD,Bad Debts Written Off,Expense,BAS Excluded,,
+405,EXP.BAD.DOU,Provision For Doubtful Debts,Expense,BAS Excluded,,
+406,EXP,Bank Fees,Expense,GST Free Expenses,Fees charged by your bank for transactions regarding your bank account(s).,
+407,EXP,Bookkeeping,Expense,GST on Expenses,,
+408,EXP,Borrowing Costs Amortised,Expense,BAS Excluded,Borrowing cost amortised for the year.,
+409,EXP,Commissions Paid,Expense,GST on Expenses,,
+410,EXP,Cleaning & Laundry,Expense,GST on Expenses,Expenses incurred for cleaning business property.,
+411,EXP,Computer Expenses,Expense,GST on Expenses,Computer Expenses that are less than $300.00,
+416,EXP.DEP,Depreciation,Expense,BAS Excluded,The amount of the asset''s cost (based on the useful life) that was consumed during the period,
+418,EXP,Donations,Expense,GST Free Expenses,,
+420,EXP.ENT,Entertainment,Expense,GST Free Expenses,,
+421,EXP.ENT.NON,Non Deductible Entertainment,Expense,GST Free Expenses,,
+425,EXP,Freight & Courier,Expense,GST on Expenses,Expenses incurred on courier & freight costs,
+426,EXP.FBT,Fringe Benefits Tax,Expense,BAS Excluded,,
+427,EXP,Hire of Plant & Equipment,Expense,GST on Expenses,Interest expenses incurred for finance leases,
+428,EXP.REN.OPE,Operating Lease Payments,Expense,GST on Expenses,Include operating lease payments which are required to be disclosed separately to rental lease payments,
+430,EXP.IMP,Impairment,Expense,BAS Excluded,"An impairment loss arises when the carrying amount of an asset exceeds its recoverable amount. If appropriate, the recoverable amount can be established by discounting future net cash flows expected to be received from that asset''s use. An impairment loss reduces an overstated carrying amount (book value) to fair value.",
+433,EXP.INS,Insurance,Expense,GST on Expenses,Expenses incurred for insuring the business'' assets,
+437,EXP.INT,Interest Expense,Expense,GST Free Expenses,Any interest expenses paid to business bank accounts or credit card accounts.,
+438,EXP.INV,Investment Expenses,Expense,GST Free Expenses,,
+439,EXP.INV.REN,Investment Rental Property Expenses,Expense,GST Free Expenses,,
+441,EXP.PRO,Legal Expenses,Expense,GST on Expenses,Expenses incurred on any legal matters,
+442,EXP,Filing Fees,Expense,GST Free Expenses,ASIC Registration Fees,
+443,EXP.NON,Fines & Penalties,Expense,GST Free Expenses,Expenses incurred from fines and penalties incurred by the business,
+445,EXP.UTI,Electricity & Gas,Expense,GST on Expenses,"Expenses incurred for lighting, powering or heating the premises",
+446,EXP,Merchant Fees,Expense,GST on Expenses,,
+447,EXP.VEH,Motor Vehicles - Fuel & Oil,Expense,GST on Expenses,,
+448,EXP.VEH,Motor Vehicles - Repairs & Maintenance,Expense,GST on Expenses,,
+449,EXP.VEH,Motor Vehicles - Registration & Insurance,Expense,GST on Expenses,,
+451,EXP.VEH,Motor Vehicles - Tolls,Expense,GST on Expenses,,
+452,EXP.VEH,Motor Vehicles - Interest & Finance Charges,Expense,GST Free Expenses,,
+453,EXP.ADM,Office Expenses,Expense,GST on Expenses,General expenses related to the running of the business office.,
+454,EXP.EMP,Staff Amenities,Expense,GST on Expenses,,
+456,EXP,Sundry Expenses,Expense,GST on Expenses,,
+461,EXP.ADM,Printing & Stationery,Expense,GST on Expenses,Expenses incurred by the entity as a result of printing and stationery,
+462,EXP.ADM,Postage,Expense,GST on Expenses,,
+469,EXP.REN,Rent,Expense,GST on Expenses,The payment to lease a building or area.,
+470,EXP.OCC,Rates,Expense,GST Free Expenses,,
+473,EXP.REP,Repairs & Maintenance,Expense,GST on Expenses,Expenses incurred on a damaged or run down asset that will bring the asset back to its original condition.,
+474,EXP.EMP,Training & Conferences,Expense,GST on Expenses,,
+475,EXP,Subcontractors,Expense,GST on Expenses,,
+477,EXP.EMP.WAG,Wages & Salaries,Expense,BAS Excluded,Payment to employees in exchange for their resources,
+478,EXP.EMP.SUP,Superannuation,Expense,BAS Excluded,Superannuation contributions,
+479,EXP.EMP,WorkCover Insurance,Expense,GST on Expenses,,
+485,EXP,Subscriptions & Memberships,Expense,GST on Expenses,"E.g. Magazines, professional bodies.",
+489,EXP.UTI,Telephone,Expense,GST on Expenses,"Expenditure incurred from any business-related phone calls, phone lines, or internet connections",
+490,EXP.UTI,Internet,Expense,GST on Expenses,"Expenditure incurred from any business-related phone calls, phone lines, or internet connections",
+491,EXP.UTI,Mobile Phone,Expense,GST on Expenses,"Expenditure incurred from any business-related phone calls, phone lines, or internet connections",
+493,EXP.TRA.NAT,Travel - National,Expense,GST on Expenses,Expenses incurred from domestic travel which has a business purpose,
+494,EXP.TRA.INT,Travel - International,Expense,GST Free Expenses,Expenses incurred from international travel which has a business purpose,
+495,EXP.EMP,Uniforms,Expense,GST on Expenses,,
+496,EXP.EMP,Annual Leave Expense,Expense,BAS Excluded,,
+497,EXP.EMP,Long Service Leave Expense,Expense,BAS Excluded,,
+498,EXP.EXT,Non Recurring Items,Expense,GST on Expenses,"Non-recurring items are those items of revenue or expense which derive from events or transactions that are not expected to occur frequently, are distinct from the ordinary operations of the entity, and are outside the control or influence of managers or owners.",
+499,EXP.NON,Other Non Deductible Items,Expense,GST Free Expenses,Include other expenses which are not allowed as a tax deduction,
+505,EXP.INC,Income Tax Adjustment,Expense,BAS Excluded,,
+600,ASS.CUR.CAS.BAN,Bank Account (Xero Ledger),Current Asset,BAS Excluded,Use this instead of system account to allow manual journals,Bank Account
+610A,ASS.CUR.REC.TRA,Accounts Receivable (Xero Ledger),Current Asset,BAS Excluded,Use this instead of system account to allow manual journals,Accounts Receivable
+610Ac,ASS.CUR.REC.TRA,Accounts Receivable,Accounts Receivable,BAS Excluded,Outstanding invoices the company has issued out to the client but has not yet received in cash at balance date.,
+611,ASS.CUR.REC.ADA,Accounts Receivable - Provision for Doubtful Debts,Current Asset,BAS Excluded,,
+612,ASS.CUR.LOA,Loan (CA),Current Asset,BAS Excluded,,Loans
+613,ASS.CUR.REL,Related Party Receivables/Loan,Current Asset,BAS Excluded,,
+615,ASS.CUR.CAS.FLO,Cash on Hand,Current Asset,BAS Excluded,,
+620,ASS.CUR.REC.PRE,Prepayments,Prepayment,BAS Excluded,An expenditure that has been paid for in advance.,
+630,ASS.CUR.INY,Stock on Hand,Current Asset,BAS Excluded,,
+635,ASS.CUR.TER,Term Deposits (CA),Current Asset,BAS Excluded,,Term Deposits
+640,ASS.CUR.INY.WIP,Work In Progress,Current Asset,BAS Excluded,"Materials and components that have begun their transformation to finished products, but remain unfinished at period end.",
+650,ASS.NCA.LOA,Loan (NCA),Non-current Asset,BAS Excluded,,Loans
+653,ASS.NCA.REL,Related Party Receivables/Loan (NCA),Non-current Asset,BAS Excluded,,Related Party Receivables/Loan
+660,ASS.CUR.REC.PRE,Borrowing Costs,Prepayment,BAS Excluded,,
+661,ASS.CUR.REC.PRE,Borrowing Costs - Written Off,Prepayment,BAS Excluded,,
+662,ASS.NCA.INT,Formation Costs,Non-current Asset,GST on Expenses,,
+663,ASS.NCA.INT.IMP,Formation Costs - Written Off,Non-current Asset,BAS Excluded,,
+670,ASS.NCA.INV.SHA,Shares in Listed Companies,Non-current Asset,BAS Excluded,,
+671,ASS.NCA.INV.SHA,Shares in Unlisted Companies,Non-current Asset,BAS Excluded,,
+672,ASS.NCA.INV,Units in Listed Trusts,Non-current Asset,BAS Excluded,,
+673,ASS.NCA.INV,Units in Unlisted Trusts,Non-current Asset,BAS Excluded,,
+675,ASS.NCA.INV.TER,Term Deposits (NCA),Non-current Asset,BAS Excluded,,Term Deposits
+700,ASS.NCA.FIX.LAC,Land at Cost,Fixed Asset,GST Free Expenses,"Include total cost of land, do not include any revaluation differential",
+701,ASS.NCA.FIX.LAC.REV,Land Revaluation,Fixed Asset,BAS Excluded,"Include the amount by which land has been revalued, do not include the original/historical cost of the land.",
+702,ASS.NCA.FIX.BUC,Building at Cost,Fixed Asset,GST Free Expenses,Buildings include marina berths and hangars.,
+703,ASS.NCA.FIX.BUC,Stamp Duty,Fixed Asset,GST Free Expenses,Stamp Duty on Building,
+704,ASS.NCA.FIX.BUC,Structural Improvements,Fixed Asset,GST on Expenses,,
+705,ASS.NCA.FIX.BUC.ACC,Less Accumulated Depreciation on Structural Improvements,Fixed Asset,BAS Excluded,Accumulated depreciation of buildings,
+706,ASS.NCA.FIX.REV,Building Revaluation,Fixed Asset,BAS Excluded,"Include the revaluation differntial only, exlcude the historical cost of building",
+707,ASS.NCA.FIX.LEA,Leasehold Improvements at Cost,Fixed Asset,GST on Expenses,,
+708,ASS.NCA.FIX.LEA.ACC,Less Accumulated Amortisation of Leasehold Improvements,Fixed Asset,BAS Excluded,,
+710,ASS.NCA.FIX.PLA,Office Equipment,Fixed Asset,GST on Expenses,Office equipment that is owned and controlled by the business,
+711,ASS.NCA.FIX.PLA.ACC,Less Accumulated Depreciation on Office Equipment,Fixed Asset,BAS Excluded,The total amount of office equipment cost that has been consumed by the entity (based on the useful life),
+720,ASS.NCA.FIX.PLA,Computer Equipment,Fixed Asset,GST on Expenses,Computer equipment that is owned and controlled by the business,
+721,ASS.NCA.FIX.PLA.ACC,Less Accumulated Depreciation on Computer Equipment,Fixed Asset,BAS Excluded,The total amount of computer equipment cost that has been consumed by the business (based on the useful life),
+730,ASS.NCA.FIX.VEH,Motor Vehicles,Fixed Asset,GST on Expenses,Motor Vehicles that are owned and controlled by the business,
+731,ASS.NCA.FIX.VEH.ACC,Less Accumulated Depreciation on Motor Vehicles,Fixed Asset,BAS Excluded,The total amount of motor vehicle cost that has been consumed by the business (based on the useful life),
+740,ASS.NCA.FIX.PLA,Plant & Equipment,Fixed Asset,GST on Expenses,"Plant owned, Equipment owned & Loose tools owned (pooled cost greater than $500)",
+741,ASS.NCA.FIX.PLA.ACC,Less Accumulated Depreciation on Plant & Equipment,Fixed Asset,BAS Excluded,The total amount of Plant & Equipment cost that has been consumed by the business (based on the useful life),
+780,ASS.NCA.INT,Intangibles,Fixed Asset,GST on Expenses,Intangible assets are non physical in form yet they provide benefits (future service potential) to the entity or give some kind of advantage in the marketplace.,
+781,ASS.NCA.INT.AMO,Intangibles - Amortisation,Fixed Asset,BAS Excluded,Amortisation of intangibles,
+785,ASS.NCA.INT.GOO,Goodwill,Non-current Asset,BAS Excluded,"Goodwill is the amount by which the purchase price for a business combination exceeds the value of the identifiable assets, liabilities and contingent liabilities at the date of acquisition. Goodwill usually represents the reputation and customer base that the acquired business has developed whilst in operation.",
+786,ASS.NCA.INT.GOO.IMP,Less Accumulated Impairment of Goodwill,Non-current Asset,BAS Excluded,Include the accumulated impairment of goodwill. This represents the total impairment that has taken place up to period end on goodwill.,
+787,ASS.NCA.REA,Research & Development,Non-current Asset,BAS Excluded,"Research and development are costs incurred to discover new knowledge about products, processes, and services, in order to create new and improved products, processes, and services that meet market needs.",
+788,ASS.NCA.REA.IMP,Less Accumulated Impairment on Research & Development,Non-current Asset,BAS Excluded,Include the accumulated impairment of research and development. This represents the total impairment that has taken place up to period end on research and development.,
+800,LIA.CUR.PAY.TRA,Accounts Payable,Accounts Payable,BAS Excluded,Outstanding invoices the company has received from suppliers but has not yet paid at balance date,
+800A,LIA.CUR.PAY.TRA,Accounts Payable (Xero Ledger),Current Liability,BAS Excluded,Use this instead of system account to allow manual journals,Accounts Payable
+801,LIA.CUR.PAY.EMP,Unpaid Expense Claims,Unpaid Expense Claims,BAS Excluded,Expense claims typically made by employees/shareholder employees still outstanding.,
+804,LIA.CUR.PAY.EMP,Wages Payable,Current Liability,BAS Excluded,Xero automatically updates this account for payroll entries created using Payroll and will store the payroll amount to be paid to the employee for the pay run. This account enables you to maintain separate accounts for employee Wages Payable amounts and Accounts Payable amounts,
+805,LIA.CUR,Deposits Held,Current Liability,BAS Excluded,,
+810,LIA.CUR.DEF,Deferred Income,Current Liability,BAS Excluded,Deferred income is income the entity has received prior to selling a product or providing a service.,
+811,LIA.CUR.DEF.GOV,Deferred Government Grants Income,Current Liability,BAS Excluded,,
+812,LIA.CUR.DEF.LEA,Deferred Lease Incentives,Current Liability,BAS Excluded,,
+815,LIA.CUR.PRO,Provisions,Current Liability,BAS Excluded,A provision is a liability uncertain as to timing or amount. Include all other provisions not otherwise separately categorised,
+820,LIA.CUR.TAX.GST,GST,GST,BAS Excluded,"The balance in this account represents GST owing to or from the ATO. At the end of the GST period, it is this account that should be used to code against either the 'refunds from' or 'payments to' the ATO that will appear on the bank statement. Xero has been designed to use only one GST account to track GST on income and expenses, so there is no need to add any new GST accounts to Xero.",
+825,LIA.CUR.PAY.PAY,PAYG Withholdings Payable,Current Liability,BAS Excluded,The amount of PAYE tax that is due to be paid,
+826,LIA.CUR.PAY.EMP,Superannuation Payable,Current Liability,BAS Excluded,The amount of superannuation that is due to be paid,
+830,LIA.CUR.TAX.INC,Income Tax Payable,Current Liability,BAS Excluded,"The amount of income tax that is due to be paid, also resident withholding tax paid on interest received.",
+832,LIA.CUR.TAX.INC.FRA,Franking Credits Attached to Dividends Received,Current Liability,BAS Excluded,,
+833,LIA.CUR.TAX.INC.TAX,Tax Credits,Current Liability,BAS Excluded,Include any other tax credits withheld from gross income earned by the entity during the period.,
+834,LIA.CUR.TAX.INC.WTP,Withholding Tax Paid,Current Liability,BAS Excluded,,
+837,LIA.CUR.PAY.EMP,Provision for Annual Leave,Current Liability,BAS Excluded,,
+838,LIA.CUR.PAY.EMP,Provision for Long Service Leave,Current Liability,BAS Excluded,,
+840,LIA.CUR.HPA,Hire Purchase (Current),Current Liability,BAS Excluded,,Hire Purchase
+840H,LIA.CUR,Historical Adjustment,Historical,BAS Excluded,For accountant adjustments,
+841,LIA.CUR.HPA.UEI,Hire Purchase - Unexpired Interest (Current),Current Liability,BAS Excluded,,Hire Purchase - Unexpired Interest
+842,LIA.CUR.CHM,Chattel Mortgage (Current),Current Liability,BAS Excluded,,Chattel Mortgage
+843,LIA.CUR.CHM.UEI,Chattel Mortgage - Unexpired Interest (Current),Current Liability,BAS Excluded,,Chattel Mortgage - Unexpired Interest
+850,LIA.CUR.REL,Related Party Payables/Loan,Current Liability,BAS Excluded,,
+851,LIA.CUR.LOA.SET,Loans from Beneficiaries/Settlors,Current Liability,BAS Excluded,"Include all advance/loans from beneficiaries or settlors, whether secured or unsecured, which are expected to be paid within 12 months of period end. If the loans are payable over a period extending beyond 12 months of period end, include only the portion that is expected to be repaid within 12 months of period end (known as the current portion).",
+852,LIA.CUR.LOA.SEC,Secured Loans,Current Liability,BAS Excluded,Secured loans are loans under which the entity (borrower) has pledged a specific asset or property which may be seized on default of loan obligations,
+853,LIA.CUR.LOA.UNS,Unsecured Loans,Current Liability,BAS Excluded,Unsecured loans often have higher interest rates and are supported by personal guarantees.,
+860,LIA.CUR,Rounding,Rounding,BAS Excluded,An adjustment entry to allow for rounding,
+877,LIA.CUR,Tracking Transfers,Tracking,BAS Excluded,Transfers between tracking categories,
+890,LIA.NCL.LOA,Loans (NCL),Non-current Liability,BAS Excluded,Money that has been borrowed from a creditor,Loans
+895,LIA.NCL.REL,Related Party Payables/Loan (NCL),Non-current Liability,BAS Excluded,,Related Party Payables/Loan
+896,LIA.NCL.LOA.SET,Loans from Beneficiaries/Settlors (NCL),Non-current Liability,BAS Excluded,,Loans from Beneficiaries/Settlors
+897,LIA.NCL.LOA.SEC,Secured Loans (NCL),Non-current Liability,BAS Excluded,,Secured Loans
+898,LIA.NCL.LOA.UNS,Unsecured Loans (NCL),Non-current Liability,BAS Excluded,,Unsecured Loans
+940,LIA.NCL.HPA,Hire Purchase (Non Current),Non-current Liability,BAS Excluded,,Hire Purchase
+941,LIA.NCL.HPA.UEI,Hire Purchase - Unexpired Interest (Non Current),Non-current Liability,BAS Excluded,,Hire Purchase - Unexpired Interest
+942,LIA.NCL.CHM,Chattel Mortgage (Non Current),Non-current Liability,BAS Excluded,,Chattel Mortgage
+943,LIA.NCL.CHM.UEI,Chattel Mortgage - Unexpired Interest (Non Current),Non-current Liability,BAS Excluded,,Chattel Mortgage - Unexpired Interest
+955,LIA.NCL,Provision for Annual Leave (NCL),Non-current Liability,BAS Excluded,,Provision for Annual Leave
+956,LIA.NCL,Provision for Long Service Leave (NCL),Non-current Liability,BAS Excluded,,Provision for Long Service Leave
+960,EQU.RET,Retained Earnings,Retained Earnings,BAS Excluded,Do not Use,
+970,EQU.SET,Settled Sum,Equity,BAS Excluded,,
+975,EQU.RES,Reserves,Equity,BAS Excluded,Include all other reserves not otherwise separately categorised. These may include general reserves where the entity sets aside part of its retained earnings for a specified purpose (and hence the funds are unavailable for distribution).,
+976,EQU.RES.FOR,Foreign Currency Translation Reserve,Equity,BAS Excluded,"These are unrealised gains or losses resulting from the translation of financial reports at period end that are denominated in a currency other than the reporting currency. For example, this would arise when translating a branch or subsidiary''s financial statements into the reporting currency. This is quite different from the gains or losses resulting from the conversion of transactional items which are accounted for in the income statement.",
+977,EQU.RES.REV,Revaluation Reserves,Equity,BAS Excluded,"A revaluation reserve records revaluations (unrealised gains) of non-current assets. Generally, this amount represents the difference between the market value of assets and their original cost.",
+980,EQU,Units Held,Equity,BAS Excluded,Units held ( if Unit trust) otherwise delete.,
+981,EQU.GIF,Gifts to Trust Corpus,Equity,BAS Excluded,,
+9900,EXP.CFL,Prior Period Losses Applied,Expense,BAS Excluded,"Journal out any prior period losses from ""undistributed income"" to this account",Prior Period Losses Applied
+9901,EXP.DIS,Distribution of Profit - Beneficiary 1,Expense,BAS Excluded,DR Income distribution journal entries for this beneficiary,Beneficiary 1
+9902,EXP.DIS,Distribution of Profit - Beneficiary 2,Expense,BAS Excluded,DR Income distribution journal entries for this beneficiary,Beneficiary 2
+9903,EXP.DIS,Distribution of Profit - Beneficiary 3,Expense,BAS Excluded,DR Income distribution journal entries for this beneficiary,Beneficiary 3
+9904,EXP.DIS,Distribution of Profit - Beneficiary 4,Expense,BAS Excluded,DR Income distribution journal entries for this beneficiary,Beneficiary 4
+9905,EXP.DIS,Distribution of Profit - Beneficiary 5,Expense,BAS Excluded,DR Income distribution journal entries for this beneficiary,Beneficiary 5
+9906,EXP.DIS,Distribution of Profit - Beneficiary 6,Expense,BAS Excluded,DR Income distribution journal entries for this beneficiary,Beneficiary 6
+9907,EXP.DIS,Distribution of Profit - Beneficiary 7,Expense,BAS Excluded,DR Income distribution journal entries for this beneficiary,Beneficiary 7
+9908,EXP.DIS,Distribution of Profit - Beneficiary 8,Expense,BAS Excluded,DR Income distribution journal entries for this beneficiary,Beneficiary 8
+9909,EXP.DIS,Distribution of Profit - Beneficiary 9,Expense,BAS Excluded,DR Income distribution journal entries for this beneficiary,Beneficiary 9
+9910,EXP.DIS,Distribution of Profit - Beneficiary 10,Expense,BAS Excluded,DR Income distribution journal entries for this beneficiary,Beneficiary 10
+9911,LIA.NCL.ADV.1,Funds Introduced - Beneficiary 1,Non-current Liability,BAS Excluded,Funds contributed to trust by this beneficiary,Funds Introduced
+9912,LIA.NCL.ADV.2,Funds Introduced - Beneficiary 2,Non-current Liability,BAS Excluded,Funds contributed to trust by this beneficiary,Funds Introduced
+9913,LIA.NCL.ADV.3,Funds Introduced - Beneficiary 3,Non-current Liability,BAS Excluded,Funds contributed to trust by this beneficiary,Funds Introduced
+9914,LIA.NCL.ADV.4,Funds Introduced - Beneficiary 4,Non-current Liability,BAS Excluded,Funds contributed to trust by this beneficiary,Funds Introduced
+9915,LIA.NCL.ADV.5,Funds Introduced - Beneficiary 5,Non-current Liability,BAS Excluded,Funds contributed to trust by this beneficiary,Funds Introduced
+9916,LIA.NCL.ADV.6,Funds Introduced - Beneficiary 6,Non-current Liability,BAS Excluded,Funds contributed to trust by this beneficiary,Funds Introduced
+9917,LIA.NCL.ADV.7,Funds Introduced - Beneficiary 7,Non-current Liability,BAS Excluded,Funds contributed to trust by this beneficiary,Funds Introduced
+9918,LIA.NCL.ADV.8,Funds Introduced - Beneficiary 8,Non-current Liability,BAS Excluded,Funds contributed to trust by this beneficiary,Funds Introduced
+9919,LIA.NCL.ADV.9,Funds Introduced - Beneficiary 9,Non-current Liability,BAS Excluded,Funds contributed to trust by this beneficiary,Funds Introduced
+9920,LIA.NCL.ADV.10,Funds Introduced - Beneficiary 10,Non-current Liability,BAS Excluded,Funds contributed to trust by this beneficiary,Funds Introduced
+9921,LIA.NCL.DRA.1,Drawings - Beneficiary 1,Non-current Liability,BAS Excluded,Funds drawn from trust by this beneficiary,Drawings
+9922,LIA.NCL.DRA.2,Drawings - Beneficiary 2,Non-current Liability,BAS Excluded,Funds drawn from trust by this beneficiary,Drawings
+9923,LIA.NCL.DRA.3,Drawings - Beneficiary 3,Non-current Liability,BAS Excluded,Funds drawn from trust by this beneficiary,Drawings
+9924,LIA.NCL.DRA.4,Drawings - Beneficiary 4,Non-current Liability,BAS Excluded,Funds drawn from trust by this beneficiary,Drawings
+9925,LIA.NCL.DRA.5,Drawings - Beneficiary 5,Non-current Liability,BAS Excluded,Funds drawn from trust by this beneficiary,Drawings
+9926,LIA.NCL.DRA.6,Drawings - Beneficiary 6,Non-current Liability,BAS Excluded,Funds drawn from trust by this beneficiary,Drawings
+9927,LIA.NCL.DRA.7,Drawings - Beneficiary 7,Non-current Liability,BAS Excluded,Funds drawn from trust by this beneficiary,Drawings
+9928,LIA.NCL.DRA.8,Drawings - Beneficiary 8,Non-current Liability,BAS Excluded,Funds drawn from trust by this beneficiary,Drawings
+9929,LIA.NCL.DRA.9,Drawings - Beneficiary 9,Non-current Liability,BAS Excluded,Funds drawn from trust by this beneficiary,Drawings
+9930,LIA.NCL.DRA.10,Drawings - Beneficiary 10,Non-current Liability,BAS Excluded,Funds drawn from trust by this beneficiary,Drawings
+9931,LIA.NCL.PFT.1,Share of Profit - Beneficiary 1,Non-current Liability,BAS Excluded,CR Income distribution journal entries for this beneficiary,Share of Profit
+9932,LIA.NCL.PFT.2,Share of Profit - Beneficiary 2,Non-current Liability,BAS Excluded,CR Income distribution journal entries for this beneficiary,Share of Profit
+9933,LIA.NCL.PFT.3,Share of Profit - Beneficiary 3,Non-current Liability,BAS Excluded,CR Income distribution journal entries for this beneficiary,Share of Profit
+9934,LIA.NCL.PFT.4,Share of Profit - Beneficiary 4,Non-current Liability,BAS Excluded,CR Income distribution journal entries for this beneficiary,Share of Profit
+9935,LIA.NCL.PFT.5,Share of Profit - Beneficiary 5,Non-current Liability,BAS Excluded,CR Income distribution journal entries for this beneficiary,Share of Profit
+9936,LIA.NCL.PFT.6,Share of Profit - Beneficiary 6,Non-current Liability,BAS Excluded,CR Income distribution journal entries for this beneficiary,Share of Profit
+9937,LIA.NCL.PFT.7,Share of Profit - Beneficiary 7,Non-current Liability,BAS Excluded,CR Income distribution journal entries for this beneficiary,Share of Profit
+9938,LIA.NCL.PFT.8,Share of Profit - Beneficiary 8,Non-current Liability,BAS Excluded,CR Income distribution journal entries for this beneficiary,Share of Profit
+9939,LIA.NCL.PFT.9,Share of Profit - Beneficiary 9,Non-current Liability,BAS Excluded,CR Income distribution journal entries for this beneficiary,Share of Profit
+9940,LIA.NCL.PFT.10,Share of Profit - Beneficiary 10,Non-current Liability,BAS Excluded,CR Income distribution journal entries for this beneficiary,Share of Profit
+9941,LIA.NCL.ADV.1,Opening Balances - Beneficiary 1,Non-current Liability,BAS Excluded,"The balance owing to this beneficiary, when the trust converted to Xero",Opening Balances
+9942,LIA.NCL.ADV.2,Opening Balances - Beneficiary 2,Non-current Liability,BAS Excluded,"The balance owing to this beneficiary, when the trust converted to Xero",Opening Balances
+9943,LIA.NCL.ADV.3,Opening Balances - Beneficiary 3,Non-current Liability,BAS Excluded,"The balance owing to this beneficiary, when the trust converted to Xero",Opening Balances
+9944,LIA.NCL.ADV.4,Opening Balances - Beneficiary 4,Non-current Liability,BAS Excluded,"The balance owing to this beneficiary, when the trust converted to Xero",Opening Balances
+9945,LIA.NCL.ADV.5,Opening Balances - Beneficiary 5,Non-current Liability,BAS Excluded,"The balance owing to this beneficiary, when the trust converted to Xero",Opening Balances
+9946,LIA.NCL.ADV.6,Opening Balances - Beneficiary 6,Non-current Liability,BAS Excluded,"The balance owing to this beneficiary, when the trust converted to Xero",Opening Balances
+9947,LIA.NCL.ADV.7,Opening Balances - Beneficiary 7,Non-current Liability,BAS Excluded,"The balance owing to this beneficiary, when the trust converted to Xero",Opening Balances
+9948,LIA.NCL.ADV.8,Opening Balances - Beneficiary 8,Non-current Liability,BAS Excluded,"The balance owing to this beneficiary, when the trust converted to Xero",Opening Balances
+9949,LIA.NCL.ADV.9,Opening Balances - Beneficiary 9,Non-current Liability,BAS Excluded,"The balance owing to this beneficiary, when the trust converted to Xero",Opening Balances
+9950,LIA.NCL.ADV.10,Opening Balances - Beneficiary 10,Non-current Liability,BAS Excluded,"The balance owing to this beneficiary, when the trust converted to Xero",Opening Balances
+999,LIA.CUR,Suspense,Current Liability,BAS Excluded,"An entry that allows an unknown transaction to be entered, so the accounts can still be worked on in balance and the entry can be dealt with later.",

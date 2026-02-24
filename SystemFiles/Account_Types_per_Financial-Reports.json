@@ -1,0 +1,992 @@
+{
+  "Accounts Payable": {
+    "allowed_codes": [
+      "LIA.CUR.PAY.TRA"
+    ],
+    "allowed_prefixes": [
+      "LIA.CUR.PAY"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Accounts Receivable": {
+    "allowed_codes": [
+      "ASS.CUR.REC.TRA"
+    ],
+    "allowed_prefixes": [
+      "ASS.CUR.REC"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Assets",
+          "Current Assets"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Current Asset": {
+    "allowed_codes": [
+      "ASS.CUR",
+      "ASS.CUR.CAS.BAN",
+      "ASS.CUR.CAS.FLO",
+      "ASS.CUR.DIR",
+      "ASS.CUR.INY",
+      "ASS.CUR.INY.WIP",
+      "ASS.CUR.LOA",
+      "ASS.CUR.REC.ADA",
+      "ASS.CUR.REC.PRE",
+      "ASS.CUR.REC.TRA",
+      "ASS.CUR.REL",
+      "ASS.CUR.TER"
+    ],
+    "allowed_prefixes": [
+      "ASS.CUR",
+      "ASS.CUR.CAS",
+      "ASS.CUR.DIR",
+      "ASS.CUR.INY",
+      "ASS.CUR.LOA",
+      "ASS.CUR.REC",
+      "ASS.CUR.REL",
+      "ASS.CUR.TER"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Assets",
+          "Current Assets"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Assets",
+          "Current Assets",
+          "Bank Accounts"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Current Liability": {
+    "allowed_codes": [
+      "LIA.CUR",
+      "LIA.CUR.CHM",
+      "LIA.CUR.CHM.UEI",
+      "LIA.CUR.DEF",
+      "LIA.CUR.DEF.GOV",
+      "LIA.CUR.DEF.LEA",
+      "LIA.CUR.HPA",
+      "LIA.CUR.HPA.UEI",
+      "LIA.CUR.LOA",
+      "LIA.CUR.LOA.DIR",
+      "LIA.CUR.LOA.SEC",
+      "LIA.CUR.LOA.SET",
+      "LIA.CUR.LOA.UNS",
+      "LIA.CUR.PAY",
+      "LIA.CUR.PAY.DIV",
+      "LIA.CUR.PAY.EMP",
+      "LIA.CUR.PAY.PAY",
+      "LIA.CUR.PAY.TRA",
+      "LIA.CUR.PRO",
+      "LIA.CUR.REL",
+      "LIA.CUR.TAX",
+      "LIA.CUR.TAX.DEF",
+      "LIA.CUR.TAX.GST",
+      "LIA.CUR.TAX.INC",
+      "LIA.CUR.TAX.INC.FRA",
+      "LIA.CUR.TAX.INC.TAX",
+      "LIA.CUR.TAX.INC.WTP",
+      "LIA.NCL.LOA.SEC"
+    ],
+    "allowed_prefixes": [
+      "LIA.CUR",
+      "LIA.CUR.CHM",
+      "LIA.CUR.DEF",
+      "LIA.CUR.HPA",
+      "LIA.CUR.LOA",
+      "LIA.CUR.PAY",
+      "LIA.CUR.PRO",
+      "LIA.CUR.REL",
+      "LIA.CUR.TAX",
+      "LIA.NCL"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities",
+          "Chattel Mortgages"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities",
+          "Chattel Mortgages",
+          "Unexpired Interest"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities",
+          "Hire Purchase Agreements"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities",
+          "Hire Purchase Agreements",
+          "Unexpired Interest"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities",
+          "Taxation"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities",
+          "Gst"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Non-current Liabilities"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Direct Costs": {
+    "allowed_codes": [
+      "EXP",
+      "EXP.COS",
+      "EXP.COS.CLO",
+      "EXP.COS.OPE",
+      "EXP.COS.PUR",
+      "EXP.COS.WPC",
+      "EXP.COS.WPO"
+    ],
+    "allowed_prefixes": [
+      "EXP",
+      "EXP.COS"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Expenses"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Cost Of Sales",
+          "Direct Costs"
+        ],
+        "report": "Report01_Trading-Statement.json"
+      },
+      {
+        "hierarchy": [
+          "Income",
+          "Trading Profit",
+          "Trading Gross Profit",
+          "Cost Of Sales"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Cost Of Sales",
+          "Closing Stock"
+        ],
+        "report": "Report01_Trading-Statement.json"
+      },
+      {
+        "hierarchy": [
+          "Cost Of Sales",
+          "Opening Stock"
+        ],
+        "report": "Report01_Trading-Statement.json"
+      },
+      {
+        "hierarchy": [
+          "Cost Of Sales",
+          "Purchases"
+        ],
+        "report": "Report01_Trading-Statement.json"
+      },
+      {
+        "hierarchy": [
+          "Cost Of Sales",
+          "Closing Work In Progress"
+        ],
+        "report": "Report01_Trading-Statement.json"
+      },
+      {
+        "hierarchy": [
+          "Cost Of Sales",
+          "Opening Work In Progress"
+        ],
+        "report": "Report01_Trading-Statement.json"
+      }
+    ]
+  },
+  "Equity": {
+    "allowed_codes": [
+      "EQU",
+      "EQU.ADV",
+      "EQU.ADV.1",
+      "EQU.ADV.10",
+      "EQU.ADV.2",
+      "EQU.ADV.3",
+      "EQU.ADV.4",
+      "EQU.ADV.5",
+      "EQU.ADV.6",
+      "EQU.ADV.7",
+      "EQU.ADV.8",
+      "EQU.ADV.9",
+      "EQU.DRA",
+      "EQU.DRA.1",
+      "EQU.DRA.10",
+      "EQU.DRA.2",
+      "EQU.DRA.3",
+      "EQU.DRA.4",
+      "EQU.DRA.5",
+      "EQU.DRA.6",
+      "EQU.DRA.7",
+      "EQU.DRA.8",
+      "EQU.DRA.9",
+      "EQU.GIF",
+      "EQU.PFT",
+      "EQU.PFT.1",
+      "EQU.PFT.10",
+      "EQU.PFT.2",
+      "EQU.PFT.3",
+      "EQU.PFT.4",
+      "EQU.PFT.5",
+      "EQU.PFT.6",
+      "EQU.PFT.7",
+      "EQU.PFT.8",
+      "EQU.PFT.9",
+      "EQU.RES",
+      "EQU.RES.FOR",
+      "EQU.RES.REV",
+      "EQU.RET",
+      "EQU.SET",
+      "EQU.SHA",
+      "EQU.SHA.ORD"
+    ],
+    "allowed_prefixes": [
+      "EQU",
+      "EQU.ADV",
+      "EQU.DRA",
+      "EQU.GIF",
+      "EQU.PFT",
+      "EQU.RES",
+      "EQU.RET",
+      "EQU.SET",
+      "EQU.SHA"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Equity",
+          "Retained Earnings"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Equity",
+          "Owner/partner Accounts"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Equity"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Equity",
+          "Reserves"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Equity",
+          "Share Capital"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Expense": {
+    "allowed_codes": [
+      "EXP",
+      "EXP.ADM",
+      "EXP.ADV",
+      "EXP.AMO",
+      "EXP.AUD",
+      "EXP.BAD",
+      "EXP.BAD.DOU",
+      "EXP.CFL",
+      "EXP.DEP",
+      "EXP.DIS",
+      "EXP.DIV",
+      "EXP.EMP",
+      "EXP.EMP.SHA",
+      "EXP.EMP.SUP",
+      "EXP.EMP.WAG",
+      "EXP.ENT",
+      "EXP.ENT.NON",
+      "EXP.EXT",
+      "EXP.FBT",
+      "EXP.FOR",
+      "EXP.FOR.UGL",
+      "EXP.IMP",
+      "EXP.INC",
+      "EXP.INS",
+      "EXP.INT",
+      "EXP.INV",
+      "EXP.INV.REN",
+      "EXP.NON",
+      "EXP.OCC",
+      "EXP.PRO",
+      "EXP.REN",
+      "EXP.REN.OPE",
+      "EXP.REP",
+      "EXP.TRA",
+      "EXP.TRA.INT",
+      "EXP.TRA.NAT",
+      "EXP.UTI",
+      "EXP.VEH"
+    ],
+    "allowed_prefixes": [
+      "EXP",
+      "EXP.ADM",
+      "EXP.ADV",
+      "EXP.AMO",
+      "EXP.AUD",
+      "EXP.BAD",
+      "EXP.CFL",
+      "EXP.DEP",
+      "EXP.DIS",
+      "EXP.DIV",
+      "EXP.EMP",
+      "EXP.ENT",
+      "EXP.EXT",
+      "EXP.FBT",
+      "EXP.FOR",
+      "EXP.IMP",
+      "EXP.INC",
+      "EXP.INS",
+      "EXP.INT",
+      "EXP.INV",
+      "EXP.NON",
+      "EXP.OCC",
+      "EXP.PRO",
+      "EXP.REN",
+      "EXP.REP",
+      "EXP.TRA",
+      "EXP.UTI",
+      "EXP.VEH"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Expenses"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Expenses",
+          "Depreciation"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Dividends Paid"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Expenses",
+          "Entertainment",
+          "Deductible Entertainment"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Expenses",
+          "Entertainment",
+          "Non Deductible Entertainment"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Expenses",
+          "Foreign Currency Gains And Losses"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Expenses",
+          "Foreign Currency Gains And Losses",
+          "Unrealised Foreign Currency Gains And Losses"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Income Tax Expense"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Expenses",
+          "Travel And Accommodation"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Expenses",
+          "Travel And Accommodation",
+          "International Travel And Accommodation"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Expenses",
+          "Travel And Accommodation",
+          "National Travel And Accommodation"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Expenses",
+          "Motor Vehicle"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      }
+    ]
+  },
+  "Fixed Asset": {
+    "allowed_codes": [
+      "ASS.NCA.FIX",
+      "ASS.NCA.FIX.BUC",
+      "ASS.NCA.FIX.BUC.ACC",
+      "ASS.NCA.FIX.LAC",
+      "ASS.NCA.FIX.LAC.REV",
+      "ASS.NCA.FIX.LEA",
+      "ASS.NCA.FIX.LEA.ACC",
+      "ASS.NCA.FIX.PLA",
+      "ASS.NCA.FIX.PLA.ACC",
+      "ASS.NCA.FIX.REV",
+      "ASS.NCA.FIX.VEH",
+      "ASS.NCA.FIX.VEH.ACC",
+      "ASS.NCA.INT",
+      "ASS.NCA.INT.AMO"
+    ],
+    "allowed_prefixes": [
+      "ASS.NCA.FIX",
+      "ASS.NCA.INT"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Assets",
+          "Non-current Assets",
+          "Property, Plant And Equipment"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Assets",
+          "Non-current Assets",
+          "Intangibles"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "GST": {
+    "allowed_codes": [
+      "LIA.CUR.TAX.GST"
+    ],
+    "allowed_prefixes": [
+      "LIA.CUR.TAX"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities",
+          "Gst"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Historical": {
+    "allowed_codes": [
+      "LIA.CUR"
+    ],
+    "allowed_prefixes": [
+      "LIA.CUR"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Non-current Asset": {
+    "allowed_codes": [
+      "ASS.NCA",
+      "ASS.NCA.DIR",
+      "ASS.NCA.FIX.BUC",
+      "ASS.NCA.FIX.LAC",
+      "ASS.NCA.FIX.LAC.REV",
+      "ASS.NCA.INT",
+      "ASS.NCA.INT.AMO",
+      "ASS.NCA.INT.GOO",
+      "ASS.NCA.INT.GOO.IMP",
+      "ASS.NCA.INT.IMP",
+      "ASS.NCA.INV",
+      "ASS.NCA.INV.SHA",
+      "ASS.NCA.INV.TER",
+      "ASS.NCA.LOA",
+      "ASS.NCA.REA",
+      "ASS.NCA.REA.IMP",
+      "ASS.NCA.REL"
+    ],
+    "allowed_prefixes": [
+      "ASS.NCA",
+      "ASS.NCA.DIR",
+      "ASS.NCA.FIX",
+      "ASS.NCA.INT",
+      "ASS.NCA.INV",
+      "ASS.NCA.LOA",
+      "ASS.NCA.REA",
+      "ASS.NCA.REL"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Assets",
+          "Non-current Assets"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Assets",
+          "Non-current Assets",
+          "Property, Plant And Equipment"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Assets",
+          "Non-current Assets",
+          "Intangibles"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Assets",
+          "Non-current Assets",
+          "Goodwill"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Assets",
+          "Non-current Assets",
+          "Research And Development"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Non-current Liability": {
+    "allowed_codes": [
+      "EQU.RET",
+      "LIA.NCL",
+      "LIA.NCL.ADV.1",
+      "LIA.NCL.ADV.10",
+      "LIA.NCL.ADV.2",
+      "LIA.NCL.ADV.3",
+      "LIA.NCL.ADV.4",
+      "LIA.NCL.ADV.5",
+      "LIA.NCL.ADV.6",
+      "LIA.NCL.ADV.7",
+      "LIA.NCL.ADV.8",
+      "LIA.NCL.ADV.9",
+      "LIA.NCL.CHM",
+      "LIA.NCL.CHM.UEI",
+      "LIA.NCL.DRA.1",
+      "LIA.NCL.DRA.10",
+      "LIA.NCL.DRA.2",
+      "LIA.NCL.DRA.3",
+      "LIA.NCL.DRA.4",
+      "LIA.NCL.DRA.5",
+      "LIA.NCL.DRA.6",
+      "LIA.NCL.DRA.7",
+      "LIA.NCL.DRA.8",
+      "LIA.NCL.DRA.9",
+      "LIA.NCL.HPA",
+      "LIA.NCL.HPA.UEI",
+      "LIA.NCL.LOA",
+      "LIA.NCL.LOA.DIR",
+      "LIA.NCL.LOA.SEC",
+      "LIA.NCL.LOA.SET",
+      "LIA.NCL.LOA.UNS",
+      "LIA.NCL.PFT.1",
+      "LIA.NCL.PFT.10",
+      "LIA.NCL.PFT.2",
+      "LIA.NCL.PFT.3",
+      "LIA.NCL.PFT.4",
+      "LIA.NCL.PFT.5",
+      "LIA.NCL.PFT.6",
+      "LIA.NCL.PFT.7",
+      "LIA.NCL.PFT.8",
+      "LIA.NCL.PFT.9",
+      "LIA.NCL.REL"
+    ],
+    "allowed_prefixes": [
+      "EQU.RET",
+      "LIA.NCL"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Equity",
+          "Retained Earnings"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Non-current Liabilities"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Non-current Liabilities",
+          "Shareholder Accounts"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Non-current Liabilities",
+          "Chattel Mortgages"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Non-current Liabilities",
+          "Chattel Mortgages",
+          "Unexpired Interest"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Non-current Liabilities",
+          "Hire Purchase Agreements"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      },
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Non-current Liabilities",
+          "Hire Purchase Agreements",
+          "Unexpired Interest"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Other income": {
+    "allowed_codes": [
+      "REV.GRA",
+      "REV.GRA.GOV",
+      "REV.INV.DIV",
+      "REV.INV.INT",
+      "REV.INV.REN",
+      "REV.NON",
+      "REV.OTH",
+      "REV.OTH.CAP",
+      "REV.OTH.COM",
+      "REV.OTH.GAI",
+      "REV.OTH.INV"
+    ],
+    "allowed_prefixes": [
+      "REV.GRA",
+      "REV.INV",
+      "REV.NON",
+      "REV.OTH"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Other Income"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      }
+    ]
+  },
+  "Prepayment": {
+    "allowed_codes": [
+      "ASS.CUR.REC.PRE"
+    ],
+    "allowed_prefixes": [
+      "ASS.CUR.REC"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Assets",
+          "Current Assets"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Retained Earnings": {
+    "allowed_codes": [
+      "EQU.RET"
+    ],
+    "allowed_prefixes": [
+      "EQU.RET"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Equity",
+          "Retained Earnings"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Revenue": {
+    "allowed_codes": [
+      "REV",
+      "REV.INV.INT",
+      "REV.INV.REN",
+      "REV.OTH",
+      "REV.OTH.CAP",
+      "REV.TRA.FAR",
+      "REV.TRA.GOO",
+      "REV.TRA.SER"
+    ],
+    "allowed_prefixes": [
+      "REV",
+      "REV.INV",
+      "REV.OTH",
+      "REV.TRA"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Sales",
+          "Revenue"
+        ],
+        "report": "Report01_Trading-Statement.json"
+      },
+      {
+        "hierarchy": [
+          "Income",
+          "Trading Profit",
+          "Trading Gross Profit",
+          "Revenue"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Other Income"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Sales",
+          "Sale Of Livestock"
+        ],
+        "report": "Report01_Trading-Statement.json"
+      },
+      {
+        "hierarchy": [
+          "Income",
+          "Trading Profit",
+          "Farming Gross Profit",
+          "Sale Of Livestock"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Sales",
+          "Sale Of Goods"
+        ],
+        "report": "Report01_Trading-Statement.json"
+      },
+      {
+        "hierarchy": [
+          "Income",
+          "Trading Profit",
+          "Trading Gross Profit",
+          "Sale Of Goods"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      },
+      {
+        "hierarchy": [
+          "Income",
+          "Service Income"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      }
+    ]
+  },
+  "Rounding": {
+    "allowed_codes": [
+      "LIA.CUR"
+    ],
+    "allowed_prefixes": [
+      "LIA.CUR"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Sales": {
+    "allowed_codes": [
+      "REV.TRA.GOO"
+    ],
+    "allowed_prefixes": [
+      "REV.TRA"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Sales",
+          "Sale Of Goods"
+        ],
+        "report": "Report01_Trading-Statement.json"
+      },
+      {
+        "hierarchy": [
+          "Income",
+          "Trading Profit",
+          "Trading Gross Profit",
+          "Sale Of Goods"
+        ],
+        "report": "Report02_Detailed-Profit-and-Loss.json"
+      }
+    ]
+  },
+  "Tracking": {
+    "allowed_codes": [
+      "LIA.CUR"
+    ],
+    "allowed_prefixes": [
+      "LIA.CUR"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  },
+  "Unpaid Expense Claims": {
+    "allowed_codes": [
+      "LIA.CUR.PAY.EMP"
+    ],
+    "allowed_prefixes": [
+      "LIA.CUR.PAY"
+    ],
+    "sections": [
+      {
+        "hierarchy": [
+          "Liabilities",
+          "Current Liabilities"
+        ],
+        "report": "Report03_Balance-Sheet.json"
+      }
+    ]
+  }
+}
