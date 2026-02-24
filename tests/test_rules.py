@@ -158,7 +158,7 @@ class TestPayrollRules:
         ctx = _ctx("construction wages", raw_type="Direct Costs",
                     canon_type="direct costs")
         code, _ = evaluate_rules(ALL_RULES, ctx)
-        assert code == "EXP.COS.WAG"
+        assert code == "EXP.COS"
 
     def test_wages_expense(self):
         ctx = _ctx("office wages", raw_type="Expense", canon_type="expense")

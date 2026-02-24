@@ -19,7 +19,7 @@ partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,427,Hire of Plant an
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,430,Subscriptions & Memberships,Expense,EXP,synonym_exact_type,95.0,EXP,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,433,Insurance,Expense,EXP.INS,code_match,100.0,EXP.INS,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,437,Interest expense,Expense,EXP.INT,code_match,100.0,EXP.INT,,
-partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,438,ATO Interest Expense,Expense,EXP.NON,non_deductible_interest,88.0,EXP.NON,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,438,ATO Interest Expense,Expense,EXP.NON,non_deductible_interest,88.0,EXP.INT,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,446,Materials & Supplies,Expense,EXP.COS.PUR,detail_include,91.0,EXP.COS.PUR,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,447,Motor vehicle - Depreciation,Expense,EXP.DEP,detail_include,91.0,EXP.DEP,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,448,Motor Vehicle Fuel Costs,Expense,EXP.VEH,detail_include,91.0,EXP.VEH,,
@@ -71,7 +71,7 @@ partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode11,Billable Ex
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode12,Billable Expense Income (deleted),Revenue,,unmatched,0.0,REV.OTH,,Billable expense income
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode14,Borrowing Cost,Non-Current Asset,,unmatched,0.0,,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode16,Capital Introduction,Equity,,unmatched,0.0,EQU,,Capital Introduction
-partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode19,Contractor Expenses (non salary),Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode19,Contractor Expenses (non salary),Expense,EXP.EMP,leave_provision_expense,86.0,EXP,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode20,Cost of sales,Direct Costs,EXP.COS,cogs_expense_default,90.0,EXP.COS,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode21,Default Credit Card,Bank,LIA.CUR.PAY,credit_card_override,92.0,LIA.CUR.PAY,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode22,Default Liability,Current Liability,,unmatched,0.0,LIA.CUR,,Default Liability
@@ -93,10 +93,10 @@ partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode52,Motor vehic
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode54,Office furniture and equipment at cost,Fixed Asset,,unmatched,0.0,,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode55,Opening balance equity,Equity,,unmatched,0.0,EQU.RES,,Opening balance equity
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode57,Owners drawings,Equity,,unmatched,0.0,EQU.DRA,,Drawings
-partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode59,PAYG instalments payable,Current Liability,,unmatched,0.0,LIA.CUR.TAX,,PAYG Payable
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode59,PAYG instalments payable,Current Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,PAYG Payable
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode60,PAYG Liability,Current Liability,LIA.CUR.PAY.EMP,paygw_withholding_liability,91.0,LIA.CUR.PAY.EMP,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode61,PAYG Withholdings Payable,Current Liability,LIA.CUR.PAY.EMP,paygw_withholding_liability,91.0,LIA.CUR.PAY.EMP,,
-partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode63,Postage & shipping,Expense,EXP,synonym_exact_type,95.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode63,Postage & shipping,Expense,EXP,synonym_exact_type,95.0,EXP.ADM,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode64,Prepayments,Current Asset,ASS.CUR.REC.PRE,synonym_exact_global,90.0,ASS.CUR.REC.PRE,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode65,"Printing, stationery & supplies",Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode67,Reconciliation Discrepancies,Expense,,unmatched,0.0,EXP,,Reconciliation discrepancies
@@ -105,7 +105,7 @@ partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode7,Bad debts (d
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode71,Retained Earnings,Retained Earnings,EQU.RET,synonym_exact_type,95.0,EQU.RET,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode73,Salary and Wages,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode76,Sales of Product Income (deleted),Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
-partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode77,"Shipping, Freight, and Delivery Postage & Handling",Expense,EXP.COS,fuzzy_name_global,100.0,EXP.COS,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode77,"Shipping, Freight, and Delivery Postage & Handling",Expense,EXP.COS,fuzzy_name_global,100.0,EXP.ADM,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode81,Superannuation - Person 3630,Current Liability,,unmatched,0.0,LIA.CUR.PAY.EMP,,Superannuation Payable
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode87,Unapplied Cash Bill Payment Expense,Expense,,unmatched,0.0,EXP,,Unapplied cash bill payment expense
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode88,Unapplied Cash Payment Income,Revenue,,unmatched,0.0,,,

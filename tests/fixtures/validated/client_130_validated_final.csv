@@ -22,7 +22,7 @@ company,client_130_ChartOfAccounts_20251215.csv,0640,Subsidies Received,Revenue,
 company,client_130_ChartOfAccounts_20251215.csv,0650,Disbursement received,Revenue,,unmatched,0.0,REV.OTH,,Disbursement received
 company,client_130_ChartOfAccounts_20251215.csv,0700,Rent Received,Revenue,,unmatched,0.0,REV.INV.REN,,Rent Received
 company,client_130_ChartOfAccounts_20251215.csv,1510,Accountancy,Expense,EXP.PRO,detail_include,91.0,EXP.PRO,,
-company,client_130_ChartOfAccounts_20251215.csv,1515,Advertising & Promotion - General,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1515,Advertising & Promotion - General,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.ADV,,
 company,client_130_ChartOfAccounts_20251215.csv,1515.1,Advertising - Recruitment,Expense,EXP.ADV,fuzzy_name_global,100.0,EXP.ADV,,
 company,client_130_ChartOfAccounts_20251215.csv,1545,Bank Fees & Charges,Expense,EXP,fuzzy_name_global,100.0,EXP,,
 company,client_130_ChartOfAccounts_20251215.csv,1546,Bank Fees & Charges- Merchant Fees,Expense,EXP,fuzzy_name_global,100.0,EXP,,
@@ -46,12 +46,12 @@ company,client_130_ChartOfAccounts_20251215.csv,1755,Insurance,Expense,EXP.COS.P
 company,client_130_ChartOfAccounts_20251215.csv,1756,Workers Compensation,Expense,,unmatched,0.0,EXP.EMP,,Workers Compensation
 company,client_130_ChartOfAccounts_20251215.csv,1756.1,Workers Comp - Direct employees,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
 company,client_130_ChartOfAccounts_20251215.csv,1760,Interest Expense - Australia,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
-company,client_130_ChartOfAccounts_20251215.csv,1761,ATO Interest,Expense,EXP.NON,non_deductible_interest,88.0,EXP.NON,,
+company,client_130_ChartOfAccounts_20251215.csv,1761,ATO Interest,Expense,EXP.NON,non_deductible_interest,88.0,EXP.INT,,
 company,client_130_ChartOfAccounts_20251215.csv,1764,Internet Costs,Expense,EXP.UTI,fuzzy_name_global,100.0,EXP.UTI,,
 company,client_130_ChartOfAccounts_20251215.csv,1770,Stamp Duty,Expense,,unmatched,0.0,EXP,,Stamp Duty
 company,client_130_ChartOfAccounts_20251215.csv,1775,Lease Payments,Expense,EXP.REN.OPE,fuzzy_name_type,80.76923076923077,EXP.REN.OPE,,
 company,client_130_ChartOfAccounts_20251215.csv,1776,Lease Preparation Fee,Expense,EXP.REN,fuzzy_name_global,100.0,EXP.REN,,
-company,client_130_ChartOfAccounts_20251215.csv,1780,Legal Fees,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1780,Legal Fees,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.PRO,,
 company,client_130_ChartOfAccounts_20251215.csv,1790,Membership,Expense,,unmatched,0.0,EXP,,Membership
 company,client_130_ChartOfAccounts_20251215.csv,1804,M/V Car - Fuel & Oil,Expense,EXP.VEH,detail_include,91.0,EXP.VEH,,
 company,client_130_ChartOfAccounts_20251215.csv,1830,NDIS Audit,Expense,EXP.PRO,fuzzy_name_type,86.36363636363636,EXP.PRO,,
@@ -62,13 +62,13 @@ company,client_130_ChartOfAccounts_20251215.csv,1840,Printing and Stationery,Exp
 company,client_130_ChartOfAccounts_20251215.csv,1855,Rent on Land & Buildings,Expense,EXP.REN,fuzzy_name_global,100.0,EXP.REN,,
 company,client_130_ChartOfAccounts_20251215.csv,1865,Repairs & Maintenance,Expense,EXP.REP,synonym_exact_type,95.0,EXP.REP,,
 company,client_130_ChartOfAccounts_20251215.csv,1875,Rubbish Removal,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
-company,client_130_ChartOfAccounts_20251215.csv,1880,Salaries - Ordinary,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1880,Salaries - Ordinary,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP.WAG,,
 company,client_130_ChartOfAccounts_20251215.csv,1881,Salaries - Assistants,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
-company,client_130_ChartOfAccounts_20251215.csv,1882,Salaries - Director,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1882,Salaries - Director,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP.WAG,,
 company,client_130_ChartOfAccounts_20251215.csv,1882.1,Salaries - Director Clinical,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
 company,client_130_ChartOfAccounts_20251215.csv,1883,Salaries - Therapists,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
-company,client_130_ChartOfAccounts_20251215.csv,1884,Salaries - Admin,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
-company,client_130_ChartOfAccounts_20251215.csv,1885,Salaries - Associated Persons,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1884,Salaries - Admin,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP.WAG,,
+company,client_130_ChartOfAccounts_20251215.csv,1885,Salaries - Associated Persons,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP.WAG,,
 company,client_130_ChartOfAccounts_20251215.csv,1915,Staff Amenities,Expense,EXP.EMP,synonym_exact_type,95.0,EXP.EMP,,
 company,client_130_ChartOfAccounts_20251215.csv,1916,Socials,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
 company,client_130_ChartOfAccounts_20251215.csv,1917,Staff Retention Program,Expense,,unmatched,0.0,EXP.EMP,,Staff Retention Program
@@ -92,14 +92,14 @@ company,client_130_ChartOfAccounts_20251215.csv,1946,Therapy Expenses,Expense,,u
 company,client_130_ChartOfAccounts_20251215.csv,1950,Travel Reimbursements,Expense,EXP.TRA.NAT,travel_domestic_expense,86.0,EXP.TRA.NAT,,
 company,client_130_ChartOfAccounts_20251215.csv,1951,Seminars & Conferences,Expense,EXP.EMP,fuzzy_name_global,100.0,EXP.EMP,,
 company,client_130_ChartOfAccounts_20251215.csv,1952,WWC Check,Expense,,unmatched,0.0,EXP.EMP,,WWC Check
-company,client_130_ChartOfAccounts_20251215.csv,2000,Speech and Learning Services,Bank,REV.TRA.SER,detail_include,91.0,REV.TRA.SER,,
-company,client_130_ChartOfAccounts_20251215.csv,2010,Speech & Learning Services Pty,Bank,REV.TRA.SER,detail_include,91.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,2000,Speech and Learning Services,Bank,REV.TRA.SER,detail_include,91.0,ASS.CUR.CAS.BAN,,
+company,client_130_ChartOfAccounts_20251215.csv,2010,Speech & Learning Services Pty,Bank,REV.TRA.SER,detail_include,91.0,ASS.CUR.CAS.BAN,,
 company,client_130_ChartOfAccounts_20251215.csv,2011,Rental bond,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.PRE,,Rental bond (prepayment)
-company,client_130_ChartOfAccounts_20251215.csv,2020,Petty Cash Float,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_130_ChartOfAccounts_20251215.csv,2020,Petty Cash Float,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.FLO,,
 company,client_130_ChartOfAccounts_20251215.csv,2029,Prepayments,Current Asset,ASS.CUR.REC.PRE,synonym_exact_global,90.0,ASS.CUR.REC.PRE,,
 company,client_130_ChartOfAccounts_20251215.csv,2030,Prepaid Insurance Expense,Current Asset,ASS.CUR.REC.PRE,detail_include,91.0,ASS.CUR.REC.PRE,,
 company,client_130_ChartOfAccounts_20251215.csv,2031,Prepaid Interest Expense,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
-company,client_130_ChartOfAccounts_20251215.csv,2050,Cash on Hand,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_130_ChartOfAccounts_20251215.csv,2050,Cash on Hand,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.FLO,,
 company,client_130_ChartOfAccounts_20251215.csv,2101,Trade Debtors,Accounts Receivable,ASS.CUR.REC.TRA,accounts_receivable_default,88.0,ASS.CUR.REC.TRA,,
 company,client_130_ChartOfAccounts_20251215.csv,2660,Received from Centrelink,Current Liability,,unmatched,0.0,LIA.CUR,,Received from Centrelink
 company,client_130_ChartOfAccounts_20251215.csv,2829,Leasehold Improvements,Fixed Asset,ASS.NCA.FIX.LEA,fuzzy_name_type,86.20689655172413,ASS.NCA.FIX.LEA,,
@@ -127,7 +127,7 @@ company,client_130_ChartOfAccounts_20251215.csv,3384,input Tax Credit Control Ac
 company,client_130_ChartOfAccounts_20251215.csv,3386,input Tax Credit Adjustment Control,Current Liability,,unmatched,0.0,LIA.CUR.TAX.GST,,Input Tax Credit
 company,client_130_ChartOfAccounts_20251215.csv,3389,BAS Clearing,Current Liability,LIA.CUR.TAX,tax_control_fallback,85.0,LIA.CUR.TAX,,
 company,client_130_ChartOfAccounts_20251215.csv,3394,PAYG Withholding,Current Liability,LIA.CUR.PAY.EMP,paygw_withholding_liability,91.0,LIA.CUR.PAY.EMP,,
-company,client_130_ChartOfAccounts_20251215.csv,3395,PAYG Instalment,Current Liability,,unmatched,0.0,LIA.CUR.TAX,,PAYG Instalment
+company,client_130_ChartOfAccounts_20251215.csv,3395,PAYG Instalment,Current Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,PAYG Instalment
 company,client_130_ChartOfAccounts_20251215.csv,3565,Directors loan - Person 3615,Non-current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
 company,client_130_ChartOfAccounts_20251215.csv,3566,Loan - Person 3616,Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
 company,client_130_ChartOfAccounts_20251215.csv,3566.1,Loan - Person 3617,Non-current Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
@@ -140,7 +140,7 @@ company,client_130_ChartOfAccounts_20251215.csv,402,Fees - AusVance loan,Expense
 company,client_130_ChartOfAccounts_20251215.csv,4110,Income Tax on Profit,Expense,,unmatched,0.0,EXP.INC,,Income Tax on Profit
 company,client_130_ChartOfAccounts_20251215.csv,4160,Dividends Provided for Or Paid,Equity,EQU.RET.DIV,equity_dividend_mapping,90.0,EQU.RET.DIV,,
 company,client_130_ChartOfAccounts_20251215.csv,4199,Unappropriated Profits,Equity,,unmatched,0.0,EQU,,Unappropriated Profits
-company,client_130_ChartOfAccounts_20251215.csv,4200,Issued & Paid Up Capital,Equity,EQU.SHA,share_capital_default,90.0,EQU.SHA,,
+company,client_130_ChartOfAccounts_20251215.csv,4200,Issued & Paid Up Capital,Equity,EQU.SHA,share_capital_default,90.0,EQU.SHA.ORD,,
 company,client_130_ChartOfAccounts_20251215.csv,497,Bank Revaluations,Bank Revaluations,EXP.FOR,bank_revaluation_override,90.0,EXP.FOR,,
 company,client_130_ChartOfAccounts_20251215.csv,498,Unrealised Currency Gains,Unrealised Currency Gains,EXP.FOR.UGL,unrealised_currency_gain,90.0,EXP.FOR.UGL,,
 company,client_130_ChartOfAccounts_20251215.csv,499,Realised Currency Gains,Realised Currency Gains,EXP.FOR.RGL,realised_currency_gain,90.0,EXP.FOR.RGL,,

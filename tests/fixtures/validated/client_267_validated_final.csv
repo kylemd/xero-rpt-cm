@@ -1,13 +1,13 @@
 EntityType,SourceFile,Code,Name,Type,SuggestedReportingCode,MatchReason,Score,ValidatedReportingCode,Reviewer,Notes
 company,client_267_ChartOfAccounts_20251201.csv,,American Express Platinum Business Card,Bank,LIA.CUR.PAY,credit_card_override,92.0,LIA.CUR.PAY,,
 company,client_267_ChartOfAccounts_20251201.csv,11105,ANZ Cheque account 11826,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
-company,client_267_ChartOfAccounts_20251201.csv,11106,ANZ GST Account 12546,Bank,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,LIA.CUR.TAX.GST,,
+company,client_267_ChartOfAccounts_20251201.csv,11106,ANZ GST Account 12546,Bank,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,ASS.CUR.CAS.BAN,,
 company,client_267_ChartOfAccounts_20251201.csv,11107,ANZ interest 2766-89216,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
 company,client_267_ChartOfAccounts_20251201.csv,11108,Rental Bond - Term Deposit 75014,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
 company,client_267_ChartOfAccounts_20251201.csv,11112,AFEX Trading account,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
 company,client_267_ChartOfAccounts_20251201.csv,11115,Cash on Hand,Non-Current Asset,,unmatched,0.0,ASS.CUR.CAS.FLO,,Cash on Hand (should be current)
 company,client_267_ChartOfAccounts_20251201.csv,11130,Deposit on goods in advance,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
-company,client_267_ChartOfAccounts_20251201.csv,11140,Petty Cash,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11140,Petty Cash,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.FLO,,
 company,client_267_ChartOfAccounts_20251201.csv,11180,Undeposited Funds,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
 company,client_267_ChartOfAccounts_20251201.csv,11180a,Undeposited Funds a,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
 company,client_267_ChartOfAccounts_20251201.csv,11190,Payroll Clearing,Current Liability,,unmatched,0.0,LIA.CUR.PAY.EMP,,Payroll Clearing
@@ -24,7 +24,7 @@ company,client_267_ChartOfAccounts_20251201.csv,11212,Vendor Store Credit Liabil
 company,client_267_ChartOfAccounts_20251201.csv,11214,Vendor Gift Card Liability,Current Liability,,unmatched,0.0,LIA.CUR,,Vendor Store Credit/Gift Card Liability
 company,client_267_ChartOfAccounts_20251201.csv,11220,Less Prov'n for Doubtful Debts,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.ADA,,Provision for Doubtful Debts
 company,client_267_ChartOfAccounts_20251201.csv,11234,Refund temporary account,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.TRA,,Refund temporary account
-company,client_267_ChartOfAccounts_20251201.csv,11250,Sundry Debtors,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.TRA,,Sundry Debtors
+company,client_267_ChartOfAccounts_20251201.csv,11250,Sundry Debtors,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC,,Sundry Debtors
 company,client_267_ChartOfAccounts_20251201.csv,11303,Stock on Hand- General,Current Asset,ASS.CUR.INY,fuzzy_name_type,80.95238095238095,ASS.CUR.INY,,
 company,client_267_ChartOfAccounts_20251201.csv,11309,Stock Closing Bal Adjustment,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
 company,client_267_ChartOfAccounts_20251201.csv,11310,Prepaid Stock,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
@@ -239,7 +239,7 @@ company,client_267_ChartOfAccounts_20251201.csv,54710,Product Development,Direct
 company,client_267_ChartOfAccounts_20251201.csv,54720,Closin Stock - Warehouse,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
 company,client_267_ChartOfAccounts_20251201.csv,55003,Commissions Paid,Expense,EXP,synonym_exact_type,95.0,EXP,,
 company,client_267_ChartOfAccounts_20251201.csv,60002,Accountants fees,Expense,,unmatched,0.0,EXP.PRO,,Accountants fees
-company,client_267_ChartOfAccounts_20251201.csv,60003,Digital Advertising,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,60003,Digital Advertising,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.ADV,,
 company,client_267_ChartOfAccounts_20251201.csv,60004,Bookkeeping,Expense,EXP,synonym_exact_type,95.0,EXP,,
 company,client_267_ChartOfAccounts_20251201.csv,60005,Bank charges,Expense,EXP,detail_include,91.0,EXP,,
 company,client_267_ChartOfAccounts_20251201.csv,60006,abc,Expense,,unmatched,0.0,,,
@@ -253,7 +253,7 @@ company,client_267_ChartOfAccounts_20251201.csv,60013,Consultancy Fee,Expense,,u
 company,client_267_ChartOfAccounts_20251201.csv,60016,Formation Costs writtenoff,Expense,,unmatched,0.0,EXP.AMO,,Formation Costs written off (amortisation)
 company,client_267_ChartOfAccounts_20251201.csv,60017,Do not use Freight & couriers,Expense,EXP.COS,fuzzy_name_global,100.0,EXP.COS,,
 company,client_267_ChartOfAccounts_20251201.csv,60018,Sample_Company (old) expenses,Expense,,unmatched,0.0,,,
-company,client_267_ChartOfAccounts_20251201.csv,60019,Fines and Late payments,Expense,,unmatched,0.0,EXP.EMP,,Late Paid Superannuation & Fine
+company,client_267_ChartOfAccounts_20251201.csv,60019,Fines and Late payments,Expense,,unmatched,0.0,EXP.NON,,Late Paid Superannuation & Fine
 company,client_267_ChartOfAccounts_20251201.csv,60020,Insurance,Expense,EXP.COS.PUR.FAR.GOA,detail_include,91.0,EXP.COS.PUR.FAR.GOA,,
 company,client_267_ChartOfAccounts_20251201.csv,60022,Filing Fee,Expense,EXP,fuzzy_name_type,95.23809523809524,EXP,,
 company,client_267_ChartOfAccounts_20251201.csv,60023,Office Cleaning,Expense,EXP.OCC,detail_include,91.0,EXP.OCC,,
@@ -261,7 +261,7 @@ company,client_267_ChartOfAccounts_20251201.csv,60024,Rubbish Removal (warehouse
 company,client_267_ChartOfAccounts_20251201.csv,60025,Office Catering,Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
 company,client_267_ChartOfAccounts_20251201.csv,60026,Office FF & Equip (under $1000),Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
 company,client_267_ChartOfAccounts_20251201.csv,60030,Import expense DO NOT USE,Expense,,unmatched,0.0,,,
-company,client_267_ChartOfAccounts_20251201.csv,60040,Legal fees,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,60040,Legal fees,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.PRO,,
 company,client_267_ChartOfAccounts_20251201.csv,60041,Repairs & Maintenance - Showroom/Warehouse,Expense,EXP.REP,fuzzy_name_type,81.9047619047619,EXP.REP,,
 company,client_267_ChartOfAccounts_20251201.csv,60042,Sub Contractor - Marketing,Expense,EXP.ADV,fuzzy_name_global,100.0,EXP.ADV,,
 company,client_267_ChartOfAccounts_20251201.csv,60042-b,Sub Contractor - Business,Expense,,unmatched,0.0,,,
@@ -310,8 +310,8 @@ company,client_267_ChartOfAccounts_20251201.csv,61330,Print Production,Expense,E
 company,client_267_ChartOfAccounts_20251201.csv,61332,Branding,Expense,,unmatched,0.0,EXP.ADV,,Branding
 company,client_267_ChartOfAccounts_20251201.csv,61333,Memberships/Directories,Expense,,unmatched,0.0,EXP.ADV,,Memberships/Directories
 company,client_267_ChartOfAccounts_20251201.csv,61334,Magazines Books Subscriptions,Expense,EXP,detail_include,91.0,EXP,,
-company,client_267_ChartOfAccounts_20251201.csv,61335,Digital Marketing/Social Media,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
-company,client_267_ChartOfAccounts_20251201.csv,61336,Advertorial/Advertising/Editorial/Partnerships,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,61335,Digital Marketing/Social Media,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.ADV,,
+company,client_267_ChartOfAccounts_20251201.csv,61336,Advertorial/Advertising/Editorial/Partnerships,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.ADV,,
 company,client_267_ChartOfAccounts_20251201.csv,61338,Sponsor/Giveaways/Influencer,Expense,,unmatched,0.0,EXP.ADV,,Sponsor/Giveaways/Influencer
 company,client_267_ChartOfAccounts_20251201.csv,61339,Vend Loyalty Expense,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
 company,client_267_ChartOfAccounts_20251201.csv,61340,VEND Store Credit Expense,Expense,,unmatched,0.0,,,
@@ -343,7 +343,7 @@ company,client_267_ChartOfAccounts_20251201.csv,62445,Staff Gifts,Expense,EXP,de
 company,client_267_ChartOfAccounts_20251201.csv,62450,Superannuation,Expense,EXP.EMP.SUP,synonym_exact_type,95.0,EXP.EMP.SUP,,
 company,client_267_ChartOfAccounts_20251201.csv,62451,Superannuation - Person 3636,Expense,EXP.EMP.SUP,fuzzy_name_global,100.0,EXP.EMP.SUP,,
 company,client_267_ChartOfAccounts_20251201.csv,63251,Fuel & Oil,Expense,EXP.VEH,detail_include,91.0,EXP.VEH,,
-company,client_267_ChartOfAccounts_20251201.csv,63252,Car Insurance,Expense,EXP.COS.PUR.FAR.GOA,detail_include,91.0,EXP.COS.PUR.FAR.GOA,,
+company,client_267_ChartOfAccounts_20251201.csv,63252,Car Insurance,Expense,EXP.COS.PUR.FAR.GOA,detail_include,91.0,EXP.VEH,,
 company,client_267_ChartOfAccounts_20251201.csv,63253,Interest,Expense,,unmatched,0.0,,,
 company,client_267_ChartOfAccounts_20251201.csv,63254,Parking & Tolls,Expense,,unmatched,0.0,EXP.VEH,,Parking & Tolls
 company,client_267_ChartOfAccounts_20251201.csv,63255,Car Repairs & Maintenance,Expense,EXP.VEH,fuzzy_name_type,88.54961832061069,EXP.VEH,,
@@ -363,7 +363,7 @@ company,client_267_ChartOfAccounts_20251201.csv,63269,Vehicle 689,Expense,,unmat
 company,client_267_ChartOfAccounts_20251201.csv,63270,Interest - Golf DTU87D,Expense,,unmatched,0.0,EXP.INT,,Vehicle Interest Expense
 company,client_267_ChartOfAccounts_20251201.csv,63271,Interst Merc Van DPJ33G,Expense,,unmatched,0.0,,,
 company,client_267_ChartOfAccounts_20251201.csv,63272,Vehicle 690,Expense,,unmatched,0.0,EXP.INT,,Vehicle Interest Expense
-company,client_267_ChartOfAccounts_20251201.csv,63273,Interest - Vehicle 681,Expense,,unmatched,0.0,EXP.INT,,Vehicle Interest Expense
+company,client_267_ChartOfAccounts_20251201.csv,63273,Interest - Vehicle 681,Expense,,unmatched,0.0,EXP.VEH,,Vehicle Interest Expense
 company,client_267_ChartOfAccounts_20251201.csv,63274,Interest - Van DTZ42X,Expense,,unmatched,0.0,EXP.INT,,Vehicle Interest Expense
 company,client_267_ChartOfAccounts_20251201.csv,66243,Less: Employee MV Contribution,Expense,,unmatched,0.0,EXP.VEH,,Less: Employee MV Contribution
 company,client_267_ChartOfAccounts_20251201.csv,66327,MV Borrowing costs / Establishment Fee,Expense,,unmatched,0.0,EXP.INT,,MV Borrowing costs / Establishment Fee
@@ -390,12 +390,12 @@ company,client_267_ChartOfAccounts_20251201.csv,86010,Paid Parental Leave Receiv
 company,client_267_ChartOfAccounts_20251201.csv,87000,Jarrah House Donations,Other Income,,unmatched,0.0,REV.OTH,,Donations Received
 company,client_267_ChartOfAccounts_20251201.csv,87500,Insurance Claims Received,Other Income,REV.OTH,detail_include,91.0,REV.OTH,,
 company,client_267_ChartOfAccounts_20251201.csv,88000,JobKeeper Subsidy,Other Income,,unmatched,0.0,REV.GRA.GOV,,Government Grants
-company,client_267_ChartOfAccounts_20251201.csv,88500,ATO Cash Flow Boost,Other Income,,unmatched,0.0,REV.GRA.GOV,,Government Grants
+company,client_267_ChartOfAccounts_20251201.csv,88500,ATO Cash Flow Boost,Other Income,,unmatched,0.0,REV.NON,,Government Grants
 company,client_267_ChartOfAccounts_20251201.csv,89000,Bushwalk Fundraiser [89000],Other Income,,unmatched,0.0,REV.OTH,,Bushwalk Fundraiser
 company,client_267_ChartOfAccounts_20251201.csv,89001,Recoveries,Other Income,,unmatched,0.0,REV.OTH,,Recoveries
 company,client_267_ChartOfAccounts_20251201.csv,89100,Events,Other Income,,unmatched,0.0,REV.OTH,,Events (other income)
 company,client_267_ChartOfAccounts_20251201.csv,91000,Interest Expense,Expense,EXP.INT,synonym_exact_type,95.0,EXP.INT,,
-company,client_267_ChartOfAccounts_20251201.csv,91500,Interest Expense - ATO,Expense,EXP.NON,non_deductible_interest,88.0,EXP.NON,,
+company,client_267_ChartOfAccounts_20251201.csv,91500,Interest Expense - ATO,Expense,EXP.NON,non_deductible_interest,88.0,EXP.INT,,
 company,client_267_ChartOfAccounts_20251201.csv,91510,Loss on Sale of NCA,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
 company,client_267_ChartOfAccounts_20251201.csv,91520,Withholding Tax,Expense,,unmatched,0.0,EXP.INC,,Withholding Tax
 company,client_267_ChartOfAccounts_20251201.csv,91750,Sri Lanka Costs,Expense,,unmatched,0.0,EXP.TRA,,Trip Expenses

@@ -66,11 +66,20 @@ _bank_rules = [
         notes="Bank type + petty cash -> cash flow asset (per SystemMappings.csv)",
     ),
     Rule(
+        name="bank_cc_abbreviation",
+        code="LIA.CUR.PAY",
+        priority=104,
+        keywords=[" cc"],
+        raw_types={"bank"},
+        notes="Bank account with 'CC' abbreviation (credit card) -> current payable. "
+              "Uses ' cc' (with leading space) to avoid substring false positives.",
+    ),
+    Rule(
         name="bank_default",
         code="ASS.CUR.CAS.BAN",
         priority=100,
         raw_types={"bank"},
-        keywords_exclude=CREDIT_CARD_NAMES,
+        keywords_exclude=[*CREDIT_CARD_NAMES, " cc"],
         notes="Bank type account without credit card name -> bank account asset",
     ),
     Rule(
@@ -226,11 +235,12 @@ _revenue_rules = [
 _payroll_rules = [
     Rule(
         name="wages_direct_cost",
-        code="EXP.COS.WAG",
+        code="EXP.COS",
         priority=95,
         keywords=["wages", "salary", "salaries"],
         raw_types={"direct costs", "cost of sales", "purchases"},
-        notes="Wages/salary under direct costs type -> COGS wages",
+        notes="Wages/salary under direct costs type -> COGS. "
+              "Note: EXP.COS.WAG is not a valid Xero reporting code.",
     ),
     Rule(
         name="wages_expense",
@@ -238,7 +248,9 @@ _payroll_rules = [
         priority=93,
         keywords=["wages", "salary", "salaries"],
         canon_types={"expense"},
-        notes="Wages/salary under expense type -> employee wages",
+        keywords_exclude=["non salary"],
+        notes="Wages/salary under expense type -> employee wages. "
+              "Excludes 'non salary' qualifier (e.g. 'Contractor Expenses (non salary)').",
     ),
     Rule(
         name="super_direct_cost",
@@ -487,14 +499,25 @@ _loan_rules = [
         notes="HP/chattel mortgage on expense type -> interest expense",
     ),
     Rule(
+        name="hp_uei_current",
+        code="LIA.CUR.HPA.UEI",
+        priority=86,
+        keywords=["hire purchase", "hp"],
+        keywords_all=["int"],
+        raw_types={"current liability"},
+        keywords_exclude=["unexpired"],
+        notes="HP + interest/int abbreviation on current liability -> current UEI. "
+              "'int' catches both 'interest' (contains 'int') and 'Int' abbreviation.",
+    ),
+    Rule(
         name="hp_current",
         code="LIA.CUR.HPA",
         priority=85,
         keywords=["hire purchase", "hp"],
         raw_types={"current liability"},
-        keywords_exclude=["unexpired", "interest"],
+        keywords_exclude=["unexpired", "interest", " int"],
         notes="Hire purchase on current liability -> current HPA. "
-              "Audit fix: removed 'liability' (generic Liability → NCL fallback).",
+              "Excludes interest/int abbreviation (caught by hp_uei_current).",
     ),
     Rule(
         name="hp_non_current",
@@ -525,11 +548,20 @@ _loan_rules = [
               "Changed from HPA to CHM per validated data.",
     ),
     Rule(
+        name="chattel_mortgage_uei",
+        code="LIA.NCL.CHM.UEI",
+        priority=89,
+        keywords=["chattel mortgage"],
+        keywords_all=["unexpired"],
+        notes="Chattel mortgage + unexpired interest -> chattel mortgage UEI. "
+              "Higher priority than generic uei_non_current to use CHM-specific code.",
+    ),
+    Rule(
         name="uei_non_current",
         code="LIA.NCL.HPA.UEI",
         priority=88,
         keywords=["unexpired interest"],
-        notes="Unexpired interest -> non-current UEI. "
+        notes="Unexpired interest -> non-current UEI (HP fallback). "
               "Validators consistently classify UEI as non-current regardless of type "
               "(UEI is contra to the full HP liability which is non-current).",
     ),
@@ -619,12 +651,22 @@ _tax_rules = [
 _general_expense_rules = [
     # Materials / COS
     Rule(
+        name="closing_stock",
+        code="EXP.COS.CLO",
+        priority=78,
+        keywords=["closing"],
+        canon_types={"expense", "direct costs"},
+        notes="Closing stock/materials -> cost of sales closing. "
+              "Higher priority than materials_purchase to catch 'Closing Raw Materials'.",
+    ),
+    Rule(
         name="materials_purchase",
         code="EXP.COS.PUR",
         priority=75,
         keywords=["materials", "building materials"],
         canon_types={"expense", "direct costs"},
-        notes="Materials/building materials -> cost of purchases",
+        keywords_exclude=["closing"],
+        notes="Materials/building materials -> cost of purchases (excludes closing stock)",
     ),
     Rule(
         name="amortisation",
@@ -783,6 +825,15 @@ _general_expense_rules = [
         keywords_all=["insurance"],
         canon_types={"expense"},
         notes="Workers comp + insurance -> employee expenses",
+    ),
+    Rule(
+        name="car_insurance",
+        code="EXP.VEH",
+        priority=75,
+        keywords_all=["car", "insurance"],
+        canon_types={"expense"},
+        notes="Car insurance -> vehicle expense (not general insurance). "
+              "Car + insurance = vehicle expense per user decision.",
     ),
     Rule(
         name="general_insurance",
@@ -958,13 +1009,14 @@ _general_expense_rules = [
     # Interest expense (from early overrides)
     Rule(
         name="ato_interest_expense",
-        code="EXP.NON",
+        code="EXP.INT",
         priority=82,
         keywords=["interest"],
         keywords_all=["ato"],
         canon_types={"expense"},
-        notes="ATO interest charges -> non-deductible expense. "
-              "ATO interest/GIC charges are penalties, not deductible interest.",
+        notes="ATO interest charges -> interest expense. "
+              "ATO interest was deductible pre-June 2025; grandfathered as EXP.INT "
+              "to avoid affecting prior reporting periods.",
     ),
     Rule(
         name="interest_expense",
