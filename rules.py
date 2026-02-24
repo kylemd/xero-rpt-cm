@@ -201,9 +201,86 @@ _revenue_rules = [
 ]
 
 
+# --- Payroll / Employee (Priority 91-95) ---
+_payroll_rules = [
+    Rule(
+        name="wages_direct_cost",
+        code="EXP.COS.WAG",
+        priority=95,
+        keywords=["wages", "salary", "salaries"],
+        raw_types={"direct costs", "cost of sales", "purchases"},
+        notes="Wages/salary under direct costs type -> COGS wages",
+    ),
+    Rule(
+        name="wages_expense",
+        code="EXP.EMP.WAG",
+        priority=93,
+        keywords=["wages", "salary", "salaries"],
+        canon_types={"expense"},
+        notes="Wages/salary under expense type -> employee wages",
+    ),
+    Rule(
+        name="super_direct_cost",
+        code="EXP.COS",
+        priority=93,
+        keywords=["superannuation"],
+        raw_types={"direct costs", "cost of sales", "purchases"},
+        keywords_exclude=["payable"],
+        notes="Superannuation under direct costs -> COGS",
+    ),
+    Rule(
+        name="super_expense",
+        code="EXP.EMP.SUP",
+        priority=91,
+        keywords=["superannuation"],
+        canon_types={"expense"},
+        keywords_exclude=["payable"],
+        notes="Superannuation under expense -> employee super",
+    ),
+    Rule(
+        name="super_payable",
+        code="LIA.CUR.PAY.EMP",
+        priority=92,
+        keywords=["superannuation"],
+        keywords_all=["superannuation", "payable"],
+        notes="Superannuation payable -> employee payables liability",
+    ),
+    Rule(
+        name="super_payable_by_type",
+        code="LIA.CUR.PAY.EMP",
+        priority=92,
+        keywords=["superannuation"],
+        raw_types={"current liability"},
+        notes="Superannuation under current liability type -> employee payables",
+    ),
+    Rule(
+        name="wages_payable",
+        code="LIA.CUR.PAY.EMP",
+        priority=95,
+        keywords=["wages payable", "withholding", "paygw"],
+        notes="Wages payable/withholding/PAYGW -> employee payables liability",
+    ),
+    Rule(
+        name="payroll_payable",
+        code="LIA.CUR.PAY.EMP",
+        priority=94,
+        keywords_all=["payroll", "payable"],
+        notes="Payroll payable -> employee payables liability",
+    ),
+    Rule(
+        name="payg_instalment",
+        code="LIA.CUR.TAX.INC",
+        priority=95,
+        keywords=["payg instalment", "payg instalments"],
+        notes="PAYG instalment is income tax liability, not payroll",
+    ),
+]
+
+
 # --- Collect all rules ---
 ALL_RULES: list[Rule] = [
     *_bank_rules,
     *_owner_rules,
     *_revenue_rules,
+    *_payroll_rules,
 ]

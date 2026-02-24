@@ -149,3 +149,59 @@ class TestRevenueRules:
                     canon_type="other income")
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "REV.OTH.GAI"
+
+
+class TestPayrollRules:
+    """Payroll and employee rules: wages, super, PAYG, payroll liabilities."""
+
+    def test_wages_direct_cost(self):
+        ctx = _ctx("construction wages", raw_type="Direct Costs",
+                    canon_type="direct costs")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS.WAG"
+
+    def test_wages_expense(self):
+        ctx = _ctx("office wages", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.EMP.WAG"
+
+    def test_salary_expense(self):
+        ctx = _ctx("salaries and oncosts", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.EMP.WAG"
+
+    def test_super_direct_cost(self):
+        ctx = _ctx("superannuation", raw_type="Direct Costs",
+                    canon_type="direct costs")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS"
+
+    def test_super_expense(self):
+        ctx = _ctx("superannuation guarantee", raw_type="Expense",
+                    canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.EMP.SUP"
+
+    def test_super_payable(self):
+        ctx = _ctx("superannuation payable", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.PAY.EMP"
+
+    def test_wages_payable(self):
+        ctx = _ctx("wages payable", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.PAY.EMP"
+
+    def test_payg_withholding(self):
+        ctx = _ctx("paygw payable", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.PAY.EMP"
+
+    def test_payg_instalment(self):
+        ctx = _ctx("payg instalment", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.TAX.INC"
