@@ -16,6 +16,8 @@ import pandas as pd, re, difflib, argparse, pathlib, csv, json, sys
 from collections import defaultdict
 from file_handler import load_chart_file, load_trial_balance_file, get_account_code_column, get_closing_balance_column
 from integrity_validator import IntegrityValidator
+from rule_engine import evaluate_rules, MatchContext
+from rules import ALL_RULES, OWNER_KEYWORDS as _OWNER_KEYWORDS
 
 TYPE_EQ = {
     # Removed problematic mappings that collapse distinct types
@@ -34,13 +36,6 @@ VEHICLE_EXPENSE_TOKENS = [
     'road tolls', 'tolls', 'washing', 'cleaning', 'expenses'
 ]
 
-PLANTEQUIP_TOKENS = ['plant & equipment', 'plant and equipment', 'office equipment', 'office equip', 'computer equipment', ]
-
-BANK_NAMES = ['westpac','nab','anz','cba','macquarie','stripe','amplify']
-CREDIT_CARD_NAMES = ['amplify','credit card','visa','mastercard','american express','amex']
-PAYROLL_KW = ['payroll','wages payable','superannuation','payg','withholding']
-OWNER_KEYWORDS = ['owner a','owner b','proprietor','drawings','capital contributed','funds introduced']
-COMMON_FIRST_NAMES = ['trent','john','mary','peter','sarah','david','michael','james','robert','jennifer','susan','william']
 
 def strip_noise_suffixes(name:str)->str:
     if pd.isnull(name): return ''
@@ -271,355 +266,6 @@ def _infer_expected_head_lookup(template_df: pd.DataFrame, tree: dict):
                 return best['reporting_code'].split('.')[0]
         return ''
     return infer
-
-def keyword_match(row, head, industry, bal_lookup, previous_row=None, template_name: str = '', validator=None):
-    txt=normalise(f"{row['*Name']} {row.get('Description','')}")
-    row_type=canonical_type(row['*Type'])
-    
-    # Enhanced bank account detection
-    if row['*Type'].lower()=='bank':
-        # Credit card by name (AMEX/credit card/visa/mastercard) → treat as liability regardless of balance
-        if any(cc in txt for cc in CREDIT_CARD_NAMES) or 'american express' in txt or 'amex' in txt or 'credit card' in txt:
-            return 'LIA.CUR.PAY','BankRule'
-        # Otherwise assume bank account
-        return 'ASS.CUR.CAS.BAN','BankRule'
-    # Liability credit cards by name
-    if row['*Type'].strip().lower() in {'current liability','liability'}:
-        if any(cc in txt for cc in CREDIT_CARD_NAMES) or 'visa' in txt or 'mastercard' in txt:
-            return 'LIA.CUR.PAY','KeywordRule'
-    
-    # Owner/proprietor accounts detection
-    if any(owner_kw in txt for owner_kw in OWNER_KEYWORDS):
-        if 'drawings' in txt:
-            return 'EQU.DRA','KeywordRule'
-        if any(x in txt for x in ['capital contributed','funds introduced','share capital']):
-            # Template-specific handling: for Company templates, treat funds introduced as shareholder/beneficiary advance (liability)
-            if str(template_name).strip().lower()=='company':
-                return 'LIA.NCL.ADV','KeywordRule'
-            return 'EQU.ADV','KeywordRule'
-    
-    # Check for common first names in account names (likely owner accounts)
-    # Handle possessive forms like "trents" → "trent"
-    for name in COMMON_FIRST_NAMES:
-        if name in txt or f"{name}s" in txt:
-            if row_type in {'current asset', 'asset'} or 'payment' in txt or 'ato' in txt:
-                # If it's an asset account with a person's name, likely drawings
-                return 'EQU.DRA','KeywordRule'
-    
-    # Accumulated depreciation logic - check if previous account is related
-    if previous_row and txt.startswith('less') and ('deprec' in txt or 'amort' in txt):
-        prev_code = previous_row.get('predictedReportCode', '')
-        if prev_code and not prev_code.endswith('.ACC'):
-            return f"{prev_code}.ACC",'AccumulatedDepreciationRule'
-    
-    # Revenue grants and other income nuances
-    # Gross receipts → trading services by default
-    if 'gross receipts' in txt and row_type in {'revenue','income','other income'}:
-        return 'REV.TRA.SER','KeywordRule'
-    # Covid-19 grants → non-taxable
-    if (('covid' in txt or 'covid-19' in txt or 'covid 19' in txt) and 'grant' in txt):
-        return 'REV.NON','KeywordRule'
-    if any(x in txt for x in ['job keeper','jobkeeper','jobsaver']):
-        return 'REV.GRA.GOV','KeywordRule'
-    if 'cash flow boost' in txt or 'cashflow boost' in txt or 'ato cash boost' in txt or 'cash boost' in txt or 'non assessable' in txt:
-        return 'REV.NON','KeywordRule'
-    if 'grant' in txt or 'apprentice' in txt or 'rebate' in txt or 'service nsw' in txt:
-        return 'REV.GRA.GOV','KeywordRule'
-    if ('reimburse' in txt or 'reimbursement' in txt) and row_type in {'other income','revenue','income'}:
-        return 'REV.OTH','KeywordRule'
-    if ('workers comp recovery' in txt or 'workcover recovery' in txt or 'workers compensation recovery' in txt) and row_type in {'other income','revenue','income'}:
-        return 'REV.OTH','KeywordRule'
-    if ('fbt contribution' in txt or 'fbt reimbursement' in txt or 'fbt reimburse' in txt) and row_type in {'other income','revenue','income'}:
-        return 'REV.OTH','KeywordRule'
-    if (("sale of fixed asset" in txt or 'sale of asset' in txt) and any(x in txt for x in ['profit','loss','gain'])) or 'profit loss on sale of fixed asset' in txt:
-        return 'REV.OTH.GAI','KeywordRule'
-    # Sale proceeds (investments or business interests)
-    if (('sale proceeds' in txt) or ('sale proceed' in txt)) and row_type in {'other income','revenue','income'}:
-        return 'REV.OTH.INV','KeywordRule'
-
-    # Cash and petty cash
-    if any(k in txt for k in ['cash on hand','petty cash','undeposited funds']):
-        return 'ASS.CUR.CAS.FLO','KeywordRule'
-    
-    # Loan detection
-    if 'loan' in txt and re.search(r'\b(pty|pl|pty ltd|pty limited)\b',txt):
-        return 'ASS.NCA.REL','KeywordRule'
-    if 'loan' in txt and any(x in txt for x in ['motor vehicle','car']):
-        return 'LIA.NCL.HPA','KeywordRule'
-    # Hire purchase detection (non-UEI): map based on current/non-current context
-    if (('hire purchase' in txt) or re.search(r'\bhp\b', txt)) and ('unexpired' not in txt and 'interest' not in txt):
-        tctx = row['*Type'].strip().lower()
-        if tctx in {'current liability','liability'}:
-            return 'LIA.CUR.HPA','KeywordRule'
-        if tctx in {'non-current liability','non current liability'}:
-            return 'LIA.NCL.HPA','KeywordRule'
-        # fallback when type label is ambiguous: prefer non-current
-        return 'LIA.NCL.HPA','KeywordRule'
-    
-    # Payroll related — avoid crossing heads
-    if any(k in txt for k in ['wages payable','withholding','paygw']) or ('payroll' in txt and 'payable' in txt):
-        return 'LIA.CUR.PAY.EMP','KeywordRule'
-    # PAYG instalment is income tax, not payroll
-    if 'payg instalment' in txt or 'payg instalments' in txt:
-        return 'LIA.CUR.TAX.INC','KeywordRule'
-    # Expense-side employee items
-    # Direct-cost wages: map to COGS wages (prefer EXP.COS.WAG if available; invalid-code guard will fallback to EXP.COS)
-    if (('wages' in txt) or ('salary' in txt) or ('salaries' in txt)) and row['*Type'].strip().lower() in {'direct costs','cost of sales','purchases'}:
-        return 'EXP.COS.WAG','KeywordRule'
-    if 'wages' in txt and row_type=='expense':
-        return 'EXP.EMP.WAG','KeywordRule'
-    if 'superannuation' in txt:
-        t=row['*Type'].strip().lower()
-        prev_name_norm = normalise(previous_row.get('Name','')) if previous_row else ''
-        prev_code = (previous_row.get('predictedReportCode','') if previous_row else '') or ''
-        # Construction nuance: if adjacent to wages (e.g., construction wages), prefer EMP.SUP even in direct costs context
-        if (('construction' in txt and 'construction' in prev_name_norm) or prev_code.startswith('EXP.EMP.WAG')) and row_type in {'expense','direct costs'}:
-            return 'EXP.EMP.SUP','KeywordRule'
-        if 'payable' in txt or t=='current liability':
-            return 'LIA.CUR.PAY.EMP','KeywordRule'
-        if t in {'direct costs','cost of sales','purchases'}:
-            return 'EXP.COS','KeywordRule'
-        if row_type=='expense' or 'admin' in txt:
-            return 'EXP.EMP.SUP','KeywordRule'
-    
-    # Vehicle insurance (green slips) - check before GST to avoid false positive
-    if 'green slip' in txt and row_type=='expense':
-        return 'EXP.VEH','KeywordRule'
-    # Specific vehicle interest/rego/insurance
-    if row_type=='expense' and (('mv' in txt or 'motor vehicle' in txt or 'vehicle' in txt or 'car' in txt or 'truck' in txt) and 'interest' in txt):
-        return 'EXP.VEH','KeywordRule'
-    if row_type=='expense' and (('mv' in txt or 'motor vehicle' in txt or 'vehicle' in txt or 'car' in txt or 'truck' in txt) and ('insurance' in txt or 'rego' in txt or 'registration' in txt or 'ctp' in txt)):
-        return 'EXP.VEH','KeywordRule'
-    # Combined MV + expense tokens (Name-based) → vehicle expenses
-    if row_type=='expense':
-        name_txt=normalise(strip_noise_suffixes(row['*Name']))
-        has_mv = any(term in name_txt for term in VEHICLE_TOKENS)
-        has_mv_exp = any(term in name_txt for term in VEHICLE_EXPENSE_TOKENS) or any(k in name_txt for k in ['interest','insurance','rego','registration','ctp'])
-        if has_mv and has_mv_exp and 'deprec' not in name_txt:
-            return 'EXP.VEH','KeywordRule'
-
-    # Sundry Debtors → Receivables (current)
-    if 'sundry debtors' in txt:
-        return 'ASS.CUR.REC','KeywordRule'
-    # Retentions receivable → trade and other receivables (current)
-    if ('retention receivable' in txt or 'retentions receivable' in txt) or ('retention' in txt and ('receiv' in txt or 'debtor' in txt)):
-        return 'ASS.CUR.REC','KeywordRule'
-
-    # Preliminary expenses are non-current assets
-    if 'preliminary expenses' in txt:
-        return 'ASS.NCA','KeywordRule'
-    
-    # GST and tax related - only when not expense context
-    if row_type != 'expense' and (('gst' in txt or 'goods and services tax' in txt) and not any(x in txt for x in ['fee', 'fees', 'stripe', 'bank'])):
-        return 'LIA.CUR.TAX.GST','KeywordRule'
-    if 'bas payable' in txt:
-        return 'LIA.CUR.TAX','KeywordRule'
-    if 'bas clearing' in txt:
-        return 'LIA.CUR.TAX','KeywordRule'
-    # Accrued Income typically deferred income (liability)
-    if 'accrued income' in txt and row['*Type'].strip().lower() in {'current liability','liability'}:
-        return 'LIA.CUR.DEF','KeywordRule'
-    
-    # Government income/grants detection handled above with specific codes
-    
-    # Enhanced expense categorization
-    if row_type=='expense':
-        # Materials and supplies
-        if any(x in txt for x in ['materials','building materials']):
-            return 'EXP.COS.PUR','KeywordRule'
-        
-        # Amortisation
-        if 'amortis' in txt:
-            return 'EXP.AMO','KeywordRule'
-
-        # Subcontractors and labor
-        if any(x in txt for x in ['subtrades','subcontract']):
-            if row['*Type'].strip().lower() in {'direct costs','cost of sales','purchases'}:
-                return 'EXP.COS','KeywordRule'
-            return 'EXP','KeywordRule'
-        # Labour hire (direct costs context → COGS)
-        if 'labour hire' in txt and row['*Type'].strip().lower() in {'direct costs','cost of sales','purchases'}:
-            return 'EXP.COS','KeywordRule'
-        
-        # Training and education
-        if any(x in txt for x in ['education','training','conference','cpd']):
-            return 'EXP.EMP','KeywordRule'
-        
-        # Uniforms and clothing
-        if any(x in txt for x in ['uniform','clothing']):
-            return 'EXP.EMP','KeywordRule'
-        
-        # Equipment hire
-        if 'hire' in txt and any(x in txt for x in ['equipment','plant','fence']):
-            if row['*Type'].strip().lower() in {'direct costs','cost of sales','purchases'}:
-                return 'EXP.COS','KeywordRule'
-            return 'EXP','KeywordRule'
-        # Home warranty insurance in construction is direct cost
-        if 'home warranty' in txt:
-            return 'EXP.COS','KeywordRule'
-        # Tools and Miscellaneous treated as consumables/purchases when direct cost context
-        if 'tools' in txt and 'miscellaneous' in txt and row['*Type'].strip().lower() in {'direct costs','cost of sales','purchases'}:
-            return 'EXP.COS.PUR','KeywordRule'
-        # Sundry Debtors → Trade receivables (current)
-        if 'sundry debtors' in txt:
-            return 'ASS.CUR.REC','KeywordRule'
-        
-        # Donations
-        if 'donation' in txt or 'charity' in txt:
-            return 'EXP','KeywordRule'
-        
-        # Advertising and marketing
-        if 'advertising' in txt or 'marketing' in txt:
-            return 'EXP.ADV','KeywordRule'
-        # Rebranding/branding (expense only) → Advertising
-        if any(k in txt for k in ['rebrand','re-brand','rebranding','branding','brand']) and row['*Type'].strip().lower()=='expense':
-            return 'EXP.ADV','KeywordRule'
-        
-        # Professional fees
-        if any(x in txt for x in ['accounting','consulting','legal']):
-            return 'EXP.PRO','KeywordRule'
-        
-
-        
-        # General insurance
-        if 'insurance' in txt and any(x in txt for x in ['workers compensation','workcover','workers cover','workers\' comp','workers comp']):
-            return 'EXP.EMP','KeywordRule'
-        if 'insurance' in txt:
-            return 'EXP.INS','KeywordRule'
-        
-        # Utilities
-        if any(x in txt for x in ['phone','mobile','telephone','internet']):
-            return 'EXP.UTI','KeywordRule'
-        if any(x in txt for x in ['light','power','electricity','gas','heating']):
-            return 'EXP.UTI','KeywordRule'
-        
-        # Administrative expenses
-        if any(x in txt for x in ['office expenses','printing','stationery','postage']):
-            return 'EXP.ADM','KeywordRule'
-        # Council rates/fees
-        if 'council' in txt and any(x in txt for x in ['rates','rate','fee','fees']):
-            return 'EXP.OCC','KeywordRule'
-        
-        # Staff and employee related
-        if any(x in txt for x in ['staff amenities','amenities','amenties']) or (('staff' in txt) and row_type=='expense'):
-            return 'EXP.EMP','KeywordRule'
-        # Gifts often marketing related
-        if 'gift' in txt or 'gifts' in txt:
-            return 'EXP.ADV','KeywordRule'
-        
-        # Bank fees - check if related to any bank names or general fees
-        if any(bank in txt for bank in BANK_NAMES) and 'fee' in txt:
-            return 'EXP','KeywordRule'
-        if any(x in txt for x in ['fee', 'fees']) and 'gst' in txt:
-            # If it mentions fees and GST together, it's still an expense
-            return 'EXP','KeywordRule'
-        if 'merchant' in txt and 'fee' in txt:
-            return 'EXP','KeywordRule'
-        
-        # Cleaning
-        if 'cleaning' in txt or 'laundry' in txt:
-            return 'EXP','KeywordRule'
-        
-        # Depreciation
-        if 'depreciation' in txt or 'deprec' in txt:
-            return 'EXP.DEP','KeywordRule'
-        
-        # Travel
-        if 'travel' in txt and 'international' not in txt:
-            return 'EXP.TRA.NAT','KeywordRule'
-        if 'travel' in txt and 'international' in txt:
-            return 'EXP.TRA.INT','KeywordRule'
-
-        # Trailer-related expenses
-        if 'trailer' in txt:
-            return 'EXP.VEH','KeywordRule'
-
-        # Work safety
-        if 'work safety' in txt or 'safety' in txt and 'work' in txt:
-            return 'EXP.EMP','KeywordRule'
-
-        # Long service leave
-        if 'long service' in txt and 'levy' in txt:
-            return 'EXP.EMP','KeywordRule'
-        
-        # Fines and penalties
-        if 'fine' in txt or 'fines' in txt or 'penalty' in txt or 'penalties' in txt:
-            return 'EXP.NON','KeywordRule'
-        
-        # Cost of goods sold
-        if row['*Type'].lower()=='cost of sales' or 'cost of goods sold' in txt:
-            return 'EXP.COS','KeywordRule'
-
-    # Industry specific rules
-    if industry.lower().startswith('building') and row_type in {'revenue','income','other income'}:
-        return 'REV.TRA.SER','IndustryRule'
-    
-    # Director loans
-    if 'loan' in txt and ('loan to director' in txt or 'loans to director' in txt or 'loans to directors' in txt or 'to director' in txt or 'to directors' in txt):
-        return 'ASS.NCA.DIR','KeywordRule'
-    if ("director's loan" in txt or 'directors loan' in txt) and 'loan' in txt:
-        return 'LIA.NCL.LOA','KeywordRule'
-    
-    # Ordinary shares
-    if 'ordinary shares' in txt:
-        return 'EQU.SHA.ORD','KeywordRule'
-    # Issued & paid up capital → Ordinary shares
-    if (('issued' in txt and 'paid' in txt and 'capital' in txt) or 'paid up capital' in txt):
-        return 'EQU.SHA.ORD','KeywordRule'
-    # Asset-side shares → Investments (shares)
-    if ('shares' in txt) and row_type in {'asset','current asset','non-current asset','non current asset'}:
-        return 'ASS.NCA.INV.SHA','KeywordRule'
-    # Retained earnings / accumulated profits
-    if (row['*Type'].strip().lower()=='retained earnings') or (('retained' in txt and ('profit' in txt or 'earnings' in txt)) or ('accumulated' in txt and 'loss' in txt)):
-        return 'EQU.RET','KeywordRule'
-    
-    # Hire purchase / chattel-like naming hints → prefer HPA (per audit preference)
-    if 'chattel mortgage' in txt or 'unexpired interest' in txt:
-        is_current = (re.search(r'\bcl\b', txt) is not None) or (' current ' in f' {txt} ')
-        is_non_current = (re.search(r'\bncl\b', txt) is not None) or (' non current ' in f' {txt} ') or (' noncurrent ' in f' {txt} ')
-        if 'unexpired interest' in txt:
-            if is_current:
-                return 'LIA.CUR.HPA.UEI','KeywordRule'
-            if is_non_current:
-                return 'LIA.NCL.HPA.UEI','KeywordRule'
-            return 'LIA.NCL.HPA.UEI','KeywordRule'
-        else:
-            if is_current:
-                return 'LIA.CUR.HPA','KeywordRule'
-            if is_non_current:
-                return 'LIA.NCL.HPA','KeywordRule'
-            return 'LIA.NCL.HPA','KeywordRule'
-
-    # Premium funding (e.g., Gallagher, IQumulate)
-    if any(x in txt for x in ['premium funding','iqumulate','gallagher']) and row['*Type'].strip().lower() in {'current liability','liability'}:
-        return 'LIA.CUR.LOA.UNS','KeywordRule'
-
-    # WIPAA items: P&L vs Balance Sheet
-    if 'wipaa' in txt:
-        if row['*Type'].strip().lower() in {'direct costs','cost of sales','purchases','expense','operating expense','operating expenses'}:
-            return 'EXP.COS','KeywordRule'
-        else:
-            return 'ASS.CUR.INY.WIP','KeywordRule'
-    
-    # Generic related party loans by context (fallback)
-    if 'loan' in txt:
-        tctx = row['*Type'].strip().lower()
-        if tctx in {'non-current liability','non current liability'}:
-            return 'LIA.NCL.REL','KeywordRule'
-        if tctx in {'current liability','liability'}:
-            return 'LIA.CUR.REL','KeywordRule'
-        if tctx in {'non-current asset','non current asset'}:
-            return 'ASS.NCA.REL','KeywordRule'
-        if tctx in {'current asset','asset'}:
-            return 'ASS.CUR.REL','KeywordRule'
-    
-    # If we have a validator, check integrity of any suggested code
-    if validator is not None:
-        # This is a placeholder - we would need to track the suggested code
-        # and validate it against the account type
-        pass
-    
-    return None,None
 
 def main(args):
     # Initialize integrity validator
@@ -869,74 +515,22 @@ def main(args):
         chosen='';reason='';flag=''
         txt_inline=normalise(f"{row['*Name']} {row.get('Description','')}")
 
-        # 1) Bank vs credit card handled via keyword for bank type only
-        if row['*Type'].strip().lower()=='bank' and not chosen:
-            rc_k,rs_k=keyword_match(row, head, args.industry or '', bal_lookup, previous_processed_row, str(args.chart_template_name or ''), validator)
-            if rc_k:
-                chosen,reason=rc_k,rs_k
+        # Define t for use by later steps (7c borrowing costs, etc.)
+        t=row['*Type'].strip().lower()
 
-        # 1b) Early, high-confidence overrides to fix audited issues even when existing code is present
+        # 1) Rule engine: declarative keyword rules (replaces old keyword_match + early overrides)
         if not chosen:
-            t=row['*Type'].strip().lower()
-            # Wages/Salaries: direct-cost vs admin split
-            if any(k in txt_inline for k in ['wages','salary','salaries']):
-                if t in {'direct costs','cost of sales','purchases'}:
-                    rc_dc = 'EXP.COS.WAG' if 'allowed_codes' in globals() and ('EXP.COS.WAG' in allowed_codes) else 'EXP.COS'
-                    chosen,reason=rc_dc,'KeywordRule'
-                elif canon_type=='expense':
-                    chosen,reason='EXP.EMP.WAG','KeywordRule'
-            # Superannuation routing based on type
-            elif 'superannuation' in txt_inline:
-                if t in {'direct costs','cost of sales','purchases'}:
-                    chosen,reason='EXP.COS','KeywordRule'
-                elif canon_type=='expense' or 'admin' in txt_inline:
-                    chosen,reason='EXP.EMP.SUP','KeywordRule'
-                elif 'payable' in txt_inline or t=='current liability':
-                    chosen,reason='LIA.CUR.PAY.EMP','KeywordRule'
-            # MV Interest → Vehicle expenses
-            elif (('mv' in txt_inline or 'motor vehicle' in txt_inline or 'vehicle' in txt_inline) and 'interest' in txt_inline) and canon_type=='expense':
-                chosen,reason='EXP.VEH','KeywordRule'
-            # Interest Expense canonical
-            elif normalise(row['*Name'])=='interest expense' and canon_type=='expense':
-                chosen,reason='EXP.INT','KeywordRule'
-            # Client meetings → Entertainment
-            elif any(k in txt_inline for k in ['client meeting','client meetings','client meal','meal entertainment']):
-                chosen,reason='EXP.ENT','KeywordRule'
-            # Accounting → Professional fees
-            elif normalise(row['*Name']) in {'accounting','accounting fees','accounting fee'}:
-                chosen,reason='EXP.PRO','KeywordRule'
-            # Bad debts → EXP.BAD
-            elif 'bad debt' in txt_inline:
-                chosen,reason='EXP.BAD','KeywordRule'
-            # Dividends Paid (Equity) and Dividend Paid or Payable (Expense)
-            elif 'dividends paid' in txt_inline and canon_type=='equity':
-                chosen,reason='EQU.RET.DIV','KeywordRule'
-            elif (normalise(row['*Name']) in {'dividend paid or payable','dividends paid or payable'} or ('dividend' in txt_inline and 'payable' in txt_inline)) and canon_type=='expense':
-                chosen,reason='EXP.DIV','KeywordRule'
-            # Utilities synonyms drift correction
-            elif any(k in txt_inline for k in ['light','power','heating','electricity','telephone','phone','mobile','internet']) and canon_type=='expense':
-                chosen,reason='EXP.UTI','KeywordRule'
-            # Protective clothing → EMP
-            elif 'protective clothing' in txt_inline and canon_type=='expense':
-                chosen,reason='EXP.EMP','KeywordRule'
-            # Staff amenities and training → EMP
-            elif (('staff amenities' in txt_inline) or ('staff training' in txt_inline)) and canon_type=='expense':
-                chosen,reason='EXP.EMP','KeywordRule'
-            # Entertainment not deductible → EXP.ENT.NON
-            elif 'entertainment' in txt_inline and (('not deductible' in txt_inline) or ('non deductible' in txt_inline) or ('non-deductible' in txt_inline) or ('not-deductible' in txt_inline)):
-                chosen,reason='EXP.ENT.NON','KeywordRule'
-            # Trailer expenses → Vehicle expenses
-            elif 'trailer' in txt_inline and canon_type=='expense':
-                chosen,reason='EXP.VEH','KeywordRule'
-            # Council rates/fees → Occupancy
-            elif 'council' in txt_inline and any(k in txt_inline for k in ['rate','rates','fee','fees']):
-                chosen,reason='EXP.OCC','KeywordRule'
-            # Trailer expenses → Vehicle expenses
-            elif 'trailer' in txt_inline and canon_type=='expense':
-                chosen,reason='EXP.VEH','KeywordRule'
-            # Council rates/fees → Occupancy
-            elif 'council' in txt_inline and any(k in txt_inline for k in ['rate','rates','fee','fees']):
-                chosen,reason='EXP.OCC','KeywordRule'
+            ctx = MatchContext(
+                normalised_text=txt_inline,
+                normalised_name=clean_nm,
+                raw_type=row['*Type'].strip(),
+                canon_type=canon_type,
+                template_name=str(args.chart_template_name or ''),
+                owner_keywords=_OWNER_KEYWORDS,
+            )
+            rc, rule_name = evaluate_rules(ALL_RULES, ctx)
+            if rc:
+                chosen, reason = rc, rule_name
 
         # 1c) Accumulated depreciation/amortisation name-based resolution (before code-based matching)
         if not chosen:
@@ -1007,12 +601,6 @@ def main(args):
             else:
                 chosen,reason=existing,'ExistingCodeValid'
 
-        # 7) Heuristic keyword rules
-        if not chosen:
-            rc_k,rs_k=keyword_match(row, head, args.industry, bal_lookup, previous_processed_row, str(args.chart_template_name or ''), validator)
-            if rc_k:
-                chosen,reason=rc_k,rs_k
-
         # 7b) Accumulated depreciation/amortisation name-based resolution
         if not chosen:
             base_key = extract_accum_base_key(row['*Name'])
@@ -1032,6 +620,9 @@ def main(args):
             # Borrowing Costs → Prepayments (current asset)
             if ('borrowing costs' in txt_inline) and t in {'current asset'}:
                 chosen,reason='ASS.CUR.REC.PRE','KeywordRule'
+            # Building industry: all revenue is trading services
+            elif str(args.industry or '').lower().startswith('building') and canon_type in {'revenue','income','other income'}:
+                chosen,reason='REV.TRA.SER','IndustryRule'
 
         if not chosen:
             # Prefer exact-ish match on names when both contain key tokens like accumulated/depreciation
