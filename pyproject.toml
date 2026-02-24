@@ -14,3 +14,7 @@ dev = [
     "pytest>=8.0.0",
     "pytest-html>=4.0.0",
 ]
+
+[tool.pytest.ini_options]
+addopts = "--html=tests/report.html --self-contained-html"
+testpaths = ["tests"]
