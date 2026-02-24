@@ -110,8 +110,100 @@ _owner_rules = [
 ]
 
 
+# --- Revenue / Grants / Government Income (Priority 80-90) ---
+# Audit fixes:
+# - 'grant' keyword now guarded by type check (other income / revenue only)
+# - 'apprentice' removed from grants rule (apprentice wages is EXP.EMP.WAG)
+# - 'rebate' removed from grants rule (too broad — insurance rebate is EXP.INS)
+_revenue_rules = [
+    Rule(
+        name="gross_receipts",
+        code="REV.TRA.SER",
+        priority=85,
+        keywords=["gross receipts"],
+        canon_types={"revenue", "income", "other income"},
+        notes="Gross receipts for revenue types -> trading services",
+    ),
+    Rule(
+        name="covid_grant",
+        code="REV.NON",
+        priority=90,
+        keywords_all=["covid", "grant"],
+        notes="Covid-related grants -> non-assessable income. "
+              "Also matches 'covid 19' and 'covid-19' after normalisation.",
+    ),
+    Rule(
+        name="jobkeeper",
+        code="REV.GRA.GOV",
+        priority=90,
+        keywords=["jobkeeper", "job keeper", "jobsaver"],
+        notes="Government wage subsidies -> government grants",
+    ),
+    Rule(
+        name="cash_flow_boost",
+        code="REV.NON",
+        priority=90,
+        keywords=["cash flow boost", "cashflow boost", "ato cash boost",
+                  "cash boost", "non assessable"],
+        notes="Government cash flow boost -> non-assessable income",
+    ),
+    Rule(
+        name="government_grant",
+        code="REV.GRA.GOV",
+        priority=80,
+        keywords=["grant", "service nsw"],
+        canon_types={"other income", "revenue", "income"},
+        keywords_exclude=["covid"],
+        notes="Audit fix: 'grant' now guarded by revenue/other income type. "
+              "'apprentice' and 'rebate' removed (too broad).",
+    ),
+    Rule(
+        name="reimbursement_income",
+        code="REV.OTH",
+        priority=75,
+        keywords=["reimburse", "reimbursement"],
+        canon_types={"other income", "revenue", "income"},
+        notes="Reimbursements received -> other income",
+    ),
+    Rule(
+        name="workers_comp_recovery",
+        code="REV.OTH",
+        priority=78,
+        keywords=["workers comp recovery", "workcover recovery",
+                  "workers compensation recovery"],
+        canon_types={"other income", "revenue", "income"},
+        notes="Workers comp recoveries -> other income",
+    ),
+    Rule(
+        name="fbt_reimbursement",
+        code="REV.OTH",
+        priority=78,
+        keywords=["fbt contribution", "fbt reimbursement", "fbt reimburse"],
+        canon_types={"other income", "revenue", "income"},
+        notes="FBT reimbursements -> other income",
+    ),
+    Rule(
+        name="sale_of_asset_gain",
+        code="REV.OTH.GAI",
+        priority=80,
+        keywords=["sale of fixed asset", "sale of asset",
+                  "profit loss on sale of fixed asset"],
+        notes="Profit/loss on sale of fixed asset -> other gains",
+    ),
+    Rule(
+        name="sale_proceeds",
+        code="REV.OTH.INV",
+        priority=78,
+        keywords=["sale proceeds", "sale proceed"],
+        canon_types={"other income", "revenue", "income"},
+        notes="Investment sale proceeds -> other investment income",
+    ),
+]
+
+
 # --- Collect all rules ---
 ALL_RULES: list[Rule] = [
     *_bank_rules,
     *_owner_rules,
+    *_revenue_rules,
 ]

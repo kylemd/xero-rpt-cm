@@ -84,3 +84,68 @@ class TestOwnerRules:
                     canon_type="expense")
         code, name = evaluate_rules(ALL_RULES, ctx)
         assert code != "EQU.DRA", f"False positive: matched as {name}"
+
+
+class TestRevenueRules:
+    """Rules 9-18: Revenue, grants, government income.
+
+    Audit fixes:
+    - 'grant' keyword now requires type guard (other income/revenue)
+    - 'apprentice' removed from grants rule (apprentice wages is EXP.EMP)
+    """
+
+    def test_gross_receipts(self):
+        ctx = _ctx("gross receipts", raw_type="Revenue", canon_type="revenue")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.TRA.SER"
+
+    def test_covid_grant(self):
+        ctx = _ctx("covid 19 grant income", raw_type="Other Income",
+                    canon_type="other income")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.NON"
+
+    def test_jobkeeper(self):
+        ctx = _ctx("jobkeeper payments", raw_type="Other Income",
+                    canon_type="other income")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.GRA.GOV"
+
+    def test_cash_flow_boost(self):
+        ctx = _ctx("ato cash flow boost", raw_type="Other Income",
+                    canon_type="other income")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.NON"
+
+    def test_grant_with_type_guard(self):
+        """'grant' should only match as government grant for revenue types."""
+        ctx = _ctx("government grant", raw_type="Other Income",
+                    canon_type="other income")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.GRA.GOV"
+
+    def test_grant_not_false_positive_on_expense(self):
+        """'Grant' in an expense context should NOT become a government grant."""
+        ctx = _ctx("grant smith consulting fee", raw_type="Expense",
+                    canon_type="expense")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code != "REV.GRA.GOV", f"False positive: matched as {name}"
+
+    def test_apprentice_wages_not_grant(self):
+        """'Apprentice Wages' should NOT be classified as a government grant."""
+        ctx = _ctx("apprentice wages", raw_type="Direct Costs",
+                    canon_type="direct costs")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code != "REV.GRA.GOV", f"False positive: matched as {name}"
+
+    def test_reimbursement(self):
+        ctx = _ctx("insurance reimbursement", raw_type="Other Income",
+                    canon_type="other income")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.OTH"
+
+    def test_sale_of_asset_gain(self):
+        ctx = _ctx("profit on sale of fixed asset", raw_type="Other Income",
+                    canon_type="other income")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.OTH.GAI"
