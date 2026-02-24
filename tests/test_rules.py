@@ -333,3 +333,37 @@ class TestLoanRules:
                     canon_type="non-current asset")
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "ASS.NCA.REL"
+
+
+class TestTaxRules:
+    """Tax and GST rules."""
+
+    def test_gst_liability(self):
+        ctx = _ctx("gst collected", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.TAX.GST"
+
+    def test_gst_not_on_expense(self):
+        """GST on expense (e.g. 'GST bank fees') should NOT be tax liability."""
+        ctx = _ctx("gst bank fees", raw_type="Expense", canon_type="expense")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code != "LIA.CUR.TAX.GST", f"False positive: {name}"
+
+    def test_bas_payable(self):
+        ctx = _ctx("bas payable", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.TAX"
+
+    def test_bas_clearing(self):
+        ctx = _ctx("bas clearing account", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.TAX"
+
+    def test_accrued_income_liability(self):
+        ctx = _ctx("accrued income", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.DEF"

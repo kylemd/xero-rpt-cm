@@ -544,6 +544,42 @@ _loan_rules = [
 ]
 
 
+# --- Tax / GST (Priority 80-85) ---
+_tax_rules = [
+    Rule(
+        name="gst_liability",
+        code="LIA.CUR.TAX.GST",
+        priority=85,
+        keywords=["gst", "goods and services tax"],
+        type_exclude={"expense"},
+        keywords_exclude=["fee", "fees", "stripe", "bank"],
+        notes="GST (not on expense accounts, not fees) -> GST tax liability",
+    ),
+    Rule(
+        name="bas_payable",
+        code="LIA.CUR.TAX",
+        priority=83,
+        keywords=["bas payable"],
+        notes="BAS payable -> tax liability",
+    ),
+    Rule(
+        name="bas_clearing",
+        code="LIA.CUR.TAX",
+        priority=83,
+        keywords=["bas clearing"],
+        notes="BAS clearing account -> tax liability",
+    ),
+    Rule(
+        name="accrued_income_liability",
+        code="LIA.CUR.DEF",
+        priority=80,
+        keywords=["accrued income"],
+        raw_types={"current liability", "liability"},
+        notes="Accrued income on liability type -> deferred income",
+    ),
+]
+
+
 # --- Collect all rules ---
 ALL_RULES: list[Rule] = [
     *_bank_rules,
@@ -552,4 +588,5 @@ ALL_RULES: list[Rule] = [
     *_payroll_rules,
     *_vehicle_rules,
     *_loan_rules,
+    *_tax_rules,
 ]
