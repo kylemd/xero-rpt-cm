@@ -977,6 +977,128 @@ _general_expense_rules = [
 ]
 
 
+# --- Equity / Shares / Retained Earnings (Priority 75-85) ---
+_equity_rules = [
+    Rule(
+        name="ordinary_shares",
+        code="EQU.SHA.ORD",
+        priority=85,
+        keywords=["ordinary shares"],
+        notes="Ordinary shares -> equity shares",
+    ),
+    Rule(
+        name="paid_up_capital",
+        code="EQU.SHA.ORD",
+        priority=83,
+        keywords=["paid up capital"],
+        notes="Issued/paid up capital -> equity ordinary shares",
+    ),
+    Rule(
+        name="issued_paid_capital",
+        code="EQU.SHA.ORD",
+        priority=83,
+        keywords_all=["issued", "paid", "capital"],
+        notes="Issued and paid capital -> equity ordinary shares",
+    ),
+    Rule(
+        name="shares_asset",
+        code="ASS.NCA.INV.SHA",
+        priority=80,
+        keywords=["shares"],
+        raw_types={"asset", "current asset", "non-current asset", "non current asset"},
+        notes="Shares on asset accounts -> investment shares",
+    ),
+    Rule(
+        name="retained_earnings_type",
+        code="EQU.RET",
+        priority=85,
+        raw_types={"retained earnings"},
+        notes="Retained Earnings type -> equity retained earnings",
+    ),
+    Rule(
+        name="retained_earnings_keyword",
+        code="EQU.RET",
+        priority=80,
+        keywords=["profit", "earnings"],
+        keywords_all=["retained"],
+        notes="'Retained' + 'profit' or 'earnings' -> equity retained earnings. "
+              "Uses keywords for any match and keywords_all for retained.",
+    ),
+    Rule(
+        name="accumulated_losses",
+        code="EQU.RET",
+        priority=80,
+        keywords_all=["accumulated", "loss"],
+        notes="Accumulated losses -> equity retained earnings",
+    ),
+]
+
+
+# --- Remaining / Uncategorized (Priority 65-80) ---
+_remaining_rules = [
+    # Cash
+    Rule(
+        name="cash_on_hand",
+        code="ASS.CUR.CAS.FLO",
+        priority=78,
+        keywords=["cash on hand", "petty cash", "undeposited funds"],
+        notes="Cash/petty cash/undeposited funds -> cash flow asset",
+    ),
+
+    # Sundry debtors / Retentions
+    Rule(
+        name="sundry_debtors",
+        code="ASS.CUR.REC",
+        priority=75,
+        keywords=["sundry debtors"],
+        notes="Sundry debtors -> current receivables",
+    ),
+    Rule(
+        name="retentions_receivable",
+        code="ASS.CUR.REC",
+        priority=75,
+        keywords=["retention receivable", "retentions receivable"],
+        notes="Retentions receivable -> current receivables",
+    ),
+    Rule(
+        name="retention_debtor",
+        code="ASS.CUR.REC",
+        priority=73,
+        keywords_all=["retention"],
+        keywords=["receiv", "debtor"],
+        notes="Retention + receivable/debtor -> current receivables",
+    ),
+
+    # Preliminary expenses
+    Rule(
+        name="preliminary_expenses",
+        code="ASS.NCA",
+        priority=75,
+        keywords=["preliminary expenses"],
+        notes="Preliminary expenses -> non-current asset",
+    ),
+
+    # WIPAA
+    Rule(
+        name="wipaa_cost",
+        code="EXP.COS",
+        priority=78,
+        keywords=["wipaa"],
+        raw_types={"direct costs", "cost of sales", "purchases",
+                   "expense", "operating expense", "operating expenses"},
+        notes="WIPAA under P&L types -> cost of sales",
+    ),
+    Rule(
+        name="wipaa_asset",
+        code="ASS.CUR.INY.WIP",
+        priority=75,
+        keywords=["wipaa"],
+        notes="WIPAA on balance sheet -> WIP inventory asset. "
+              "Lower priority than wipaa_cost so P&L types match first.",
+    ),
+]
+
+
 # --- Collect all rules ---
 ALL_RULES: list[Rule] = [
     *_bank_rules,
@@ -987,4 +1109,6 @@ ALL_RULES: list[Rule] = [
     *_loan_rules,
     *_tax_rules,
     *_general_expense_rules,
+    *_equity_rules,
+    *_remaining_rules,
 ]

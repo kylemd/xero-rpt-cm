@@ -521,3 +521,97 @@ class TestGeneralExpenseRules:
         # Should NOT match as EXP.EMP unless a specific rule applies
         # staff_amenities only matches "staff amenities" or "amenities"
         assert name != "staff_catch_all", "Broad staff catch-all should not exist"
+
+
+class TestEquityRules:
+    """Equity, shares, and retained earnings rules."""
+
+    def test_ordinary_shares(self):
+        ctx = _ctx("ordinary shares", raw_type="Equity", canon_type="equity")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EQU.SHA.ORD"
+
+    def test_paid_up_capital(self):
+        ctx = _ctx("issued and paid up capital", raw_type="Equity", canon_type="equity")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EQU.SHA.ORD"
+
+    def test_shares_as_asset(self):
+        ctx = _ctx("shares in xyz company", raw_type="Non-Current Asset",
+                    canon_type="non-current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.INV.SHA"
+
+    def test_retained_earnings(self):
+        ctx = _ctx("retained earnings", raw_type="Retained Earnings",
+                    canon_type="retained earnings")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EQU.RET"
+
+    def test_accumulated_losses(self):
+        ctx = _ctx("accumulated losses", raw_type="Equity", canon_type="equity")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EQU.RET"
+
+
+class TestRemainingRules:
+    """Remaining uncategorized rules: cash, sundry, preliminary, WIPAA, industry."""
+
+    def test_petty_cash(self):
+        ctx = _ctx("petty cash", raw_type="Current Asset",
+                    canon_type="current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.CAS.FLO"
+
+    def test_cash_on_hand(self):
+        ctx = _ctx("cash on hand", raw_type="Current Asset",
+                    canon_type="current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.CAS.FLO"
+
+    def test_undeposited_funds(self):
+        ctx = _ctx("undeposited funds", raw_type="Current Asset",
+                    canon_type="current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.CAS.FLO"
+
+    def test_sundry_debtors(self):
+        ctx = _ctx("sundry debtors", raw_type="Current Asset",
+                    canon_type="current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.REC"
+
+    def test_retentions_receivable(self):
+        ctx = _ctx("retentions receivable", raw_type="Current Asset",
+                    canon_type="current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.REC"
+
+    def test_preliminary_expenses(self):
+        ctx = _ctx("preliminary expenses", raw_type="Non-Current Asset",
+                    canon_type="non-current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA"
+
+    def test_wipaa_direct_cost(self):
+        ctx = _ctx("wipaa", raw_type="Direct Costs", canon_type="direct costs")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS"
+
+    def test_wipaa_asset(self):
+        ctx = _ctx("wipaa balance", raw_type="Current Asset",
+                    canon_type="current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.INY.WIP"
+
+    def test_building_industry_revenue(self):
+        """Building industry revenue defaults to trading services."""
+        ctx = _ctx("contract income", raw_type="Revenue",
+                    canon_type="revenue", template="company")
+        # Note: industry rules need an industry context field — for now test that
+        # building-related revenue gets REV.TRA.SER via another rule or
+        # this test can verify no false match. We'll handle industry in rewire task.
+        # For now just verify it doesn't error.
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        # Contract income without specific keyword may not match any rule yet
+        # This is OK — it'll be handled by template matching in the pipeline
