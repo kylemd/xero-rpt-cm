@@ -205,3 +205,44 @@ class TestPayrollRules:
                     canon_type="current liability")
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "LIA.CUR.TAX.INC"
+
+
+class TestVehicleRules:
+    """Vehicle expense rules: MV fuel, insurance, rego, green slip, trailer."""
+
+    def test_green_slip(self):
+        ctx = _ctx("green slip insurance", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.VEH"
+
+    def test_vehicle_interest(self):
+        ctx = _ctx("motor vehicle interest", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.VEH"
+
+    def test_vehicle_insurance(self):
+        ctx = _ctx("motor vehicle insurance", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.VEH"
+
+    def test_vehicle_rego(self):
+        ctx = _ctx("vehicle registration", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.VEH"
+
+    def test_mv_fuel(self):
+        ctx = _ctx("mv fuel", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.VEH"
+
+    def test_trailer(self):
+        ctx = _ctx("trailer expenses", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.VEH"
+
+    def test_vehicle_depreciation_not_matched(self):
+        """Vehicle depreciation should NOT match as EXP.VEH — it's EXP.DEP."""
+        ctx = _ctx("motor vehicle depreciation", raw_type="Expense", canon_type="expense")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code != "EXP.VEH" or name != "vehicle_expense_combined", \
+            "Vehicle depreciation should not be caught by vehicle expense rules"

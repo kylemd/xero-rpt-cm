@@ -277,10 +277,131 @@ _payroll_rules = [
 ]
 
 
+# --- Vehicle Expenses (Priority 70-75) ---
+_vehicle_rules = [
+    Rule(
+        name="green_slip",
+        code="EXP.VEH",
+        priority=70,
+        keywords=["green slip"],
+        canon_types={"expense"},
+        notes="Green slip (CTP insurance) -> vehicle expenses",
+    ),
+    Rule(
+        name="mv_fuel",
+        code="EXP.VEH",
+        priority=72,
+        keywords_all=["mv", "fuel"],
+        canon_types={"expense"},
+        notes="MV fuel -> vehicle expenses",
+    ),
+    Rule(
+        name="motor_vehicle_fuel",
+        code="EXP.VEH",
+        priority=72,
+        keywords_all=["motor vehicle", "fuel"],
+        canon_types={"expense"},
+        notes="Motor vehicle fuel -> vehicle expenses",
+    ),
+    Rule(
+        name="vehicle_fuel",
+        code="EXP.VEH",
+        priority=72,
+        keywords_all=["vehicle", "fuel"],
+        canon_types={"expense"},
+        notes="Vehicle fuel -> vehicle expenses",
+    ),
+    Rule(
+        name="mv_interest",
+        code="EXP.VEH",
+        priority=75,
+        keywords_all=["mv", "interest"],
+        canon_types={"expense"},
+        notes="MV interest -> vehicle expenses",
+    ),
+    Rule(
+        name="motor_vehicle_interest",
+        code="EXP.VEH",
+        priority=75,
+        keywords_all=["motor vehicle", "interest"],
+        canon_types={"expense"},
+        notes="Motor vehicle interest -> vehicle expenses",
+    ),
+    Rule(
+        name="vehicle_interest",
+        code="EXP.VEH",
+        priority=75,
+        keywords_all=["vehicle", "interest"],
+        canon_types={"expense"},
+        keywords_exclude=["unexpired"],
+        notes="Vehicle interest -> vehicle expenses (excludes UEI)",
+    ),
+    Rule(
+        name="motor_vehicle_insurance",
+        code="EXP.VEH",
+        priority=75,
+        keywords_all=["motor vehicle", "insurance"],
+        canon_types={"expense"},
+        notes="Motor vehicle insurance -> vehicle expenses",
+    ),
+    Rule(
+        name="vehicle_insurance",
+        code="EXP.VEH",
+        priority=75,
+        keywords_all=["vehicle", "insurance"],
+        canon_types={"expense"},
+        notes="Vehicle insurance -> vehicle expenses",
+    ),
+    Rule(
+        name="vehicle_rego",
+        code="EXP.VEH",
+        priority=75,
+        keywords_all=["vehicle", "registration"],
+        canon_types={"expense"},
+        notes="Vehicle registration -> vehicle expenses",
+    ),
+    Rule(
+        name="motor_vehicle_rego",
+        code="EXP.VEH",
+        priority=75,
+        keywords_all=["motor vehicle", "registration"],
+        canon_types={"expense"},
+        notes="Motor vehicle registration -> vehicle expenses",
+    ),
+    Rule(
+        name="mv_expenses",
+        code="EXP.VEH",
+        priority=72,
+        keywords_all=["mv", "expenses"],
+        canon_types={"expense"},
+        keywords_exclude=["depreciation", "deprec", "accumulated"],
+        notes="MV expenses (excluding depreciation) -> vehicle expenses",
+    ),
+    Rule(
+        name="motor_vehicle_expenses",
+        code="EXP.VEH",
+        priority=72,
+        keywords=["motor vehicle expenses", "motor vehicle running"],
+        canon_types={"expense"},
+        keywords_exclude=["depreciation", "deprec", "accumulated"],
+        notes="Motor vehicle expenses -> vehicle expenses",
+    ),
+    Rule(
+        name="trailer_expense",
+        code="EXP.VEH",
+        priority=70,
+        keywords=["trailer"],
+        canon_types={"expense"},
+        notes="Trailer expenses -> vehicle expenses",
+    ),
+]
+
+
 # --- Collect all rules ---
 ALL_RULES: list[Rule] = [
     *_bank_rules,
     *_owner_rules,
     *_revenue_rules,
     *_payroll_rules,
+    *_vehicle_rules,
 ]
