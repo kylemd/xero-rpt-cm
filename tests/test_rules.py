@@ -246,3 +246,90 @@ class TestVehicleRules:
         code, name = evaluate_rules(ALL_RULES, ctx)
         assert code != "EXP.VEH" or name != "vehicle_expense_combined", \
             "Vehicle depreciation should not be caught by vehicle expense rules"
+
+
+class TestLoanRules:
+    """Loan, hire purchase, chattel mortgage, and related party rules.
+
+    Audit fix: Company loans now check account type to determine direction
+    (asset = loan TO company; liability = loan FROM company).
+    """
+
+    def test_loan_to_pty(self):
+        ctx = _ctx("loan to pty ltd", raw_type="Non-Current Asset",
+                    canon_type="non-current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.REL"
+
+    def test_loan_from_pty_liability(self):
+        """Audit fix: loan FROM company should be liability, not asset."""
+        ctx = _ctx("loan pty ltd", raw_type="Non-Current Liability",
+                    canon_type="non-current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.NCL.REL"
+
+    def test_vehicle_loan(self):
+        ctx = _ctx("motor vehicle loan", raw_type="Non-Current Liability",
+                    canon_type="non-current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.NCL.HPA"
+
+    def test_hire_purchase_current(self):
+        ctx = _ctx("hire purchase", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.HPA"
+
+    def test_hire_purchase_non_current(self):
+        ctx = _ctx("hire purchase", raw_type="Non-Current Liability",
+                    canon_type="non-current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.NCL.HPA"
+
+    def test_chattel_mortgage(self):
+        ctx = _ctx("chattel mortgage", raw_type="Non-Current Liability",
+                    canon_type="non-current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.NCL.HPA"
+
+    def test_unexpired_interest_current(self):
+        ctx = _ctx("unexpired interest cl", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.HPA.UEI"
+
+    def test_unexpired_interest_non_current(self):
+        ctx = _ctx("unexpired interest ncl", raw_type="Non-Current Liability",
+                    canon_type="non-current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.NCL.HPA.UEI"
+
+    def test_director_loan_to(self):
+        ctx = _ctx("loan to director", raw_type="Non-Current Asset",
+                    canon_type="non-current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.DIR"
+
+    def test_directors_loan(self):
+        ctx = _ctx("directors loan", raw_type="Non-Current Liability",
+                    canon_type="non-current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.NCL.LOA"
+
+    def test_premium_funding(self):
+        ctx = _ctx("premium funding gallagher", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.LOA.UNS"
+
+    def test_generic_loan_current_liability(self):
+        ctx = _ctx("business loan", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.REL"
+
+    def test_generic_loan_non_current_asset(self):
+        ctx = _ctx("loan receivable", raw_type="Non-Current Asset",
+                    canon_type="non-current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.REL"

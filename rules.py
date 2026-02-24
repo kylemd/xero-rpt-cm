@@ -397,6 +397,153 @@ _vehicle_rules = [
 ]
 
 
+# --- Loan / Hire Purchase / Related Party (Priority 75-95) ---
+# Audit fix: company loans now check account type to determine direction
+_loan_rules = [
+    Rule(
+        name="director_loan_to",
+        code="ASS.NCA.DIR",
+        priority=95,
+        keywords=["loan to director", "loans to director", "loans to directors",
+                  "to director", "to directors"],
+        keywords_all=["loan"],
+        notes="Loan TO director -> director loan asset",
+    ),
+    Rule(
+        name="directors_loan_from",
+        code="LIA.NCL.LOA",
+        priority=94,
+        keywords=["director's loan", "directors loan"],
+        notes="Director's loan (FROM director) -> non-current loan liability",
+    ),
+    Rule(
+        name="loan_to_pty",
+        code="ASS.NCA.REL",
+        priority=90,
+        keywords_all=["loan"],
+        keywords=["pty", "pty ltd", "pty limited"],
+        raw_types={"non-current asset", "non current asset", "current asset", "asset"},
+        notes="Audit fix: Loan + pty on ASSET type -> related party asset. "
+              "Direction determined by account type, not just keyword.",
+    ),
+    Rule(
+        name="loan_from_pty",
+        code="LIA.NCL.REL",
+        priority=90,
+        keywords_all=["loan"],
+        keywords=["pty", "pty ltd", "pty limited"],
+        raw_types={"non-current liability", "non current liability",
+                   "current liability", "liability"},
+        notes="Audit fix: Loan + pty on LIABILITY type -> related party liability",
+    ),
+    Rule(
+        name="vehicle_loan",
+        code="LIA.NCL.HPA",
+        priority=88,
+        keywords_all=["loan"],
+        keywords=["motor vehicle", "car"],
+        notes="Vehicle loan -> hire purchase liability (non-current)",
+    ),
+    Rule(
+        name="hp_current",
+        code="LIA.CUR.HPA",
+        priority=85,
+        keywords=["hire purchase", "hp"],
+        raw_types={"current liability", "liability"},
+        keywords_exclude=["unexpired", "interest"],
+        notes="Hire purchase on current liability -> current HPA",
+    ),
+    Rule(
+        name="hp_non_current",
+        code="LIA.NCL.HPA",
+        priority=85,
+        keywords=["hire purchase", "hp"],
+        raw_types={"non-current liability", "non current liability"},
+        keywords_exclude=["unexpired", "interest"],
+        notes="Hire purchase on non-current liability -> non-current HPA",
+    ),
+    Rule(
+        name="hp_fallback",
+        code="LIA.NCL.HPA",
+        priority=80,
+        keywords=["hire purchase", "hp"],
+        keywords_exclude=["unexpired", "interest"],
+        notes="Hire purchase fallback (ambiguous type) -> non-current HPA",
+    ),
+    Rule(
+        name="chattel_mortgage",
+        code="LIA.NCL.HPA",
+        priority=85,
+        keywords=["chattel mortgage"],
+        keywords_exclude=["unexpired", "interest"],
+        notes="Chattel mortgage -> non-current HPA",
+    ),
+    Rule(
+        name="uei_current",
+        code="LIA.CUR.HPA.UEI",
+        priority=88,
+        keywords=["unexpired interest"],
+        raw_types={"current liability", "liability"},
+        notes="Unexpired interest on current liability -> current UEI",
+    ),
+    Rule(
+        name="uei_non_current",
+        code="LIA.NCL.HPA.UEI",
+        priority=88,
+        keywords=["unexpired interest"],
+        raw_types={"non-current liability", "non current liability"},
+        notes="Unexpired interest on non-current liability -> non-current UEI",
+    ),
+    Rule(
+        name="uei_fallback",
+        code="LIA.NCL.HPA.UEI",
+        priority=83,
+        keywords=["unexpired interest"],
+        notes="Unexpired interest fallback -> non-current UEI",
+    ),
+    Rule(
+        name="premium_funding",
+        code="LIA.CUR.LOA.UNS",
+        priority=80,
+        keywords=["premium funding", "iqumulate", "gallagher"],
+        raw_types={"current liability", "liability"},
+        notes="Premium funding (insurance financing) -> unsecured current loan",
+    ),
+    Rule(
+        name="generic_loan_ncl",
+        code="LIA.NCL.REL",
+        priority=60,
+        keywords=["loan"],
+        raw_types={"non-current liability", "non current liability"},
+        notes="Generic loan on non-current liability -> related party NCL",
+    ),
+    Rule(
+        name="generic_loan_cl",
+        code="LIA.CUR.REL",
+        priority=60,
+        keywords=["loan"],
+        raw_types={"current liability", "liability"},
+        notes="Generic loan on current liability -> related party CL",
+    ),
+    Rule(
+        name="generic_loan_nca",
+        code="ASS.NCA.REL",
+        priority=60,
+        keywords=["loan"],
+        raw_types={"non-current asset", "non current asset"},
+        notes="Generic loan on non-current asset -> related party NCA",
+    ),
+    Rule(
+        name="generic_loan_ca",
+        code="ASS.CUR.REL",
+        priority=60,
+        keywords=["loan"],
+        raw_types={"current asset", "asset"},
+        notes="Generic loan on current asset -> related party CA",
+    ),
+]
+
+
 # --- Collect all rules ---
 ALL_RULES: list[Rule] = [
     *_bank_rules,
@@ -404,4 +551,5 @@ ALL_RULES: list[Rule] = [
     *_revenue_rules,
     *_payroll_rules,
     *_vehicle_rules,
+    *_loan_rules,
 ]
