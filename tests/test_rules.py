@@ -615,3 +615,10 @@ class TestRemainingRules:
         code, _ = evaluate_rules(ALL_RULES, ctx)
         # Contract income without specific keyword may not match any rule yet
         # This is OK — it'll be handled by template matching in the pipeline
+
+
+def test_no_duplicate_rule_names():
+    """Every rule must have a unique name."""
+    names = [r.name for r in ALL_RULES]
+    duplicates = [n for n in names if names.count(n) > 1]
+    assert len(names) == len(set(names)), f"Duplicate rule names: {set(duplicates)}"
