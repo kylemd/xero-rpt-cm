@@ -21,6 +21,17 @@ from rule_engine import evaluate_rules, MatchContext
 from rules import ALL_RULES, OWNER_KEYWORDS
 from mapping_logic_v15 import normalise, canonical_type
 
+def js_str(s: str) -> str:
+    """Escape a string for use inside a JS single-quoted string in an HTML attribute.
+
+    Must handle both JS special chars (\\, ', \\n) and HTML attribute chars (&, ", <, >).
+    Order matters: escape backslash first, then single-quote for JS, then html-escape
+    for the HTML attribute context.
+    """
+    s = s.replace("\\", "\\\\").replace("'", "\\'").replace("\n", "\\n")
+    return html_mod.escape(s, quote=True)
+
+
 FIXTURES_DIR = pathlib.Path(__file__).parent.parent / "tests" / "fixtures" / "validated"
 SYSTEM_MAPPINGS = pathlib.Path(__file__).parent.parent / "SystemFiles" / "SystemMappings.csv"
 OUTPUT = pathlib.Path(__file__).parent.parent / "tests" / "mismatch_report.html"
@@ -92,6 +103,23 @@ def collect_mismatches(sys_map):
                     category, category_detail = categorise(code, validated)
                     r = rule_index.get(rule_name)
 
+                    # Original chart code (InputReportingCode where available)
+                    input_rc = row.get("InputReportingCode", "").strip()
+
+                    # Balance (DR/CR format)
+                    raw_balance = row.get("Balance", "").strip()
+                    if raw_balance:
+                        try:
+                            bal_num = float(raw_balance.replace(",", ""))
+                            if bal_num >= 0:
+                                balance_fmt = f"${abs(bal_num):,.2f} DR"
+                            else:
+                                balance_fmt = f"${abs(bal_num):,.2f} CR"
+                        except ValueError:
+                            balance_fmt = raw_balance  # Show raw if not numeric
+                    else:
+                        balance_fmt = ""
+
                     mismatches.append({
                         "id": f"{csv_file.stem}:{row.get('Code', '')}:{name[:40]}",
                         "file": csv_file.name,
@@ -115,6 +143,8 @@ def collect_mismatches(sys_map):
                         "rule_notes": r.notes if r else "",
                         "old_suggested": suggested,
                         "old_match_reason": match_reason,
+                        "input_reporting_code": input_rc,
+                        "balance": balance_fmt,
                         "category": category,
                         "category_detail": category_detail,
                     })
@@ -291,13 +321,15 @@ tr.reviewed:hover td {{ opacity: 1; }}
   <th onclick="sortTable(1)">Category</th>
   <th onclick="sortTable(2)">File</th>
   <th onclick="sortTable(3)">Account</th>
-  <th onclick="sortTable(4)">Type</th>
-  <th onclick="sortTable(5)">Normalised</th>
-  <th onclick="sortTable(6)">Got</th>
-  <th onclick="sortTable(7)">Expected</th>
-  <th onclick="sortTable(8)">Rule</th>
-  <th onclick="sortTable(9)">Rule Context</th>
-  <th onclick="sortTable(10)">Old Mapper</th>
+  <th onclick="sortTable(4)">Xero Code</th>
+  <th onclick="sortTable(5)">Balance</th>
+  <th onclick="sortTable(6)">Type</th>
+  <th onclick="sortTable(7)">Normalised</th>
+  <th onclick="sortTable(8)">Got</th>
+  <th onclick="sortTable(9)">Expected</th>
+  <th onclick="sortTable(10)">Rule</th>
+  <th onclick="sortTable(11)">Rule Context</th>
+  <th onclick="sortTable(12)">Old Mapper</th>
   <th style="min-width:270px">Your Decision</th>
 </tr>
 </thead>
@@ -309,7 +341,8 @@ tr.reviewed:hover td {{ opacity: 1; }}
         cat_class = "specificity" if cat == "Specificity Gap" else ("category-mismatch" if cat == "Category Mismatch" else "")
         tag_class = "spec" if cat == "Specificity Gap" else ("cat" if cat == "Category Mismatch" else "code-m")
         row_id = m["id"]
-        esc_id = h(row_id)
+        esc_id = h(row_id)       # for HTML attribute contexts (data-id, data-row-id)
+        js_id = js_str(row_id)   # for inline JS string contexts (onchange, oninput)
 
         # Rule context cell
         ctx_parts = []
@@ -332,6 +365,7 @@ tr.reviewed:hover td {{ opacity: 1; }}
         search_text = " ".join([
             m["name"], m["raw_type"], m["got"], m["expected"],
             m["normalised"], m["rule_name"], m["category"],
+            m["input_reporting_code"], m["balance"],
         ]).lower()
 
         parts.append(
@@ -341,14 +375,28 @@ tr.reviewed:hover td {{ opacity: 1; }}
             f'data-rule="{h(m["rule_name"])}" '
             f'data-file="{h(m["file"])}" '
             f'data-search="{h(search_text)}" '
-            f'data-status="pending">\n'
+            f'data-status="pending" '
+            f'data-account-name="{h(m["name"])}" '
+            f'data-account-type="{h(m["raw_type"])}" '
+            f'data-got="{h(m["got"])}" '
+            f'data-expected="{h(m["expected"])}" '
+            f'data-rule-name="{h(m["rule_name"])}">\n'
         )
         parts.append(f'  <td>{i + 1}</td>\n')
         parts.append(f'  <td><span class="tag {tag_class}">{h(cat)}</span>'
                      f'<br><span class="detail-row">{h(m["category_detail"])}</span></td>\n')
         parts.append(f'  <td style="font-size:.78em">{h(m["file"].replace("_validated_final.csv",""))}</td>\n')
         parts.append(f'  <td><strong>{h(m["name"])}</strong>'
-                     f'<br><span class="detail-row">Xero: {h(m["code"])}</span></td>\n')
+                     f'<br><span class="detail-row">#{h(m["code"])}</span></td>\n')
+        irc = m["input_reporting_code"]
+        irc_desc = sys_map.get(irc, "") if irc else ""
+        parts.append(f'  <td><span class="code" style="color:#6b7280">{h(irc) if irc else "—"}</span>'
+                     f'{("<br><span class=detail-row>" + h(irc_desc[:40]) + "</span>") if irc_desc else ""}</td>\n')
+        bal = m["balance"]
+        bal_class = "green" if "DR" in bal else ("red" if "CR" in bal else "")
+        parts.append(f'  <td style="white-space:nowrap;font-size:.82em;font-weight:600'
+                     f'{";color:#16a34a" if "DR" in bal else (";color:#dc2626" if "CR" in bal else "")}">'
+                     f'{h(bal) if bal else "—"}</td>\n')
         parts.append(f'  <td>{h(m["raw_type"])}'
                      f'<br><span class="detail-row">{h(m["canon_type"])}</span></td>\n')
         parts.append(f'  <td style="font-family:monospace;font-size:.78em">{h(m["normalised"][:60])}</td>\n')
@@ -365,23 +413,23 @@ tr.reviewed:hover td {{ opacity: 1; }}
         parts.append(f'  <td class="decision-cell" data-row-id="{esc_id}">\n')
         parts.append(f'    <div class="radio-group">\n')
         parts.append(f'      <label><input type="radio" name="d_{i}" value="got" '
-                     f'onchange="setDecision(\'{esc_id}\',\'got\',\'{h(m["got"])}\')"> '
+                     f'onchange="setDecision(\'{js_id}\',\'got\',\'{js_str(m["got"])}\')"> '
                      f'<span class="code got">{h(m["got"])}</span> (Rule Engine)</label>\n')
         parts.append(f'      <label><input type="radio" name="d_{i}" value="expected" '
-                     f'onchange="setDecision(\'{esc_id}\',\'expected\',\'{h(m["expected"])}\')"> '
+                     f'onchange="setDecision(\'{js_id}\',\'expected\',\'{js_str(m["expected"])}\')"> '
                      f'<span class="code exp">{h(m["expected"])}</span> (Validated)</label>\n')
         parts.append(f'      <label><input type="radio" name="d_{i}" value="other" '
-                     f'onchange="setDecision(\'{esc_id}\',\'other\',\'\')"> '
+                     f'onchange="setDecision(\'{js_id}\',\'other\',\'\')"> '
                      f'Other code...</label>\n')
         parts.append(f'    </div>\n')
         parts.append(f'    <div class="other-input" id="other_{i}">\n')
         parts.append(f'      <input type="text" list="codeSuggestions" placeholder="e.g. EXP.OCC" '
-                     f'oninput="setOtherCode(\'{esc_id}\',this.value, {i})">\n')
+                     f'oninput="setOtherCode(\'{js_id}\',this.value, {i})">\n')
         parts.append(f'      <span class="code-desc" id="otherDesc_{i}"></span>\n')
         parts.append(f'    </div>\n')
         parts.append(f'    <div class="reason-label">Reason:</div>\n')
         parts.append(f'    <textarea placeholder="Why is this the right code?" '
-                     f'oninput="setReason(\'{esc_id}\',this.value)"></textarea>\n')
+                     f'oninput="setReason(\'{js_id}\',this.value)"></textarea>\n')
         parts.append(f'  </td>\n')
         parts.append('</tr>\n')
 
@@ -396,10 +444,11 @@ const FILENAME = 'mismatch_decisions.json';
 const CODES = {code_json};
 const CODE_MAP = Object.fromEntries(CODES);
 const TOTAL = {len(mismatches)};
+const IS_FILE = location.protocol === 'file:';
 
 // ─── State ───
 let decisions = loadDecisions();
-let dirHandle = null;      // File System Access directory handle
+let dirHandle = null;      // File System Access directory handle (http only)
 let saveTimer = null;      // Debounced auto-save timer
 let lastSaveHash = '';     // Track whether data changed since last write
 
@@ -411,11 +460,12 @@ function loadDecisions() {{
 function saveDecisions() {{
   localStorage.setItem(STORAGE_KEY, JSON.stringify(decisions));
   updateProgress();
-  scheduleAutoSave();
+  if (!IS_FILE) scheduleAutoSave();
 }}
 
-// ─── Auto-save to file (debounced 2s after last change) ───
+// ─── Auto-save to file (debounced 2s, http only) ───
 function scheduleAutoSave() {{
+  if (IS_FILE) return;
   if (saveTimer) clearTimeout(saveTimer);
   updateSaveStatus('unsaved');
   saveTimer = setTimeout(() => writeToFile(), 2000);
@@ -450,17 +500,18 @@ function buildExportData() {{
     const id = row.dataset.id;
     const d = decisions[id];
     if (!d || !d.choice) return;
-    const cells = row.querySelectorAll('td');
+    const got = row.dataset.got;
+    const expected = row.dataset.expected;
     exported.push({{
       id: id,
-      account_name: cells[3].querySelector('strong').textContent,
-      type: cells[4].childNodes[0].textContent.trim(),
-      rule_engine_code: cells[6].querySelector('.code').textContent,
-      validated_code: cells[7].querySelector('.code').textContent,
-      rule_name: cells[8].textContent.trim(),
+      account_name: row.dataset.accountName,
+      type: row.dataset.accountType,
+      rule_engine_code: got,
+      validated_code: expected,
+      rule_name: row.dataset.ruleName,
       decision: d.choice,
-      chosen_code: d.choice === 'got' ? cells[6].querySelector('.code').textContent
-                 : d.choice === 'expected' ? cells[7].querySelector('.code').textContent
+      chosen_code: d.choice === 'got' ? got
+                 : d.choice === 'expected' ? expected
                  : d.code,
       reason: d.reason || '',
       timestamp: d.timestamp
@@ -469,9 +520,40 @@ function buildExportData() {{
   return exported;
 }}
 
-// ─── File System Access API ───
+// ─── Blob download (always works, even on file://) ───
+function downloadBlob(json) {{
+  const blob = new Blob([json], {{type: 'application/json'}});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = FILENAME;
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  // Delay cleanup so browser can start the download
+  setTimeout(() => {{
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }}, 500);
+  lastSaveHash = json;
+  updateSaveStatus('saved', '(downloaded)');
+}}
 
-// IndexedDB helpers for persisting the directory handle across sessions
+// ─── Save button handler ───
+async function saveNow() {{
+  // On http with a folder handle, write directly
+  if (!IS_FILE && dirHandle) {{
+    await writeToFile();
+    return;
+  }}
+  // Otherwise always download as blob
+  const data = buildExportData();
+  if (data.length === 0) {{ alert('No decisions to save yet.'); return; }}
+  downloadBlob(JSON.stringify(data, null, 2));
+}}
+
+// ─── File System Access API (http only) ───
+
 function openHandleDB() {{
   return new Promise((resolve, reject) => {{
     const req = indexedDB.open(DIR_HANDLE_DB, 1);
@@ -499,6 +581,18 @@ async function loadHandle() {{
 }}
 
 async function pickFolder() {{
+  if (IS_FILE) {{
+    alert('Folder picker requires serving the page over HTTP.\\n\\n'
+        + 'Use the Save button to download the JSON instead,\\n'
+        + 'or run: python -m http.server 8080\\n'
+        + 'then open http://localhost:8080/tests/mismatch_report.html');
+    return;
+  }}
+  if (!('showDirectoryPicker' in window)) {{
+    alert('Folder picker is not available in this browser.\\n'
+        + 'Use the Save button to download the JSON instead.');
+    return;
+  }}
   try {{
     dirHandle = await window.showDirectoryPicker({{ mode: 'readwrite' }});
     await storeHandle(dirHandle);
@@ -506,98 +600,51 @@ async function pickFolder() {{
     btn.textContent = dirHandle.name;
     btn.classList.add('linked');
     updateSaveStatus('idle', 'Folder: ' + dirHandle.name);
-    // Immediately save current state
     await writeToFile();
   }} catch (e) {{
-    if (e.name !== 'AbortError') updateSaveStatus('error', 'Folder pick failed');
+    if (e.name !== 'AbortError') {{
+      console.error('Folder pick error:', e);
+      updateSaveStatus('error', 'Folder pick failed: ' + e.message);
+    }}
   }}
 }}
 
 async function restoreDirHandle() {{
+  if (IS_FILE) return;  // Skip on file:// — API not available
   try {{
     const stored = await loadHandle();
     if (!stored) return;
-    // Verify permission is still granted
     const perm = await stored.queryPermission({{ mode: 'readwrite' }});
     if (perm === 'granted') {{
       dirHandle = stored;
+    }} else {{
+      const req = await stored.requestPermission({{ mode: 'readwrite' }});
+      if (req === 'granted') dirHandle = stored;
+    }}
+    if (dirHandle) {{
       const btn = document.querySelector('.btn-folder');
       btn.textContent = dirHandle.name;
       btn.classList.add('linked');
       updateSaveStatus('idle', 'Folder: ' + dirHandle.name);
-    }} else {{
-      // Try requesting — will show a prompt first time
-      const req = await stored.requestPermission({{ mode: 'readwrite' }});
-      if (req === 'granted') {{
-        dirHandle = stored;
-        const btn = document.querySelector('.btn-folder');
-        btn.textContent = dirHandle.name;
-        btn.classList.add('linked');
-        updateSaveStatus('idle', 'Folder: ' + dirHandle.name);
-      }}
     }}
-  }} catch {{ /* ignore — will need manual pick */ }}
+  }} catch {{ /* ignore */ }}
 }}
 
 async function writeToFile() {{
+  if (IS_FILE || !dirHandle) return;
   const data = buildExportData();
   const json = JSON.stringify(data, null, 2);
-  // Skip if nothing changed
-  if (json === lastSaveHash) {{ updateSaveStatus('idle', dirHandle ? 'Folder: ' + dirHandle.name : ''); return; }}
-
-  if (dirHandle) {{
-    // Write directly to folder
-    try {{
-      const fileHandle = await dirHandle.getFileHandle(FILENAME, {{ create: true }});
-      const writable = await fileHandle.createWritable();
-      await writable.write(json);
-      await writable.close();
-      lastSaveHash = json;
-      const now = new Date().toLocaleTimeString();
-      updateSaveStatus('saved', now + ' (' + data.length + ' decisions)');
-    }} catch (e) {{
-      updateSaveStatus('error', 'Write failed: ' + e.message);
-    }}
-  }} else {{
-    // No folder set — just note unsaved
-    if (data.length > 0) {{
-      updateSaveStatus('idle', 'Pick a save folder to auto-commit');
-    }}
-  }}
-}}
-
-async function saveNow() {{
-  if (!dirHandle) {{
-    // Fallback: download via blob if no folder set
-    const data = buildExportData();
-    if (data.length === 0) {{ alert('No decisions to save.'); return; }}
-    const json = JSON.stringify(data, null, 2);
-    if ('showSaveFilePicker' in window) {{
-      try {{
-        const fh = await window.showSaveFilePicker({{
-          suggestedName: FILENAME,
-          types: [{{ description: 'JSON', accept: {{ 'application/json': ['.json'] }} }}]
-        }});
-        const w = await fh.createWritable();
-        await w.write(json);
-        await w.close();
-        lastSaveHash = json;
-        updateSaveStatus('saved', new Date().toLocaleTimeString());
-      }} catch (e) {{
-        if (e.name !== 'AbortError') updateSaveStatus('error', e.message);
-      }}
-    }} else {{
-      // Legacy fallback
-      const blob = new Blob([json], {{type: 'application/json'}});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = FILENAME;
-      a.click();
-      URL.revokeObjectURL(a.href);
-      updateSaveStatus('saved', '(downloaded)');
-    }}
-  }} else {{
-    await writeToFile();
+  if (json === lastSaveHash) {{ updateSaveStatus('idle', 'Folder: ' + dirHandle.name); return; }}
+  try {{
+    const fileHandle = await dirHandle.getFileHandle(FILENAME, {{ create: true }});
+    const writable = await fileHandle.createWritable();
+    await writable.write(json);
+    await writable.close();
+    lastSaveHash = json;
+    const now = new Date().toLocaleTimeString();
+    updateSaveStatus('saved', now + ' (' + data.length + ' decisions)');
+  }} catch (e) {{
+    updateSaveStatus('error', 'Write failed: ' + e.message);
   }}
 }}
 
