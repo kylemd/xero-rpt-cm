@@ -1,4 +1,6 @@
 """Tests for synonym normalisation."""
+import pathlib
+
 from synonyms import SynonymDB
 
 
@@ -52,3 +54,15 @@ def test_normalise_empty_string(tmp_path):
     with SynonymDB(tmp_path / "test.db") as db:
         db.add("mv", "motor vehicle", "abbreviation")
         assert db.normalise_tokens("") == ""
+
+
+def test_seed_db_exists():
+    db_path = pathlib.Path(__file__).parent.parent / "data" / "synonyms.db"
+    assert db_path.exists(), "Run 'python data/seed_synonyms.py' first"
+    with SynonymDB(db_path) as db:
+        entries = db.all_entries()
+        assert len(entries) >= 40  # we seeded at least 40+ entries
+        # Spot-check a few
+        assert db.lookup("mv") == "motor vehicle"
+        assert db.lookup("acc dep") == "accumulated depreciation"
+        assert db.lookup("ammenities") == "amenities"
