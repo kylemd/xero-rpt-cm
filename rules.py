@@ -76,7 +76,42 @@ _bank_rules = [
 ]
 
 
+# --- Owner / Proprietor (Priority 90-95) ---
+# Audit fix: removed COMMON_FIRST_NAMES catch-all (old rule 7).
+# It was too aggressive — "St John's" matched "john", "Peterson" matched "peter".
+# Owner detection should rely on OWNER_KEYWORDS which are specific enough.
+_owner_rules = [
+    Rule(
+        name="owner_drawings",
+        code="EQU.DRA",
+        priority=95,
+        keywords=["drawings"],
+        owner_context=True,
+        notes="Owner keyword + 'drawings' -> equity drawings",
+    ),
+    Rule(
+        name="owner_funds_introduced_company",
+        code="LIA.NCL.ADV",
+        priority=93,
+        keywords=["capital contributed", "funds introduced", "share capital"],
+        owner_context=True,
+        template="company",
+        notes="Owner keyword + capital/funds + Company template -> NCL advance "
+              "(companies use liability not equity for shareholder advances)",
+    ),
+    Rule(
+        name="owner_funds_introduced_other",
+        code="EQU.ADV",
+        priority=92,
+        keywords=["capital contributed", "funds introduced", "share capital"],
+        owner_context=True,
+        notes="Owner keyword + capital/funds + non-Company template -> equity advance",
+    ),
+]
+
+
 # --- Collect all rules ---
 ALL_RULES: list[Rule] = [
     *_bank_rules,
+    *_owner_rules,
 ]
