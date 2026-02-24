@@ -12,10 +12,19 @@ import sqlite3
 class SynonymDB:
     """Manages a SQLite synonym database for text normalisation."""
 
+    MAX_PHRASE_LENGTH = 4
+
     def __init__(self, db_path: pathlib.Path | str):
         self.db_path = pathlib.Path(db_path)
         self._conn = sqlite3.connect(str(self.db_path))
         self._create_tables()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+        return False
 
     def _create_tables(self):
         self._conn.executescript("""
@@ -30,7 +39,6 @@ class SynonymDB:
             CREATE UNIQUE INDEX IF NOT EXISTS idx_synonyms_term
                 ON synonyms(term COLLATE NOCASE);
         """)
-        self._conn.commit()
 
     def add(self, term: str, canonical: str, category: str,
             domain: str | None = None, notes: str | None = None):
@@ -69,8 +77,7 @@ class SynonymDB:
         i = 0
         while i < len(words):
             matched = False
-            # Try decreasing phrase lengths (max 4 words)
-            for length in range(min(4, len(words) - i), 0, -1):
+            for length in range(min(self.MAX_PHRASE_LENGTH, len(words) - i), 0, -1):
                 phrase = " ".join(words[i : i + length])
                 canonical = self.lookup(phrase)
                 if canonical is not None:
