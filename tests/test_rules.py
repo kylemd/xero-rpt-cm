@@ -290,13 +290,14 @@ class TestLoanRules:
         ctx = _ctx("chattel mortgage", raw_type="Non-Current Liability",
                     canon_type="non-current liability")
         code, _ = evaluate_rules(ALL_RULES, ctx)
-        assert code == "LIA.NCL.HPA"
+        assert code == "LIA.NCL.CHM"
 
     def test_unexpired_interest_current(self):
+        """UEI always maps to non-current per validated data."""
         ctx = _ctx("unexpired interest cl", raw_type="Current Liability",
                     canon_type="current liability")
         code, _ = evaluate_rules(ALL_RULES, ctx)
-        assert code == "LIA.CUR.HPA.UEI"
+        assert code == "LIA.NCL.HPA.UEI"
 
     def test_unexpired_interest_non_current(self):
         ctx = _ctx("unexpired interest ncl", raw_type="Non-Current Liability",
@@ -304,11 +305,18 @@ class TestLoanRules:
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "LIA.NCL.HPA.UEI"
 
-    def test_director_loan_to(self):
+    def test_director_loan_to_nca(self):
         ctx = _ctx("loan to director", raw_type="Non-Current Asset",
                     canon_type="non-current asset")
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "ASS.NCA.DIR"
+
+    def test_director_loan_to_ca(self):
+        """Current Asset type -> ASS.CUR.DIR (not NCA)."""
+        ctx = _ctx("loan to directors", raw_type="Current Asset",
+                    canon_type="current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.DIR"
 
     def test_directors_loan(self):
         ctx = _ctx("directors loan", raw_type="Non-Current Liability",
@@ -323,10 +331,11 @@ class TestLoanRules:
         assert code == "LIA.CUR.LOA.UNS"
 
     def test_generic_loan_current_liability(self):
+        """Generic loans on CL type -> NCL loan (most loans are long-term)."""
         ctx = _ctx("business loan", raw_type="Current Liability",
                     canon_type="current liability")
         code, _ = evaluate_rules(ALL_RULES, ctx)
-        assert code == "LIA.CUR.REL"
+        assert code == "LIA.NCL.LOA"
 
     def test_generic_loan_non_current_asset(self):
         ctx = _ctx("loan receivable", raw_type="Non-Current Asset",

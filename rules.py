@@ -58,6 +58,14 @@ _bank_rules = [
         notes="Bank type account with credit card name -> current payable",
     ),
     Rule(
+        name="bank_petty_cash",
+        code="ASS.CUR.CAS.FLO",
+        priority=102,
+        raw_types={"bank"},
+        keywords=["petty cash"],
+        notes="Bank type + petty cash -> cash flow asset (per SystemMappings.csv)",
+    ),
+    Rule(
         name="bank_default",
         code="ASS.CUR.CAS.BAN",
         priority=100,
@@ -82,12 +90,24 @@ _bank_rules = [
 # Owner detection should rely on OWNER_KEYWORDS which are specific enough.
 _owner_rules = [
     Rule(
+        name="owner_drawings_company",
+        code="LIA.NCL.DRA",
+        priority=96,
+        keywords=["drawings"],
+        owner_context=True,
+        template="company",
+        type_exclude={"equity"},
+        notes="Owner keyword + 'drawings' on Company template -> liability drawings "
+              "(companies report owner drawings as liabilities not equity). "
+              "Excludes Equity type accounts which should stay as EQU.DRA.",
+    ),
+    Rule(
         name="owner_drawings",
         code="EQU.DRA",
         priority=95,
         keywords=["drawings"],
         owner_context=True,
-        notes="Owner keyword + 'drawings' -> equity drawings",
+        notes="Owner keyword + 'drawings' -> equity drawings (non-company fallback)",
     ),
     Rule(
         name="owner_funds_introduced_company",
@@ -188,7 +208,8 @@ _revenue_rules = [
         priority=80,
         keywords=["sale of fixed asset", "sale of asset",
                   "profit loss on sale of fixed asset"],
-        notes="Profit/loss on sale of fixed asset -> other gains",
+        type_exclude={"expense"},
+        notes="Profit/loss on sale of fixed asset -> other gains (not on expense type)",
     ),
     Rule(
         name="sale_proceeds",
@@ -257,8 +278,11 @@ _payroll_rules = [
         name="wages_payable",
         code="LIA.CUR.PAY.EMP",
         priority=95,
-        keywords=["wages payable", "withholding", "paygw"],
-        notes="Wages payable/withholding/PAYGW -> employee payables liability",
+        keywords=["wages payable", "paygw"],
+        raw_types={"current liability", "liability"},
+        notes="Wages payable/PAYGW -> employee payables liability. "
+              "Audit fix: removed 'withholding' (too broad — caught ABN withholding, "
+              "voluntary withholding credits, withholding tax). Added type guard.",
     ),
     Rule(
         name="payroll_payable",
@@ -401,13 +425,23 @@ _vehicle_rules = [
 # Audit fix: company loans now check account type to determine direction
 _loan_rules = [
     Rule(
+        name="director_loan_to_ca",
+        code="ASS.CUR.DIR",
+        priority=96,
+        keywords=["loan to director", "loans to director", "loans to directors",
+                  "to director", "to directors"],
+        keywords_all=["loan"],
+        raw_types={"current asset", "asset"},
+        notes="Loan TO director on current asset -> current director loan",
+    ),
+    Rule(
         name="director_loan_to",
         code="ASS.NCA.DIR",
         priority=95,
         keywords=["loan to director", "loans to director", "loans to directors",
                   "to director", "to directors"],
         keywords_all=["loan"],
-        notes="Loan TO director -> director loan asset",
+        notes="Loan TO director (fallback) -> non-current director loan asset",
     ),
     Rule(
         name="directors_loan_from",
@@ -445,22 +479,31 @@ _loan_rules = [
         notes="Vehicle loan -> hire purchase liability (non-current)",
     ),
     Rule(
+        name="hp_interest_expense",
+        code="EXP.INT",
+        priority=87,
+        keywords=["hire purchase", "hp", "chattel mortgage"],
+        canon_types={"expense"},
+        notes="HP/chattel mortgage on expense type -> interest expense",
+    ),
+    Rule(
         name="hp_current",
         code="LIA.CUR.HPA",
         priority=85,
         keywords=["hire purchase", "hp"],
-        raw_types={"current liability", "liability"},
+        raw_types={"current liability"},
         keywords_exclude=["unexpired", "interest"],
-        notes="Hire purchase on current liability -> current HPA",
+        notes="Hire purchase on current liability -> current HPA. "
+              "Audit fix: removed 'liability' (generic Liability → NCL fallback).",
     ),
     Rule(
         name="hp_non_current",
         code="LIA.NCL.HPA",
         priority=85,
         keywords=["hire purchase", "hp"],
-        raw_types={"non-current liability", "non current liability"},
+        raw_types={"non-current liability", "non current liability", "liability"},
         keywords_exclude=["unexpired", "interest"],
-        notes="Hire purchase on non-current liability -> non-current HPA",
+        notes="Hire purchase on non-current/generic liability -> non-current HPA",
     ),
     Rule(
         name="hp_fallback",
@@ -468,38 +511,27 @@ _loan_rules = [
         priority=80,
         keywords=["hire purchase", "hp"],
         keywords_exclude=["unexpired", "interest"],
-        notes="Hire purchase fallback (ambiguous type) -> non-current HPA",
+        type_exclude={"expense"},
+        notes="Hire purchase fallback -> non-current HPA (excludes expense type)",
     ),
     Rule(
         name="chattel_mortgage",
-        code="LIA.NCL.HPA",
+        code="LIA.NCL.CHM",
         priority=85,
         keywords=["chattel mortgage"],
         keywords_exclude=["unexpired", "interest"],
-        notes="Chattel mortgage -> non-current HPA",
-    ),
-    Rule(
-        name="uei_current",
-        code="LIA.CUR.HPA.UEI",
-        priority=88,
-        keywords=["unexpired interest"],
-        raw_types={"current liability", "liability"},
-        notes="Unexpired interest on current liability -> current UEI",
+        type_exclude={"expense"},
+        notes="Chattel mortgage -> non-current chattel mortgage. "
+              "Changed from HPA to CHM per validated data.",
     ),
     Rule(
         name="uei_non_current",
         code="LIA.NCL.HPA.UEI",
         priority=88,
         keywords=["unexpired interest"],
-        raw_types={"non-current liability", "non current liability"},
-        notes="Unexpired interest on non-current liability -> non-current UEI",
-    ),
-    Rule(
-        name="uei_fallback",
-        code="LIA.NCL.HPA.UEI",
-        priority=83,
-        keywords=["unexpired interest"],
-        notes="Unexpired interest fallback -> non-current UEI",
+        notes="Unexpired interest -> non-current UEI. "
+              "Validators consistently classify UEI as non-current regardless of type "
+              "(UEI is contra to the full HP liability which is non-current).",
     ),
     Rule(
         name="premium_funding",
@@ -511,19 +543,20 @@ _loan_rules = [
     ),
     Rule(
         name="generic_loan_ncl",
-        code="LIA.NCL.REL",
+        code="LIA.NCL.LOA",
         priority=60,
         keywords=["loan"],
         raw_types={"non-current liability", "non current liability"},
-        notes="Generic loan on non-current liability -> related party NCL",
+        notes="Generic loan on non-current liability -> non-current loan",
     ),
     Rule(
         name="generic_loan_cl",
-        code="LIA.CUR.REL",
+        code="LIA.NCL.LOA",
         priority=60,
         keywords=["loan"],
         raw_types={"current liability", "liability"},
-        notes="Generic loan on current liability -> related party CL",
+        notes="Generic loan on current/generic liability -> non-current loan "
+              "(most loans are long-term even when typed as current liability)",
     ),
     Rule(
         name="generic_loan_nca",
@@ -646,6 +679,15 @@ _general_expense_rules = [
 
     # Equipment hire
     Rule(
+        name="car_hire_expense",
+        code="EXP.VEH",
+        priority=72,
+        keywords_all=["car", "hire"],
+        canon_types={"expense"},
+        keywords_exclude=["purchase"],
+        notes="Car hire -> vehicle expenses",
+    ),
+    Rule(
         name="equipment_hire_direct",
         code="EXP.COS",
         priority=75,
@@ -662,8 +704,8 @@ _general_expense_rules = [
         priority=68,
         keywords_all=["hire"],
         canon_types={"expense"},
-        keywords_exclude=["purchase", "labour"],
-        notes="Equipment hire under expense -> general expense",
+        keywords_exclude=["purchase", "labour", "car"],
+        notes="Equipment hire under expense -> general expense (excludes car hire)",
     ),
 
     # Home warranty (construction)
@@ -714,11 +756,11 @@ _general_expense_rules = [
     ),
     Rule(
         name="gifts",
-        code="EXP.ADV",
+        code="EXP",
         priority=68,
         keywords=["gift", "gifts"],
         canon_types={"expense"},
-        notes="Gifts -> advertising/marketing expense",
+        notes="Gifts/donations -> general expense (not advertising)",
     ),
 
     # Professional fees
@@ -766,7 +808,9 @@ _general_expense_rules = [
         priority=72,
         keywords=["light", "power", "electricity", "gas", "heating"],
         canon_types={"expense"},
-        notes="Light/power/electricity/gas -> utilities",
+        keywords_exclude=["flight", "flights", "highlight", "spotlight"],
+        notes="Light/power/electricity/gas -> utilities. "
+              "Excludes 'flight' (which contains 'light').",
     ),
 
     # Administration
@@ -828,11 +872,12 @@ _general_expense_rules = [
     # Cleaning
     Rule(
         name="cleaning",
-        code="EXP",
+        code="EXP.OCC",
         priority=65,
         keywords=["cleaning", "laundry"],
         canon_types={"expense"},
-        notes="Cleaning/laundry -> general expense",
+        keywords_exclude=["vehicle", "car", "mv", "motor vehicle"],
+        notes="Cleaning/laundry -> occupancy expense (excludes vehicle washing)",
     ),
 
     # Depreciation
@@ -858,11 +903,12 @@ _general_expense_rules = [
     Rule(
         name="travel_domestic",
         code="EXP.TRA.NAT",
-        priority=70,
-        keywords=["travel"],
+        priority=73,
+        keywords=["travel", "accommodation"],
         canon_types={"expense"},
         keywords_exclude=["international"],
-        notes="Domestic travel (not international) -> national travel",
+        notes="Domestic travel/accommodation (not international) -> national travel. "
+              "Priority raised above training_education to win when both match.",
     ),
 
     # Work safety
@@ -910,6 +956,16 @@ _general_expense_rules = [
     ),
 
     # Interest expense (from early overrides)
+    Rule(
+        name="ato_interest_expense",
+        code="EXP.NON",
+        priority=82,
+        keywords=["interest"],
+        keywords_all=["ato"],
+        canon_types={"expense"},
+        notes="ATO interest charges -> non-deductible expense. "
+              "ATO interest/GIC charges are penalties, not deductible interest.",
+    ),
     Rule(
         name="interest_expense",
         code="EXP.INT",
@@ -1042,7 +1098,8 @@ _remaining_rules = [
         code="ASS.CUR.CAS.FLO",
         priority=78,
         keywords=["cash on hand", "petty cash", "undeposited funds"],
-        notes="Cash/petty cash/undeposited funds -> cash flow asset",
+        notes="Cash/petty cash/undeposited funds -> cash flow asset. "
+              "Per SystemMappings.csv: ASS.CUR.CAS.FLO is 'Cash on Hand'.",
     ),
 
     # Sundry debtors / Retentions
