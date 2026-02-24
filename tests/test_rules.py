@@ -367,3 +367,157 @@ class TestTaxRules:
                     canon_type="current liability")
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "LIA.CUR.DEF"
+
+
+class TestGeneralExpenseRules:
+    """General expense categorisation rules."""
+
+    def test_materials(self):
+        ctx = _ctx("building materials", raw_type="Direct Costs",
+                    canon_type="direct costs")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS.PUR"
+
+    def test_amortisation(self):
+        ctx = _ctx("amortisation", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.AMO"
+
+    def test_subcontractor_direct(self):
+        ctx = _ctx("subcontractor costs", raw_type="Direct Costs",
+                    canon_type="direct costs")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS"
+
+    def test_subcontractor_expense(self):
+        ctx = _ctx("subcontractor fees", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP"
+
+    def test_training(self):
+        ctx = _ctx("staff training course", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.EMP"
+
+    def test_uniforms(self):
+        ctx = _ctx("uniform expenses", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.EMP"
+
+    def test_advertising(self):
+        ctx = _ctx("advertising expense", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ADV"
+
+    def test_professional_fees(self):
+        ctx = _ctx("consulting fees", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.PRO"
+
+    def test_workers_comp_insurance(self):
+        ctx = _ctx("workers compensation insurance", raw_type="Expense",
+                    canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.EMP"
+
+    def test_general_insurance(self):
+        ctx = _ctx("public liability insurance", raw_type="Expense",
+                    canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.INS"
+
+    def test_phone(self):
+        ctx = _ctx("mobile phone", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.UTI"
+
+    def test_electricity(self):
+        ctx = _ctx("electricity charges", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.UTI"
+
+    def test_office_expenses(self):
+        ctx = _ctx("office expenses", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ADM"
+
+    def test_council_rates(self):
+        ctx = _ctx("council rates", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.OCC"
+
+    def test_depreciation(self):
+        ctx = _ctx("depreciation expense", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.DEP"
+
+    def test_travel_domestic(self):
+        ctx = _ctx("travel expenses", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.TRA.NAT"
+
+    def test_travel_international(self):
+        ctx = _ctx("international travel", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.TRA.INT"
+
+    def test_fines(self):
+        ctx = _ctx("parking fines", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.NON"
+
+    def test_interest_expense(self):
+        ctx = _ctx("interest expense", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.INT"
+
+    def test_client_meetings(self):
+        ctx = _ctx("client meetings", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ENT"
+
+    def test_bad_debts(self):
+        ctx = _ctx("bad debt expense", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.BAD"
+
+    def test_entertainment_non_deductible(self):
+        ctx = _ctx("entertainment not deductible", raw_type="Expense",
+                    canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ENT.NON"
+
+    def test_donations(self):
+        ctx = _ctx("charity donations", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP"
+
+    def test_staff_amenities(self):
+        """Staff amenities -> EXP.EMP (broad 'staff' catch-all removed)."""
+        ctx = _ctx("staff amenities", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.EMP"
+
+    def test_cost_of_goods_sold(self):
+        ctx = _ctx("cost of goods sold", raw_type="Direct Costs",
+                    canon_type="direct costs")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS"
+
+    def test_dividends_paid_equity(self):
+        ctx = _ctx("dividends paid", raw_type="Equity", canon_type="equity")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EQU.RET.DIV"
+
+    def test_dividend_payable_expense(self):
+        ctx = _ctx("dividend paid or payable", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.DIV"
+
+    def test_staff_broad_not_catch_all(self):
+        """Audit fix: 'staff' alone should NOT blindly match everything."""
+        ctx = _ctx("staff parking permit", raw_type="Expense", canon_type="expense")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        # Should NOT match as EXP.EMP unless a specific rule applies
+        # staff_amenities only matches "staff amenities" or "amenities"
+        assert name != "staff_catch_all", "Broad staff catch-all should not exist"

@@ -580,6 +580,403 @@ _tax_rules = [
 ]
 
 
+# --- General Expenses (Priority 65-80) ---
+# Audit fix: removed broad 'staff' catch-all. Staff-related rules now
+# require specific context (amenities, training, uniforms, etc.)
+_general_expense_rules = [
+    # Materials / COS
+    Rule(
+        name="materials_purchase",
+        code="EXP.COS.PUR",
+        priority=75,
+        keywords=["materials", "building materials"],
+        canon_types={"expense", "direct costs"},
+        notes="Materials/building materials -> cost of purchases",
+    ),
+    Rule(
+        name="amortisation",
+        code="EXP.AMO",
+        priority=75,
+        keywords=["amortis"],
+        canon_types={"expense"},
+        notes="Amortisation expense",
+    ),
+    Rule(
+        name="subcontractor_direct",
+        code="EXP.COS",
+        priority=78,
+        keywords=["subtrades", "subcontract"],
+        raw_types={"direct costs", "cost of sales", "purchases"},
+        notes="Subcontractor under direct costs -> COGS",
+    ),
+    Rule(
+        name="subcontractor_expense",
+        code="EXP",
+        priority=72,
+        keywords=["subtrades", "subcontract"],
+        canon_types={"expense"},
+        notes="Subcontractor under expense -> general expense",
+    ),
+    Rule(
+        name="labour_hire_direct",
+        code="EXP.COS",
+        priority=78,
+        keywords=["labour hire"],
+        raw_types={"direct costs", "cost of sales", "purchases"},
+        notes="Labour hire under direct costs -> COGS",
+    ),
+
+    # Training / Uniforms / Employee
+    Rule(
+        name="training_education",
+        code="EXP.EMP",
+        priority=72,
+        keywords=["education", "training", "conference", "cpd"],
+        canon_types={"expense"},
+        notes="Training/education/conference -> employee expenses",
+    ),
+    Rule(
+        name="uniforms_clothing",
+        code="EXP.EMP",
+        priority=72,
+        keywords=["uniform", "clothing", "protective clothing"],
+        canon_types={"expense"},
+        notes="Uniforms/clothing -> employee expenses",
+    ),
+
+    # Equipment hire
+    Rule(
+        name="equipment_hire_direct",
+        code="EXP.COS",
+        priority=75,
+        keywords=["hire"],
+        keywords_all=["hire"],
+        canon_types={"direct costs"},
+        keywords_exclude=["purchase", "labour"],
+        notes="Equipment/plant hire under direct costs -> COGS. "
+              "keywords 'hire' excludes 'hire purchase' via keywords_exclude.",
+    ),
+    Rule(
+        name="equipment_hire_expense",
+        code="EXP",
+        priority=68,
+        keywords_all=["hire"],
+        canon_types={"expense"},
+        keywords_exclude=["purchase", "labour"],
+        notes="Equipment hire under expense -> general expense",
+    ),
+
+    # Home warranty (construction)
+    Rule(
+        name="home_warranty",
+        code="EXP.COS",
+        priority=78,
+        keywords=["home warranty"],
+        notes="Home warranty insurance -> cost of sales (construction)",
+    ),
+
+    # Tools and misc
+    Rule(
+        name="tools_misc_direct",
+        code="EXP.COS.PUR",
+        priority=75,
+        keywords_all=["tools", "miscellaneous"],
+        raw_types={"direct costs", "cost of sales", "purchases"},
+        notes="Tools and miscellaneous under direct costs -> COGS purchases",
+    ),
+
+    # Donations
+    Rule(
+        name="donations",
+        code="EXP",
+        priority=65,
+        keywords=["donation", "charity"],
+        canon_types={"expense"},
+        notes="Donations/charity -> general expense",
+    ),
+
+    # Advertising / Marketing
+    Rule(
+        name="advertising",
+        code="EXP.ADV",
+        priority=72,
+        keywords=["advertising", "marketing"],
+        canon_types={"expense"},
+        notes="Advertising/marketing -> advertising expense",
+    ),
+    Rule(
+        name="branding",
+        code="EXP.ADV",
+        priority=72,
+        keywords=["rebrand", "re-brand", "rebranding", "branding", "brand"],
+        canon_types={"expense"},
+        notes="Branding/rebranding -> advertising expense",
+    ),
+    Rule(
+        name="gifts",
+        code="EXP.ADV",
+        priority=68,
+        keywords=["gift", "gifts"],
+        canon_types={"expense"},
+        notes="Gifts -> advertising/marketing expense",
+    ),
+
+    # Professional fees
+    Rule(
+        name="professional_fees",
+        code="EXP.PRO",
+        priority=72,
+        keywords=["accounting", "consulting", "legal"],
+        canon_types={"expense"},
+        notes="Accounting/consulting/legal -> professional fees",
+    ),
+
+    # Insurance
+    Rule(
+        name="workers_comp_insurance",
+        code="EXP.EMP",
+        priority=78,
+        keywords=["workers compensation", "workcover", "workers cover",
+                  "workers comp"],
+        keywords_all=["insurance"],
+        canon_types={"expense"},
+        notes="Workers comp + insurance -> employee expenses",
+    ),
+    Rule(
+        name="general_insurance",
+        code="EXP.INS",
+        priority=70,
+        keywords=["insurance"],
+        canon_types={"expense"},
+        notes="General insurance -> insurance expense",
+    ),
+
+    # Utilities
+    Rule(
+        name="phone_internet",
+        code="EXP.UTI",
+        priority=72,
+        keywords=["phone", "mobile", "telephone", "internet"],
+        canon_types={"expense"},
+        notes="Phone/mobile/internet -> utilities",
+    ),
+    Rule(
+        name="power_heating",
+        code="EXP.UTI",
+        priority=72,
+        keywords=["light", "power", "electricity", "gas", "heating"],
+        canon_types={"expense"},
+        notes="Light/power/electricity/gas -> utilities",
+    ),
+
+    # Administration
+    Rule(
+        name="office_admin",
+        code="EXP.ADM",
+        priority=70,
+        keywords=["office expenses", "printing", "stationery", "postage"],
+        canon_types={"expense"},
+        notes="Office expenses/printing/stationery/postage -> admin",
+    ),
+    Rule(
+        name="council_rates",
+        code="EXP.OCC",
+        priority=72,
+        keywords_all=["council"],
+        keywords=["rate", "rates", "fee", "fees"],
+        notes="Council rates/fees -> occupancy",
+    ),
+
+    # Staff (specific, NOT catch-all)
+    Rule(
+        name="staff_amenities",
+        code="EXP.EMP",
+        priority=72,
+        keywords=["staff amenities", "amenities", "amenties"],
+        canon_types={"expense"},
+        notes="Staff amenities -> employee expenses. "
+              "Audit fix: broad 'staff' catch-all removed.",
+    ),
+    Rule(
+        name="staff_training",
+        code="EXP.EMP",
+        priority=73,
+        keywords=["staff training"],
+        canon_types={"expense"},
+        notes="Staff training -> employee expenses",
+    ),
+
+    # Bank/merchant fees
+    Rule(
+        name="bank_fees",
+        code="EXP",
+        priority=65,
+        keywords=BANK_NAMES,
+        keywords_all=["fee"],
+        canon_types={"expense"},
+        notes="Bank name + fee -> general expense",
+    ),
+    Rule(
+        name="merchant_fees",
+        code="EXP",
+        priority=65,
+        keywords_all=["merchant", "fee"],
+        canon_types={"expense"},
+        notes="Merchant fees -> general expense",
+    ),
+
+    # Cleaning
+    Rule(
+        name="cleaning",
+        code="EXP",
+        priority=65,
+        keywords=["cleaning", "laundry"],
+        canon_types={"expense"},
+        notes="Cleaning/laundry -> general expense",
+    ),
+
+    # Depreciation
+    Rule(
+        name="depreciation_expense",
+        code="EXP.DEP",
+        priority=72,
+        keywords=["depreciation", "deprec"],
+        canon_types={"expense"},
+        keywords_exclude=["accumulated"],
+        notes="Depreciation expense (excludes accumulated dep)",
+    ),
+
+    # Travel
+    Rule(
+        name="travel_international",
+        code="EXP.TRA.INT",
+        priority=75,
+        keywords_all=["travel", "international"],
+        canon_types={"expense"},
+        notes="International travel -> international travel expense",
+    ),
+    Rule(
+        name="travel_domestic",
+        code="EXP.TRA.NAT",
+        priority=70,
+        keywords=["travel"],
+        canon_types={"expense"},
+        keywords_exclude=["international"],
+        notes="Domestic travel (not international) -> national travel",
+    ),
+
+    # Work safety
+    Rule(
+        name="work_safety",
+        code="EXP.EMP",
+        priority=72,
+        keywords=["work safety", "safety"],
+        canon_types={"expense"},
+        notes="Work safety -> employee expenses",
+    ),
+    Rule(
+        name="long_service_leave",
+        code="EXP.EMP",
+        priority=72,
+        keywords_all=["long service", "levy"],
+        canon_types={"expense"},
+        notes="Long service leave levy -> employee expenses",
+    ),
+
+    # Fines/penalties
+    Rule(
+        name="fines_penalties",
+        code="EXP.NON",
+        priority=72,
+        keywords=["fine", "fines", "penalty", "penalties"],
+        canon_types={"expense"},
+        notes="Fines/penalties -> non-deductible expense",
+    ),
+
+    # Cost of goods sold catch-all
+    Rule(
+        name="cost_of_goods_sold",
+        code="EXP.COS",
+        priority=60,
+        keywords=["cost of goods sold"],
+        notes="Cost of goods sold -> COGS (catch-all)",
+    ),
+    Rule(
+        name="cost_of_sales_type",
+        code="EXP.COS",
+        priority=55,
+        raw_types={"cost of sales"},
+        notes="Cost of sales type catch-all -> COGS",
+    ),
+
+    # Interest expense (from early overrides)
+    Rule(
+        name="interest_expense",
+        code="EXP.INT",
+        priority=80,
+        keywords=["interest expense"],
+        canon_types={"expense"},
+        notes="Interest expense -> interest expense",
+    ),
+
+    # Entertainment (from early overrides)
+    Rule(
+        name="client_entertainment",
+        code="EXP.ENT",
+        priority=78,
+        keywords=["client meeting", "client meetings", "client meal",
+                  "meal entertainment"],
+        canon_types={"expense"},
+        notes="Client meetings/meals -> entertainment",
+    ),
+    Rule(
+        name="entertainment_non_deductible",
+        code="EXP.ENT.NON",
+        priority=82,
+        keywords=["not deductible", "non deductible", "non-deductible",
+                  "not-deductible"],
+        keywords_all=["entertainment"],
+        canon_types={"expense"},
+        notes="Entertainment + non-deductible -> non-deductible entertainment",
+    ),
+
+    # Bad debts (from early overrides)
+    Rule(
+        name="bad_debts",
+        code="EXP.BAD",
+        priority=78,
+        keywords=["bad debt"],
+        notes="Bad debt expense",
+    ),
+
+    # Dividends (from early overrides)
+    Rule(
+        name="dividends_paid_equity",
+        code="EQU.RET.DIV",
+        priority=80,
+        keywords=["dividends paid"],
+        canon_types={"equity"},
+        notes="Dividends paid on equity -> retained earnings dividends",
+    ),
+    Rule(
+        name="dividend_payable_expense",
+        code="EXP.DIV",
+        priority=80,
+        keywords=["dividend paid or payable", "dividends paid or payable"],
+        canon_types={"expense"},
+        notes="Dividend paid/payable on expense -> dividend expense",
+    ),
+    Rule(
+        name="dividend_payable_by_keyword",
+        code="EXP.DIV",
+        priority=78,
+        keywords_all=["dividend", "payable"],
+        canon_types={"expense"},
+        notes="Dividend + payable on expense -> dividend expense",
+    ),
+]
+
+
 # --- Collect all rules ---
 ALL_RULES: list[Rule] = [
     *_bank_rules,
@@ -589,4 +986,5 @@ ALL_RULES: list[Rule] = [
     *_vehicle_rules,
     *_loan_rules,
     *_tax_rules,
+    *_general_expense_rules,
 ]
