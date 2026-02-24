@@ -1,0 +1,410 @@
+EntityType,SourceFile,Code,Name,Type,SuggestedReportingCode,MatchReason,Score,ValidatedReportingCode,Reviewer,Notes
+company,client_267_ChartOfAccounts_20251201.csv,,American Express Platinum Business Card,Bank,LIA.CUR.PAY,credit_card_override,92.0,LIA.CUR.PAY,,
+company,client_267_ChartOfAccounts_20251201.csv,11105,ANZ Cheque account 11826,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11106,ANZ GST Account 12546,Bank,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,LIA.CUR.TAX.GST,,
+company,client_267_ChartOfAccounts_20251201.csv,11107,ANZ interest 2766-89216,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11108,Rental Bond - Term Deposit 75014,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11112,AFEX Trading account,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11115,Cash on Hand,Non-Current Asset,,unmatched,0.0,ASS.CUR.CAS.FLO,,Cash on Hand (should be current)
+company,client_267_ChartOfAccounts_20251201.csv,11130,Deposit on goods in advance,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11140,Petty Cash,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11180,Undeposited Funds,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11180a,Undeposited Funds a,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11190,Payroll Clearing,Current Liability,,unmatched,0.0,LIA.CUR.PAY.EMP,,Payroll Clearing
+company,client_267_ChartOfAccounts_20251201.csv,11195,Contra,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11200,Trade Debtors,Accounts Receivable,ASS.CUR.REC.TRA,accounts_receivable_default,88.0,ASS.CUR.REC.TRA,,
+company,client_267_ChartOfAccounts_20251201.csv,11200O,Trade Debtors Original,Current Asset,ASS.CUR.REC.TRA,accounts_receivable_default,88.0,ASS.CUR.REC.TRA,,
+company,client_267_ChartOfAccounts_20251201.csv,11202,Trade Debtors - Shop,Current Asset,ASS.CUR.REC.TRA,accounts_receivable_default,88.0,ASS.CUR.REC.TRA,,
+company,client_267_ChartOfAccounts_20251201.csv,11205,Trade Debtor Adjustment acct,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.TRA,,Trade Debtor Adjustment (should be current)
+company,client_267_ChartOfAccounts_20251201.csv,11206,Refunds,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11208,Discounts,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11209,Roundings,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11210,Till Discrepancy,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11212,Vendor Store Credit Liability,Current Liability,,unmatched,0.0,LIA.CUR,,Vendor Store Credit/Gift Card Liability
+company,client_267_ChartOfAccounts_20251201.csv,11214,Vendor Gift Card Liability,Current Liability,,unmatched,0.0,LIA.CUR,,Vendor Store Credit/Gift Card Liability
+company,client_267_ChartOfAccounts_20251201.csv,11220,Less Prov'n for Doubtful Debts,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.ADA,,Provision for Doubtful Debts
+company,client_267_ChartOfAccounts_20251201.csv,11234,Refund temporary account,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.TRA,,Refund temporary account
+company,client_267_ChartOfAccounts_20251201.csv,11250,Sundry Debtors,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.TRA,,Sundry Debtors
+company,client_267_ChartOfAccounts_20251201.csv,11303,Stock on Hand- General,Current Asset,ASS.CUR.INY,fuzzy_name_type,80.95238095238095,ASS.CUR.INY,,
+company,client_267_ChartOfAccounts_20251201.csv,11309,Stock Closing Bal Adjustment,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11310,Prepaid Stock,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11960,Voluntary Withholding Credits,Non-Current Asset,,unmatched,0.0,ASS.CUR,,Withholding Credits (current asset)
+company,client_267_ChartOfAccounts_20251201.csv,11970,ABN Withholding Credits,Non-Current Asset,,unmatched,0.0,ASS.CUR,,Withholding Credits (current asset)
+company,client_267_ChartOfAccounts_20251201.csv,12100,Deposits Paid,Non-Current Asset,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,12110,Pre-paid GST Do not use,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.PRE,,Pre-paid GST (prepayment)
+company,client_267_ChartOfAccounts_20251201.csv,12200,Bond for Shop,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.PRE,,Bond for Shop (prepayment)
+company,client_267_ChartOfAccounts_20251201.csv,12201,Bond Warehouse,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,12300,Formation Costs,Non-Current Asset,ASS.NCA.INT,synonym_exact_type,95.0,ASS.NCA.INT,,
+company,client_267_ChartOfAccounts_20251201.csv,13068,Loan to Directors - R Unsworth 30.6.24,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,13110,Buildings Improvement at Cost,Fixed Asset,,unmatched,0.0,ASS.NCA.FIX.BUC,,Buildings Improvement at Cost
+company,client_267_ChartOfAccounts_20251201.csv,13120,Less - Accumulated Depreciation on Buildings Improvement,Fixed Asset,ASS.NCA.FIX.BUC.ACC,fuzzy_name_type,80.0,ASS.NCA.FIX.BUC.ACC,,
+company,client_267_ChartOfAccounts_20251201.csv,13210,Equipment Improve at Cost,Fixed Asset,,unmatched,0.0,ASS.NCA.FIX.PLA,,Equipment Improvement at Cost
+company,client_267_ChartOfAccounts_20251201.csv,13220,Less - Accumulated Depreciation on Equipment Improve,Fixed Asset,ASS.NCA.FIX.PLA.ACC,fuzzy_name_type,85.71428571428572,ASS.NCA.FIX.PLA.ACC,,
+company,client_267_ChartOfAccounts_20251201.csv,13230,Office Equipment,Fixed Asset,ASS.NCA.FIX.PLA,synonym_exact_type,95.0,ASS.NCA.FIX.PLA,,
+company,client_267_ChartOfAccounts_20251201.csv,13240,Less - Accumulated Depreciation on Office Equipment,Fixed Asset,ASS.NCA.FIX.PLA.ACC,synonym_exact_type,95.0,ASS.NCA.FIX.PLA.ACC,,
+company,client_267_ChartOfAccounts_20251201.csv,13310,Vehicles at Cost,Fixed Asset,ASS.NCA.FIX.VEH,fuzzy_name_global,100.0,ASS.NCA.FIX.VEH,,
+company,client_267_ChartOfAccounts_20251201.csv,13320,Less - Accumulated Depreciation on Vehicles,Fixed Asset,ASS.NCA.FIX.VEH.ACC,fuzzy_name_type,86.23853211009174,ASS.NCA.FIX.VEH.ACC,,
+company,client_267_ChartOfAccounts_20251201.csv,13321,Borrowing Costs - DTZ42X,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.PRE,,Borrowing Costs (prepayment)
+company,client_267_ChartOfAccounts_20251201.csv,13325,Borrowing Costs Merc Benz,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.PRE,,Borrowing Costs (prepayment)
+company,client_267_ChartOfAccounts_20251201.csv,13327,Borrowing Costs Golf DTU87D,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.PRE,,Borrowing Costs (prepayment)
+company,client_267_ChartOfAccounts_20251201.csv,13328,Borrowing Costs  Van DPJ33G,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.PRE,,Borrowing Costs (prepayment)
+company,client_267_ChartOfAccounts_20251201.csv,13329,Vehicle 657,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.PRE,,Borrowing Costs (prepayment)
+company,client_267_ChartOfAccounts_20251201.csv,13330,Borrowing Costs DYN84F,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.PRE,,Borrowing Costs (prepayment)
+company,client_267_ChartOfAccounts_20251201.csv,13331,Prepaid Borrowing Exp,Non-Current Asset,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,13332,Borrowing Cost,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.PRE,,Borrowing Costs (prepayment)
+company,client_267_ChartOfAccounts_20251201.csv,13410,Furniture & Fixtures at Cost,Fixed Asset,,unmatched,0.0,ASS.NCA.FIX.PLA,,Furniture & Fixtures at Cost
+company,client_267_ChartOfAccounts_20251201.csv,13420,Furniture & Fixtures Accum Dep,Fixed Asset,,unmatched,0.0,ASS.NCA.FIX.PLA,,Furniture & Fixtures at Cost
+company,client_267_ChartOfAccounts_20251201.csv,13510,Plant & Equipment,Fixed Asset,ASS.NCA.FIX.PLA,synonym_exact_type,95.0,ASS.NCA.FIX.PLA,,
+company,client_267_ChartOfAccounts_20251201.csv,13520,Less - Accumulated Depreciation on Plant & Equipment,Fixed Asset,ASS.NCA.FIX.PLA.ACC,synonym_exact_type,95.0,ASS.NCA.FIX.PLA.ACC,,
+company,client_267_ChartOfAccounts_20251201.csv,13530,New Forklift,Non-Current Asset,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,13531,Vehicle 658,Non-Current Asset,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,14210,Entity 2324 2010,Non-Current Asset,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,14211,Entity 2324 2011,Non-Current Asset,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,14212,Entity 2324 2012,Non-Current Asset,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,14213,Entity 2324 2013,Non-Current Asset,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,14214,Entity 2324 2014,Non-Current Asset,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,14215,Entity 2324 2015,Non-Current Asset,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,14216,Entity 2325 2016,Non-Current Asset,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16010,Loan to Directors - R Unsworth 30.6.17,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16015,Loan to Directors - R Unsworth 30.6.18,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16020,Loan to Directors - R Unsworth 30.6.19,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16025,Loan to Directors - R Unsworth 30.6.20,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16030,Loan to Directors - R Unsworth 30.6.21,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16034,Loan to Directors - R Unsworth 30.6.22,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16036,Loan to Directors - R Unsworth 30.6.23,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16038,Loan to Directors - R Unsworth 30.6.25,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16039,Loan to Directors - R Unsworth 30.6.26,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16050,Loan to Directors - M Unsworth 30.6.17,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16055,Loan to Directors - M Unsworth 30.6.18,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16060,Loan to Directors - M Unsworth 30.6.19,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16065,Loan to Directors - M Unsworth 30.6.20,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16070,Loan to Directors - M Unsworth 30.6.21,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16072,Loan to Directors - M Unsworth 30.6.22,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16074,Loan to Directors - M Unsworth 30.6.23,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16076,Loan to Directors - M Unsworth 30.6.24,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16078,Loan to Directors - M Unsworth 30.6.25,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,16860,Loan to Directors - M Unsworth 30.6.26,Current Asset,ASS.CUR.DIR,fuzzy_name_global,80.0,ASS.CUR.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,19999,Suspense Clearing,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,21120,American Express,Bank,LIA.CUR.PAY,credit_card_override,92.0,LIA.CUR.PAY,,
+company,client_267_ChartOfAccounts_20251201.csv,21122,Qantas American Express Discov,Bank,LIA.CUR.PAY,credit_card_override,92.0,LIA.CUR.PAY,,
+company,client_267_ChartOfAccounts_20251201.csv,21145,Citibank Visa 1342 - Business,Bank,LIA.CUR.PAY,credit_card_override,92.0,LIA.CUR.PAY,,
+company,client_267_ChartOfAccounts_20251201.csv,21150,Shrimpton,Liability,,unmatched,0.0,LIA.CUR,,Shrimpton (liability)
+company,client_267_ChartOfAccounts_20251201.csv,21170,ANZ Visa Card 7928,Bank,LIA.CUR.PAY,credit_card_override,92.0,LIA.CUR.PAY,,
+company,client_267_ChartOfAccounts_20251201.csv,21171,ANZ Visa Card 0346,Bank,LIA.CUR.PAY,credit_card_override,92.0,LIA.CUR.PAY,,
+company,client_267_ChartOfAccounts_20251201.csv,21200,Trade Creditors,Accounts Payable,,unmatched,0.0,LIA.CUR.PAY.TRA,,Trade Creditors
+company,client_267_ChartOfAccounts_20251201.csv,21200O,Trade Creditors Original,Current Liability,,unmatched,0.0,LIA.CUR.PAY.TRA,,Trade Creditors
+company,client_267_ChartOfAccounts_20251201.csv,21210,Trade Creditor Adjustment acct,Liability,,unmatched,0.0,LIA.CUR.PAY.TRA,,Trade Creditors
+company,client_267_ChartOfAccounts_20251201.csv,21230,Sundry Creditors - ATO,Liability,LIA.CUR.TAX,tax_control_fallback,85.0,LIA.CUR.TAX,,
+company,client_267_ChartOfAccounts_20251201.csv,21236,Sundry Payroll Creditor,Liability,EXP.EMP.WAG,fuzzy_name_global,100.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,21240,Michael Unsworth,Liability,,unmatched,0.0,LIA.CUR.REL,,Related Party Payable
+company,client_267_ChartOfAccounts_20251201.csv,21240a,Sundry Creditors - FBT,Liability,,unmatched,0.0,LIA.CUR.PAY.TRA,,Sundry Creditors
+company,client_267_ChartOfAccounts_20251201.csv,21245,Richard Unsworth,Liability,,unmatched,0.0,LIA.CUR.REL,,Related Party Payable
+company,client_267_ChartOfAccounts_20251201.csv,21250,Income in Advance,Current Liability,,unmatched,0.0,LIA.CUR.DEF,,Income in Advance
+company,client_267_ChartOfAccounts_20251201.csv,21310,GST payable control account,GST,LIA.CUR.TAX.GST,detail_include,91.0,LIA.CUR.TAX.GST,,
+company,client_267_ChartOfAccounts_20251201.csv,21335,GST Payable Adjustment Control Account,Liability,LIA.CUR.TAX.GST,detail_include,91.0,LIA.CUR.TAX.GST,,
+company,client_267_ChartOfAccounts_20251201.csv,21340,GST Accrual - Vehicle 659,Liability,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,LIA.CUR.TAX.GST,,
+company,client_267_ChartOfAccounts_20251201.csv,21341,GST Accrual - Vehicle 660,Liability,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,LIA.CUR.TAX.GST,,
+company,client_267_ChartOfAccounts_20251201.csv,21342,GST Accrual Merc - Benz,Liability,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,LIA.CUR.TAX.GST,,
+company,client_267_ChartOfAccounts_20251201.csv,21343,Vehicle 661,Liability,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,LIA.CUR.TAX.GST,,
+company,client_267_ChartOfAccounts_20251201.csv,21344,Vehicle 662,Liability,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,LIA.CUR.TAX.GST,,
+company,client_267_ChartOfAccounts_20251201.csv,21360,Import Duty Payable,Liability,,unmatched,0.0,LIA.CUR.TAX,,Import Duty Payable
+company,client_267_ChartOfAccounts_20251201.csv,21380,ABN Withholdings Payable,Liability,LIA.CUR.PAY.PAY,fuzzy_name_global,90.9090909090909,LIA.CUR.PAY.PAY,,
+company,client_267_ChartOfAccounts_20251201.csv,21391,FBT Payable,Current Liability,,unmatched,0.0,LIA.CUR.TAX,,FBT Payable
+company,client_267_ChartOfAccounts_20251201.csv,21410,Superannuation Payable,Current Liability,LIA.CUR.PAY.EMP,synonym_exact_type,95.0,LIA.CUR.PAY.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,21415,Salary Sacrifice,Liability,EXP.EMP.WAG,fuzzy_name_global,100.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,21420,PAYG Withholding Payable,Liability,LIA.CUR.PAY.EMP,paygw_withholding_liability,91.0,LIA.CUR.PAY.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,21430,PAYG income tax instal 07-08,Liability,,unmatched,0.0,LIA.CUR.TAX,,PAYG income tax instalment
+company,client_267_ChartOfAccounts_20251201.csv,21432,PAYG income tax Instal 2008-09,Liability,,unmatched,0.0,LIA.CUR.TAX,,PAYG income tax instalment
+company,client_267_ChartOfAccounts_20251201.csv,21433,Payroll Tax Liability,Current Liability,,unmatched,0.0,LIA.CUR.TAX,,Payroll Tax Liability
+company,client_267_ChartOfAccounts_20251201.csv,21501,Provision for income tax 07-08 [21501],Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21502,Provision for income tax 07-08 [21502],Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21503,Provision for income tax 09-10,Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21504,Provision for Income tax 10-11,Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21505,Provison for income tax 11-12,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,21506,Provison for income tax 12-13,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,21507,Provision for Income Tax 13-14,Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21508,Provision for Income Tax 14-15,Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21509,Provision for Income tax 15-16,Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21510,Provision for Income Tax 16-17,Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21511,Provision for Income Tax 18-19 [21511],Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21512,Provision for Income Tax 17-18,Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21513,Provision for Income Tax 18-19 [21513],Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21514,Provision for Income Tax 20-21,Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21515,BAS - Amendment 31/3/06,Liability,LIA.CUR.TAX,tax_control_fallback,85.0,LIA.CUR.TAX,,
+company,client_267_ChartOfAccounts_20251201.csv,21516,Provision for Income Tax 21-22,Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21517,Provision for Income Tax,Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21518,Provision for Income Tax 24_25,Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,Provision for Income Tax
+company,client_267_ChartOfAccounts_20251201.csv,21520,BAS-30/6/06,Liability,LIA.CUR.TAX,tax_control_fallback,85.0,LIA.CUR.TAX,,
+company,client_267_ChartOfAccounts_20251201.csv,21525,June'20 QTR BAS,Liability,LIA.CUR.TAX,tax_control_fallback,85.0,LIA.CUR.TAX,,
+company,client_267_ChartOfAccounts_20251201.csv,21530,BAS - June'19 QTR,Liability,LIA.CUR.TAX,tax_control_fallback,85.0,LIA.CUR.TAX,,
+company,client_267_ChartOfAccounts_20251201.csv,21540,BAS clearing,Liability,LIA.CUR.TAX,tax_control_fallback,85.0,LIA.CUR.TAX,,
+company,client_267_ChartOfAccounts_20251201.csv,21640,Customer Deposits,Liability,,unmatched,0.0,LIA.CUR.DEF,,Customer Deposits
+company,client_267_ChartOfAccounts_20251201.csv,21655,Gift Vouchers,Liability,EXP,fuzzy_name_global,100.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,21660,Lay-bys,Liability,,unmatched,0.0,LIA.CUR.DEF,,Lay-bys
+company,client_267_ChartOfAccounts_20251201.csv,21810,IQumulate - Insurance Funding,Current Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22100,Loan for Forklift,Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
+company,client_267_ChartOfAccounts_20251201.csv,22105,Loan for Stacker,Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
+company,client_267_ChartOfAccounts_20251201.csv,22200,Less Unexpired Interest Stacke,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_267_ChartOfAccounts_20251201.csv,22205,Less:Unexpired Interest Forkli,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_267_ChartOfAccounts_20251201.csv,22210,Vehicle 663,Liability,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,22211,Vehicle 664,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22215,Less: Vehicle 665,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_267_ChartOfAccounts_20251201.csv,22220,Vehicle 666,Liability,,unmatched,0.0,LIA.NCL.LOA,,VW Loan/Hire Purchase
+company,client_267_ChartOfAccounts_20251201.csv,22225,Less: Unexpired Hire Purchase,Liability,LIA.CUR.HPA.UEI,fuzzy_name_global,90.19607843137254,LIA.CUR.HPA.UEI,,
+company,client_267_ChartOfAccounts_20251201.csv,22230,Vehicle 667,Liability,,unmatched,0.0,LIA.NCL.LOA,,Mazda Loan/Hire Purchase
+company,client_267_ChartOfAccounts_20251201.csv,22235,Vehicle 668,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_267_ChartOfAccounts_20251201.csv,22236,Vehicle 669,Liability,,unmatched,0.0,LIA.NCL.LOA,,Mazda Loan/Hire Purchase
+company,client_267_ChartOfAccounts_20251201.csv,22240,Vehicle 670,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22250,Unexpired Interest,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_267_ChartOfAccounts_20251201.csv,22255,Vehicle 671,Liability,,unmatched,0.0,LIA.NCL.LOA,,Mercedes Loan/Hire Purchase
+company,client_267_ChartOfAccounts_20251201.csv,22256,Less unexpired Term chg Merc B,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22257,Merc Benz HP Ballon,Liability,,unmatched,0.0,LIA.NCL.LOA,,Mercedes Loan/Hire Purchase
+company,client_267_ChartOfAccounts_20251201.csv,22258,Vehicle 672,Liability,,unmatched,0.0,LIA.NCL.LOA,,VW Loan/Hire Purchase
+company,client_267_ChartOfAccounts_20251201.csv,22259,Vehicle 673,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22260,Ballon pay out VWGolf CEC81X,Liability,,unmatched,0.0,LIA.NCL.LOA,,Balloon Payment
+company,client_267_ChartOfAccounts_20251201.csv,22261,Vehicle 674,Liability,,unmatched,0.0,LIA.NCL.LOA,,Mazda Loan/Hire Purchase
+company,client_267_ChartOfAccounts_20251201.csv,22262,Vehicle 675,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_267_ChartOfAccounts_20251201.csv,22263,HP Mazdz CES72N Ballon,Liability,,unmatched,0.0,LIA.NCL.HPA,,Hire Purchase
+company,client_267_ChartOfAccounts_20251201.csv,22264,Borrowing cost MV,Liability,ASS.NCA.FIX.VEH,fuzzy_name_global,100.0,ASS.NCA.FIX.VEH,,
+company,client_267_ChartOfAccounts_20251201.csv,22265,Vehicle 676,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_267_ChartOfAccounts_20251201.csv,22266,HP - Vehicle 677,Liability,,unmatched,0.0,LIA.NCL.LOA,,VW Loan/Hire Purchase
+company,client_267_ChartOfAccounts_20251201.csv,22267,Vehicle 678,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22270,Vehicle 679,Liability,LIA.CUR.CHM,fuzzy_name_global,82.05128205128204,LIA.CUR.CHM,,
+company,client_267_ChartOfAccounts_20251201.csv,22275,Loan- Person 3631,Liability,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,22276,Unexpired Interest New Ute,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_267_ChartOfAccounts_20251201.csv,22277,Loan- Person 3632,Liability,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,22278,Unexpired Interest Golf DTU87D,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_267_ChartOfAccounts_20251201.csv,22279,Loan- Person 3633,Liability,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,22280,Unexp Interest Truck DPJ33G,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22281,Loan - Person 3634,Current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
+company,client_267_ChartOfAccounts_20251201.csv,22282,Vehicle 680,Current Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22283,Loan - Person 3635,Liability,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,22284,Unexpired Int - Vehicle 681,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22285,Merc Van DTZ42X,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22286,Unexp. Int - Van DTZ42X,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22288,Vehicle 682,Current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
+company,client_267_ChartOfAccounts_20251201.csv,22289,Unexpired Interest - Vehicle 683,Current Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_267_ChartOfAccounts_20251201.csv,22290,Vehicle 684 - Westpac,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22291,Unexpired Term Interest - Vehicle 684,Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22292,Aud1 Q4 eTron - Vehicle 685,Non-current Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22293,Unexpired Charges,Non-current Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22297,Chattel Mort. 311 Sprinter MWB Van,Non-current Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,22298,Chattel Mort. 311 Sprinter MWB Van unexp charges,Non-current Liability,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,23000,Rental Bond - Sublease,Current Liability,,unmatched,0.0,LIA.CUR,,Rental Bond - Sublease
+company,client_267_ChartOfAccounts_20251201.csv,29999,Transactions to be re allocated,Current Liability,,unmatched,0.0,LIA.CUR,,Historical Balancing / Transactions to be re allocated
+company,client_267_ChartOfAccounts_20251201.csv,31100,Owner's Capital,Equity,,unmatched,0.0,EQU.SHA.ORD,,Owner's Capital
+company,client_267_ChartOfAccounts_20251201.csv,31200,Owner's Drawings Richard Unswo,Equity,,unmatched,0.0,EQU.DRA,,Owner's Drawings
+company,client_267_ChartOfAccounts_20251201.csv,31210,Owner's Drawings Michael Unswo,Equity,,unmatched,0.0,EQU.DRA,,Owner's Drawings
+company,client_267_ChartOfAccounts_20251201.csv,31290,Michael U Purchase of Shares,Equity,,unmatched,0.0,EQU.SHA.ORD,,Share Capital
+company,client_267_ChartOfAccounts_20251201.csv,31300,Share Capital,Equity,,unmatched,0.0,EQU.SHA.ORD,,Share Capital
+company,client_267_ChartOfAccounts_20251201.csv,38000,Retained Earnings,Retained Earnings,EQU.RET,synonym_exact_type,95.0,EQU.RET,,
+company,client_267_ChartOfAccounts_20251201.csv,39100,Income Tax Expenses,Expense,EXP.INC,fuzzy_name_type,97.2972972972973,EXP.INC,,
+company,client_267_ChartOfAccounts_20251201.csv,39200,Fully Franked Dividend Paid,Equity,EQU.RET.DIV,equity_dividend_mapping,90.0,EQU.RET.DIV,,
+company,client_267_ChartOfAccounts_20251201.csv,39999,Historical Balancing,Historical,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,40002,Sales DESIGN,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+company,client_267_ChartOfAccounts_20251201.csv,40003,Sales INSTALLATION,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+company,client_267_ChartOfAccounts_20251201.csv,40010,Sales MAINTENANCE,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+company,client_267_ChartOfAccounts_20251201.csv,41006,Sales SHOP Pots,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+company,client_267_ChartOfAccounts_20251201.csv,41007,Sales SHOP Plants,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+company,client_267_ChartOfAccounts_20251201.csv,41008,Sales SHOP Other,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+company,client_267_ChartOfAccounts_20251201.csv,41009,Sales SHOP Discount Trade,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+company,client_267_ChartOfAccounts_20251201.csv,411,Website Sales,Current Asset,,unmatched,0.0,ASS.CUR.REC.TRA,,Website Sales (receivable)
+company,client_267_ChartOfAccounts_20251201.csv,41100,Sales Website Pots,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+company,client_267_ChartOfAccounts_20251201.csv,41105,Sales Website Plants,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+company,client_267_ChartOfAccounts_20251201.csv,41110,Sales Website Other,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+company,client_267_ChartOfAccounts_20251201.csv,41115,Freight Website,Revenue,,unmatched,0.0,REV.TRA.GOO,,Freight Website (revenue)
+company,client_267_ChartOfAccounts_20251201.csv,42000,Sri Lanka Tour Revenue,Other Income,,unmatched,0.0,REV.OTH,,Tour/Trip Revenue (other income)
+company,client_267_ChartOfAccounts_20251201.csv,42100,UK Trip - June 2026,Other Income,,unmatched,0.0,REV.OTH,,Tour/Trip Revenue (other income)
+company,client_267_ChartOfAccounts_20251201.csv,43000,FBT Employee Contribution,Other Income,REV.OTH,fuzzy_name_type,91.30434782608695,REV.OTH,,
+company,client_267_ChartOfAccounts_20251201.csv,45010,Freight Charged,Revenue,,unmatched,0.0,REV.TRA.GOO,,Freight Charged (revenue)
+company,client_267_ChartOfAccounts_20251201.csv,497,Bank Revaluations,Bank Revaluations,EXP.FOR,bank_revaluation_override,90.0,EXP.FOR,,
+company,client_267_ChartOfAccounts_20251201.csv,498,Unrealised Currency Gains,Unrealised Currency Gains,EXP.FOR.UGL,unrealised_currency_gain,90.0,EXP.FOR.UGL,,
+company,client_267_ChartOfAccounts_20251201.csv,499,Realised Currency Gains,Realised Currency Gains,EXP.FOR.RGL,realised_currency_gain,90.0,EXP.FOR.RGL,,
+company,client_267_ChartOfAccounts_20251201.csv,50010,COGS - MAINTENANCE,Direct Costs,EXP.COS,cogs_expense_default,90.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,50013,COGS - DESIGN,Direct Costs,EXP.COS,cogs_expense_default,90.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,50017,COGS - INSTALLATION,Direct Costs,EXP.COS,cogs_expense_default,90.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,51002,Shop related purchases,Direct Costs,EXP.COS.PUR,detail_include,91.0,EXP.COS.PUR,,
+company,client_267_ChartOfAccounts_20251201.csv,51006,COGS SHOP Pots***,Direct Costs,EXP.COS,cogs_expense_default,90.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,51007,COGS SHOP Plants***,Direct Costs,EXP.COS,cogs_expense_default,90.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,51008,COGS SHOP,Direct Costs,EXP.COS,cogs_expense_default,90.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,52000,Freight and Couriers,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,52011,Website Freight,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,52015,Import Freight / Charges / Duty,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,52030,Label / Stickers Shop,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,54005,Opening Stock,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,54010,Less: Closing Stock on Hand,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,54015,Opening work in Progress,Direct Costs,EXP.COS.WPO,detail_include,91.0,EXP.COS.WPO,,
+company,client_267_ChartOfAccounts_20251201.csv,54700,Closing Stock [54700],Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,54710,Product Development,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,54720,Closin Stock - Warehouse,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,55003,Commissions Paid,Expense,EXP,synonym_exact_type,95.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,60002,Accountants fees,Expense,,unmatched,0.0,EXP.PRO,,Accountants fees
+company,client_267_ChartOfAccounts_20251201.csv,60003,Digital Advertising,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,60004,Bookkeeping,Expense,EXP,synonym_exact_type,95.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,60005,Bank charges,Expense,EXP,detail_include,91.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,60006,abc,Expense,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,60007,Client Gifts,Expense,EXP,detail_include,91.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,60008,Credit card interest,Expense,,unmatched,0.0,EXP.INT,,Credit card interest
+company,client_267_ChartOfAccounts_20251201.csv,60009,Entertainment Clients (non-deductible),Expense,EXP.ENT.NON,fuzzy_name_type,87.5,EXP.ENT.NON,,
+company,client_267_ChartOfAccounts_20251201.csv,60010,Depreciation - Prop & office,Expense,EXP.DEP,detail_include,91.0,EXP.DEP,,
+company,client_267_ChartOfAccounts_20251201.csv,60011,Deductible Donations,Expense,EXP,detail_include,91.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,60012,Light & Power,Expense,EXP.UTI,fuzzy_name_global,100.0,EXP.UTI,,
+company,client_267_ChartOfAccounts_20251201.csv,60013,Consultancy Fee,Expense,,unmatched,0.0,EXP.PRO,,Consultancy Fee
+company,client_267_ChartOfAccounts_20251201.csv,60016,Formation Costs writtenoff,Expense,,unmatched,0.0,EXP.AMO,,Formation Costs written off (amortisation)
+company,client_267_ChartOfAccounts_20251201.csv,60017,Do not use Freight & couriers,Expense,EXP.COS,fuzzy_name_global,100.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,60018,Sample_Company (old) expenses,Expense,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,60019,Fines and Late payments,Expense,,unmatched,0.0,EXP.EMP,,Late Paid Superannuation & Fine
+company,client_267_ChartOfAccounts_20251201.csv,60020,Insurance,Expense,EXP.COS.PUR.FAR.GOA,detail_include,91.0,EXP.COS.PUR.FAR.GOA,,
+company,client_267_ChartOfAccounts_20251201.csv,60022,Filing Fee,Expense,EXP,fuzzy_name_type,95.23809523809524,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,60023,Office Cleaning,Expense,EXP.OCC,detail_include,91.0,EXP.OCC,,
+company,client_267_ChartOfAccounts_20251201.csv,60024,Rubbish Removal (warehouse/shop),Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,60025,Office Catering,Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
+company,client_267_ChartOfAccounts_20251201.csv,60026,Office FF & Equip (under $1000),Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
+company,client_267_ChartOfAccounts_20251201.csv,60030,Import expense DO NOT USE,Expense,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,60040,Legal fees,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,60041,Repairs & Maintenance - Showroom/Warehouse,Expense,EXP.REP,fuzzy_name_type,81.9047619047619,EXP.REP,,
+company,client_267_ChartOfAccounts_20251201.csv,60042,Sub Contractor - Marketing,Expense,EXP.ADV,fuzzy_name_global,100.0,EXP.ADV,,
+company,client_267_ChartOfAccounts_20251201.csv,60042-b,Sub Contractor - Business,Expense,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,60043,Trade Shows,Expense,,unmatched,0.0,EXP.ADV,,Trade Shows
+company,client_267_ChartOfAccounts_20251201.csv,60044,Merchant fees,Expense,EXP,synonym_exact_type,95.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,60045,Depn- Property Improvements,Expense,,unmatched,0.0,EXP.ADV,,Public Relations (PR)
+company,client_267_ChartOfAccounts_20251201.csv,60046,Depreciation,Expense,EXP.DEP,detail_include,91.0,EXP.DEP,,
+company,client_267_ChartOfAccounts_20251201.csv,60047,Minor Assets,Expense,,unmatched,0.0,EXP,,Minor Assets
+company,client_267_ChartOfAccounts_20251201.csv,60048,Hardware,Expense,,unmatched,0.0,EXP,,Hardware
+company,client_267_ChartOfAccounts_20251201.csv,60049,Shop reno,Expense,,unmatched,0.0,EXP,,Shop reno
+company,client_267_ChartOfAccounts_20251201.csv,60050,Office Printing & Stationery,Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
+company,client_267_ChartOfAccounts_20251201.csv,60055,Packaging,Expense,,unmatched,0.0,EXP.COS.PUR,,Packaging (cost of sales)
+company,client_267_ChartOfAccounts_20251201.csv,60075,Postage,Expense,EXP.ADM,synonym_exact_type,95.0,EXP.ADM,,
+company,client_267_ChartOfAccounts_20251201.csv,60077,Property Related - Orange,Expense,,unmatched,0.0,EXP.ADV,,Public Relations (PR)
+company,client_267_ChartOfAccounts_20251201.csv,60080,Rates & Taxes,Expense,EXP.OCC,detail_include,91.0,EXP.OCC,,
+company,client_267_ChartOfAccounts_20251201.csv,60085,RU Book,Expense,,unmatched,0.0,EXP.ADV,,Magazines Books Subscriptions
+company,client_267_ChartOfAccounts_20251201.csv,60086,Taxi,Expense,EXP.TRA.NAT,fuzzy_name_global,100.0,EXP.TRA.NAT,,
+company,client_267_ChartOfAccounts_20251201.csv,60090,Rent - office,Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
+company,client_267_ChartOfAccounts_20251201.csv,60091,Rent - Warehouse,Expense,EXP.REN,fuzzy_name_global,100.0,EXP.REN,,
+company,client_267_ChartOfAccounts_20251201.csv,60092,Rent - Orange Enterprises,Expense,EXP.REN,fuzzy_name_global,100.0,EXP.REN,,
+company,client_267_ChartOfAccounts_20251201.csv,60093,Rent - Shop / Office,Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
+company,client_267_ChartOfAccounts_20251201.csv,60094,Rent- Blackheath,Expense,EXP.REN,fuzzy_name_global,100.0,EXP.REN,,
+company,client_267_ChartOfAccounts_20251201.csv,60095,Repairs & replacements,Expense,EXP.REP,fuzzy_name_global,100.0,EXP.REP,,
+company,client_267_ChartOfAccounts_20251201.csv,60096,Instore Merchandising / Shop displays,Expense,,unmatched,0.0,EXP.ADM,,Instore Merchandising / Shop displays
+company,client_267_ChartOfAccounts_20251201.csv,60097,Subscriptions,Expense,EXP,fuzzy_name_global,100.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,60098,Telephone,Expense,EXP.UTI,synonym_exact_type,95.0,EXP.UTI,,
+company,client_267_ChartOfAccounts_20251201.csv,60099,Accommodation,Expense,EXP.TRA.NAT,travel_domestic_expense,86.0,EXP.TRA.NAT,,
+company,client_267_ChartOfAccounts_20251201.csv,60099a,Flights,Expense,EXP.TRA.NAT,fuzzy_name_global,100.0,EXP.TRA.NAT,,
+company,client_267_ChartOfAccounts_20251201.csv,60099b,Taxi / Uber,Expense,EXP.TRA.NAT,fuzzy_name_global,100.0,EXP.TRA.NAT,,
+company,client_267_ChartOfAccounts_20251201.csv,60099c,Travel Meals & Incidentals,Expense,EXP.TRA.NAT,travel_domestic_expense,86.0,EXP.TRA.NAT,,
+company,client_267_ChartOfAccounts_20251201.csv,61001,Software Development,Expense,,unmatched,0.0,EXP,,Software Development
+company,client_267_ChartOfAccounts_20251201.csv,61002,Computer on line charges,Expense,,unmatched,0.0,EXP.UTI,,Computer on line charges
+company,client_267_ChartOfAccounts_20251201.csv,61003,IT Support,Expense,,unmatched,0.0,EXP,,IT Support
+company,client_267_ChartOfAccounts_20251201.csv,61004,"Software - Subs, Apps",Expense,EXP,fuzzy_name_global,81.48148148148148,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,61005,Software MS365 Vend Xero,Expense,,unmatched,0.0,EXP,,Software MS365 Vend Xero
+company,client_267_ChartOfAccounts_20251201.csv,61006,Cloud Server,Expense,,unmatched,0.0,EXP,,Cloud Server
+company,client_267_ChartOfAccounts_20251201.csv,61007,Computer Hardware & Supplies,Expense,EXP,fuzzy_name_global,100.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,61010,Website Maintenance/Development,Expense,EXP.REP,fuzzy_name_global,100.0,EXP.REP,,
+company,client_267_ChartOfAccounts_20251201.csv,61300,Copywriting,Expense,,unmatched,0.0,EXP.ADV,,Copywriting
+company,client_267_ChartOfAccounts_20251201.csv,61305,Events/Workshops,Expense,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,61310,Graphic Design,Expense,,unmatched,0.0,EXP.ADV,,Graphic Design
+company,client_267_ChartOfAccounts_20251201.csv,61315,Video Shoots/Content Production,Expense,,unmatched,0.0,EXP.ADV,,Video Shoots/Content Production
+company,client_267_ChartOfAccounts_20251201.csv,61320,Photo Shoots,Expense,,unmatched,0.0,EXP.ADV,,Photo Shoots
+company,client_267_ChartOfAccounts_20251201.csv,61325,Public Relations (PR),Expense,,unmatched,0.0,EXP.ADV,,Public Relations (PR)
+company,client_267_ChartOfAccounts_20251201.csv,61330,Print Production,Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
+company,client_267_ChartOfAccounts_20251201.csv,61332,Branding,Expense,,unmatched,0.0,EXP.ADV,,Branding
+company,client_267_ChartOfAccounts_20251201.csv,61333,Memberships/Directories,Expense,,unmatched,0.0,EXP.ADV,,Memberships/Directories
+company,client_267_ChartOfAccounts_20251201.csv,61334,Magazines Books Subscriptions,Expense,EXP,detail_include,91.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,61335,Digital Marketing/Social Media,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,61336,Advertorial/Advertising/Editorial/Partnerships,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,61338,Sponsor/Giveaways/Influencer,Expense,,unmatched,0.0,EXP.ADV,,Sponsor/Giveaways/Influencer
+company,client_267_ChartOfAccounts_20251201.csv,61339,Vend Loyalty Expense,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,61340,VEND Store Credit Expense,Expense,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,62405,Staff Training/Seminars,Expense,EXP.EMP,fuzzy_name_global,100.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,62410,Staff Amenities,Expense,EXP.EMP,synonym_exact_type,95.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,62415,Protective Clothing,Expense,,unmatched,0.0,EXP.ADV,,Public Relations (PR)
+company,client_267_ChartOfAccounts_20251201.csv,62418,Staff OH&S,Expense,,unmatched,0.0,EXP.EMP,,Staff OH&S
+company,client_267_ChartOfAccounts_20251201.csv,62430,Salaries & Wages,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62430 a,Salaries & Wages - Associated payments,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62430-1,Salaries & Wages - Office,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62430b,Salaries & Wages - Design,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62430c,Salaries & Wages - Installation,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62430d,Salaries & Wages - Shop,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62430e,Salaries & Wages - Shop (casual),Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62430f,Salaries & Wages - Bonus,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62430g,Salaries & Wages - Warehouse,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62430h,Salaries & Wages - PPL,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62430j,Salaries & Wages - Marketing,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62431,Ex Gratia Payment,Expense,,unmatched,0.0,EXP.EMP,,Ex Gratia Payment
+company,client_267_ChartOfAccounts_20251201.csv,62432,Wages Paid on WorkCover,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62433,WorkCover Reimbursment,Expense,EXP.INS,fuzzy_name_global,100.0,EXP.INS,,
+company,client_267_ChartOfAccounts_20251201.csv,62435,Payroll Tax,Expense,EXP.EMP.WAG,fuzzy_name_global,100.0,EXP.EMP.WAG,,
+company,client_267_ChartOfAccounts_20251201.csv,62440,Workers' Compensation,Expense,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,62441,Staff Recruitment,Expense,,unmatched,0.0,EXP.EMP,,Staff Recruitment
+company,client_267_ChartOfAccounts_20251201.csv,62442,Sub Contractors - Warehouse,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,62442a,Sub Contractors - Install,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,62443,Staff Entertainment (non-deductible),Expense,EXP.ENT.NON,fuzzy_name_type,90.32258064516128,EXP.ENT.NON,,
+company,client_267_ChartOfAccounts_20251201.csv,62445,Staff Gifts,Expense,EXP,detail_include,91.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,62450,Superannuation,Expense,EXP.EMP.SUP,synonym_exact_type,95.0,EXP.EMP.SUP,,
+company,client_267_ChartOfAccounts_20251201.csv,62451,Superannuation - Person 3636,Expense,EXP.EMP.SUP,fuzzy_name_global,100.0,EXP.EMP.SUP,,
+company,client_267_ChartOfAccounts_20251201.csv,63251,Fuel & Oil,Expense,EXP.VEH,detail_include,91.0,EXP.VEH,,
+company,client_267_ChartOfAccounts_20251201.csv,63252,Car Insurance,Expense,EXP.COS.PUR.FAR.GOA,detail_include,91.0,EXP.COS.PUR.FAR.GOA,,
+company,client_267_ChartOfAccounts_20251201.csv,63253,Interest,Expense,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,63254,Parking & Tolls,Expense,,unmatched,0.0,EXP.VEH,,Parking & Tolls
+company,client_267_ChartOfAccounts_20251201.csv,63255,Car Repairs & Maintenance,Expense,EXP.VEH,fuzzy_name_type,88.54961832061069,EXP.VEH,,
+company,client_267_ChartOfAccounts_20251201.csv,63256,Depreciation - Motor Vehicle,Expense,EXP.DEP,detail_include,91.0,EXP.DEP,,
+company,client_267_ChartOfAccounts_20251201.csv,63257,Car Registration & 3rd party,Expense,,unmatched,0.0,EXP.VEH,,Car Registration & 3rd party
+company,client_267_ChartOfAccounts_20251201.csv,63258,Stamp duty on MV expenses,Expense,,unmatched,0.0,EXP.VEH,,Stamp duty on MV expenses
+company,client_267_ChartOfAccounts_20251201.csv,63259,Car Hire,Expense,,unmatched,0.0,EXP.VEH,,Car Hire
+company,client_267_ChartOfAccounts_20251201.csv,63260,Vehicle 686,Expense,EXP.VEH,fuzzy_name_global,84.21052631578948,EXP.VEH,,
+company,client_267_ChartOfAccounts_20251201.csv,63261,Vehicle 687,Expense,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,63262,Motor Vehicle - Private Use,Expense,EXP.VEH,motor_vehicle_expense,86.0,EXP.VEH,,
+company,client_267_ChartOfAccounts_20251201.csv,63263,MV - Hire Purchase Charges,Expense,,unmatched,0.0,EXP.INT,,MV Hire Purchase/Chattel Mortgage Charges
+company,client_267_ChartOfAccounts_20251201.csv,63264,Forklift Charges,Expense,,unmatched,0.0,EXP.VEH,,Forklift/Stacker Charges
+company,client_267_ChartOfAccounts_20251201.csv,63265,Stacker Charges,Expense,,unmatched,0.0,EXP.VEH,,Forklift/Stacker Charges
+company,client_267_ChartOfAccounts_20251201.csv,63267,MV - Chattel Mortgage,Expense,,unmatched,0.0,EXP.INT,,MV Hire Purchase/Chattel Mortgage Charges
+company,client_267_ChartOfAccounts_20251201.csv,63268,Vehicle 688,Expense,,unmatched,0.0,EXP.INT,,Vehicle Interest Expense
+company,client_267_ChartOfAccounts_20251201.csv,63269,Vehicle 689,Expense,,unmatched,0.0,EXP.INT,,Vehicle Interest Expense
+company,client_267_ChartOfAccounts_20251201.csv,63270,Interest - Golf DTU87D,Expense,,unmatched,0.0,EXP.INT,,Vehicle Interest Expense
+company,client_267_ChartOfAccounts_20251201.csv,63271,Interst Merc Van DPJ33G,Expense,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,63272,Vehicle 690,Expense,,unmatched,0.0,EXP.INT,,Vehicle Interest Expense
+company,client_267_ChartOfAccounts_20251201.csv,63273,Interest - Vehicle 681,Expense,,unmatched,0.0,EXP.INT,,Vehicle Interest Expense
+company,client_267_ChartOfAccounts_20251201.csv,63274,Interest - Van DTZ42X,Expense,,unmatched,0.0,EXP.INT,,Vehicle Interest Expense
+company,client_267_ChartOfAccounts_20251201.csv,66243,Less: Employee MV Contribution,Expense,,unmatched,0.0,EXP.VEH,,Less: Employee MV Contribution
+company,client_267_ChartOfAccounts_20251201.csv,66327,MV Borrowing costs / Establishment Fee,Expense,,unmatched,0.0,EXP.INT,,MV Borrowing costs / Establishment Fee
+company,client_267_ChartOfAccounts_20251201.csv,66328,Borrowing Expense,Expense,,unmatched,0.0,EXP.INT,,Borrowing Expense
+company,client_267_ChartOfAccounts_20251201.csv,66329,Bad Debt written off,Expense,EXP.BAD,fuzzy_name_type,97.5609756097561,EXP.BAD,,
+company,client_267_ChartOfAccounts_20251201.csv,66363,Discount taken,Expense,,unmatched,0.0,EXP,,Discount taken
+company,client_267_ChartOfAccounts_20251201.csv,67005,RM Account Sales Discount,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,67010,RM Till Shortage,Expense,,unmatched,0.0,EXP,,Till Shortage
+company,client_267_ChartOfAccounts_20251201.csv,67015,Sri Lanka Trip 2019,Expense,,unmatched,0.0,EXP.TRA,,Trip Expenses
+company,client_267_ChartOfAccounts_20251201.csv,67016,UK Trip - Exps June 2026,Expense,,unmatched,0.0,EXP.TRA,,Trip Expenses
+company,client_267_ChartOfAccounts_20251201.csv,67020,Bushwalks,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,80020,Merchant surcharge,Other Income,,unmatched,0.0,REV.OTH,,Merchant surcharge (other income)
+company,client_267_ChartOfAccounts_20251201.csv,81000,Interest Income,Other Income,REV.INV.INT,synonym_exact_type,95.0,REV.INV.INT,,
+company,client_267_ChartOfAccounts_20251201.csv,81005,Rent Warehouse,Other Income,,unmatched,0.0,REV.INV.REN,,Rental Income
+company,client_267_ChartOfAccounts_20251201.csv,81010,Interest Income ATO,Other Income,REV.INV.INT,fuzzy_name_type,88.23529411764706,REV.INV.INT,,
+company,client_267_ChartOfAccounts_20251201.csv,81050,Div 7a Interest Income - Directors,Other Income,REV.INV.INT,div7a_interest_income,89.0,REV.INV.INT,,
+company,client_267_ChartOfAccounts_20251201.csv,81060,Entity 2326,Other Income,,unmatched,0.0,,,
+company,client_267_ChartOfAccounts_20251201.csv,82000,Rent upstairs,Other Income,,unmatched,0.0,REV.INV.REN,,Rental Income
+company,client_267_ChartOfAccounts_20251201.csv,83000,Profit On Sale of NCA,Other Income,,unmatched,0.0,REV.OTH.GAI,,Profit on Sale of Non-Current Asset
+company,client_267_ChartOfAccounts_20251201.csv,83050,Procces fo disposal of Vehical,Other Income,,unmatched,0.0,REV.OTH.GAI,,Profit on Sale of Non-Current Asset
+company,client_267_ChartOfAccounts_20251201.csv,844V,Revenue received in advance - Vend,Liability,,unmatched,0.0,LIA.CUR.DEF,,Revenue received in advance
+company,client_267_ChartOfAccounts_20251201.csv,86000,Workers Compensation Claims,Other Income,,unmatched,0.0,REV.OTH,,Workers Compensation Claims
+company,client_267_ChartOfAccounts_20251201.csv,86010,Paid Parental Leave Received,Other Income,,unmatched,0.0,REV.INV.REN,,Rental Income
+company,client_267_ChartOfAccounts_20251201.csv,87000,Jarrah House Donations,Other Income,,unmatched,0.0,REV.OTH,,Donations Received
+company,client_267_ChartOfAccounts_20251201.csv,87500,Insurance Claims Received,Other Income,REV.OTH,detail_include,91.0,REV.OTH,,
+company,client_267_ChartOfAccounts_20251201.csv,88000,JobKeeper Subsidy,Other Income,,unmatched,0.0,REV.GRA.GOV,,Government Grants
+company,client_267_ChartOfAccounts_20251201.csv,88500,ATO Cash Flow Boost,Other Income,,unmatched,0.0,REV.GRA.GOV,,Government Grants
+company,client_267_ChartOfAccounts_20251201.csv,89000,Bushwalk Fundraiser [89000],Other Income,,unmatched,0.0,REV.OTH,,Bushwalk Fundraiser
+company,client_267_ChartOfAccounts_20251201.csv,89001,Recoveries,Other Income,,unmatched,0.0,REV.OTH,,Recoveries
+company,client_267_ChartOfAccounts_20251201.csv,89100,Events,Other Income,,unmatched,0.0,REV.OTH,,Events (other income)
+company,client_267_ChartOfAccounts_20251201.csv,91000,Interest Expense,Expense,EXP.INT,synonym_exact_type,95.0,EXP.INT,,
+company,client_267_ChartOfAccounts_20251201.csv,91500,Interest Expense - ATO,Expense,EXP.NON,non_deductible_interest,88.0,EXP.NON,,
+company,client_267_ChartOfAccounts_20251201.csv,91510,Loss on Sale of NCA,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_267_ChartOfAccounts_20251201.csv,91520,Withholding Tax,Expense,,unmatched,0.0,EXP.INC,,Withholding Tax
+company,client_267_ChartOfAccounts_20251201.csv,91750,Sri Lanka Costs,Expense,,unmatched,0.0,EXP.TRA,,Trip Expenses
+company,client_267_ChartOfAccounts_20251201.csv,92001,Donations [92001],Expense,EXP,detail_include,91.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,92010,Fringe Benefit Tax,Expense,EXP.FBT,detail_redirect,88.0,EXP.FBT,,
+company,client_267_ChartOfAccounts_20251201.csv,92030,Late Paid Superannuation & Fine,Expense,EXP.EMP.SUP,fuzzy_name_global,100.0,EXP.EMP.SUP,,
+company,client_267_ChartOfAccounts_20251201.csv,93000,Company Income Tax 06.07,Expense,,unmatched,0.0,EXP.INC,,Income Tax Expense
+company,client_267_ChartOfAccounts_20251201.csv,94000,Income Tax Expense,Expense,EXP.INC,synonym_exact_type,95.0,EXP.INC,,
+company,client_267_ChartOfAccounts_20251201.csv,95000,Trade Ins Suspense,Expense,EXP.EXT,suspense_expense,86.0,EXP.EXT,,
+company,client_267_ChartOfAccounts_20251201.csv,95100,Other Non Deductible,Expense,EXP.NON,fuzzy_name_type,86.95652173913044,EXP.NON,,
+company,client_267_ChartOfAccounts_20251201.csv,96000,RM Clearing A/C,Expense,,unmatched,0.0,EXP,,Clearing Account
+company,client_267_ChartOfAccounts_20251201.csv,98000,Fraud,Expense,,unmatched,0.0,EXP,,Fraud

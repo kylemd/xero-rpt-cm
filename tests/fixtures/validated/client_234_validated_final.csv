@@ -1,0 +1,278 @@
+Code,InputReportingCode,Name,Reporting Name,Type,Tax Code,Description,Dashboard,Expense Claims,Enable Payments,Balance,SuggestedReportingCode,MatchReason,Score,ValidatedReportingCode,TaxCodeValid,TaxCodeExpected,TaxCodeIssue,Notes
+,ASS,Petty Cash account,,Bank,BAS Excluded,,No,No,No,,,,,ASS.CUR.CAS.FLO,True,,Reporting code not in default chart - cannot verify,Petty cash
+,ASS,Interest Account,,Bank,BAS Excluded,,No,No,No,,,,,ASS.CUR.CAS.BAN,True,,,Interest account (bank)
+,ASS,Qantas American Express Premium Card,,Bank,BAS Excluded,,No,No,No,,,,,ASS.CUR.CAS.BAN,True,,,Bank account
+,ASS,Empire Vehicles,,Bank,BAS Excluded,,No,No,No,,,,,ASS.CUR.CAS.BAN,True,,,Bank account
+,ASS,RAY VISA ANZ (new feed),,Bank,BAS Excluded,,No,No,No,,,,,LIA.CUR.PAY,True,,Reporting code not in default chart - cannot verify,Credit card liability
+,ASS,Banks Cheque Account,,Bank,BAS Excluded,,No,No,No,,,,,ASS.CUR.CAS.BAN,True,,,Bank account
+,ASS,Ray AMEX CC,,Bank,BAS Excluded,,No,No,No,,,,,LIA.CUR.PAY,True,,Reporting code not in default chart - cannot verify,Credit card liability
+,ASS,Empires Vehicles Credit Card,,Bank,BAS Excluded,,No,No,No,,,,,LIA.CUR.PAY,True,,Reporting code not in default chart - cannot verify,Credit card liability
+,ASS,Ray ANZ CC,,Bank,BAS Excluded,,No,No,No,,,,,LIA.CUR.PAY,True,,Reporting code not in default chart - cannot verify,Credit card liability
+10106,ASS,PayPal,,Current Asset,BAS Excluded,,No,No,Yes,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10107,ASS,Petty Cash,,Current Asset,BAS Excluded,,No,No,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10108,ASS,Electronic Clearing Account,,Current Asset,BAS Excluded,,No,No,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10109,ASS,Payroll Clearing Account,,Current Asset,BAS Excluded,,No,No,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10110,ASS,Stripe Clearing Account,,Current Asset,BAS Excluded,,No,No,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10111,ASS,Undeposited Funds,,Current Asset,BAS Excluded,,No,No,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10201,ASS.CUR.REC.TRA,Trade Debtors,,Accounts Receivable,BAS Excluded,,No,No,No,,ASS.CUR.REC.TRA,accounts_receivable_default,88.0,ASS.CUR.REC.TRA,True,BAS Excluded,,
+10202,ASS,ABN Withholding Credits,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.CUR,True,,Reporting code not in default chart - cannot verify,Withholding credits (should be current asset)
+10203,ASS,Voluntary Withholding Credits,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.CUR,True,,Reporting code not in default chart - cannot verify,Withholding credits (should be current asset)
+10204,ASS,Migration Trade Debtors,,Current Asset,BAS Excluded,,No,No,No,,ASS.CUR.REC.TRA,accounts_receivable_default,88.0,ASS.CUR.REC.TRA,True,BAS Excluded,,
+10301,ASS,Truck/Trailer Accessories,,Fixed Asset,GST on Expenses,,No,Yes,No,,,unmatched,0.0,ASS.NCA.FIX.VEH,True,,,Truck/trailer accessories
+10302,ASS,Electricals AC & DC,,Fixed Asset,GST on Expenses,,No,Yes,No,,,unmatched,0.0,ASS.NCA.FIX.PLA,True,,,Electrical equipment
+10307,ASS,WIP - Manufacturing,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.NCA.FIX.PLA,False,,"Expected one of: GST on Expenses, got: BAS Excluded",Electrical equipment
+10310,ASS,Motor Vehicles,,Fixed Asset,GST on Expenses,,No,No,No,,ASS.NCA.FIX.VEH,synonym_exact_type,95.0,ASS.NCA.FIX.VEH,True,GST on Expenses,,
+10311,ASS,Motor Vehicles - Depreciation,,Fixed Asset,BAS Excluded,,No,No,No,,ASS.NCA.FIX.VEH,fuzzy_name_type,81.69014084507043,ASS.NCA.FIX.VEH,False,GST on Expenses,"Expected one of: GST on Expenses, got: BAS Excluded",
+10401,ASS,Deposits Paid,,Current Asset,BAS Excluded,,No,Yes,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10402,ASS,Prepayments,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.CUR.REC.PRE,True,,,Prepayments (should be current asset)
+10403,ASS,Pre-paid Insurance,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.CUR.REC.PRE,True,,,Prepayments (should be current asset)
+10404,ASS,Accrued Revenue,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.NCA.FIX.PLA,False,,"Expected one of: GST on Expenses, got: BAS Excluded",Electrical equipment
+10414,ASS,Director's Loan to Ian Banks,,Current Asset,BAS Excluded,,No,Yes,Yes,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10416,ASS,Loan - Person 3622,,Current Asset,BAS Excluded,,No,Yes,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10418,ASS,Income Tax Instalment,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.CUR.REC.PRE,True,,,Tax instalments (prepayments)
+10419,ASS,FBT Instalment,,Prepayment,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
+10420,ASS,Loan - Person 3623,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.CUR.LOA,True,,,Loan to staff (current asset)
+10451,ASS,Entity 2322,,Current Asset,BAS Excluded,,No,Yes,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10452,ASS,Loan Banks Subcontracting,,Current Asset,BAS Excluded,,No,Yes,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10511,ASS,Plant and Equipment>$1500,,Fixed Asset,GST on Capital,,No,Yes,No,,ASS.NCA.FIX.PLA,fuzzy_name_global,100.0,ASS.NCA.FIX.PLA,False,GST on Expenses,"Expected one of: GST on Expenses, got: GST on Capital",
+10512,ASS,Plant and Equipment < $1500,,Fixed Asset,GST on Capital,,No,Yes,No,,ASS.NCA.FIX.PLA,fuzzy_name_global,100.0,ASS.NCA.FIX.PLA,False,GST on Expenses,"Expected one of: GST on Expenses, got: GST on Capital",
+10513,ASS,Rental Truck Improvements,,Fixed Asset,GST on Capital,,No,Yes,No,,,unmatched,0.0,ASS.NCA.FIX.VEH,False,,"Expected one of: GST on Expenses, got: GST on Capital",Rental truck improvements
+10518,ASS,Plant & Equipment Depreciation,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.NCA.FIX.PLA.ACC,True,,,Plant & equipment accumulated depreciation
+10713,ASS,Borrowing Expenses (10713),,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.CUR.REC.PRE,True,,,Prepaid borrowing expenses
+10714,ASS,Borrowing Cost Accum Depreciat,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.NCA.FIX.PLA,False,,"Expected one of: GST on Expenses, got: BAS Excluded",Electrical equipment
+10801,ASS,Goodwill,,Non-Current Asset,BAS Excluded,,No,Yes,No,,ASS.NCA.INT.GOO,detail_include,91.0,ASS.NCA.INT.GOO,True,BAS Excluded,,
+10802,ASS,Website Development,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.NCA.INT,False,,"Expected one of: GST on Expenses, got: BAS Excluded",Website development (intangible)
+10803,ASS,Website - Accum Amortisation,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.NCA.FIX.PLA,False,,"Expected one of: GST on Expenses, got: BAS Excluded",Electrical equipment
+10804,ASS,Drawing Software,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.NCA.INT,False,,"Expected one of: GST on Expenses, got: BAS Excluded",Drawing software (intangible)
+10805,ASS,Drawing Software - Amortisation,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.NCA.INT.AMO,True,,,Drawing software accumulated amortisation
+10811,ASS,Other Intangibles,,Fixed Asset,BAS Excluded,,No,Yes,No,,ASS.NCA.INT,fuzzy_name_global,100.0,ASS.NCA.INT,False,GST on Expenses,"Expected one of: GST on Expenses, got: BAS Excluded",
+10812,ASS,Other Intangibles Amortisations,,Fixed Asset,BAS Excluded,,No,Yes,No,,ASS.NCA.INT,fuzzy_name_global,100.0,ASS.NCA.INT,False,GST on Expenses,"Expected one of: GST on Expenses, got: BAS Excluded",
+11311,ASS,Motor Vehicle Depreciation,,Fixed Asset,GST on Expenses,,No,No,No,,ASS.NCA.FIX.VEH,fuzzy_name_type,81.69014084507043,ASS.NCA.FIX.VEH,True,GST on Expenses,,
+21010,LIA.CUR.PAY.TRA,Trade Creditors,,Accounts Payable,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+21011,LIA,Migration Trade Creditors,,Current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,LIA.CUR.PAY.TRA,True,,,Migration trade creditors
+21050,LIA,Unpresented Cheques,,Current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,LIA.CUR,True,,,Unpresented cheques
+21060,ASS,Customer Deposits Bonds,,Current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,LIA.CUR,True,,,Customer deposits/bonds
+21061,ASS,Unearned Revenue,,Current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,LIA.CUR.DEF,True,,,Unearned revenue (deferred income)
+21062,LIA,Accrued Expenses,,Current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,LIA.CUR,True,,,Accrued expenses
+21063,LIA,Entity 2323,,Current Liability,BAS Excluded,Loan,Yes,No,Yes,,,unmatched,0.0,,True,,,
+21064,LIA,ANZ - Temporary Loan,,Current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+21080,LIA,Sundry Creditors,,Current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,LIA.CUR.PAY,True,,Reporting code not in default chart - cannot verify,Sundry creditors
+21201,ASS,Visa Ian ANZ Platinum 6970,,Current Liability,BAS Excluded,,No,No,No,,LIA.CUR.PAY,credit_card_override,92.0,LIA.CUR.PAY,True,,Reporting code not in default chart - cannot verify,
+21207,ASS,Banks Dist Credit Card 2183,,Current Liability,BAS Excluded,,No,No,No,,LIA.CUR.PAY,credit_card_override,92.0,LIA.CUR.PAY,True,,Reporting code not in default chart - cannot verify,
+21300,LIA.CUR.TAX.GST,GST,,GST,BAS Excluded,,No,No,No,,LIA.CUR.TAX.GST,synonym_exact_type,95.0,LIA.CUR.TAX.GST,True,BAS Excluded,,
+21301,LIA,PAYG Withholdings payable,,Current Liability,BAS Excluded,,No,Yes,No,,LIA.CUR.PAY.EMP,paygw_withholding_liability,91.0,LIA.CUR.PAY.EMP,True,BAS Excluded,,
+21302,LIA,PAYG Instalment payable,,Current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,LIA.CUR.TAX.INC,True,,,PAYG instalment payable
+21303,LIA,Superannuation Payable,,Current Liability,BAS Excluded,,No,Yes,No,,LIA.CUR.PAY.EMP,synonym_exact_type,95.0,LIA.CUR.PAY.EMP,True,BAS Excluded,,
+21304,LIA,Superannuation Payable MYOB,,Current Liability,BAS Excluded,,No,Yes,No,,LIA.CUR.PAY.EMP,fuzzy_name_type,89.79591836734694,LIA.CUR.PAY.EMP,True,BAS Excluded,,
+21305,LIA,Payroll Tax Payable,,Current Liability,BAS Excluded,,No,Yes,No,,LIA.CUR.PAY.EMP,fuzzy_name_type,92.3076923076923,LIA.CUR.PAY.EMP,True,BAS Excluded,,
+21306,LIA,Provision for Annual Leave,,Current Liability,BAS Excluded,,No,Yes,No,,LIA.CUR.PAY.EMP,synonym_exact_type,95.0,LIA.CUR.PAY.EMP,True,BAS Excluded,,
+21307,LIA,CSA Payments,,Current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,LIA.CUR.PAY.EMP,True,,,CSA payments (employment liability)
+21308,LIA,Wages and salaries payable,,Current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+21401,ASS,Integrated Client Account,,Current Liability,BAS Excluded,,No,No,Yes,,,unmatched,0.0,LIA.CUR,True,,,Integrated client account
+21402,ASS,FBT Integrated Account,,Current Liability,BAS Excluded,,No,No,Yes,,,unmatched,0.0,LIA.CUR,True,,,FBT integrated account
+21407,LIA,Provision for Taxation,,Current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,LIA.CUR.TAX.INC,True,,,Provision for taxation
+21408,ASS,Company Income Tax,,Current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,LIA.CUR.TAX.INC,True,,,Company income tax
+21502,ASS,Banks Distribution Group,,Current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+21504,LIA,Empire Loan Account,,Current Liability,BAS Excluded,,No,Yes,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+21506,ASS,ANZ # 29172 Vendor Finance,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,LIA.NCL.LOA,True,,,ANZ vendor finance
+21507,ASS,Citibank Loan xx3415,,Current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+21510,LIA,Macquarie Premium Funding,,Current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
+21511,LIA,Less Unexpired Interest,,Current Liability,BAS Excluded,,No,Yes,No,,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,True,BAS Excluded,,
+21604,ASS,Loan From Raymond Porter,,Current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+21605,ASS,Loan from Shaun Anthony Buckle,,Current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+21606,LIA,Loan from Natalie Pecotich,,Current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+21608,LIA,Director's Loan Ian Banks,,Current Liability,BAS Excluded,,No,Yes,Yes,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+22010,LIA,Vehicle 647,,Non-current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
+22011,LIA,Vehicle 648,,Non-current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
+22015,LIA,Electric Scissor JLG ANZ 23743,,Non-current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
+22016,LIA,Int Electric Scissor JLG,,Non-current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
+22020,ASS,TRS ANZ 25981,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+22021,LIA,Int TRS ANZ 25981,,Non-current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
+22025,LIA,H & W Generator ANZ 59719,,Non-current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
+22026,LIA,Int H & W Generator ANZ 59719,,Non-current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
+22027,ASS,Coolroom & Freezer ANZ67495,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+22028,LIA,Int Coolroom/Freezer ANZ67495,,Non-current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
+22029,LIA,Vehicle 649,,Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,LIA.CUR,True,,,Unexpired interest on finance
+22030,LIA,Vehicle 650,,Non-current Liability,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
+22031,LIA,Vehicle 651,,Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,LIA.NCL.LOA,True,,,Vehicle finance (non-current)
+22032,LIA,Vehicle 652,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+22033,LIA,Vehicle 653 - Loan BMWFS 1152175,,Non-current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+22101,LIA,ANZ Chattel Mortgage Loan,,Non-current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+22102,LIA,ANZ Chattel Mortgage Loan - Interest,,Non-current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+22111,LIA,METRO Finance Loan,,Non-current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+22112,LIA,METRO Finance Loan - Interest,,Non-current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+22113,LIA,BOQ Finance,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+22114,LIA,BOQ Finance Charges,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+22115,LIA,Branded Finance,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+22116,LIA,Branded Finance Charges,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+22117,LIA,Volkswagon Financial Services,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+22118,LIA,Volkswagon Finance Charges,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+22120,LIA,Vehicle 654,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+22121,LIA,Vehicle 655,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+22122,LIA,Loan - Person 3624,,Current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+22123,LIA,Loan - Person 3625,,Liability,BAS Excluded,,No,No,No,,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,True,BAS Excluded,,
+22124,LIA,Westpac Loan - Interest,,Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+22125,LIA,Metro Loan,,Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+22126,LIA,Metro Loan - Interest,,Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+28000,LIA,Contra Account,,Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,LIA.CUR,True,,,Contra account
+29000,ASS,Suspense,,Current Liability,BAS Excluded,,No,No,No,,LIA.CUR,synonym_exact_type,95.0,LIA.CUR,True,BAS Excluded,,
+29003,LIA,Suspense - Hire Purchase,,Current Liability,BAS Excluded,,No,No,Yes,,LIA.CUR,fuzzy_name_global,100.0,LIA.CUR,True,BAS Excluded,,
+29005,LIA,Suspense - Hire Purchase Int,,Current Liability,BAS Excluded,,No,No,Yes,,LIA.CUR,fuzzy_name_global,100.0,LIA.CUR,True,BAS Excluded,,
+31000,EQU,Issued Shares,,Equity,BAS Excluded,,No,No,No,,,unmatched,0.0,EQU.SHA.ORD,True,,,Issued shares
+32000,EQU,Ray Portion Company Share,,Equity,BAS Excluded,,No,No,No,,,unmatched,0.0,EQU.SHA.ORD,True,,,Share portion
+33000,EQU,Shaun Portion Company Share,,Equity,BAS Excluded,,No,No,No,,,unmatched,0.0,EQU.SHA.ORD,True,,,Share portion
+38000,EQU.RET,Retained Earnings,,Retained Earnings,BAS Excluded,,No,No,No,,EQU.RET,synonym_exact_type,95.0,EQU.RET,True,BAS Excluded,,
+39100,EQU,Income Tax on profit,,Equity,BAS Excluded,,No,No,No,,,unmatched,0.0,EQU,True,,Reporting code not in default chart - cannot verify,Income tax on profit (equity adjustment)
+39500,EQU,Dividend Paid - Banks FT,,Equity,BAS Excluded,,No,No,No,,EQU.RET.DIV,equity_dividend_mapping,90.0,EQU.RET.DIV,True,,Reporting code not in default chart - cannot verify,
+39600,EQU,Dividend Paid - R&K Porter FT,,Equity,BAS Excluded,,No,No,No,,EQU.RET.DIV,equity_dividend_mapping,90.0,EQU.RET.DIV,True,,Reporting code not in default chart - cannot verify,
+39700,EQU,Dividend Paid - S&P Buckley FT,,Equity,BAS Excluded,,No,No,No,,EQU.RET.DIV,equity_dividend_mapping,90.0,EQU.RET.DIV,True,,Reporting code not in default chart - cannot verify,
+39999,EQU,Historical Balancing Account,,Equity,BAS Excluded,,No,No,No,,,unmatched,0.0,EQU,True,,Reporting code not in default chart - cannot verify,Historical balancing account
+41100,REV,Rental Income,,Sales,GST on Income,,No,No,No,,,unmatched,0.0,REV.INV.REN,False,,"Expected one of: GST Free Income, got: GST on Income",Rental income
+41200,REV,Toll Oncharging,,Sales,GST on Income,,No,No,No,,,unmatched,0.0,REV.TRA,True,,Reporting code not in default chart - cannot verify,Toll oncharging (trading revenue)
+42100,REV,Body Building Income,,Sales,GST on Income,,No,No,No,,,unmatched,0.0,REV.TRA.SER,True,,,Body building income (service)
+42200,REV,Freight Income,,Sales,GST on Income,,No,No,No,,,unmatched,0.0,REV.TRA,True,,Reporting code not in default chart - cannot verify,Freight income (trading revenue)
+42300,REV,Parts Sales Income,,Sales,GST on Income,,No,No,No,,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,True,GST on Income,,
+42400,REV,Warranty Repairs Income,,Sales,GST on Income,,No,No,No,,REV.TRA.SER,fuzzy_name_global,100.0,REV.TRA.SER,True,GST on Income,,
+42500,REV,Other Repairs Income,,Sales,GST on Income,,No,No,No,,REV.TRA.SER,fuzzy_name_global,100.0,REV.TRA.SER,True,GST on Income,,
+42700,REV,Steel Recycling Income,,Sales,GST on Income,,No,No,No,,,unmatched,0.0,REV.TRA,True,,Reporting code not in default chart - cannot verify,Steel recycling income
+42800,REV,Generator Repair & Maintenance INCOME,,Sales,GST on Income,,No,No,No,,REV.TRA.SER,fuzzy_name_global,100.0,REV.TRA.SER,True,GST on Income,,
+497,EXP.FOR,Bank Revaluations,,Bank Revaluations,BAS Excluded,Bank account revaluations due for foreign exchange rate changes,No,No,No,,EXP.FOR,bank_revaluation_override,90.0,EXP.FOR,True,BAS Excluded,,
+498,EXP.FOR.UGL,Unrealised Currency Gains,,Unrealised Currency Gains,BAS Excluded,Unrealised currency gains on outstanding items,No,No,No,,EXP.FOR.UGL,unrealised_currency_gain,90.0,EXP.FOR.UGL,True,BAS Excluded,,
+499,EXP.FOR.RGL,Realised Currency Gains,,Realised Currency Gains,BAS Excluded,Gains or losses made due to currency exchange rate changes,No,No,No,,EXP.FOR.RGL,realised_currency_gain,90.0,EXP.FOR.RGL,True,BAS Excluded,,
+49999,REV,Currency Gain Loss,,Sales,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.OTH,True,,,Currency gain/loss
+51100,EXP,Empire Vehicles Rental,,Direct Costs,GST on Expenses,,No,Yes,No,,EXP.COS,direct_costs_head,82.0,EXP.COS,True,GST on Expenses,,
+51101,EXP,Empire Vehicles Rental - Contractors,,Direct Costs,GST on Expenses,,No,Yes,Yes,,EXP.COS,direct_costs_head,82.0,EXP.COS,True,GST on Expenses,,
+51102,EXP,Empire Vehicles Rental - Contractor Super,,Direct Costs,GST Free Expenses,,No,Yes,Yes,,EXP.COS,direct_costs_head,82.0,EXP.COS,False,GST on Expenses,"Expected one of: GST on Expenses, got: GST Free Expenses",
+51200,EXP,Registration & Inspections,,Direct Costs,GST on Expenses,,No,Yes,No,,EXP.COS,direct_costs_head,82.0,EXP.COS,True,GST on Expenses,,
+52100,EXP,Empire Vehicles Body Buildings,,Direct Costs,GST on Expenses,,No,Yes,No,,EXP.COS,direct_costs_head,82.0,EXP.COS,True,GST on Expenses,,
+52300,EXP,Transporting Cost,,Direct Costs,GST on Expenses,,No,Yes,No,,EXP.COS,direct_costs_head,82.0,EXP.COS,True,GST on Expenses,,
+52400,EXP,Freight Cost for Purchases,,Direct Costs,GST on Expenses,,No,Yes,No,,EXP.COS.PUR,detail_include,91.0,EXP.COS.PUR,True,GST on Expenses,,
+52500,EXP,Warranty Repairs Cost,,Direct Costs,GST on Expenses,,No,Yes,No,,EXP.COS,direct_costs_head,82.0,EXP.COS,True,GST on Expenses,,
+52600,EXP,Other Repairs Cost,,Direct Costs,GST on Expenses,,No,Yes,No,,EXP.COS,direct_costs_head,82.0,EXP.COS,True,GST on Expenses,,
+52700,EXP,Parts Cost of Sales,,Direct Costs,GST on Expenses,,No,Yes,No,,EXP.COS,cogs_expense_default,90.0,EXP.COS,True,GST on Expenses,,
+52800,EXP,Closing Raw Materials,,Direct Costs,BAS Excluded,,No,Yes,No,,EXP.COS.CLO,detail_include,91.0,EXP.COS.CLO,True,BAS Excluded,,
+54001,EXP,Body Building Wages-DNU,,Direct Costs,BAS Excluded,,No,Yes,No,,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,True,BAS Excluded,,
+54004,EXP,Reseller Commission,,Direct Costs,GST on Expenses,,No,No,No,,EXP.COS.PUR.FAR.DAI,detail_include,91.0,EXP.COS.PUR.FAR.DAI,True,,Reporting code not in default chart - cannot verify,
+61001,EXP,Accountancy,,Expense,GST on Expenses,,No,Yes,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+61002,EXP,Bookkeeping Fees,,Expense,GST on Expenses,,No,Yes,No,,EXP,fuzzy_name_type,81.4814814814815,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+61003,EXP,Bank Charges,,Expense,GST Free Expenses,,No,Yes,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+61004,EXP,Borrowing Expenses (61004),,Expense,BAS Excluded,,No,Yes,No,,,unmatched,0.0,EXP.INT,False,,"Expected one of: GST Free Expenses, got: BAS Excluded",Borrowing expenses
+61005,EXP,Merchant Charges,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP,True,,,Merchant/credit card charges
+61006,EXP,Credit Card Charges,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP,True,,,Merchant/credit card charges
+61007,EXP,Bad Debts,,Expense,BAS Excluded,,No,Yes,No,,EXP.BAD,fuzzy_name_global,100.0,EXP.BAD,True,BAS Excluded,,
+61008,EXP,Cleaning,,Expense,GST on Expenses,,No,Yes,No,,EXP.OCC,detail_include,91.0,EXP.OCC,False,GST Free Expenses,"Expected one of: GST Free Expenses, got: GST on Expenses",
+61010,EXP,Computer Expenses,,Expense,GST on Expenses,,No,Yes,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+61012,EXP,Website Hosting,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP.UTI,True,,,Website hosting
+61013,EXP,"Certification, Licences & Regi",,Expense,GST Free Expenses,,No,Yes,No,,,unmatched,0.0,EXP,True,,,"Certification, licences & registration"
+61014,EXP,Donations,,Expense,BAS Excluded,,No,Yes,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+61015,EXP,Consultants Fees,,Expense,BAS Excluded,,No,Yes,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+61016,EXP,Entertainment - Clients,,Expense,GST Free Expenses,,No,Yes,No,,EXP.ENT,fuzzy_name_global,100.0,EXP.ENT,True,GST Free Expenses,,
+61017,EXP,Entertainment - Employees,,Expense,GST Free Expenses,,No,Yes,No,,EXP.ENT,fuzzy_name_global,100.0,EXP.ENT,True,GST Free Expenses,,
+61018,EXP,Filing Fees,,Expense,GST Free Expenses,,No,Yes,No,,EXP,synonym_exact_type,95.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+61019,EXP,Fines,,Expense,BAS Excluded,,No,Yes,No,,EXP.NON,fuzzy_name_global,100.0,EXP.NON,True,"BAS Excluded, GST Free Expenses",,
+61020,EXP,Freight Paid,,Expense,GST on Expenses,,No,Yes,No,,EXP.ADM,fuzzy_name_type,87.17948717948718,EXP.ADM,True,GST on Expenses,,
+61021,EXP,Gift - Clients,,Expense,GST on Expenses,,No,Yes,No,,EXP,fuzzy_name_global,100.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+61022,EXP,Gift - Employee,,Expense,GST on Expenses,,No,Yes,No,,EXP,fuzzy_name_global,100.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+61023,EXP,Legal Fees,,Expense,GST on Expenses,,No,Yes,No,,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,True,"BAS Excluded, GST on Expenses",,
+61024,EXP,Office Supplies,,Expense,GST on Expenses,,No,Yes,No,,EXP.ADM,synonym_exact_type,95.0,EXP.ADM,True,GST on Expenses,,
+61025,EXP,Office Repairs & Maintenance,,Expense,GST on Expenses,,No,Yes,No,,EXP.REP,fuzzy_name_type,84.31372549019608,EXP.REP,True,GST on Expenses,,
+61026,EXP,Postage & Stationery,,Expense,GST on Expenses,,No,Yes,No,,EXP.COS,fuzzy_name_global,100.0,EXP.COS,True,GST on Expenses,,
+61027,EXP,Parking,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP.VEH,True,,,Parking/tolls (vehicle expense)
+61028,EXP,Tolls,,Expense,GST on Expenses,,No,Yes,No,,EXP.VEH,fuzzy_name_global,100.0,EXP.VEH,True,"GST Free Expenses, GST on Expenses",,
+61029,EXP,Pest Control,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP,True,,,Pest control
+61030,EXP,Subscriptions,,Expense,GST on Expenses,,No,Yes,No,,EXP,fuzzy_name_global,100.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+61031,EXP,"Telephone, Fax & Internet",,Expense,GST on Expenses,,No,Yes,No,,EXP.UTI,fuzzy_name_global,100.0,EXP.UTI,True,GST on Expenses,,
+61032,EXP,Rates & Council Fees,,Expense,GST Free Expenses,,No,Yes,No,,EXP.OCC,detail_include,91.0,EXP.OCC,True,GST Free Expenses,,
+61036,EXP,Security,,Expense,GST on Expenses,,No,Yes,No,,EXP.OCC,detail_include,91.0,EXP.OCC,False,GST Free Expenses,"Expected one of: GST Free Expenses, got: GST on Expenses",
+61040,EXP,Travelling Expenses,,Expense,GST on Expenses,,No,Yes,No,,EXP.TRA.NAT,travel_domestic_expense,86.0,EXP.TRA.NAT,True,GST on Expenses,,
+61041,EXP,Travel - International,,Expense,GST Free Expenses,International travel - GST free,No,No,No,,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,False,"BAS Excluded, GST on Expenses","Expected one of: BAS Excluded, GST on Expenses, got: GST Free Expenses",
+61042,EXP,Meeting Expenses,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP,True,,,Meeting expenses
+61043,EXP,Business Insurance,,Expense,GST on Expenses,,No,Yes,No,,EXP.COS.PUR.FAR.DAI,detail_include,91.0,EXP.COS.PUR.FAR.DAI,True,,Reporting code not in default chart - cannot verify,
+61044,EXP,PPL Insurance,,Expense,GST on Expenses,,No,Yes,No,,EXP.COS.PUR.FAR.DAI,detail_include,91.0,EXP.COS.PUR.FAR.DAI,True,,Reporting code not in default chart - cannot verify,
+61049,EXP,Wages and Salaries - Person 3626,,Expense,BAS Excluded,,No,No,No,,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,True,BAS Excluded,,
+61050,EXP,Superannuation Directors,,Expense,BAS Excluded,,No,No,No,,EXP.EMP.SUP,fuzzy_name_global,100.0,EXP.EMP.SUP,True,BAS Excluded,,
+61051,EXP,Wages & Salaries - Person 3627,,Expense,BAS Excluded,,No,Yes,No,,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,True,BAS Excluded,,
+61052,EXP,Superannuation Expenses - Office,,Expense,BAS Excluded,,No,Yes,No,,EXP.EMP.SUP,detail_include,91.0,EXP.EMP.SUP,True,BAS Excluded,,
+61053,EXP,Fringe Benefits Tax,,Expense,BAS Excluded,,No,Yes,No,,EXP.FBT,synonym_exact_type,95.0,EXP.FBT,True,BAS Excluded,,
+61054,EXP,Payroll Tax,,Expense,BAS Excluded,,No,Yes,No,,EXP.EMP.WAG,fuzzy_name_global,100.0,EXP.EMP.WAG,True,BAS Excluded,,
+61055,EXP,Workers Compensation,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP.INS,True,,,Workers compensation
+61056,EXP,Staff Advertising,,Expense,GST on Expenses,,No,Yes,No,,EXP.ADV,fuzzy_name_global,100.0,EXP.ADV,True,GST on Expenses,,
+61057,EXP,Staff Training,,Expense,GST on Expenses,,No,Yes,No,,EXP.EMP,fuzzy_name_global,100.0,EXP.EMP,True,"BAS Excluded, GST on Expenses",,
+61058,EXP,Staff Amenities,,Expense,GST on Expenses,,No,Yes,No,,EXP.EMP,synonym_exact_type,95.0,EXP.EMP,True,"BAS Excluded, GST on Expenses",,
+61060,EXP,Annual Leave Provision,,Expense,BAS Excluded,,No,Yes,No,,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,True,"BAS Excluded, GST on Expenses",,
+61071,EXP,MV - Rego,,Expense,GST Free Expenses,,No,Yes,No,,,unmatched,0.0,EXP.VEH,True,,,Motor vehicle registration
+61072,EXP,MV - Repair & Maintenance,,Expense,GST on Expenses,,No,Yes,No,,EXP.VEH,fuzzy_name_global,100.0,EXP.VEH,True,"GST Free Expenses, GST on Expenses",,
+61073,EXP,MV - Fuel & Oil,,Expense,GST on Expenses,,No,Yes,No,,EXP.VEH,detail_include,91.0,EXP.VEH,True,"GST Free Expenses, GST on Expenses",,
+61075,EXP,MV - Insurance,,Expense,GST on Expenses,,No,Yes,No,,EXP.COS.PUR.FAR.DAI,detail_include,91.0,EXP.COS.PUR.FAR.DAI,True,,Reporting code not in default chart - cannot verify,
+61085,EXP,General Expenses,,Expense,GST on Expenses,,No,Yes,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+61090,EXP,Amortisation Expenses,,Expense,BAS Excluded,,No,Yes,No,,EXP.AMO,fuzzy_name_global,100.0,EXP.AMO,True,BAS Excluded,,
+61095,EXP,Advertising & Promotion,,Expense,GST on Expenses,,No,Yes,No,,EXP.ADV,synonym_exact_type,95.0,EXP.ADV,True,GST on Expenses,,
+61100,EXP,Other Employer Expenses,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP.EMP,True,,,Other employer expenses
+62101,EXP,Rent,,Expense,GST on Expenses,,No,Yes,No,,EXP.REN,synonym_exact_type,95.0,EXP.REN,True,GST on Expenses,,
+62102,EXP,Storage,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP.REN,True,,,Storage
+62103,EXP,"Electricity , Water & Gas",,Expense,GST on Expenses,,No,Yes,No,,EXP.UTI,detail_include,91.0,EXP.UTI,True,GST on Expenses,,
+62105,EXP,Equipment Repair/Maintentance,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP.REP,True,,,Equipment repair/maintenance
+62106,EXP,Hire of Plant & Equipment,,Expense,GST on Expenses,,No,Yes,No,,EXP,synonym_exact_type,95.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+62301,EXP,Wages & Salaries,,Expense,BAS Excluded,,No,Yes,No,,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,True,BAS Excluded,,
+62302,EXP,Superannuation Expenses,,Expense,BAS Excluded,,No,Yes,No,,EXP.EMP.SUP,detail_include,91.0,EXP.EMP.SUP,True,BAS Excluded,,
+62304,EXP,Uniforms,,Expense,GST on Expenses,,No,Yes,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+62305,EXP,First Aid Supplies,,Expense,GST on Expenses,,No,Yes,No,,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,True,GST on Expenses,,
+62402,EXP,Waste Removal,,Expense,GST on Expenses,,No,Yes,No,,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,True,"BAS Excluded, GST on Expenses",,
+62405,EXP,Depreciation,,Expense,BAS Excluded,,No,Yes,No,,EXP.DEP,detail_include,91.0,EXP.DEP,True,BAS Excluded,,
+62406,EXP,Small business write off,,Expense,BAS Excluded,Small business write off,No,No,No,,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,True,"BAS Excluded, GST on Expenses",,
+62501,EXP,Workshop Expenses - Canal Rd,,Expense,GST on Expenses,,No,Yes,No,,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,True,"BAS Excluded, GST on Expenses",,
+63900,EXP,Employee Purchases,,Expense,BAS Excluded,,No,Yes,No,,EXP.COS.PUR,detail_include,91.0,EXP.COS.PUR,False,GST on Expenses,"Expected one of: GST on Expenses, got: BAS Excluded",
+64104,EXP,Lease Costs - R,,Expense,GST Free Expenses,,No,Yes,No,,EXP.REN,fuzzy_name_global,100.0,EXP.REN,False,GST on Expenses,"Expected one of: GST on Expenses, got: GST Free Expenses",
+64205,EXP,MV - Refurbishment - R,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP.VEH,True,,,Motor vehicle refurbishment
+64207,EXP,Rental Truck-General Expenses,,Expense,GST on Expenses,,No,Yes,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+66001,EXP,Accountancy 950 - DNU,,Expense,GST on Expenses,,No,Yes,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+66006,EXP,Office SuppliesPostage 950-DNU,,Expense,GST on Expenses,,No,Yes,No,,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,True,GST on Expenses,,
+66014,EXP,MV - Fuel & Oil 950 - DNU,,Expense,GST on Expenses,,No,Yes,No,,EXP.VEH,detail_include,91.0,EXP.VEH,True,"GST Free Expenses, GST on Expenses",,
+66015,EXP,Motor Vehicle Expenses - DNU,,Expense,GST on Expenses,,No,Yes,No,,EXP.VEH,motor_vehicle_expense,86.0,EXP.VEH,True,"GST Free Expenses, GST on Expenses",,
+66023,EXP,Wages Contractors,,Expense,GST Free Expenses,,No,Yes,No,,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,False,BAS Excluded,"Expected one of: BAS Excluded, got: GST Free Expenses",
+801,LIA.CUR.PAY.EMP,Unpaid Expense Claims,,Unpaid Expense Claims,BAS Excluded,Expense claims typically made by employees/shareholder employees still outstanding.,No,No,No,,,,,,True,,,
+81000,REV,Interest Income,,Other Income,GST Free Income,,No,No,No,,REV.INV.INT,synonym_exact_type,95.0,REV.INV.INT,True,GST Free Income,,
+81001,REV,FBT recouped,,Other Income,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.OTH,True,,,FBT recouped
+81002,REV,Interest Income ATO,,Other Income,BAS Excluded,,No,No,No,,REV.INV.INT,fuzzy_name_type,88.23529411764706,REV.INV.INT,False,GST Free Income,"Expected one of: GST Free Income, got: BAS Excluded",
+81010,REV,Profit on Sale of Fixed Assets,,Other Income,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.OTH.GAI,True,,,Profit on sale of fixed assets
+82000,REV,Consulting Fees - Ian,,Other Income,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.OTH,True,,,Consulting fees
+83000,REV,Liquor Logistics,,Other Income,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.OTH,True,,,Liquor logistics income
+840,LIA.CUR,Historical Adjustment,,Historical,BAS Excluded,For accountant adjustments,No,No,No,,LIA.CUR,synonym_exact_global,90.0,LIA.CUR,True,BAS Excluded,,
+84000,REV,Banks SCM,,Other Income,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.OTH,True,,,Banks SCM income
+85000,REV,Other Income,,Other Income,GST Free Income,,No,No,No,,,unmatched,0.0,REV.OTH,False,,"Expected one of: BAS Excluded, GST on Income, got: GST Free Income",Other income
+860,LIA.CUR,Rounding,,Rounding,BAS Excluded,An adjustment entry to allow for rounding,No,No,No,,,,,,True,,,
+86000,REV,Jobkeeper Payments,,Other Income,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.OTH,True,,,JobKeeper payments
+87000,REV,ATO Incentive Payment,,Other Income,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.OTH,True,,,ATO incentive payment
+877,LIA.CUR,Tracking Transfers,,Tracking,BAS Excluded,Transfers between tracking categories,No,No,No,,,,,,True,,,
+88000,REV,NSW Govt Grant,,Other Income,GST Free Income,,No,No,No,,,unmatched,0.0,REV.GRA.GOV,True,,,NSW Government grant
+89000,REV,Rebate - Apprentice,,Other Income,GST Free Income,,No,No,No,,,unmatched,0.0,REV.OTH,False,,"Expected one of: BAS Excluded, GST on Income, got: GST Free Income",Apprentice rebate
+90001,EXP,Interest Expenses,,Expense,GST Free Expenses,,No,Yes,No,,EXP.INT,fuzzy_name_type,96.96969696969695,EXP.INT,True,GST Free Expenses,,
+90002,EXP,Interest Expenses - ATO,,Expense,GST Free Expenses,,No,Yes,No,,EXP.NON,non_deductible_interest,88.0,EXP.NON,True,"BAS Excluded, GST Free Expenses",,
+90003,EXP,Chattel Mortgage Interest,,Expense,GST Free Expenses,,No,Yes,No,,,unmatched,0.0,,True,,,
+90004,EXP,Bormio Loan - Interest,,Expense,GST Free Expenses,,No,No,Yes,,,unmatched,0.0,,True,,,
+90005,EXP,Vehicle 656,,Expense,GST Free Expenses,,No,No,No,,EXP.VEH,fuzzy_name_global,82.05128205128204,EXP.VEH,True,"GST Free Expenses, GST on Expenses",,
+91000,EXP,Loss on Sale of Fixed Assets,,Expense,BAS Excluded,,No,Yes,No,,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,True,"BAS Excluded, GST on Expenses",,
+91010,EXP,Foreign exchange loss-realised,,Expense,BAS Excluded,,No,Yes,No,,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,True,"BAS Excluded, GST on Expenses",,
+92999,EXP,Miscellanous,,Expense,BAS Excluded,,No,Yes,No,,,unmatched,0.0,EXP,True,,,Miscellaneous expenses
+93000,EXP,Income Tax,,Expense,BAS Excluded,,No,Yes,No,,EXP.INC,fuzzy_name_global,100.0,EXP.INC,True,BAS Excluded,,
+93001,EXP,Fine - ATO,,Expense,BAS Excluded,,No,Yes,No,,,unmatched,0.0,EXP.NON,True,,,Fines
+94000,EXP,Suspense 950,,Expense,BAS Excluded,,No,Yes,No,,EXP.EXT,suspense_expense,86.0,EXP.EXT,False,GST on Expenses,"Expected one of: GST on Expenses, got: BAS Excluded",
+SQ-000000,ASS,Square Balance,,Bank,BAS Excluded,,No,No,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+SQ-200000,REV,Square Other Income,,Revenue,GST on Income,,No,No,No,,,unmatched,0.0,REV.TRA.GOO,True,,,Square sales/revenue
+SQ-200001,REV,Square Sales,,Revenue,GST on Income,,No,No,No,,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,True,GST on Income,,
+SQ-200002,REV,Square Discounts,,Revenue,GST on Income,,No,No,No,,,unmatched,0.0,REV.TRA.GOO,True,,,Square sales/revenue
+SQ-200003,REV,Square Shipping/Delivery Fee Revenue,,Revenue,GST on Income,,No,No,No,,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,True,GST on Income,,
+SQ-200004,REV,Square Surcharges,,Revenue,GST on Income,,No,No,No,,,unmatched,0.0,REV.TRA.GOO,True,,,Square sales/revenue
+SQ-200011,REV,Square Service Charges,,Revenue,GST on Income,,No,No,No,,,unmatched,0.0,REV.TRA.GOO,True,,,Square sales/revenue
+SQ-300000,EXP,Square Fees,,Expense,GST on Expenses,,No,No,No,,,unmatched,0.0,,True,,,
+SQ-300001,EXP,Square Third Party Fee,,Expense,GST on Expenses,,No,No,No,,,unmatched,0.0,,True,,,
+SQ-300002,EXP,Square Chargebacks,,Expense,GST on Expenses,,No,No,No,,,unmatched,0.0,,True,,,
+SQ-600000,ASS,Square Balance Adjustments,,Current Asset,BAS Excluded,,No,No,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+SQ-600003,ASS,Square Held Funds,,Current Asset,BAS Excluded,,No,No,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+SQ-600008,ASS,Square Cash Clearing,,Current Asset,BAS Excluded,,No,No,Yes,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+SQ-600010,ASS,Square Other Payment Clearing,,Current Asset,BAS Excluded,,No,No,Yes,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+SQ-800000,LIA,Square Loan Payments,,Current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+SQ-800005,LIA,Square Tips,,Current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+SQ-800006,LIA,Square Gift Card,,Current Liability,BAS Excluded,,No,No,Yes,,,unmatched,0.0,,True,,,
+SQ-800007,LIA,Square Collected Taxes,,Current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
+SQ-800009,LIA,Square Exchange Credit Clearing,,Current Liability,BAS Excluded,,No,No,Yes,,,unmatched,0.0,,True,,,

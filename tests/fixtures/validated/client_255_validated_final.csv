@@ -1,0 +1,118 @@
+EntityType,SourceFile,Code,Name,Type,SuggestedReportingCode,MatchReason,Score,ValidatedReportingCode,Reviewer,Notes
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,,Business Trans Acct,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,,Business Trans Acct (1397),Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,0271,Apprentice - Subsidies/Grants,Other Income,,unmatched,0.0,REV.GRA.GOV,,Government grants (apprentice subsidies)
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,0272,Operating grants,Other Income,,unmatched,0.0,REV.GRA.GOV,,Operating grants (government)
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,0273,ATO Interest Income,Other Income,REV.INV.INT,fuzzy_name_type,88.23529411764706,REV.INV.INT,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,0500,Sales,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,0501,Sales of Product Income,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,400,Advertising and marketing,Expense,EXP.ADV,fuzzy_name_type,95.91836734693877,EXP.ADV,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,401,Accounting and bookkeeping,Expense,EXP.PRO,fuzzy_name_global,100.0,EXP.PRO,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,406,Bank charges and fees,Expense,EXP,code_match,100.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,408,Borrowing Charges,Expense,,unmatched,0.0,EXP.INT,,Borrowing charges (interest expense)
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,410,Rubbish Removal,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,412,Consultants fees,Expense,EXP,detail_include,91.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,413,Client Gifts,Expense,EXP,detail_include,91.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,416,Immediate Asset Write Off,Expense,,unmatched,0.0,EXP.DEP,,Immediate asset write off (depreciation)
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,420,Entertainment,Expense,EXP.ENT,code_match,100.0,EXP.ENT,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,427,Hire of Plant and Equip,Expense,EXP,code_match,100.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,430,Subscriptions & Memberships,Expense,EXP,synonym_exact_type,95.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,433,Insurance,Expense,EXP.INS,code_match,100.0,EXP.INS,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,437,Interest expense,Expense,EXP.INT,code_match,100.0,EXP.INT,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,438,ATO Interest Expense,Expense,EXP.NON,non_deductible_interest,88.0,EXP.NON,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,446,Materials & Supplies,Expense,EXP.COS.PUR,detail_include,91.0,EXP.COS.PUR,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,447,Motor vehicle - Depreciation,Expense,EXP.DEP,detail_include,91.0,EXP.DEP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,448,Motor Vehicle Fuel Costs,Expense,EXP.VEH,detail_include,91.0,EXP.VEH,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,449,Motor vehicle Registration & Insurance,Expense,EXP.VEH,code_match,100.0,EXP.VEH,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,450,Motor Vehicle Service and Repairs,Expense,EXP.VEH,motor_vehicle_expense,86.0,EXP.VEH,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,453,Office expenses,Expense,EXP.ADM,code_match,100.0,EXP.ADM,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,454,Staff amenities,Expense,EXP.EMP,code_match,100.0,EXP.EMP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,473,Repairs and maintenance,Expense,EXP.REP,code_match,100.0,EXP.REP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,474,Training Course,Expense,EXP.EMP,synonym_exact_type,95.0,EXP.EMP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,475,Subcontractors,Expense,EXP,code_match,100.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,476,Protective Clothing & Boots,Expense,,unmatched,0.0,EXP.EMP,,Protective clothing & boots (employee expense)
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,477,Wages Expense,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,478,Superannuation Expense,Expense,EXP.EMP.SUP,code_match,100.0,EXP.EMP.SUP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,479,Replace Trade Tools,Expense,EXP,tools_general_expense,80.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,481,SGC expenses & fees,Expense,EXP.PRO,fuzzy_name_global,86.66666666666667,EXP.PRO,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,489,Telephone & internet expenses,Expense,EXP.UTI,code_match,100.0,EXP.UTI,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,493,Travel expenses,Expense,EXP.TRA.NAT,travel_domestic_expense,86.0,EXP.TRA.NAT,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,497,Bank Revaluations,Bank Revaluations,EXP.FOR,bank_revaluation_override,90.0,EXP.FOR,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,498,Unrealised Currency Gains,Unrealised Currency Gains,EXP.FOR.UGL,unrealised_currency_gain,90.0,EXP.FOR.UGL,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,499,Realised Currency Gains,Realised Currency Gains,EXP.FOR.RGL,realised_currency_gain,90.0,EXP.FOR.RGL,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,610,Accounts Receivable (A/R),Accounts Receivable,ASS.CUR.REC.TRA,accounts_receivable_default,88.0,ASS.CUR.REC.TRA,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,610A,Accounts Receivable (A/R) Original,Current Asset,ASS.CUR.REC.TRA,accounts_receivable_default,88.0,ASS.CUR.REC.TRA,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,800,Accounts Payable (A/P),Accounts Payable,LIA.CUR.PAY.TRA,code_match,100.0,LIA.CUR.PAY.TRA,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,801A,Accounts Payable (A/P) Original,Current Liability,LIA.CUR.PAY.TRA,fuzzy_name_global,100.0,LIA.CUR.PAY.TRA,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,803,Payroll clearing,Current Liability,,unmatched,0.0,LIA.CUR.PAY.EMP,,Wages Payable / Payroll clearing
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,804,Wages Payable - Payroll,Current Liability,LIA.CUR.PAY.EMP,code_match,100.0,LIA.CUR.PAY.EMP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,820,GST Payable Adjustment Control A/c,GST,LIA.CUR.TAX.GST,code_match,100.0,LIA.CUR.TAX.GST,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,821,BAS Clearing Account,Current Liability,LIA.CUR.TAX,tax_control_fallback,85.0,LIA.CUR.TAX,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,822,GST payable control account,Current Liability,LIA.CUR.TAX.GST,detail_include,91.0,LIA.CUR.TAX.GST,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,823,PAYG W variance,Current Liability,LIA.CUR.PAY.EMP,paygw_withholding_liability,91.0,LIA.CUR.PAY.EMP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,826,Superannuation payable,Current Liability,LIA.CUR.PAY.EMP,code_match,100.0,LIA.CUR.PAY.EMP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,827,ATO SGC Account,Current Liability,LIA.CUR.TAX,tax_control_fallback,85.0,LIA.CUR.TAX,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,840,Historical Adjustment,Historical,LIA.CUR,synonym_exact_global,90.0,LIA.CUR,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,900,Directors Loan,Current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,980,Macquarie Finance,Non-current Liability,,unmatched,0.0,LIA.NCL.LOA,,Macquarie Finance (loan)
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,980-1,Interest Payable - Macquarie Finance,Non-current Liability,,unmatched,0.0,LIA.NCL.LOA,,Macquarie Finance (loan)
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9901,Distribution of Profit/Loss - Peter Stepto,Expense,EXP.DIS,code_match,100.0,EXP.DIS,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9902,Distribution of Profit/Loss - Rochelle Stepto,Expense,EXP.DIS,code_match,100.0,EXP.DIS,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9921,Drawings - Person 3628,Non-current Liability,LIA.NCL.DRA.10,trust_template_match,93.0,LIA.NCL.DRA.10,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9922,Drawings - Person 3629,Non-current Liability,LIA.NCL.DRA.10,trust_template_match,93.0,LIA.NCL.DRA.10,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9931,Share of Profit/Loss - Peter Stepto,Non-current Liability,EQU.PFT.1,code_match,100.0,EQU.PFT.1,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9932,Share of Profit/Loss - Rochelle Stepto,Non-current Liability,EQU.PFT.2,code_match,100.0,EQU.PFT.2,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9941,Opening Balances - Person 3628,Non-current Liability,LIA.NCL.ADV.10,trust_template_match,93.0,LIA.NCL.ADV.10,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9942,Opening Balances - Person 3629,Non-current Liability,LIA.NCL.ADV.10,trust_template_match,93.0,LIA.NCL.ADV.10,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9999,Suspense,Non-current Liability,LIA.CUR,trust_template_match,93.0,LIA.CUR,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,nocode,Sales Income,Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode10,BAS Roundoff Gain or Loss,Expense,,unmatched,0.0,EXP,,BAS expense/roundoff
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode11,Billable Expense Income,Revenue,,unmatched,0.0,REV.OTH,,Billable expense income
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode12,Billable Expense Income (deleted),Revenue,,unmatched,0.0,REV.OTH,,Billable expense income
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode14,Borrowing Cost,Non-Current Asset,,unmatched,0.0,,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode16,Capital Introduction,Equity,,unmatched,0.0,EQU,,Capital Introduction
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode19,Contractor Expenses (non salary),Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode20,Cost of sales,Direct Costs,EXP.COS,cogs_expense_default,90.0,EXP.COS,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode21,Default Credit Card,Bank,LIA.CUR.PAY,credit_card_override,92.0,LIA.CUR.PAY,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode22,Default Liability,Current Liability,,unmatched,0.0,LIA.CUR,,Default Liability
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode23,Employee Expenses,Expense,,unmatched,0.0,,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode26,Freight & Delivery - COS,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode27,Fuel & oils (deleted),Expense,EXP.VEH,detail_include,91.0,EXP.VEH,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode28,Gas and electricity,Expense,EXP.UTI,detail_include,91.0,EXP.UTI,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode29,General Pool Assets,Fixed Asset,ASS.NCA.FIX.PLA,general_pool_asset,85.0,ASS.NCA.FIX.PLA,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode30,Gifts and donations,Expense,EXP,detail_include,91.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode31,GST Adjustment,Current Liability,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,LIA.CUR.TAX.GST,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode36,Insurance Recoveries,Other Income,,unmatched,0.0,REV.OTH,,Insurance recoveries
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode38,Interest income,Other Income,REV.INV.INT,synonym_exact_type,95.0,REV.INV.INT,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode40,Inventory (deleted),Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode41,Inventory Asset,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode42,Inventory Asset (deleted),Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode43,Loan (deleted),Non-current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode47,Meals and entertainment,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode52,Motor vehicles at cost,Fixed Asset,ASS.NCA.FIX.VEH,fuzzy_name_type,87.87878787878788,ASS.NCA.FIX.VEH,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode54,Office furniture and equipment at cost,Fixed Asset,,unmatched,0.0,,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode55,Opening balance equity,Equity,,unmatched,0.0,EQU.RES,,Opening balance equity
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode57,Owners drawings,Equity,,unmatched,0.0,EQU.DRA,,Drawings
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode59,PAYG instalments payable,Current Liability,,unmatched,0.0,LIA.CUR.TAX,,PAYG Payable
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode60,PAYG Liability,Current Liability,LIA.CUR.PAY.EMP,paygw_withholding_liability,91.0,LIA.CUR.PAY.EMP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode61,PAYG Withholdings Payable,Current Liability,LIA.CUR.PAY.EMP,paygw_withholding_liability,91.0,LIA.CUR.PAY.EMP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode63,Postage & shipping,Expense,EXP,synonym_exact_type,95.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode64,Prepayments,Current Asset,ASS.CUR.REC.PRE,synonym_exact_global,90.0,ASS.CUR.REC.PRE,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode65,"Printing, stationery & supplies",Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode67,Reconciliation Discrepancies,Expense,,unmatched,0.0,EXP,,Reconciliation discrepancies
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode68,Registration and insurance,Expense,EXP.COS.PUR.FAR.GOA,detail_include,91.0,EXP.COS.PUR.FAR.GOA,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode7,Bad debts (deleted),Expense,,unmatched,0.0,,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode71,Retained Earnings,Retained Earnings,EQU.RET,synonym_exact_type,95.0,EQU.RET,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode73,Salary and Wages,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode76,Sales of Product Income (deleted),Revenue,REV.TRA.GOO,detail_include,91.0,REV.TRA.GOO,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode77,"Shipping, Freight, and Delivery Postage & Handling",Expense,EXP.COS,fuzzy_name_global,100.0,EXP.COS,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode81,Superannuation - Person 3630,Current Liability,,unmatched,0.0,LIA.CUR.PAY.EMP,,Superannuation Payable
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode87,Unapplied Cash Bill Payment Expense,Expense,,unmatched,0.0,EXP,,Unapplied cash bill payment expense
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode88,Unapplied Cash Payment Income,Revenue,,unmatched,0.0,,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode89,Uncategorised Asset,Current Asset,ASS.CUR,type_head_fallback,70.0,ASS.CUR,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode9,BAS Expense,Expense,,unmatched,0.0,EXP,,BAS expense/roundoff
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode90,Uncategorised Expense,Expense,EXP,type_head_fallback,70.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode91,Undeposited funds,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode93CB,GST Conversion Balance,Current Liability,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,LIA.CUR.TAX.GST,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode94,Workcover expenses,Expense,EXP.INS,fuzzy_name_global,100.0,EXP.INS,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,RECONC,Reconciliation account,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,

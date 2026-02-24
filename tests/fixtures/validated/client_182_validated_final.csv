@@ -1,0 +1,86 @@
+Code,InputReportingCode,Name,Reporting Name,Type,Tax Code,Description,Dashboard,Expense Claims,Enable Payments,Balance,SuggestedReportingCode,MatchReason,Score,ValidatedReportingCode,TaxCodeValid,TaxCodeExpected,TaxCodeIssue,Notes
+,ASS,Entity 2315 1 Loan,,Bank,BAS Excluded,,No,No,No,,,,,ASS.CUR.CAS.BAN,True,,,Trust loan account (bank)
+,ASS.CUR.CAS.BAN,NAB Account # 7840,,Bank,BAS Excluded,,No,No,No,,,,,ASS.CUR.CAS.BAN,True,,,Bank account
+,ASS,NAB Account # 1627,,Bank,BAS Excluded,,No,No,No,,,,,ASS.CUR.CAS.BAN,True,,,Bank account
+200,REV.TRA.GOO,Sales,,Revenue,GST on Income,Income from any normal business activity,No,No,No,,,,,REV.TRA.GOO,True,,,Sales (goods)
+260,REV.OTH,Other Income,,Other Income,GST on Income,Any other income that does not relate to normal business activities and is not recurring,No,No,No,,,unmatched,0.0,,True,,,
+270,REV,Interest Income,,Revenue,GST Free Income,Interest income,No,No,No,,REV.INV.INT,code_match,100.0,REV.INV.INT,True,GST Free Income,,
+280,REV,Rental Income,,Revenue,GST on Income,,No,No,No,,REV.INV.REN,synonym_exact_type,95.0,REV.INV.REN,False,GST Free Income,"Expected one of: GST Free Income, got: GST on Income",
+281,REV,Outgoings Recovered,,Revenue,GST on Income,,No,No,No,,,unmatched,0.0,REV.INV.REN,False,,"Expected one of: GST Free Income, got: GST on Income",Outgoings recovered (rental income component)
+282,REV,Other Lease Recoveries,,Revenue,GST on Income,,No,No,No,,,unmatched,0.0,REV.INV.REN,False,,"Expected one of: GST Free Income, got: GST on Income",Other lease recoveries (rental income)
+310,EXP.COS,Cost of Goods Sold,,Direct Costs,GST on Expenses,Cost of goods sold by the business,No,No,No,,EXP.COS,cogs_expense_default,90.0,EXP.COS,True,GST on Expenses,,
+350,EXP,A Budget Carry-over,,Expense,BAS Excluded,Do not post to this account,No,No,No,,,unmatched,0.0,EXP,True,,,Budget carry-over (general expense)
+400,EXP,Advertising & Marketing,,Expense,GST on Expenses,Expenses incurred for advertising while trying to increase sales,No,No,No,,EXP.ADV,synonym_exact_type,95.0,EXP.ADV,True,GST on Expenses,,
+404,EXP.INT,Bank Fees,,Expense,GST Free Expenses,Fees charged by your bank for transactions regarding your bank account(s).,No,No,No,,EXP.BAD,bank_fee_override,84.0,EXP.BAD,False,BAS Excluded,"Expected one of: BAS Excluded, got: GST Free Expenses",
+405,EXP,Filing Fees,,Expense,GST Free Expenses,,No,No,No,,EXP,synonym_exact_type,95.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+408,EXP,Cleaning,,Expense,GST on Expenses,Expenses incurred for cleaning business property.,No,No,No,,EXP.OCC,detail_include,91.0,EXP.OCC,False,GST Free Expenses,"Expected one of: GST Free Expenses, got: GST on Expenses",
+410,EXP,Acquisition Fees,,Expense,GST on Expenses,,No,No,Yes,,,unmatched,0.0,EXP,True,,,Acquisition fees
+412,EXP,Accounting,,Expense,GST on Expenses,,No,No,No,,EXP.PRO,fuzzy_name_type,87.17948717948718,EXP.PRO,True,GST on Expenses,,
+413,EXP,Borrowing Expenses,,Expense,GST Free Expenses,,No,No,No,,,unmatched,0.0,EXP.INT,True,,,Borrowing expenses
+414,EXP,Contractor Expense,,Expense,GST on Expenses,,No,No,No,,,unmatched,0.0,EXP,True,,,Contractor expenses
+415,EXP,Consultants,,Expense,GST on Expenses,,No,No,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+416,EXP.DEP,Depreciation,,Expense,BAS Excluded,The amount of the asset's cost (based on the useful life) that was consumed during the period,No,No,No,,EXP.DEP,code_match,100.0,EXP.DEP,True,BAS Excluded,,
+420,EXP,DA Fees,,Expense,GST Free Expenses,Development Application Fees paid to State & Local Govt,No,No,No,,,unmatched,0.0,EXP,True,,,DA fees (development application)
+425,EXP,Freight & Courier,,Expense,GST on Expenses,Expenses incurred on courier & freight costs,No,No,No,,,,,EXP,True,,,Freight & courier
+429,EXP,General Expenses,,Expense,GST on Expenses,General expenses related to the running of the business.,No,No,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+433,EXP,Insurance,,Expense,GST on Expenses,Expenses incurred for insuring the business' assets,No,No,No,,EXP.INS,code_match,100.0,EXP.INS,True,GST on Expenses,,
+437,EXP.INT,Interest Expense,,Expense,GST Free Expenses,"Any interest expenses paid to ATO, business bank accounts or credit card accounts.",No,No,No,,EXP.INT,code_match,100.0,EXP.INT,True,GST Free Expenses,,
+438,EXP,Equity Interest Accrual,,Expense,GST Free Expenses,,No,No,No,,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,False,"BAS Excluded, GST on Expenses","Expected one of: BAS Excluded, GST on Expenses, got: GST Free Expenses",
+441,EXP,Legal expenses,,Expense,GST on Expenses,Expenses incurred on any legal matters,No,No,No,,EXP.PRO,code_match,100.0,EXP.PRO,True,GST on Expenses,,
+445,EXP,"Light, Power, Heating",,Expense,GST on Expenses,"Expenses incurred for lighting, powering or heating the premises",No,No,No,,EXP.UTI,fuzzy_name_global,100.0,EXP.UTI,True,GST on Expenses,,
+449,EXP.VEH,Motor Vehicle Expenses,,Expense,GST on Expenses,Expenses incurred on the running of company motor vehicles,No,No,No,,EXP.VEH,motor_vehicle_expense,86.0,EXP.VEH,True,"GST Free Expenses, GST on Expenses",,
+450,EXP,Management Fees,,Expense,GST on Expenses,,No,No,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+451,EXP,Municipal Services,,Expense,GST on Expenses,,No,No,No,,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,True,"BAS Excluded, GST on Expenses",,
+452,EXP,Valuation Fee,,Expense,GST on Expenses,,No,No,No,,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,True,"BAS Excluded, GST on Expenses",,
+453,EXP,Office Expenses,,Expense,GST on Expenses,General expenses related to the running of the business office.,No,No,No,,EXP.ADM,code_match,100.0,EXP.ADM,True,GST on Expenses,,
+461,EXP,Printing & Stationery,,Expense,GST on Expenses,Expenses incurred by the entity as a result of printing and stationery,No,No,No,,EXP.ADM,code_match,100.0,EXP.ADM,True,GST on Expenses,,
+469,EXP.REN,Rent,,Expense,GST on Expenses,The payment to lease a building or area.,No,No,No,,,,,EXP.REN,True,,,Rent
+473,EXP,Repairs and Maintenance,,Expense,GST on Expenses,Expenses incurred on a damaged or run down asset that will bring the asset back to its original condition.,No,No,No,,EXP.REP,code_match,100.0,EXP.REP,True,GST on Expenses,,
+477,EXP.EMP.WAG,Wages and Salaries,,Expense,BAS Excluded,Payment to employees in exchange for their resources,No,No,No,,,,,,True,,,
+478,EXP.EMP.SUP,Superannuation,,Expense,BAS Excluded,Superannuation contributions,No,No,No,,,,,EXP.EMP.SUP,True,,,Superannuation
+484,EXP,Service Fees,,Expense,GST on Expenses,,No,No,No,,EXP.REP,fuzzy_name_global,100.0,EXP.REP,True,GST on Expenses,,
+485,EXP,Subscriptions,,Expense,GST on Expenses,"E.g. Magazines, professional bodies.",No,No,No,,EXP,code_match,100.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
+489,EXP,Communications,,Expense,GST on Expenses,"Expenditure incurred from any business-related phone calls, phone lines, or internet connections",No,No,No,,,unmatched,0.0,EXP.UTI,True,,,Communications (utilities)
+493,EXP.TRA.NAT,Travel - National,,Expense,GST on Expenses,Expenses incurred from domestic travel which has a business purpose,No,No,No,,,,,EXP.TRA.NAT,True,,,Travel - National
+494,EXP.TRA.INT,Travel - International,,Expense,GST Free Expenses,Expenses incurred from international travel which has a business purpose,No,No,No,,,,,EXP.TRA.INT,True,,,Travel - International
+500,EXP,Stamp Duty,,Expense,GST Free Expenses,,No,No,No,,,unmatched,0.0,EXP,True,,,Stamp duty
+501,EXP,Land Tax,,Expense,GST Free Expenses,,No,No,No,,,unmatched,0.0,EXP.OCC,True,,,Land tax (occupancy expense)
+505,EXP.INC,Income Tax Expense,,Expense,BAS Excluded,A percentage of total earnings paid to the government.,No,No,No,,,,,EXP.INC,True,,,Income tax expense
+601,ASS,CBA Account #2715,,Bank,BAS Excluded,,No,No,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+610,ASS.CUR.REC.TRA,Accounts Receivable,,Accounts Receivable,BAS Excluded,Outstanding invoices the company has issued out to the client but has not yet received in cash at balance date.,No,No,No,,ASS.CUR.REC.TRA,accounts_receivable_default,88.0,ASS.CUR.REC.TRA,True,BAS Excluded,,
+620,ASS.CUR.REC.PRE,Prepayments,,Current Asset,BAS Excluded,An expenditure that has been paid for in advance.,No,No,No,,ASS.CUR.REC.PRE,code_match,100.0,ASS.CUR.REC.PRE,True,BAS Excluded,,
+630,ASS.CUR.INY,Inventory,,Inventory,BAS Excluded,Value of tracked items for resale.,No,No,No,,ASS.CUR.INY,inventory_default,88.0,ASS.CUR.INY,True,BAS Excluded,,
+710,ASS.NCA.FIX.PLA,Office Equipment,,Fixed Asset,GST on Expenses,Office equipment that is owned and controlled by the business,No,No,No,,,,,ASS.NCA.FIX.PLA,True,,,Office equipment
+711,ASS.NCA.FIX.PLA.ACC,Less Accumulated Depreciation on Office Equipment,,Fixed Asset,BAS Excluded,The total amount of office equipment cost that has been consumed by the entity (based on the useful life),No,No,No,,,,,ASS.NCA.FIX.PLA.ACC,True,,,Accumulated depreciation on office equipment
+720,ASS.NCA.FIX.PLA,Computer Equipment,,Fixed Asset,GST on Expenses,Computer equipment that is owned and controlled by the business,No,No,No,,,,,ASS.NCA.FIX.PLA,True,,,Computer equipment
+721,ASS.NCA.FIX.PLA.ACC,Less Accumulated Depreciation on Computer Equipment,,Fixed Asset,BAS Excluded,The total amount of computer equipment cost that has been consumed by the business (based on the useful life),No,No,No,,,,,ASS.NCA.FIX.PLA.ACC,True,,,Accumulated depreciation on computer equipment
+730,ASS,4 Charles St South Perth,,Fixed Asset,BAS Excluded,,No,No,No,,,unmatched,0.0,ASS.NCA.FIX.BUC,False,,"Expected one of: GST Free Expenses, GST on Expenses, got: BAS Excluded",Property at cost (4 Charles St South Perth)
+740,ASS,Borrowing Costs,,Non-Current Asset,BAS Excluded,,No,No,No,,,unmatched,0.0,ASS.NCA.INT,False,,"Expected one of: GST on Expenses, got: BAS Excluded",Borrowing costs (intangible)
+800,LIA.CUR.PAY.TRA,Accounts Payable,,Accounts Payable,BAS Excluded,Outstanding invoices the company has received from suppliers but has not yet paid at balance date,No,No,No,,,,,,True,,,
+801,LIA.CUR.PAY.EMP,Unpaid Expense Claims,,Unpaid Expense Claims,BAS Excluded,Expense claims typically made by employees/shareholder employees still outstanding.,No,No,No,,,,,,True,,,
+804,LIA.CUR.PAY.EMP,Wages Payable - Payroll,,Current Liability,BAS Excluded,"Where this account is set as the nominated Wages Payable account within Payroll Settings, Xero allocates the net wage amount of each pay run created using Payroll to this account",No,No,No,,LIA.CUR.PAY.EMP,code_match,100.0,LIA.CUR.PAY.EMP,True,BAS Excluded,,
+820,LIA.CUR.TAX.GST,GST,,GST,BAS Excluded,"The balance in this account represents GST owing to or from the ATO. At the end of the GST period, it is this account that should be used to code against either the 'refunds from' or 'payments to' the ATO that will appear on the bank statement. Xero has been designed to use only one GST account to track GST on income and expenses, so there is no need to add any new GST accounts to Xero.",No,No,No,,,,,,True,,,
+823,LIA,BAS Clearing,,Current Liability,BAS Excluded,,No,No,No,,LIA.CUR.TAX,tax_control_fallback,85.0,LIA.CUR.TAX,True,,Reporting code not in default chart - cannot verify,
+824,LIA,GST Adjustment account,,Current Liability,BAS Excluded,,No,No,No,,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,LIA.CUR.TAX.GST,True,BAS Excluded,,
+825,LIA.CUR.PAY.PAY,PAYG Withholdings Payable,,Current Liability,BAS Excluded,The amount of PAYE tax that is due to be paid,No,No,No,,,,,LIA.CUR.PAY.PAY,True,,,PAYG withholdings payable
+826,LIA.CUR.PAY.EMP,Superannuation Payable,,Current Liability,BAS Excluded,The amount of superannuation that is due to be paid,No,No,No,,,,,LIA.CUR.PAY.EMP,True,,,Superannuation payable
+830,LIA.CUR.TAX.INC,Income Tax Payable,,Current Liability,BAS Excluded,"The amount of income tax that is due to be paid, also resident withholding tax paid on interest received.",No,No,No,,,,,LIA.CUR.TAX.INC,True,,,Income tax payable
+840,LIA.CUR,Historical Adjustment,,Historical,BAS Excluded,For accountant adjustments,No,No,No,,LIA.CUR,synonym_exact_global,90.0,LIA.CUR,True,BAS Excluded,,
+845,LIA,Entity 2315 2,,Non-current Liability,BAS Excluded,Entity 14 2,No,No,No,,,unmatched,0.0,,True,,,
+850,LIA.CUR,Suspense,,Current Liability,BAS Excluded,"An entry that allows an unknown transaction to be entered, so the accounts can still be worked on in balance and the entry can be dealt with later.",No,No,No,,LIA.CUR,synonym_exact_type,95.0,LIA.CUR,True,BAS Excluded,,
+860,LIA.CUR,Rounding,,Rounding,BAS Excluded,An adjustment entry to allow for rounding,No,No,No,,,,,,True,,,
+877,LIA.CUR,Tracking Transfers,,Tracking,BAS Excluded,Transfers between tracking categories,No,No,No,,,,,,True,,,
+880,LIA.NCL.ADV,Owner A Drawings,,Current Liability,BAS Excluded,Withdrawals by the owners,No,No,Yes,,LIA.NCL.DRA.1,owner_capital_mapping,90.0,LIA.NCL.DRA.1,True,BAS Excluded,,
+881,LIA.NCL.ADV,Owner A Funds Introduced,,Current Liability,BAS Excluded,Funds contributed by the owner,No,No,Yes,,LIA.NCL.DRA.1,owner_capital_mapping,90.0,LIA.NCL.DRA.1,True,BAS Excluded,,
+900,LIA.NCL.LOA,Loan - Person 3620,,Non-current Liability,BAS Excluded,Money that has been borrowed from a creditor,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+901,LIA,Loan - Person 3621,,Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+905,LIA,Entity 2317,,Current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
+906,LIA,Entity 2318 2,,Liability,BAS Excluded,,No,No,Yes,,LIA.NCL.REL,loan_from_trust,90.0,LIA.NCL.REL,True,BAS Excluded,,
+907,LIA,Charles 4 - Deposits Held,,Liability,BAS Excluded,Entity 2319 Account for Charles 4 Sale,No,No,Yes,,LIA.CUR,fuzzy_name_global,100.0,LIA.CUR,True,BAS Excluded,,
+910,LIA,Investor Capital Deposits - 4 Charles St South Perth,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,LIA.NCL,True,,,Investor deposits/contributions
+920,LIA,Investor Progressive Contributions,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,LIA.NCL,True,,,Investor deposits/contributions
+950,LIA,Equity Interest,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,LIA.NCL,True,,,Equity interest
+960,EQU.RET,Retained Earnings,,Retained Earnings,BAS Excluded,Do not Use,No,No,No,,,,,,True,,,
+970,EQU.SHA.ORD,Owner A Share Capital,,Equity,BAS Excluded,The value of shares purchased by the shareholders,No,No,Yes,,,unmatched,0.0,EQU.SHA.ORD,True,,,Share capital
+980,EQU,Unit Capital,,Equity,BAS Excluded,,No,No,No,,,unmatched,0.0,EQU.SHA.ORD,True,,,Unit capital (share capital)
+C04,ASS,Entity 2320 Account (JLL),,Non-Current Asset,BAS Excluded,Entity 2321 Account for 4 Charles,No,No,Yes,,,unmatched,0.0,ASS.NCA,True,,Reporting code not in default chart - cannot verify,Trust account (non-current asset)

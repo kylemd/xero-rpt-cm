@@ -1,0 +1,151 @@
+EntityType,SourceFile,Code,Name,Type,SuggestedReportingCode,MatchReason,Score,ValidatedReportingCode,Reviewer,Notes
+company,client_130_ChartOfAccounts_20251215.csv,,Tax,Bank,EXP.FBT,fuzzy_name_global,100.0,EXP.FBT,,
+company,client_130_ChartOfAccounts_20251215.csv,,End of year,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_130_ChartOfAccounts_20251215.csv,,Savings,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_130_ChartOfAccounts_20251215.csv,0575,Interest Received,Other Income,REV.INV.INT,detail_include,91.0,REV.INV.INT,,
+company,client_130_ChartOfAccounts_20251215.csv,0584,Other Income,Other Income,,unmatched,0.0,REV.OTH,,Other Income
+company,client_130_ChartOfAccounts_20251215.csv,0585,Govt Cash Flow Boost,Other Income,,unmatched,0.0,REV.GRA.GOV,,Government Cash Flow Boost
+company,client_130_ChartOfAccounts_20251215.csv,0586,Income - Clinical Placements,Revenue,,unmatched,0.0,REV.OTH,,Income - Clinical Placements
+company,client_130_ChartOfAccounts_20251215.csv,0587,Coaching / Supervising,Revenue,,unmatched,0.0,REV.OTH,,Coaching / Supervising
+company,client_130_ChartOfAccounts_20251215.csv,0590,Professional Fees,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,0591,Fees - NDIA Managed,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,0591.1,Fees - NDIA Managed - Assistant,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,0592,Fees - NDIS Plan Managed,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,0592.1,Fees - NDIS Plan Managed - Assistant,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,0593,Fees - NDIS Self Managed,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,0593.1,Fees - NDIS Self Managed - Assistant,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,0594,Fees - Private,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,0594.1,Fees - Private - Assistant,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,0595,Fees - Third party other,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,0595.1,Fees - Third Party Other - Assistant,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,0640,Subsidies Received,Revenue,,unmatched,0.0,REV.OTH,,Subsidies Received
+company,client_130_ChartOfAccounts_20251215.csv,0650,Disbursement received,Revenue,,unmatched,0.0,REV.OTH,,Disbursement received
+company,client_130_ChartOfAccounts_20251215.csv,0700,Rent Received,Revenue,,unmatched,0.0,REV.INV.REN,,Rent Received
+company,client_130_ChartOfAccounts_20251215.csv,1510,Accountancy,Expense,EXP.PRO,detail_include,91.0,EXP.PRO,,
+company,client_130_ChartOfAccounts_20251215.csv,1515,Advertising & Promotion - General,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1515.1,Advertising - Recruitment,Expense,EXP.ADV,fuzzy_name_global,100.0,EXP.ADV,,
+company,client_130_ChartOfAccounts_20251215.csv,1545,Bank Fees & Charges,Expense,EXP,fuzzy_name_global,100.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1546,Bank Fees & Charges- Merchant Fees,Expense,EXP,fuzzy_name_global,100.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1547,Bookkeeping,Expense,EXP,synonym_exact_type,95.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1548,Borrowing Exp,Expense,EXP,fuzzy_name_global,81.81818181818181,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1565,Cleaning/Rubbish Removal,Expense,EXP.OCC,detail_include,91.0,EXP.OCC,,
+company,client_130_ChartOfAccounts_20251215.csv,1585,Consultants Fees,Expense,EXP,detail_include,91.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1590,Contractors - Therapists,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_130_ChartOfAccounts_20251215.csv,1617,Depreciation,Expense,EXP.DEP,detail_include,91.0,EXP.DEP,,
+company,client_130_ChartOfAccounts_20251215.csv,1635,Disbursements,Expense,,unmatched,0.0,EXP,,Disbursements
+company,client_130_ChartOfAccounts_20251215.csv,1645,Donations,Expense,EXP,detail_include,91.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1646,Gift/Donation,Expense,EXP,fuzzy_name_global,100.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1655,Electricity,Expense,EXP.UTI,detail_include,91.0,EXP.UTI,,
+company,client_130_ChartOfAccounts_20251215.csv,1660,Entertainment,Expense,EXP.ENT,synonym_exact_type,95.0,EXP.ENT,,
+company,client_130_ChartOfAccounts_20251215.csv,1661,Gift,Expense,EXP,synonym_exact_type,95.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1662,Referrer Gifts,Expense,EXP,detail_include,91.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1685,Filing Fees,Expense,EXP,synonym_exact_type,95.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1740,Hire/Rent of  Plant & Equipment,Expense,EXP,fuzzy_name_global,100.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1752,Immediate write off assets,Expense,,unmatched,0.0,EXP,,Immediate write off assets
+company,client_130_ChartOfAccounts_20251215.csv,1755,Insurance,Expense,EXP.COS.PUR.FAR.WOO,detail_include,91.0,EXP.COS.PUR.FAR.WOO,,
+company,client_130_ChartOfAccounts_20251215.csv,1756,Workers Compensation,Expense,,unmatched,0.0,EXP.EMP,,Workers Compensation
+company,client_130_ChartOfAccounts_20251215.csv,1756.1,Workers Comp - Direct employees,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_130_ChartOfAccounts_20251215.csv,1760,Interest Expense - Australia,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1761,ATO Interest,Expense,EXP.NON,non_deductible_interest,88.0,EXP.NON,,
+company,client_130_ChartOfAccounts_20251215.csv,1764,Internet Costs,Expense,EXP.UTI,fuzzy_name_global,100.0,EXP.UTI,,
+company,client_130_ChartOfAccounts_20251215.csv,1770,Stamp Duty,Expense,,unmatched,0.0,EXP,,Stamp Duty
+company,client_130_ChartOfAccounts_20251215.csv,1775,Lease Payments,Expense,EXP.REN.OPE,fuzzy_name_type,80.76923076923077,EXP.REN.OPE,,
+company,client_130_ChartOfAccounts_20251215.csv,1776,Lease Preparation Fee,Expense,EXP.REN,fuzzy_name_global,100.0,EXP.REN,,
+company,client_130_ChartOfAccounts_20251215.csv,1780,Legal Fees,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1790,Membership,Expense,,unmatched,0.0,EXP,,Membership
+company,client_130_ChartOfAccounts_20251215.csv,1804,M/V Car - Fuel & Oil,Expense,EXP.VEH,detail_include,91.0,EXP.VEH,,
+company,client_130_ChartOfAccounts_20251215.csv,1830,NDIS Audit,Expense,EXP.PRO,fuzzy_name_type,86.36363636363636,EXP.PRO,,
+company,client_130_ChartOfAccounts_20251215.csv,1832,Office Expenses,Expense,EXP.ADM,synonym_exact_type,95.0,EXP.ADM,,
+company,client_130_ChartOfAccounts_20251215.csv,1833,Parking,Expense,,unmatched,0.0,EXP.ADM,,Parking
+company,client_130_ChartOfAccounts_20251215.csv,1835,Postage,Expense,EXP.ADM,synonym_exact_type,95.0,EXP.ADM,,
+company,client_130_ChartOfAccounts_20251215.csv,1840,Printing and Stationery,Expense,EXP.ADM,fuzzy_name_type,93.93939393939394,EXP.ADM,,
+company,client_130_ChartOfAccounts_20251215.csv,1855,Rent on Land & Buildings,Expense,EXP.REN,fuzzy_name_global,100.0,EXP.REN,,
+company,client_130_ChartOfAccounts_20251215.csv,1865,Repairs & Maintenance,Expense,EXP.REP,synonym_exact_type,95.0,EXP.REP,,
+company,client_130_ChartOfAccounts_20251215.csv,1875,Rubbish Removal,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1880,Salaries - Ordinary,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1881,Salaries - Assistants,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_130_ChartOfAccounts_20251215.csv,1882,Salaries - Director,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1882.1,Salaries - Director Clinical,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_130_ChartOfAccounts_20251215.csv,1883,Salaries - Therapists,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_130_ChartOfAccounts_20251215.csv,1884,Salaries - Admin,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1885,Salaries - Associated Persons,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1915,Staff Amenities,Expense,EXP.EMP,synonym_exact_type,95.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1916,Socials,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1917,Staff Retention Program,Expense,,unmatched,0.0,EXP.EMP,,Staff Retention Program
+company,client_130_ChartOfAccounts_20251215.csv,1918,Team Building Day,Expense,,unmatched,0.0,EXP.EMP,,Team Building Day
+company,client_130_ChartOfAccounts_20251215.csv,1919,Birthdays,Expense,,unmatched,0.0,EXP.EMP,,Birthdays
+company,client_130_ChartOfAccounts_20251215.csv,1920,Staff Training,Expense,EXP.EMP,fuzzy_name_global,100.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1921,Director Training,Expense,EXP.EMP,fuzzy_name_global,100.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1925,Subscriptions,Expense,EXP,fuzzy_name_global,100.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1925.1,Subscriptions - training,Expense,EXP.EMP,fuzzy_name_global,100.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1926,Professional Registrations,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1930,Sundry Expenses,Expense,EXP,synonym_exact_type,95.0,EXP,,
+company,client_130_ChartOfAccounts_20251215.csv,1935,Superannuation,Expense,EXP.EMP.SUP,synonym_exact_type,95.0,EXP.EMP.SUP,,
+company,client_130_ChartOfAccounts_20251215.csv,1936,Superannuation - Person 3610,Expense,EXP.EMP.SUP,fuzzy_name_global,100.0,EXP.EMP.SUP,,
+company,client_130_ChartOfAccounts_20251215.csv,1937,Superannuation - Person 3611,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_130_ChartOfAccounts_20251215.csv,1938,Superannuation - Person 3612,Expense,EXP.EMP.SUP,fuzzy_name_global,100.0,EXP.EMP.SUP,,
+company,client_130_ChartOfAccounts_20251215.csv,1938.1,Superannuation - Person 3613,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_130_ChartOfAccounts_20251215.csv,1939,Superannuation - Person 3614,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_130_ChartOfAccounts_20251215.csv,1940,Telephone,Expense,EXP.UTI,synonym_exact_type,95.0,EXP.UTI,,
+company,client_130_ChartOfAccounts_20251215.csv,1945,Website expenses,Expense,,unmatched,0.0,EXP,,Website expenses
+company,client_130_ChartOfAccounts_20251215.csv,1946,Therapy Expenses,Expense,,unmatched,0.0,EXP,,Therapy Expenses
+company,client_130_ChartOfAccounts_20251215.csv,1950,Travel Reimbursements,Expense,EXP.TRA.NAT,travel_domestic_expense,86.0,EXP.TRA.NAT,,
+company,client_130_ChartOfAccounts_20251215.csv,1951,Seminars & Conferences,Expense,EXP.EMP,fuzzy_name_global,100.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1952,WWC Check,Expense,,unmatched,0.0,EXP.EMP,,WWC Check
+company,client_130_ChartOfAccounts_20251215.csv,2000,Speech and Learning Services,Bank,REV.TRA.SER,detail_include,91.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,2010,Speech & Learning Services Pty,Bank,REV.TRA.SER,detail_include,91.0,REV.TRA.SER,,
+company,client_130_ChartOfAccounts_20251215.csv,2011,Rental bond,Non-Current Asset,,unmatched,0.0,ASS.CUR.REC.PRE,,Rental bond (prepayment)
+company,client_130_ChartOfAccounts_20251215.csv,2020,Petty Cash Float,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_130_ChartOfAccounts_20251215.csv,2029,Prepayments,Current Asset,ASS.CUR.REC.PRE,synonym_exact_global,90.0,ASS.CUR.REC.PRE,,
+company,client_130_ChartOfAccounts_20251215.csv,2030,Prepaid Insurance Expense,Current Asset,ASS.CUR.REC.PRE,detail_include,91.0,ASS.CUR.REC.PRE,,
+company,client_130_ChartOfAccounts_20251215.csv,2031,Prepaid Interest Expense,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_130_ChartOfAccounts_20251215.csv,2050,Cash on Hand,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_130_ChartOfAccounts_20251215.csv,2101,Trade Debtors,Accounts Receivable,ASS.CUR.REC.TRA,accounts_receivable_default,88.0,ASS.CUR.REC.TRA,,
+company,client_130_ChartOfAccounts_20251215.csv,2660,Received from Centrelink,Current Liability,,unmatched,0.0,LIA.CUR,,Received from Centrelink
+company,client_130_ChartOfAccounts_20251215.csv,2829,Leasehold Improvements,Fixed Asset,ASS.NCA.FIX.LEA,fuzzy_name_type,86.20689655172413,ASS.NCA.FIX.LEA,,
+company,client_130_ChartOfAccounts_20251215.csv,2830,Less: Accumulated Depreciation,Fixed Asset,,unmatched,0.0,ASS.NCA.FIX.LEA.ACC,,Accumulated Depreciation
+company,client_130_ChartOfAccounts_20251215.csv,2831,Office Equipment,Fixed Asset,ASS.NCA.FIX.PLA,synonym_exact_type,95.0,ASS.NCA.FIX.PLA,,
+company,client_130_ChartOfAccounts_20251215.csv,2832,Less : Accumulated Depreciation on Office Equipment,Fixed Asset,ASS.NCA.FIX.PLA.ACC,synonym_exact_type,95.0,ASS.NCA.FIX.PLA.ACC,,
+company,client_130_ChartOfAccounts_20251215.csv,2833,Furniture,Fixed Asset,,unmatched,0.0,ASS.NCA.FIX.PLA,,Furniture
+company,client_130_ChartOfAccounts_20251215.csv,2834,Less : Accumulated Depreciation on Furniture,Fixed Asset,ASS.NCA.FIX.PLA.ACC,fuzzy_name_type,80.0,ASS.NCA.FIX.PLA.ACC,,
+company,client_130_ChartOfAccounts_20251215.csv,2860,General Pool,Fixed Asset,ASS.NCA.FIX.PLA,general_pool_asset,85.0,ASS.NCA.FIX.PLA,,
+company,client_130_ChartOfAccounts_20251215.csv,2861,Low Value Pool,Fixed Asset,ASS.NCA.FIX.PLA,general_pool_asset,85.0,ASS.NCA.FIX.PLA,,
+company,client_130_ChartOfAccounts_20251215.csv,2862,Borrowing Cost,Current Asset,ASS.CUR.REC.PRE,fuzzy_name_global,96.55172413793105,ASS.CUR.REC.PRE,,
+company,client_130_ChartOfAccounts_20251215.csv,2925,Goodwill,Non-Current Asset,ASS.NCA.INT.GOO,detail_include,91.0,ASS.NCA.INT.GOO,,
+company,client_130_ChartOfAccounts_20251215.csv,2929,Goodwill (Less: Accumulated Amortisation),Non-Current Asset,ASS.NCA.INT.GOO,detail_include,91.0,ASS.NCA.INT.GOO,,
+company,client_130_ChartOfAccounts_20251215.csv,3030,contra account,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_130_ChartOfAccounts_20251215.csv,3032,Office Furniture,Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
+company,client_130_ChartOfAccounts_20251215.csv,3035,Staff Training Refundable,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_130_ChartOfAccounts_20251215.csv,3040,Advance Pay,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_130_ChartOfAccounts_20251215.csv,3048,Trade Creditors,Accounts Payable,,unmatched,0.0,LIA.CUR.PAY.TRA,,Trade Creditors
+company,client_130_ChartOfAccounts_20251215.csv,3049,Sundry Creditors,Current Liability,,unmatched,0.0,LIA.CUR.PAY.TRA,,Sundry Creditors
+company,client_130_ChartOfAccounts_20251215.csv,3325,Taxation,Current Liability,,unmatched,0.0,LIA.CUR.TAX,,Taxation
+company,client_130_ChartOfAccounts_20251215.csv,3350,Superannuation Payable,Current Liability,LIA.CUR.PAY.EMP,synonym_exact_type,95.0,LIA.CUR.PAY.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,3380,Gst Payable Control Account,GST,LIA.CUR.TAX.GST,detail_include,91.0,LIA.CUR.TAX.GST,,
+company,client_130_ChartOfAccounts_20251215.csv,3382,Gst Payable Adjustment Control Account,Current Liability,LIA.CUR.TAX.GST,detail_include,91.0,LIA.CUR.TAX.GST,,
+company,client_130_ChartOfAccounts_20251215.csv,3384,input Tax Credit Control Account,Current Liability,,unmatched,0.0,LIA.CUR.TAX.GST,,Input Tax Credit
+company,client_130_ChartOfAccounts_20251215.csv,3386,input Tax Credit Adjustment Control,Current Liability,,unmatched,0.0,LIA.CUR.TAX.GST,,Input Tax Credit
+company,client_130_ChartOfAccounts_20251215.csv,3389,BAS Clearing,Current Liability,LIA.CUR.TAX,tax_control_fallback,85.0,LIA.CUR.TAX,,
+company,client_130_ChartOfAccounts_20251215.csv,3394,PAYG Withholding,Current Liability,LIA.CUR.PAY.EMP,paygw_withholding_liability,91.0,LIA.CUR.PAY.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,3395,PAYG Instalment,Current Liability,,unmatched,0.0,LIA.CUR.TAX,,PAYG Instalment
+company,client_130_ChartOfAccounts_20251215.csv,3565,Directors loan - Person 3615,Non-current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
+company,client_130_ChartOfAccounts_20251215.csv,3566,Loan - Person 3616,Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
+company,client_130_ChartOfAccounts_20251215.csv,3566.1,Loan - Person 3617,Non-current Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_130_ChartOfAccounts_20251215.csv,3570,Loan - Person 3618,Non-current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
+company,client_130_ChartOfAccounts_20251215.csv,3571,Less: Unexpired Interest - Premium Funding Advance $1475,Non-current Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_130_ChartOfAccounts_20251215.csv,3572,Loan - Person 3619,Non-current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
+company,client_130_ChartOfAccounts_20251215.csv,3573,Less: Unexpired Interest - Premium Fund,Non-current Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_130_ChartOfAccounts_20251215.csv,3574,Paid Parental Leave Liability,Current Liability,,unmatched,0.0,LIA.CUR,,Paid Parental Leave Liability
+company,client_130_ChartOfAccounts_20251215.csv,402,Fees - AusVance loan,Expense,,unmatched,0.0,EXP.INT,,Fees - AusVance loan
+company,client_130_ChartOfAccounts_20251215.csv,4110,Income Tax on Profit,Expense,,unmatched,0.0,EXP.INC,,Income Tax on Profit
+company,client_130_ChartOfAccounts_20251215.csv,4160,Dividends Provided for Or Paid,Equity,EQU.RET.DIV,equity_dividend_mapping,90.0,EQU.RET.DIV,,
+company,client_130_ChartOfAccounts_20251215.csv,4199,Unappropriated Profits,Equity,,unmatched,0.0,EQU,,Unappropriated Profits
+company,client_130_ChartOfAccounts_20251215.csv,4200,Issued & Paid Up Capital,Equity,EQU.SHA,share_capital_default,90.0,EQU.SHA,,
+company,client_130_ChartOfAccounts_20251215.csv,497,Bank Revaluations,Bank Revaluations,EXP.FOR,bank_revaluation_override,90.0,EXP.FOR,,
+company,client_130_ChartOfAccounts_20251215.csv,498,Unrealised Currency Gains,Unrealised Currency Gains,EXP.FOR.UGL,unrealised_currency_gain,90.0,EXP.FOR.UGL,,
+company,client_130_ChartOfAccounts_20251215.csv,499,Realised Currency Gains,Realised Currency Gains,EXP.FOR.RGL,realised_currency_gain,90.0,EXP.FOR.RGL,,
+company,client_130_ChartOfAccounts_20251215.csv,660,Paid Parental leave,Expense,,unmatched,0.0,EXP.EMP,,Paid Parental leave
+company,client_130_ChartOfAccounts_20251215.csv,804,Wages Payable - Payroll,Current Liability,LIA.CUR.PAY.EMP,code_match,100.0,LIA.CUR.PAY.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,840,Historical Adjustment,Historical,LIA.CUR,synonym_exact_global,90.0,LIA.CUR,,
+company,client_130_ChartOfAccounts_20251215.csv,9999,suspense,Current Asset,LIA.CUR,trust_template_match,93.0,LIA.CUR,,
+company,client_130_ChartOfAccounts_20251215.csv,BAS,Business Activity Statement,Expense,,unmatched,0.0,EXP,,Business Activity Statement
