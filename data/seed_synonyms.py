@@ -100,10 +100,9 @@ SEED_DATA = [
 def main():
     if DB_PATH.exists():
         DB_PATH.unlink()
-    db = SynonymDB(DB_PATH)
-    db.add_many(SEED_DATA)
+    with SynonymDB(DB_PATH) as db:
+        db.add_many(SEED_DATA)
     print(f"Seeded {len(SEED_DATA)} synonyms to {DB_PATH}")
-    db.close()
 
 
 if __name__ == "__main__":
