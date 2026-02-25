@@ -1,0 +1,148 @@
+# Run-Mapping.ps1 — Drag-and-drop launcher for Xero Report Code Mapping
+# Usage: Drag a ChartOfAccounts CSV and a Trial Balance file onto this script.
+
+param()
+$ErrorActionPreference = "Stop"
+
+# ── Resolve project root (where this script lives) ──
+$ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Definition
+
+# ── Validate arguments ──
+if ($args.Count -ne 2) {
+    Write-Host ""
+    Write-Host "  Xero Report Code Mapping" -ForegroundColor Cyan
+    Write-Host "  ========================" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "  Usage: Drag TWO files onto this script:" -ForegroundColor Yellow
+    Write-Host "    1. ChartOfAccounts CSV  (filename starts with 'ChartOfAccounts')"
+    Write-Host "    2. Trial Balance file   (CSV or XLSX)"
+    Write-Host ""
+    Read-Host "  Press Enter to exit"
+    exit 1
+}
+
+# ── Resolve full paths ──
+$File1 = Resolve-Path $args[0] -ErrorAction Stop | Select-Object -ExpandProperty Path
+$File2 = Resolve-Path $args[1] -ErrorAction Stop | Select-Object -ExpandProperty Path
+
+# ── Identify chart vs trial balance ──
+$ChartFile = $null
+$TBFile = $null
+
+foreach ($f in @($File1, $File2)) {
+    $name = [System.IO.Path]::GetFileName($f)
+    if ($name -match '^ChartOfAccounts') {
+        $ChartFile = $f
+    } else {
+        $TBFile = $f
+    }
+}
+
+if (-not $ChartFile -or -not $TBFile) {
+    Write-Host ""
+    Write-Host "  ERROR: Could not identify files." -ForegroundColor Red
+    Write-Host "  One file must start with 'ChartOfAccounts'." -ForegroundColor Red
+    Write-Host "  Got: $([System.IO.Path]::GetFileName($File1))" -ForegroundColor Yellow
+    Write-Host "       $([System.IO.Path]::GetFileName($File2))" -ForegroundColor Yellow
+    Write-Host ""
+    Read-Host "  Press Enter to exit"
+    exit 1
+}
+
+# ── Validate extensions ──
+$chartExt = [System.IO.Path]::GetExtension($ChartFile).ToLower()
+$tbExt = [System.IO.Path]::GetExtension($TBFile).ToLower()
+
+if ($chartExt -ne '.csv') {
+    Write-Host "  ERROR: Chart file must be .csv (got $chartExt)" -ForegroundColor Red
+    Read-Host "  Press Enter to exit"
+    exit 1
+}
+if ($tbExt -notin @('.csv', '.xlsx')) {
+    Write-Host "  ERROR: Trial balance must be .csv or .xlsx (got $tbExt)" -ForegroundColor Red
+    Read-Host "  Press Enter to exit"
+    exit 1
+}
+
+Write-Host ""
+Write-Host "  Xero Report Code Mapping" -ForegroundColor Cyan
+Write-Host "  ========================" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "  Chart:          $([System.IO.Path]::GetFileName($ChartFile))" -ForegroundColor Green
+Write-Host "  Trial Balance:  $([System.IO.Path]::GetFileName($TBFile))" -ForegroundColor Green
+Write-Host ""
+
+# ── Template selection ──
+$templates = @("Company", "Trust", "SoleTrader", "Partnership", "XeroHandi")
+Write-Host "  Select template:" -ForegroundColor Yellow
+for ($i = 0; $i -lt $templates.Count; $i++) {
+    Write-Host "    $($i + 1). $($templates[$i])"
+}
+Write-Host ""
+$choice = Read-Host "  Enter number (1-$($templates.Count))"
+$idx = [int]$choice - 1
+if ($idx -lt 0 -or $idx -ge $templates.Count) {
+    Write-Host "  ERROR: Invalid selection." -ForegroundColor Red
+    Read-Host "  Press Enter to exit"
+    exit 1
+}
+$template = $templates[$idx]
+Write-Host ""
+Write-Host "  Template: $template" -ForegroundColor Green
+Write-Host ""
+
+# ── Run mapping pipeline ──
+Write-Host "  Running mapping pipeline..." -ForegroundColor Cyan
+Push-Location $ProjectRoot
+try {
+    & uv run python mapping_logic_v15.py "$ChartFile" "$TBFile" --chart $template
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host ""
+        Write-Host "  ERROR: Mapping pipeline failed (exit code $LASTEXITCODE)." -ForegroundColor Red
+        Read-Host "  Press Enter to exit"
+        exit 1
+    }
+} finally {
+    Pop-Location
+}
+
+# ── Locate augmented output ──
+$chartDir = [System.IO.Path]::GetDirectoryName($ChartFile)
+$augmented = Join-Path $chartDir "AugmentedChartOfAccounts.csv"
+if (-not (Test-Path $augmented)) {
+    Write-Host "  ERROR: AugmentedChartOfAccounts.csv not found in $chartDir" -ForegroundColor Red
+    Read-Host "  Press Enter to exit"
+    exit 1
+}
+
+Write-Host ""
+Write-Host "  Generating review report..." -ForegroundColor Cyan
+
+# ── Generate HTML review report ──
+Push-Location $ProjectRoot
+try {
+    & uv run python tools/gen_review_report.py "$augmented"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host ""
+        Write-Host "  ERROR: Review report generation failed." -ForegroundColor Red
+        Read-Host "  Press Enter to exit"
+        exit 1
+    }
+} finally {
+    Pop-Location
+}
+
+# ── Open HTML in browser ──
+$htmlReport = Join-Path $chartDir "ReviewReport.html"
+if (Test-Path $htmlReport) {
+    Write-Host ""
+    Write-Host "  Opening review report in browser..." -ForegroundColor Green
+    Start-Process $htmlReport
+} else {
+    Write-Host "  WARNING: ReviewReport.html not found." -ForegroundColor Yellow
+}
+
+Write-Host ""
+Write-Host "  Done!" -ForegroundColor Green
+Write-Host ""
+Read-Host "  Press Enter to exit"
