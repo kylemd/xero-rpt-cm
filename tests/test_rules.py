@@ -60,8 +60,9 @@ class TestOwnerRules:
         assert code == "EQU.DRA"
 
     def test_funds_introduced_company(self):
-        ctx = _ctx("owner a funds introduced", raw_type="Equity",
-                    canon_type="equity", template="company")
+        """'Funds introduced' on company template, liability type -> LIA.NCL.ADV."""
+        ctx = _ctx("owner a funds introduced", raw_type="Current Liability",
+                    canon_type="current liability", template="company")
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "LIA.NCL.ADV"
 
@@ -240,6 +241,18 @@ class TestVehicleRules:
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "EXP.VEH"
 
+    def test_mv_insurance(self):
+        """MV + insurance -> vehicle expense."""
+        ctx = _ctx("m v car rego insurance", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.VEH"
+
+    def test_registration_insurance(self):
+        """Registration + insurance -> vehicle expense."""
+        ctx = _ctx("registration and insurance", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.VEH"
+
     def test_vehicle_depreciation_not_matched(self):
         """Vehicle depreciation should NOT match as EXP.VEH — it's EXP.DEP."""
         ctx = _ctx("motor vehicle depreciation", raw_type="Expense", canon_type="expense")
@@ -324,6 +337,20 @@ class TestLoanRules:
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "LIA.NCL.LOA"
 
+    def test_directors_loan_apostrophe_on_asset(self):
+        """'Director's Loan' normalised to 'director s loan' on current asset -> ASS.CUR.DIR."""
+        ctx = _ctx("director s loan to ian banks", raw_type="Current Asset",
+                    canon_type="current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.DIR"
+
+    def test_directors_loan_apostrophe_on_liability(self):
+        """'Director's Loan' normalised to 'director s loan' on liability -> LIA.NCL.LOA."""
+        ctx = _ctx("director s loan from john smith", raw_type="Non-Current Liability",
+                    canon_type="non-current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.NCL.LOA"
+
     def test_premium_funding(self):
         ctx = _ctx("premium funding gallagher", raw_type="Current Liability",
                     canon_type="current liability")
@@ -341,7 +368,7 @@ class TestLoanRules:
         ctx = _ctx("loan receivable", raw_type="Non-Current Asset",
                     canon_type="non-current asset")
         code, _ = evaluate_rules(ALL_RULES, ctx)
-        assert code == "ASS.NCA.REL"
+        assert code == "ASS.NCA.LOA"
 
 
 class TestTaxRules:
@@ -358,6 +385,14 @@ class TestTaxRules:
         ctx = _ctx("gst bank fees", raw_type="Expense", canon_type="expense")
         code, name = evaluate_rules(ALL_RULES, ctx)
         assert code != "LIA.CUR.TAX.GST", f"False positive: {name}"
+
+    def test_gst_not_on_prepaid(self):
+        """Pre-paid GST should NOT match gst_liability."""
+        ctx = _ctx("pre paid gst do not use", raw_type="Non-Current Asset",
+                    canon_type="non-current asset")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code != "LIA.CUR.TAX.GST", f"Prepaid GST should not match gst_liability"
+        assert code == "ASS.CUR.REC.PRE"
 
     def test_bas_payable(self):
         ctx = _ctx("bas payable", raw_type="Current Liability",
@@ -535,6 +570,12 @@ class TestGeneralExpenseRules:
 class TestEquityRules:
     """Equity, shares, and retained earnings rules."""
 
+    def test_share_capital_equity(self):
+        """'Share capital' on equity -> EQU.SHA.ORD (not owner funds rule)."""
+        ctx = _ctx("owner a share capital", raw_type="Equity", canon_type="equity")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EQU.SHA.ORD"
+
     def test_ordinary_shares(self):
         ctx = _ctx("ordinary shares", raw_type="Equity", canon_type="equity")
         code, _ = evaluate_rules(ALL_RULES, ctx)
@@ -595,6 +636,13 @@ class TestRemainingRules:
                     canon_type="current asset")
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "ASS.CUR.REC"
+
+    def test_prepaid_asset(self):
+        """Prepaid / pre-paid -> prepaid receivable."""
+        ctx = _ctx("pre paid insurance", raw_type="Current Asset",
+                    canon_type="current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.REC.PRE"
 
     def test_preliminary_expenses(self):
         ctx = _ctx("preliminary expenses", raw_type="Non-Current Asset",

@@ -122,19 +122,24 @@ _owner_rules = [
         name="owner_funds_introduced_company",
         code="LIA.NCL.ADV",
         priority=93,
-        keywords=["capital contributed", "funds introduced", "share capital"],
+        keywords=["capital contributed", "funds introduced"],
+        keywords_exclude=["share capital"],
         owner_context=True,
         template="company",
+        type_exclude={"equity"},
         notes="Owner keyword + capital/funds + Company template -> NCL advance "
-              "(companies use liability not equity for shareholder advances)",
+              "(companies use liability not equity for shareholder advances). "
+              "Excludes equity accounts and 'share capital' (which is EQU.SHA.ORD).",
     ),
     Rule(
         name="owner_funds_introduced_other",
         code="EQU.ADV",
         priority=92,
-        keywords=["capital contributed", "funds introduced", "share capital"],
+        keywords=["capital contributed", "funds introduced"],
+        keywords_exclude=["share capital"],
         owner_context=True,
-        notes="Owner keyword + capital/funds + non-Company template -> equity advance",
+        notes="Owner keyword + capital/funds + non-Company template -> equity advance. "
+              "Excludes 'share capital' (handled by share_capital_equity rule).",
     ),
 ]
 
@@ -389,6 +394,24 @@ _vehicle_rules = [
         notes="Vehicle insurance -> vehicle expenses",
     ),
     Rule(
+        name="mv_insurance",
+        code="EXP.VEH",
+        priority=75,
+        keywords_all=["mv", "insurance"],
+        canon_types={"expense"},
+        notes="MV insurance -> vehicle expenses. "
+              "'MV' = motor vehicle abbreviation (e.g. 'MV - Insurance').",
+    ),
+    Rule(
+        name="registration_insurance",
+        code="EXP.VEH",
+        priority=75,
+        keywords_all=["registration", "insurance"],
+        canon_types={"expense"},
+        notes="Registration and insurance -> vehicle expenses. "
+              "Registration + insurance combination is vehicle-related.",
+    ),
+    Rule(
         name="vehicle_rego",
         code="EXP.VEH",
         priority=75,
@@ -441,10 +464,11 @@ _loan_rules = [
         code="ASS.CUR.DIR",
         priority=96,
         keywords=["loan to director", "loans to director", "loans to directors",
-                  "to director", "to directors"],
+                  "to director", "to directors", "director s loan"],
         keywords_all=["loan"],
         raw_types={"current asset", "asset"},
-        notes="Loan TO director on current asset -> current director loan",
+        notes="Loan TO director on current asset -> current director loan. "
+              "'director s loan' catches normalised apostrophe form of \"director's loan\".",
     ),
     Rule(
         name="director_loan_to",
@@ -459,8 +483,9 @@ _loan_rules = [
         name="directors_loan_from",
         code="LIA.NCL.LOA",
         priority=94,
-        keywords=["director's loan", "directors loan"],
-        notes="Director's loan (FROM director) -> non-current loan liability",
+        keywords=["director's loan", "directors loan", "director s loan"],
+        notes="Director's loan (FROM director) -> non-current loan liability. "
+              "'director s loan' catches normalised apostrophe form.",
     ),
     Rule(
         name="loan_to_pty",
@@ -481,6 +506,23 @@ _loan_rules = [
         raw_types={"non-current liability", "non current liability",
                    "current liability", "liability"},
         notes="Audit fix: Loan + pty on LIABILITY type -> related party liability",
+    ),
+    Rule(
+        name="related_party_nca",
+        code="ASS.NCA.REL",
+        priority=85,
+        keywords=["related party"],
+        raw_types={"non-current asset", "non current asset"},
+        notes="Explicit 'related party' on NCA type -> related party NCA. "
+              "Catches accounts like 'Related Party Receivables/Loan (NCA)'.",
+    ),
+    Rule(
+        name="related_party_ca",
+        code="ASS.CUR.REL",
+        priority=85,
+        keywords=["related party"],
+        raw_types={"current asset", "asset"},
+        notes="Explicit 'related party' on current asset type -> related party CA.",
     ),
     Rule(
         name="vehicle_loan",
@@ -592,11 +634,12 @@ _loan_rules = [
     ),
     Rule(
         name="generic_loan_nca",
-        code="ASS.NCA.REL",
+        code="ASS.NCA.LOA",
         priority=60,
         keywords=["loan"],
         raw_types={"non-current asset", "non current asset"},
-        notes="Generic loan on non-current asset -> related party NCA",
+        notes="Generic loan on non-current asset -> NCA loan. "
+              "Not related-party by default (needs qualifying context like a name).",
     ),
     Rule(
         name="generic_loan_ca",
@@ -617,8 +660,8 @@ _tax_rules = [
         priority=85,
         keywords=["gst", "goods and services tax"],
         type_exclude={"expense"},
-        keywords_exclude=["fee", "fees", "stripe", "bank"],
-        notes="GST (not on expense accounts, not fees) -> GST tax liability",
+        keywords_exclude=["fee", "fees", "stripe", "bank", "pre paid", "prepaid"],
+        notes="GST (not on expense accounts, not fees, not prepaid) -> GST tax liability",
     ),
     Rule(
         name="bas_payable",
@@ -1088,6 +1131,15 @@ _general_expense_rules = [
 # --- Equity / Shares / Retained Earnings (Priority 75-85) ---
 _equity_rules = [
     Rule(
+        name="share_capital_equity",
+        code="EQU.SHA.ORD",
+        priority=90,
+        keywords=["share capital"],
+        canon_types={"equity"},
+        notes="Share capital on equity -> ordinary shares. "
+              "Higher priority than owner_funds_introduced which now excludes equity.",
+    ),
+    Rule(
         name="ordinary_shares",
         code="EQU.SHA.ORD",
         priority=85,
@@ -1185,6 +1237,18 @@ _remaining_rules = [
         priority=75,
         keywords=["preliminary expenses"],
         notes="Preliminary expenses -> non-current asset",
+    ),
+
+    # Prepaid / Prepayments
+    Rule(
+        name="prepaid_asset",
+        code="ASS.CUR.REC.PRE",
+        priority=72,
+        keywords=["pre paid", "prepaid", "prepayment"],
+        keywords_exclude=["stock", "interest"],
+        notes="Prepaid/prepayment -> current prepaid receivable. "
+              "Catches 'Pre-paid GST', 'Prepaid Insurance', etc. "
+              "Excludes stock (inventory) and interest (expense) prepayments.",
     ),
 
     # WIPAA

@@ -13,13 +13,13 @@ Code,Name,Type,Tax Code,InputReportingCode,ValidatedReportingCode,MatchReason,Sc
 108.0,Sales - Afterpay,Revenue,GST on Income,REV,REV.TRA.GOO,detail_include,91.0,True,,,,No,No,No,,
 109.0,Sales - Paypal,Revenue,GST on Income,REV,REV.TRA.GOO,detail_include,91.0,True,,,,No,No,No,,
 110.0,Cash Boost,Other Income,BAS Excluded,REV,REV.NON,unmatched,0.0,True,,,Cash Boost,No,No,No,,Government cashflow boost
-111.0,Service NSW - JobSaver,Other Income,BAS Excluded,REV,REV.OTH,unmatched,0.0,True,,,,No,No,No,,JobSaver subsidy
+111.0,Service NSW - JobSaver,Other Income,BAS Excluded,REV,REV.GRA.GOV,unmatched,0.0,True,,,,No,No,No,,JobSaver subsidy
 1110.0,Opening Stock on Hand,Direct Costs,BAS Excluded,EXP.COS.OPE,EXP.COS,direct_costs_head,82.0,False,GST on Expenses,"Expected one of: GST on Expenses, got: BAS Excluded",,No,No,No,,
 11116.0,Freight Inbound,Direct Costs,GST on Expenses,EXP,EXP.COS,direct_costs_head,82.0,True,GST on Expenses,,"landing the product for sale, landed costs",No,No,No,,
 1115.0,Purchases,Direct Costs,GST on Expenses,EXP.COS.PUR,EXP.COS.PUR,detail_include,91.0,True,,,,No,No,No,,
 1117.0,Commission MarketPlace,Direct Costs,GST on Expenses,EXP,EXP.COS.PUR,detail_include,91.0,True,,,,No,No,No,,
 1118.0,Freight Cost - Importing,Direct Costs,GST on Expenses,EXP,EXP.COS,direct_costs_head,82.0,True,GST on Expenses,,extra account related to importing,No,No,No,,
-1119.0,Closing Stock on Hand,Direct Costs,BAS Excluded,EXP.COS.CLO,EXP.COS,direct_costs_head,82.0,False,GST on Expenses,"Expected one of: GST on Expenses, got: BAS Excluded",,No,No,No,,
+1119.0,Closing Stock on Hand,Direct Costs,BAS Excluded,EXP.COS.CLO,EXP.COS.CLO,direct_costs_head,82.0,False,GST on Expenses,"Expected one of: GST on Expenses, got: BAS Excluded",,No,No,No,,
 112.0,ANZ Charge Back - Frauds,Sales,GST on Income,REV,,unmatched,0.0,True,,,,No,No,No,,
 1120.0,Stock movement,Direct Costs,BAS Excluded,EXP,EXP.COS,direct_costs_head,82.0,False,GST on Expenses,"Expected one of: GST on Expenses, got: BAS Excluded",,No,No,No,,
 113.0,Sales Discount,Sales,GST on Income,REV,REV.TRA.GOO,detail_include,91.0,True,,,,No,No,No,,
@@ -47,8 +47,8 @@ Code,Name,Type,Tax Code,InputReportingCode,ValidatedReportingCode,MatchReason,Sc
 1715.0,General Expenses,Expense,GST on Expenses,EXP,EXP,detail_include,91.0,True,,,,No,No,No,,
 1740.0,Hire/Rent of  Plant & Equipment,Expense,GST on Expenses,EXP.REN,EXP,fuzzy_name_global,100.0,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,,No,No,No,,
 1752.0,Immediate Asset Write Off,Expense,GST on Expenses,EXP,EXP,unmatched,0.0,True,,,,No,No,No,,Asset write-off
-1755.0,Insurance,Expense,GST on Expenses,EXP,EXP.COS.PUR,detail_include,91.0,True,,,,No,No,No,,
-1760.0,Interest Expense - Australia,Expense,GST Free Expenses,EXP.INT,EXP.EMP,leave_provision_expense,86.0,False,"BAS Excluded, GST on Expenses","Expected one of: BAS Excluded, GST on Expenses, got: GST Free Expenses",,No,No,No,,
+1755.0,Insurance,Expense,GST on Expenses,EXP,EXP.INS,detail_include,91.0,True,,,,No,No,No,,
+1760.0,Interest Expense - Australia,Expense,GST Free Expenses,EXP.INT,EXP.INT,leave_provision_expense,86.0,False,"BAS Excluded, GST on Expenses","Expected one of: BAS Excluded, GST on Expenses, got: GST Free Expenses",,No,No,No,,
 1764.0,Internet Costs,Expense,GST on Expenses,EXP,EXP.UTI,fuzzy_name_global,100.0,True,GST on Expenses,,,No,No,No,,
 1765.0,Website Development Expenses,Expense,GST on Expenses,EXP,,unmatched,0.0,True,,,,No,No,No,,
 1775.0,Parcel Wrap,Direct Costs,GST on Expenses,EXP.COS.PUR,EXP.COS,direct_costs_head,82.0,True,GST on Expenses,,Parcel Wrap,No,No,No,,
@@ -57,7 +57,7 @@ Code,Name,Type,Tax Code,InputReportingCode,ValidatedReportingCode,MatchReason,Sc
 1804.0,M/V Car - Fuel & Oil,Expense,GST on Expenses,EXP,EXP.VEH,detail_include,91.0,True,,,,No,No,No,,
 1805.0,M/V Car - Interest,Expense,BAS Excluded,EXP,EXP.VEH,motor_vehicle_expense,86.0,False,"GST Free Expenses, GST on Expenses","Expected one of: GST Free Expenses, GST on Expenses, got: BAS Excluded",,No,No,No,,
 1806.0,M/V Car - Lease,Expense,GST on Expenses,EXP,EXP.VEH,motor_vehicle_expense,86.0,True,"GST Free Expenses, GST on Expenses",,,No,No,No,,
-1807.0,M/V Car - Rego/Insurance,Expense,GST on Expenses,EXP,EXP.COS.PUR,detail_include,91.0,True,,,,No,No,No,,
+1807.0,M/V Car - Rego/Insurance,Expense,GST on Expenses,EXP,EXP.VEH,detail_include,91.0,True,,,,No,No,No,,
 1808.0,M/V Car - Repairs,Expense,GST on Expenses,EXP,EXP.VEH,motor_vehicle_expense,86.0,True,"GST Free Expenses, GST on Expenses",,,No,No,No,,
 1809.0,M/V Car - Other,Expense,GST on Expenses,EXP,EXP.VEH,motor_vehicle_expense,86.0,True,"GST Free Expenses, GST on Expenses",,,No,No,No,,
 1810.0,Parking and Taxi,Expense,GST on Expenses,EXP,,unmatched,0.0,True,,,,No,No,No,,

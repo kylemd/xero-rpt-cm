@@ -1,10 +1,10 @@
 EntityType,SourceFile,Code,Name,Type,SuggestedReportingCode,MatchReason,Score,ValidatedReportingCode,Reviewer,Notes
-company,client_130_ChartOfAccounts_20251215.csv,,Tax,Bank,EXP.FBT,fuzzy_name_global,100.0,EXP.FBT,,
+company,client_130_ChartOfAccounts_20251215.csv,,Tax,Bank,EXP.FBT,fuzzy_name_global,100.0,ASS.CUR.CAS.BAN,,
 company,client_130_ChartOfAccounts_20251215.csv,,End of year,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
 company,client_130_ChartOfAccounts_20251215.csv,,Savings,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
 company,client_130_ChartOfAccounts_20251215.csv,0575,Interest Received,Other Income,REV.INV.INT,detail_include,91.0,REV.INV.INT,,
 company,client_130_ChartOfAccounts_20251215.csv,0584,Other Income,Other Income,,unmatched,0.0,REV.OTH,,Other Income
-company,client_130_ChartOfAccounts_20251215.csv,0585,Govt Cash Flow Boost,Other Income,,unmatched,0.0,REV.GRA.GOV,,Government Cash Flow Boost
+company,client_130_ChartOfAccounts_20251215.csv,0585,Govt Cash Flow Boost,Other Income,,unmatched,0.0,REV.NON,,Government Cash Flow Boost
 company,client_130_ChartOfAccounts_20251215.csv,0586,Income - Clinical Placements,Revenue,,unmatched,0.0,REV.OTH,,Income - Clinical Placements
 company,client_130_ChartOfAccounts_20251215.csv,0587,Coaching / Supervising,Revenue,,unmatched,0.0,REV.OTH,,Coaching / Supervising
 company,client_130_ChartOfAccounts_20251215.csv,0590,Professional Fees,Revenue,REV.TRA.SER,revenue_fee_mapping,86.0,REV.TRA.SER,,
@@ -42,10 +42,10 @@ company,client_130_ChartOfAccounts_20251215.csv,1662,Referrer Gifts,Expense,EXP,
 company,client_130_ChartOfAccounts_20251215.csv,1685,Filing Fees,Expense,EXP,synonym_exact_type,95.0,EXP,,
 company,client_130_ChartOfAccounts_20251215.csv,1740,Hire/Rent of  Plant & Equipment,Expense,EXP,fuzzy_name_global,100.0,EXP,,
 company,client_130_ChartOfAccounts_20251215.csv,1752,Immediate write off assets,Expense,,unmatched,0.0,EXP,,Immediate write off assets
-company,client_130_ChartOfAccounts_20251215.csv,1755,Insurance,Expense,EXP.COS.PUR.FAR.WOO,detail_include,91.0,EXP.COS.PUR.FAR.WOO,,
+company,client_130_ChartOfAccounts_20251215.csv,1755,Insurance,Expense,EXP.COS.PUR.FAR.WOO,detail_include,91.0,EXP.INS,,
 company,client_130_ChartOfAccounts_20251215.csv,1756,Workers Compensation,Expense,,unmatched,0.0,EXP.EMP,,Workers Compensation
 company,client_130_ChartOfAccounts_20251215.csv,1756.1,Workers Comp - Direct employees,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
-company,client_130_ChartOfAccounts_20251215.csv,1760,Interest Expense - Australia,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
+company,client_130_ChartOfAccounts_20251215.csv,1760,Interest Expense - Australia,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.INT,,
 company,client_130_ChartOfAccounts_20251215.csv,1761,ATO Interest,Expense,EXP.NON,non_deductible_interest,88.0,EXP.INT,,
 company,client_130_ChartOfAccounts_20251215.csv,1764,Internet Costs,Expense,EXP.UTI,fuzzy_name_global,100.0,EXP.UTI,,
 company,client_130_ChartOfAccounts_20251215.csv,1770,Stamp Duty,Expense,,unmatched,0.0,EXP,,Stamp Duty
@@ -130,7 +130,7 @@ company,client_130_ChartOfAccounts_20251215.csv,3394,PAYG Withholding,Current Li
 company,client_130_ChartOfAccounts_20251215.csv,3395,PAYG Instalment,Current Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,PAYG Instalment
 company,client_130_ChartOfAccounts_20251215.csv,3565,Directors loan - Person 3615,Non-current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
 company,client_130_ChartOfAccounts_20251215.csv,3566,Loan - Person 3616,Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
-company,client_130_ChartOfAccounts_20251215.csv,3566.1,Loan - Person 3617,Non-current Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
+company,client_130_ChartOfAccounts_20251215.csv,3566.1,Loan - Person 3617,Non-current Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.LOA.UNS,,
 company,client_130_ChartOfAccounts_20251215.csv,3570,Loan - Person 3618,Non-current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
 company,client_130_ChartOfAccounts_20251215.csv,3571,Less: Unexpired Interest - Premium Funding Advance $1475,Non-current Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
 company,client_130_ChartOfAccounts_20251215.csv,3572,Loan - Person 3619,Non-current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,

@@ -27,13 +27,13 @@ Code,InputReportingCode,Name,Reporting Name,Type,Tax Code,Description,Dashboard,
 10402,ASS,Prepayments,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.CUR.REC.PRE,True,,,Prepayments (should be current asset)
 10403,ASS,Pre-paid Insurance,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.CUR.REC.PRE,True,,,Prepayments (should be current asset)
 10404,ASS,Accrued Revenue,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.NCA.FIX.PLA,False,,"Expected one of: GST on Expenses, got: BAS Excluded",Electrical equipment
-10414,ASS,Director's Loan to Ian Banks,,Current Asset,BAS Excluded,,No,Yes,Yes,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
-10416,ASS,Loan - Person 3622,,Current Asset,BAS Excluded,,No,Yes,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10414,ASS,Director's Loan to Ian Banks,,Current Asset,BAS Excluded,,No,Yes,Yes,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.DIR,True,BAS Excluded,,
+10416,ASS,Loan - Person 3622,,Current Asset,BAS Excluded,,No,Yes,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.REL,True,BAS Excluded,,
 10418,ASS,Income Tax Instalment,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.CUR.REC.PRE,True,,,Tax instalments (prepayments)
 10419,ASS,FBT Instalment,,Prepayment,BAS Excluded,,No,Yes,No,,,unmatched,0.0,,True,,,
 10420,ASS,Loan - Person 3623,,Fixed Asset,BAS Excluded,,No,Yes,No,,,unmatched,0.0,ASS.CUR.LOA,True,,,Loan to staff (current asset)
 10451,ASS,Entity 2322,,Current Asset,BAS Excluded,,No,Yes,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
-10452,ASS,Loan Banks Subcontracting,,Current Asset,BAS Excluded,,No,Yes,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,True,BAS Excluded,,
+10452,ASS,Loan Banks Subcontracting,,Current Asset,BAS Excluded,,No,Yes,No,,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.REL,True,BAS Excluded,,
 10511,ASS,Plant and Equipment>$1500,,Fixed Asset,GST on Capital,,No,Yes,No,,ASS.NCA.FIX.PLA,fuzzy_name_global,100.0,ASS.NCA.FIX.PLA,False,GST on Expenses,"Expected one of: GST on Expenses, got: GST on Capital",
 10512,ASS,Plant and Equipment < $1500,,Fixed Asset,GST on Capital,,No,Yes,No,,ASS.NCA.FIX.PLA,fuzzy_name_global,100.0,ASS.NCA.FIX.PLA,False,GST on Expenses,"Expected one of: GST on Expenses, got: GST on Capital",
 10513,ASS,Rental Truck Improvements,,Fixed Asset,GST on Capital,,No,Yes,No,,,unmatched,0.0,ASS.NCA.FIX.VEH,False,,"Expected one of: GST on Expenses, got: GST on Capital",Rental truck improvements
@@ -110,7 +110,7 @@ Code,InputReportingCode,Name,Reporting Name,Type,Tax Code,Description,Dashboard,
 22120,LIA,Vehicle 654,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
 22121,LIA,Vehicle 655,,Non-current Liability,BAS Excluded,,No,No,No,,,unmatched,0.0,,True,,,
 22122,LIA,Loan - Person 3624,,Current Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
-22123,LIA,Loan - Person 3625,,Liability,BAS Excluded,,No,No,No,,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,True,BAS Excluded,,
+22123,LIA,Loan - Person 3625,,Liability,BAS Excluded,,No,No,No,,ASS.NCA.DIR,personal_director_loan,91.0,LIA.NCL.HPA,True,BAS Excluded,,
 22124,LIA,Westpac Loan - Interest,,Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
 22125,LIA,Metro Loan,,Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
 22126,LIA,Metro Loan - Interest,,Liability,BAS Excluded,,No,No,No,,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,True,BAS Excluded,,
@@ -188,7 +188,7 @@ Code,InputReportingCode,Name,Reporting Name,Type,Tax Code,Description,Dashboard,
 61041,EXP,Travel - International,,Expense,GST Free Expenses,International travel - GST free,No,No,No,,EXP.EMP,leave_provision_expense,86.0,EXP.TRA.INT,False,"BAS Excluded, GST on Expenses","Expected one of: BAS Excluded, GST on Expenses, got: GST Free Expenses",
 61042,EXP,Meeting Expenses,,Expense,GST on Expenses,,No,Yes,No,,,unmatched,0.0,EXP,True,,,Meeting expenses
 61043,EXP,Business Insurance,,Expense,GST on Expenses,,No,Yes,No,,EXP.COS.PUR.FAR.DAI,detail_include,91.0,EXP.INS,True,,Reporting code not in default chart - cannot verify,
-61044,EXP,PPL Insurance,,Expense,GST on Expenses,,No,Yes,No,,EXP.COS.PUR.FAR.DAI,detail_include,91.0,EXP.COS.PUR.FAR.DAI,True,,Reporting code not in default chart - cannot verify,
+61044,EXP,PPL Insurance,,Expense,GST on Expenses,,No,Yes,No,,EXP.COS.PUR.FAR.DAI,detail_include,91.0,EXP.INS,True,,Reporting code not in default chart - cannot verify,
 61049,EXP,Wages and Salaries - Person 3626,,Expense,BAS Excluded,,No,No,No,,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,True,BAS Excluded,,
 61050,EXP,Superannuation Directors,,Expense,BAS Excluded,,No,No,No,,EXP.EMP.SUP,fuzzy_name_global,100.0,EXP.EMP.SUP,True,BAS Excluded,,
 61051,EXP,Wages & Salaries - Person 3627,,Expense,BAS Excluded,,No,Yes,No,,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,True,BAS Excluded,,
@@ -203,7 +203,7 @@ Code,InputReportingCode,Name,Reporting Name,Type,Tax Code,Description,Dashboard,
 61071,EXP,MV - Rego,,Expense,GST Free Expenses,,No,Yes,No,,,unmatched,0.0,EXP.VEH,True,,,Motor vehicle registration
 61072,EXP,MV - Repair & Maintenance,,Expense,GST on Expenses,,No,Yes,No,,EXP.VEH,fuzzy_name_global,100.0,EXP.VEH,True,"GST Free Expenses, GST on Expenses",,
 61073,EXP,MV - Fuel & Oil,,Expense,GST on Expenses,,No,Yes,No,,EXP.VEH,detail_include,91.0,EXP.VEH,True,"GST Free Expenses, GST on Expenses",,
-61075,EXP,MV - Insurance,,Expense,GST on Expenses,,No,Yes,No,,EXP.COS.PUR.FAR.DAI,detail_include,91.0,EXP.COS.PUR.FAR.DAI,True,,Reporting code not in default chart - cannot verify,
+61075,EXP,MV - Insurance,,Expense,GST on Expenses,,No,Yes,No,,EXP.COS.PUR.FAR.DAI,detail_include,91.0,EXP.VEH,True,,Reporting code not in default chart - cannot verify,
 61085,EXP,General Expenses,,Expense,GST on Expenses,,No,Yes,No,,EXP,detail_include,91.0,EXP,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,
 61090,EXP,Amortisation Expenses,,Expense,BAS Excluded,,No,Yes,No,,EXP.AMO,fuzzy_name_global,100.0,EXP.AMO,True,BAS Excluded,,
 61095,EXP,Advertising & Promotion,,Expense,GST on Expenses,,No,Yes,No,,EXP.ADV,synonym_exact_type,95.0,EXP.ADV,True,GST on Expenses,,
@@ -241,7 +241,7 @@ Code,InputReportingCode,Name,Reporting Name,Type,Tax Code,Description,Dashboard,
 84000,REV,Banks SCM,,Other Income,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.OTH,True,,,Banks SCM income
 85000,REV,Other Income,,Other Income,GST Free Income,,No,No,No,,,unmatched,0.0,REV.OTH,False,,"Expected one of: BAS Excluded, GST on Income, got: GST Free Income",Other income
 860,LIA.CUR,Rounding,,Rounding,BAS Excluded,An adjustment entry to allow for rounding,No,No,No,,,,,,True,,,
-86000,REV,Jobkeeper Payments,,Other Income,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.OTH,True,,,JobKeeper payments
+86000,REV,Jobkeeper Payments,,Other Income,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.GRA.GOV,True,,,JobKeeper payments
 87000,REV,ATO Incentive Payment,,Other Income,BAS Excluded,,No,No,No,,,unmatched,0.0,REV.OTH,True,,,ATO incentive payment
 877,LIA.CUR,Tracking Transfers,,Tracking,BAS Excluded,Transfers between tracking categories,No,No,No,,,,,,True,,,
 88000,REV,NSW Govt Grant,,Other Income,GST Free Income,,No,No,No,,,unmatched,0.0,REV.GRA.GOV,True,,,NSW Government grant

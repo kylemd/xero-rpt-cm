@@ -58,8 +58,8 @@ partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,980,Macquarie Financ
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,980-1,Interest Payable - Macquarie Finance,Non-current Liability,,unmatched,0.0,LIA.NCL.LOA,,Macquarie Finance (loan)
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9901,Distribution of Profit/Loss - Peter Stepto,Expense,EXP.DIS,code_match,100.0,EXP.DIS,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9902,Distribution of Profit/Loss - Rochelle Stepto,Expense,EXP.DIS,code_match,100.0,EXP.DIS,,
-partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9921,Drawings - Person 3628,Non-current Liability,LIA.NCL.DRA.10,trust_template_match,93.0,LIA.NCL.DRA.10,,
-partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9922,Drawings - Person 3629,Non-current Liability,LIA.NCL.DRA.10,trust_template_match,93.0,LIA.NCL.DRA.10,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9921,Drawings - Person 3628,Non-current Liability,LIA.NCL.DRA.10,trust_template_match,93.0,LIA.NCL.DRA.1,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9922,Drawings - Person 3629,Non-current Liability,LIA.NCL.DRA.10,trust_template_match,93.0,LIA.NCL.DRA.2,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9931,Share of Profit/Loss - Peter Stepto,Non-current Liability,EQU.PFT.1,code_match,100.0,EQU.PFT.1,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9932,Share of Profit/Loss - Rochelle Stepto,Non-current Liability,EQU.PFT.2,code_match,100.0,EQU.PFT.2,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,9941,Opening Balances - Person 3628,Non-current Liability,LIA.NCL.ADV.10,trust_template_match,93.0,LIA.NCL.ADV.10,,
@@ -100,7 +100,7 @@ partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode63,Postage & s
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode64,Prepayments,Current Asset,ASS.CUR.REC.PRE,synonym_exact_global,90.0,ASS.CUR.REC.PRE,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode65,"Printing, stationery & supplies",Expense,EXP.ADM,fuzzy_name_global,100.0,EXP.ADM,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode67,Reconciliation Discrepancies,Expense,,unmatched,0.0,EXP,,Reconciliation discrepancies
-partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode68,Registration and insurance,Expense,EXP.COS.PUR.FAR.GOA,detail_include,91.0,EXP.COS.PUR.FAR.GOA,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode68,Registration and insurance,Expense,EXP.COS.PUR.FAR.GOA,detail_include,91.0,EXP.VEH,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode7,Bad debts (deleted),Expense,,unmatched,0.0,,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode71,Retained Earnings,Retained Earnings,EQU.RET,synonym_exact_type,95.0,EQU.RET,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode73,Salary and Wages,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
@@ -112,7 +112,7 @@ partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode88,Unapplied C
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode89,Uncategorised Asset,Current Asset,ASS.CUR,type_head_fallback,70.0,ASS.CUR,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode9,BAS Expense,Expense,,unmatched,0.0,EXP,,BAS expense/roundoff
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode90,Uncategorised Expense,Expense,EXP,type_head_fallback,70.0,EXP,,
-partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode91,Undeposited funds,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode91,Undeposited funds,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.FLO,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode93CB,GST Conversion Balance,Current Liability,LIA.CUR.TAX.GST,fuzzy_name_global,100.0,LIA.CUR.TAX.GST,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,NoCode94,Workcover expenses,Expense,EXP.INS,fuzzy_name_global,100.0,EXP.INS,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,RECONC,Reconciliation account,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,

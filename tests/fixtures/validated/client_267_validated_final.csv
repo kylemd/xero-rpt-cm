@@ -9,7 +9,7 @@ company,client_267_ChartOfAccounts_20251201.csv,11115,Cash on Hand,Non-Current A
 company,client_267_ChartOfAccounts_20251201.csv,11130,Deposit on goods in advance,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
 company,client_267_ChartOfAccounts_20251201.csv,11140,Petty Cash,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.FLO,,
 company,client_267_ChartOfAccounts_20251201.csv,11180,Undeposited Funds,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
-company,client_267_ChartOfAccounts_20251201.csv,11180a,Undeposited Funds a,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
+company,client_267_ChartOfAccounts_20251201.csv,11180a,Undeposited Funds a,Current Asset,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.FLO,,
 company,client_267_ChartOfAccounts_20251201.csv,11190,Payroll Clearing,Current Liability,,unmatched,0.0,LIA.CUR.PAY.EMP,,Payroll Clearing
 company,client_267_ChartOfAccounts_20251201.csv,11195,Contra,Bank,ASS.CUR.CAS.BAN,bank_default_override,85.0,ASS.CUR.CAS.BAN,,
 company,client_267_ChartOfAccounts_20251201.csv,11200,Trade Debtors,Accounts Receivable,ASS.CUR.REC.TRA,accounts_receivable_default,88.0,ASS.CUR.REC.TRA,,
@@ -158,7 +158,7 @@ company,client_267_ChartOfAccounts_20251201.csv,22240,Vehicle 670,Liability,,unm
 company,client_267_ChartOfAccounts_20251201.csv,22250,Unexpired Interest,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
 company,client_267_ChartOfAccounts_20251201.csv,22255,Vehicle 671,Liability,,unmatched,0.0,LIA.NCL.LOA,,Mercedes Loan/Hire Purchase
 company,client_267_ChartOfAccounts_20251201.csv,22256,Less unexpired Term chg Merc B,Liability,,unmatched,0.0,,,
-company,client_267_ChartOfAccounts_20251201.csv,22257,Merc Benz HP Ballon,Liability,,unmatched,0.0,LIA.NCL.LOA,,Mercedes Loan/Hire Purchase
+company,client_267_ChartOfAccounts_20251201.csv,22257,Merc Benz HP Ballon,Liability,,unmatched,0.0,LIA.NCL.HPA,,Mercedes Loan/Hire Purchase
 company,client_267_ChartOfAccounts_20251201.csv,22258,Vehicle 672,Liability,,unmatched,0.0,LIA.NCL.LOA,,VW Loan/Hire Purchase
 company,client_267_ChartOfAccounts_20251201.csv,22259,Vehicle 673,Liability,,unmatched,0.0,,,
 company,client_267_ChartOfAccounts_20251201.csv,22260,Ballon pay out VWGolf CEC81X,Liability,,unmatched,0.0,LIA.NCL.LOA,,Balloon Payment
@@ -167,18 +167,18 @@ company,client_267_ChartOfAccounts_20251201.csv,22262,Vehicle 675,Liability,LIA.
 company,client_267_ChartOfAccounts_20251201.csv,22263,HP Mazdz CES72N Ballon,Liability,,unmatched,0.0,LIA.NCL.HPA,,Hire Purchase
 company,client_267_ChartOfAccounts_20251201.csv,22264,Borrowing cost MV,Liability,ASS.NCA.FIX.VEH,fuzzy_name_global,100.0,ASS.NCA.FIX.VEH,,
 company,client_267_ChartOfAccounts_20251201.csv,22265,Vehicle 676,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
-company,client_267_ChartOfAccounts_20251201.csv,22266,HP - Vehicle 677,Liability,,unmatched,0.0,LIA.NCL.LOA,,VW Loan/Hire Purchase
+company,client_267_ChartOfAccounts_20251201.csv,22266,HP - Vehicle 677,Liability,,unmatched,0.0,LIA.NCL.HPA,,VW Loan/Hire Purchase
 company,client_267_ChartOfAccounts_20251201.csv,22267,Vehicle 678,Liability,,unmatched,0.0,,,
 company,client_267_ChartOfAccounts_20251201.csv,22270,Vehicle 679,Liability,LIA.CUR.CHM,fuzzy_name_global,82.05128205128204,LIA.CUR.CHM,,
-company,client_267_ChartOfAccounts_20251201.csv,22275,Loan- Person 3631,Liability,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,22275,Loan- Person 3631,Liability,ASS.NCA.DIR,personal_director_loan,91.0,LIA.NCL.HPA,,
 company,client_267_ChartOfAccounts_20251201.csv,22276,Unexpired Interest New Ute,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
-company,client_267_ChartOfAccounts_20251201.csv,22277,Loan- Person 3632,Liability,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,22277,Loan- Person 3632,Liability,ASS.NCA.DIR,personal_director_loan,91.0,LIA.NCL.HPA,,
 company,client_267_ChartOfAccounts_20251201.csv,22278,Unexpired Interest Golf DTU87D,Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
-company,client_267_ChartOfAccounts_20251201.csv,22279,Loan- Person 3633,Liability,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,22279,Loan- Person 3633,Liability,ASS.NCA.DIR,personal_director_loan,91.0,LIA.NCL.HPA,,
 company,client_267_ChartOfAccounts_20251201.csv,22280,Unexp Interest Truck DPJ33G,Liability,,unmatched,0.0,,,
 company,client_267_ChartOfAccounts_20251201.csv,22281,Loan - Person 3634,Current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
 company,client_267_ChartOfAccounts_20251201.csv,22282,Vehicle 680,Current Liability,,unmatched,0.0,,,
-company,client_267_ChartOfAccounts_20251201.csv,22283,Loan - Person 3635,Liability,ASS.NCA.DIR,personal_director_loan,91.0,ASS.NCA.DIR,,
+company,client_267_ChartOfAccounts_20251201.csv,22283,Loan - Person 3635,Liability,ASS.NCA.DIR,personal_director_loan,91.0,LIA.NCL.HPA,,
 company,client_267_ChartOfAccounts_20251201.csv,22284,Unexpired Int - Vehicle 681,Liability,,unmatched,0.0,,,
 company,client_267_ChartOfAccounts_20251201.csv,22285,Merc Van DTZ42X,Liability,,unmatched,0.0,,,
 company,client_267_ChartOfAccounts_20251201.csv,22286,Unexp. Int - Van DTZ42X,Liability,,unmatched,0.0,,,
@@ -232,9 +232,9 @@ company,client_267_ChartOfAccounts_20251201.csv,52011,Website Freight,Direct Cos
 company,client_267_ChartOfAccounts_20251201.csv,52015,Import Freight / Charges / Duty,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
 company,client_267_ChartOfAccounts_20251201.csv,52030,Label / Stickers Shop,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
 company,client_267_ChartOfAccounts_20251201.csv,54005,Opening Stock,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
-company,client_267_ChartOfAccounts_20251201.csv,54010,Less: Closing Stock on Hand,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,54010,Less: Closing Stock on Hand,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS.CLO,,
 company,client_267_ChartOfAccounts_20251201.csv,54015,Opening work in Progress,Direct Costs,EXP.COS.WPO,detail_include,91.0,EXP.COS.WPO,,
-company,client_267_ChartOfAccounts_20251201.csv,54700,Closing Stock [54700],Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
+company,client_267_ChartOfAccounts_20251201.csv,54700,Closing Stock [54700],Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS.CLO,,
 company,client_267_ChartOfAccounts_20251201.csv,54710,Product Development,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
 company,client_267_ChartOfAccounts_20251201.csv,54720,Closin Stock - Warehouse,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,
 company,client_267_ChartOfAccounts_20251201.csv,55003,Commissions Paid,Expense,EXP,synonym_exact_type,95.0,EXP,,
@@ -254,7 +254,7 @@ company,client_267_ChartOfAccounts_20251201.csv,60016,Formation Costs writtenoff
 company,client_267_ChartOfAccounts_20251201.csv,60017,Do not use Freight & couriers,Expense,EXP.COS,fuzzy_name_global,100.0,EXP.COS,,
 company,client_267_ChartOfAccounts_20251201.csv,60018,Sample_Company (old) expenses,Expense,,unmatched,0.0,,,
 company,client_267_ChartOfAccounts_20251201.csv,60019,Fines and Late payments,Expense,,unmatched,0.0,EXP.NON,,Late Paid Superannuation & Fine
-company,client_267_ChartOfAccounts_20251201.csv,60020,Insurance,Expense,EXP.COS.PUR.FAR.GOA,detail_include,91.0,EXP.COS.PUR.FAR.GOA,,
+company,client_267_ChartOfAccounts_20251201.csv,60020,Insurance,Expense,EXP.COS.PUR.FAR.GOA,detail_include,91.0,EXP.INS,,
 company,client_267_ChartOfAccounts_20251201.csv,60022,Filing Fee,Expense,EXP,fuzzy_name_type,95.23809523809524,EXP,,
 company,client_267_ChartOfAccounts_20251201.csv,60023,Office Cleaning,Expense,EXP.OCC,detail_include,91.0,EXP.OCC,,
 company,client_267_ChartOfAccounts_20251201.csv,60024,Rubbish Removal (warehouse/shop),Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
