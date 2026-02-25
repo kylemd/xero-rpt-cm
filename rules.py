@@ -18,8 +18,145 @@ CREDIT_CARD_NAMES = [
     "american express", "amex",
 ]
 
-BANK_NAMES = [
-    "westpac", "nab", "anz", "cba", "macquarie", "stripe", "amplify",
+# --- Australian market dictionaries ---
+# Flat keyword lists: each entry is lowercase for normalised matching.
+# Includes full names, abbreviations, and common brand variants.
+
+AUSTRALIAN_BANKS = [
+    # Major four
+    "commonwealth bank", "cba", "commbank",
+    "westpac", "wbc",
+    "anz",
+    "nab", "national australia bank",
+    # Second-tier & regional
+    "macquarie bank", "macquarie", "mqg",
+    "bendigo bank", "bendigo", "ben",
+    "suncorp",
+    "bank of queensland", "boq",
+    "bankwest", "bw",
+    "ing bank", "ing direct",
+    "amp bank", "amp",
+    "hsbc",
+    "citibank", "citi",
+    "st george", "stgeorge", "stg",
+    "banksa", "bsa",
+    "bank of melbourne", "bom",
+    "me bank",
+    "ubank",
+    "rabobank", "rabo",
+    "heritage bank", "heritage",
+    "beyond bank", "beyond",
+    "great southern bank", "gsb",
+    # Payment processors (commonly appear in bank-type accounts)
+    "tyro",
+    "stripe",
+    "square",
+]
+
+# Backwards-compat alias — existing rules reference BANK_NAMES
+BANK_NAMES = AUSTRALIAN_BANKS
+
+VEHICLE_MAKES = [
+    # --- Passenger makes & abbreviations ---
+    "toyota", "corolla", "camry", "rav4", "yaris", "prado", "kluger", "landcruiser",
+    "mazda", "cx-5", "cx-3", "cx-9", "mazda3", "mazda2", "bt-50",
+    "hyundai", "i30", "tucson", "kona", "santa fe", "venue",
+    "kia", "sportage", "cerato", "seltos", "carnival", "tasman",
+    "ford", "focus", "mustang", "escape", "puma",
+    "volkswagen", "vw", "golf", "polo", "tiguan", "t-roc", "amarok",
+    "mercedes-benz", "merc", "mb", "c-class", "e-class", "glc", "gle", "a-class",
+    "bmw", "3 series", "x3", "x5", "1 series",
+    "audi", "a3", "a4", "q5", "q7",
+    "subaru", "subi", "forester", "outback", "xv", "impreza", "wrx",
+    "mitsubishi", "mitsu", "outlander", "asx", "eclipse cross", "pajero",
+    "honda", "cr-v", "hr-v", "civic", "jazz", "accord",
+    "nissan", "x-trail", "qashqai", "patrol", "juke",
+    "suzuki", "vitara", "swift", "jimny", "s-cross", "baleno",
+    "jeep", "wrangler", "grand cherokee", "compass",
+    "land rover", "lr", "defender", "discovery", "range rover",
+    "lexus", "rx", "nx", "is", "ux",
+    "tesla", "model 3", "model y",
+    "peugeot", "2008", "3008", "5008",
+    "mg", "zs", "hs", "mg3", "mg4",
+    # --- Commercial makes & abbreviations ---
+    "hilux", "hiace", "landcruiser 70",
+    "ranger", "transit", "transit custom",
+    "isuzu", "d-max", "mu-x", "n-series", "f-series",
+    "hino", "300", "500", "700",
+    "mitsubishi fuso", "fuso", "canter", "fighter", "shogun",
+    "fiat", "ducato", "scudo",
+    "volvo trucks", "fh", "fm", "fe",
+    "kenworth", "kw", "t610", "t410",
+    "daf", "cf", "lf", "xf",
+    "man", "tgs", "tgx", "tge",
+    "scania", "p-series", "r-series",
+    "sprinter", "actros", "vito",
+    "iveco", "daily", "eurocargo",
+    "western star", "4700", "4800",
+    "ud trucks", "ud", "quon", "croner",
+    "mack", "granite", "anthem",
+    "freightliner", "cascadia", "coronado",
+    "foton", "tunland", "aumark",
+    "great wall", "gwm", "ute", "cannon",
+    "ram", "1500", "2500",
+]
+
+AUSTRALIAN_LENDERS = [
+    # Major banks (as lenders)
+    "commonwealth bank", "cba",
+    "westpac", "wbc",
+    "anz",
+    "nab",
+    "macquarie", "mqg",
+    "st george", "stg",
+    "bankwest", "bw",
+    "suncorp",
+    # Non-bank mortgage lenders
+    "pepper money", "pepper",
+    "liberty",
+    "firstmac",
+    "resimac",
+    "la trobe",
+    "bluestone",
+    "think tank",
+    "bmm",
+    "prospa",
+    "judo",
+    "plenti",
+    "wisr",
+    # Equipment & asset finance
+    "nmef",
+    "capital finance",
+    "angle finance",
+    "metro finance",
+    "rapid finance",
+    "cnhi",
+    "agco",
+    "dll",
+    "flexirent", "humm",
+    "flexigroup",
+    # Credit card brands
+    "visa",
+    "mastercard", "mc",
+    "american express", "amex",
+    "diners club", "diners",
+    "altitude",
+    "platinum",
+    "low rate",
+    "qantas money",
+    "coles",
+    "afterpay",
+    # Vehicle finance
+    "toyota finance", "tfs",
+    "nissan finance", "nfs",
+    "ally",
+    "bmw financial", "bmw fs",
+    "mbfs",
+    "vw finance", "vw fs",
+    "stratton",
+    "motor finance wizard", "mfw",
+    "loan market",
+    "mortgage choice",
 ]
 
 VEHICLE_TOKENS = [
@@ -648,6 +785,28 @@ _loan_rules = [
         keywords=["loan"],
         raw_types={"current asset", "asset"},
         notes="Generic loan on current asset -> related party CA",
+    ),
+
+    # --- Dictionary-powered rules ---
+    Rule(
+        name="vehicle_make_finance_liability",
+        code="LIA.NCL.HPA",
+        priority=78,
+        keywords=VEHICLE_MAKES,
+        keywords_all=["finance"],
+        canon_types={"non-current liability", "current liability", "liability"},
+        notes="Vehicle make + finance -> hire purchase liability",
+    ),
+    Rule(
+        name="lender_liability",
+        code="LIA.NCL.LOA",
+        priority=72,
+        keywords=AUSTRALIAN_LENDERS,
+        canon_types={"non-current liability", "current liability", "liability"},
+        keywords_exclude=["fee", "charge", "interest expense",
+                          "car", "motor vehicle", "vehicle", "mv"],
+        notes="Recognised Australian lender name -> loan liability. "
+              "Excludes vehicle context (may be asset side of finance arrangement).",
     ),
 ]
 

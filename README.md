@@ -1,7 +1,7 @@
 # Xero Report Code Mapping
 
 Python toolkit for assigning Xero reporting codes to client Charts of Accounts.
-Takes a client chart (CSV/XLSX) and an optional trial balance, matches each account
+Takes a client chart (CSV/XLSX) and a trial balance, matches each account
 against template charts, a declarative rule engine, and heuristic keyword rules,
 then produces an augmented chart with reporting codes, a change report, and a
 reporting tree.
@@ -76,6 +76,19 @@ dataclass instances with explicit conditions and priority-based evaluation.
 2. `evaluate_rules()` tests all rules against a normalised account context
 3. The highest-priority matching rule wins
 4. Priority tiers: 100+ (type-specific), 90-99 (high-confidence), 70-79 (general), 60-69 (broad)
+
+### Dictionaries
+
+`rules.py` includes Australian market keyword dictionaries used by the rule engine
+for entity recognition:
+
+| Dictionary | Entries | Purpose |
+|-----------|---------|---------|
+| `AUSTRALIAN_BANKS` | 25 institutions + abbreviations | Detect bank names in account descriptions (fees, accounts) |
+| `VEHICLE_MAKES` | 40 makes + abbreviations + popular models | Detect vehicle-related liabilities and expenses |
+| `AUSTRALIAN_LENDERS` | 50 lenders + abbreviations | Detect loan liabilities from recognised lender names |
+
+`BANK_NAMES` is a backwards-compatible alias for `AUSTRALIAN_BANKS`.
 
 ### Synonym normalisation
 

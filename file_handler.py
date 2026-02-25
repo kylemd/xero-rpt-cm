@@ -61,7 +61,7 @@ def load_trial_balance_file(path: pathlib.Path) -> Tuple[pd.DataFrame, Dict[str,
         df = pd.read_csv(path)
         return df, {"format": "csv", "sanitized": False}
     elif file_ext == '.xlsx':
-        df = pd.read_excel(path, engine='openpyxl')
+        df = pd.read_excel(path, engine='openpyxl', header=None)
         return sanitize_xlsx_trial_balance(df)
     else:
         raise ValueError(f"Unsupported file format: {file_ext}. Only .csv and .xlsx are supported.")
@@ -105,6 +105,9 @@ def sanitize_xlsx_trial_balance(df: pd.DataFrame) -> Tuple[pd.DataFrame, Dict[st
         
         return df, {"format": "xero_trial_balance", "period": period_date, "sanitized": True}
     
+    # Non-Xero format: promote row 0 to headers so downstream code gets named columns
+    df.columns = df.iloc[0]
+    df = df.iloc[1:].reset_index(drop=True)
     return df, {"format": "unknown", "sanitized": False}
 
 
