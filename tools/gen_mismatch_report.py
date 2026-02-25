@@ -153,7 +153,31 @@ def collect_mismatches(sys_map):
     return mismatches
 
 
-def generate_html(mismatches, sys_map, code_list):
+def collect_all_accounts():
+    """Load every row from every validated fixture CSV.
+
+    Returns a list of dicts used by Phase 2 (type review) and Phase 3 (CSV export).
+    """
+    accounts = []
+    for csv_file in sorted(FIXTURES_DIR.glob("*_validated_final.csv")):
+        with open(csv_file, encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                validated = row.get("ValidatedReportingCode", "").strip()
+                if not validated:
+                    continue
+                accounts.append({
+                    "code": row.get("Code", "").strip(),
+                    "name": row.get("Name", "").strip(),
+                    "type": row.get("Type", "").strip(),
+                    "validated_rc": validated,
+                    "input_rc": row.get("InputReportingCode", "").strip(),
+                    "balance": row.get("Balance", "").strip(),
+                    "file": csv_file.name,
+                })
+    return accounts
+
+
+def generate_html(mismatches, sys_map, code_list, all_accounts=None):
     h = html_mod.escape
     cat_counts = Counter(m["category"] for m in mismatches)
     rule_counts = Counter(m["rule_name"] for m in mismatches)
@@ -161,6 +185,7 @@ def generate_html(mismatches, sys_map, code_list):
 
     # Embed the full code list as JSON for the autocomplete/datalist
     code_json = json.dumps(code_list, ensure_ascii=False)
+    all_accounts_json = json.dumps(all_accounts or [], ensure_ascii=False)
 
     parts = []
 
@@ -244,6 +269,30 @@ tr.reviewed:hover td {{ opacity: 1; }}
 .decision-cell textarea::placeholder {{ color: #aaa; }}
 .decision-cell .reason-label {{ font-size: .72em; color: #888; margin-bottom: 2px; }}
 .decided-badge {{ display: inline-block; background: #dcfce7; color: #166534; padding: 1px 6px; border-radius: 8px; font-size: .7em; font-weight: 600; margin-left: 4px; }}
+
+/* Phase 2: Type Review */
+.phase2-banner {{ background: #f0fdf4; border: 2px solid #16a34a; border-radius: 8px; padding: 20px 24px; margin: 20px 0; text-align: center; }}
+.phase2-banner h2 {{ color: #166534; margin-bottom: 6px; }}
+.phase2-banner p {{ color: #15803d; margin-bottom: 12px; }}
+.phase2-section {{ margin-top: 24px; }}
+.phase2-section h2 {{ margin-bottom: 8px; font-size: 1.3em; color: #166534; }}
+.phase2-table {{ width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.1); font-size: .82em; }}
+.phase2-table th {{ background: #166534; color: white; padding: 8px 10px; text-align: left; font-weight: 600; font-size: .8em; }}
+.phase2-table td {{ padding: 7px 10px; border-bottom: 1px solid #eee; vertical-align: top; }}
+.phase2-table tr:hover td {{ background: #f0fdf4 !important; }}
+.phase2-table tr.reviewed td {{ opacity: .55; }}
+.phase2-table tr.reviewed:hover td {{ opacity: 1; }}
+.phase2-table select {{ padding: 4px 6px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: .9em; }}
+.btn-accept {{ padding: 8px 18px; background: #16a34a; color: white; border: none; border-radius: 5px; font-weight: 600; font-size: .9em; cursor: pointer; }}
+.btn-accept:hover {{ background: #15803d; }}
+.btn-accept-sm {{ padding: 3px 8px; background: #16a34a; color: white; border: none; border-radius: 4px; font-size: .75em; cursor: pointer; margin-left: 4px; }}
+.btn-accept-sm:hover {{ background: #15803d; }}
+
+/* Phase 3: CSV Export */
+.csv-section {{ margin-top: 24px; background: white; border-radius: 8px; padding: 20px 24px; box-shadow: 0 1px 3px rgba(0,0,0,.1); text-align: center; }}
+.csv-section h2 {{ margin-bottom: 8px; color: #1e293b; }}
+.btn-download {{ padding: 12px 28px; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 1em; font-weight: 600; cursor: pointer; }}
+.btn-download:hover {{ background: #1d4ed8; }}
 </style>
 </head>
 <body>
@@ -451,6 +500,7 @@ const DIR_HANDLE_DB = 'mismatch_dir_handle';
 const FILENAME = 'mismatch_decisions.json';
 const CODES = {code_json};
 const CODE_MAP = Object.fromEntries(CODES);
+const ALL_ACCOUNTS = {all_accounts_json};
 const TOTAL = {len(mismatches)};
 const IS_FILE = location.protocol === 'file:';
 
@@ -708,6 +758,7 @@ function updateProgress() {{
   const reviewed = Object.entries(decisions).filter(([id, d]) => d.choice && currentIds.has(id)).length;
   document.getElementById('reviewedCount').textContent = reviewed;
   document.getElementById('reviewedPct').textContent = Math.round(reviewed / TOTAL * 100) + '%';
+  checkPhase1Complete();
 }}
 
 // ─── Restore saved state on load ───
@@ -831,6 +882,332 @@ function clearAll() {{
   updateProgress();
 }}
 
+// ─── Phase 2: Type Review ───
+const HEAD_FROM_TYPE = {{
+  'Current Asset': 'ASS', 'Fixed Asset': 'ASS', 'Inventory': 'ASS',
+  'Non-current Asset': 'ASS', 'Prepayment': 'ASS',
+  'Equity': 'EQU',
+  'Depreciation': 'EXP', 'Direct Costs': 'EXP', 'Expense': 'EXP', 'Overhead': 'EXP',
+  'Current Liability': 'LIA', 'Liability': 'LIA', 'Non-current Liability': 'LIA',
+  'Other Income': 'REV', 'Revenue': 'REV', 'Sales': 'REV'
+}};
+
+const ALLOWED_TYPES_BY_HEAD = {{
+  'ASS': ['Current Asset', 'Fixed Asset', 'Inventory', 'Non-current Asset', 'Prepayment'],
+  'EQU': ['Equity'],
+  'EXP': ['Depreciation', 'Direct Costs', 'Expense', 'Overhead'],
+  'LIA': ['Current Liability', 'Liability', 'Non-current Liability'],
+  'REV': ['Other Income', 'Revenue', 'Sales']
+}};
+
+const SYSTEM_TYPES = new Set([
+  'Bank', 'Accounts Receivable', 'Accounts Payable', 'GST',
+  'Historical', 'Rounding', 'Tracking', 'Unpaid Expense Claims', 'Retained Earnings'
+]);
+
+const TYPE_STORAGE_KEY = 'type_decisions_v1';
+let typeDecisions = loadTypeDecisions();
+let phase2Active = false;
+
+function loadTypeDecisions() {{
+  try {{ return JSON.parse(localStorage.getItem(TYPE_STORAGE_KEY)) || {{}}; }}
+  catch {{ return {{}}; }}
+}}
+
+function saveTypeDecisions() {{
+  localStorage.setItem(TYPE_STORAGE_KEY, JSON.stringify(typeDecisions));
+  updatePhase2Progress();
+}}
+
+function headFromCode(code) {{
+  return code ? code.split('.')[0] : '';
+}}
+
+function predictTypeFromCode(code, currentType) {{
+  if (!code) return currentType;
+  const c = code.toUpperCase();
+  if (c.startsWith('ASS.CUR.INY'))       return 'Inventory';
+  if (c.startsWith('ASS.NCA.FIX'))       return 'Fixed Asset';
+  if (c.startsWith('ASS.CUR.REC.PRE'))   return 'Prepayment';
+  if (c.startsWith('ASS.NCA'))            return 'Non-current Asset';
+  if (c.startsWith('ASS'))               return 'Current Asset';
+  if (c.startsWith('EXP.DEP'))            return 'Depreciation';
+  if (c.startsWith('EXP.COS'))            return 'Direct Costs';
+  if (c.startsWith('EXP')) {{
+    if (currentType === 'Overhead')       return 'Overhead';
+    return 'Expense';
+  }}
+  if (c.startsWith('LIA.NCL'))            return 'Non-current Liability';
+  if (c.startsWith('LIA'))               return 'Current Liability';
+  if (c.startsWith('REV.OTH'))            return 'Other Income';
+  if (c.startsWith('REV')) {{
+    if (currentType === 'Sales')          return 'Sales';
+    return 'Revenue';
+  }}
+  if (c.startsWith('EQU'))               return 'Equity';
+  return currentType;
+}}
+
+function getFinalCode(acct) {{
+  // Build a lookup key matching the mismatch id format
+  const rows = document.querySelectorAll('#mismatchTable tbody tr');
+  for (const row of rows) {{
+    const id = row.dataset.id;
+    // Match by file + code + name prefix
+    if (id.startsWith(acct.file.replace('.csv','') + ':' + acct.code + ':')) {{
+      const d = decisions[id];
+      if (d && d.choice) {{
+        if (d.choice === 'got') return row.dataset.got;
+        if (d.choice === 'expected') return row.dataset.expected;
+        if (d.choice === 'other' && d.code) return d.code;
+      }}
+    }}
+  }}
+  return acct.validated_rc;
+}}
+
+function checkPhase1Complete() {{
+  const currentIds = new Set();
+  document.querySelectorAll('#mismatchTable tbody tr').forEach(r => currentIds.add(r.dataset.id));
+  const reviewed = Object.entries(decisions).filter(([id, d]) => d.choice && currentIds.has(id)).length;
+  if (reviewed >= TOTAL && TOTAL > 0 && !phase2Active) {{
+    showPhase2Banner();
+  }}
+}}
+
+function showPhase2Banner() {{
+  if (document.getElementById('phase2Banner')) return;
+  const banner = document.createElement('div');
+  banner.id = 'phase2Banner';
+  banner.className = 'phase2-banner';
+  banner.innerHTML = '<h2>All mismatches reviewed!</h2>'
+    + '<p>Proceed to check account types against reporting codes?</p>'
+    + '<button class="btn-download" onclick="startPhase2()">Start Type Review</button>';
+  document.querySelector('table').after(banner);
+}}
+
+function startPhase2() {{
+  phase2Active = true;
+  const banner = document.getElementById('phase2Banner');
+  if (banner) banner.remove();
+
+  // Build type mismatches
+  const typeMismatches = [];
+  ALL_ACCOUNTS.forEach((acct, idx) => {{
+    if (SYSTEM_TYPES.has(acct.type)) return;
+    const finalCode = getFinalCode(acct);
+    const codeHead = headFromCode(finalCode);
+    const typeHead = HEAD_FROM_TYPE[acct.type];
+    if (!typeHead || !codeHead) return;
+    if (codeHead !== typeHead) {{
+      const predicted = predictTypeFromCode(finalCode, acct.type);
+      typeMismatches.push({{
+        idx: idx,
+        file: acct.file,
+        code: acct.code,
+        name: acct.name,
+        currentType: acct.type,
+        finalCode: finalCode,
+        codeHead: codeHead,
+        predictedType: predicted,
+        acctId: acct.file + ':' + acct.code + ':' + acct.name.substring(0, 40)
+      }});
+    }}
+  }});
+
+  renderPhase2(typeMismatches);
+}}
+
+function renderPhase2(typeMismatches) {{
+  const existing = document.getElementById('phase2Section');
+  if (existing) existing.remove();
+
+  const section = document.createElement('div');
+  section.id = 'phase2Section';
+  section.className = 'phase2-section';
+
+  if (typeMismatches.length === 0) {{
+    section.innerHTML = '<h2>Type Review</h2>'
+      + '<p style="color:#16a34a;font-weight:600">No type mismatches found — all account types are consistent with their reporting codes.</p>';
+    document.querySelector('table').after(section);
+    showCSVSection();
+    return;
+  }}
+
+  let html = '<h2>Type Review <span style="font-weight:400;font-size:.8em;color:#666">('
+    + typeMismatches.length + ' accounts)</span></h2>'
+    + '<p style="margin-bottom:12px;color:#666;font-size:.9em">These accounts have a reporting code head that disagrees with their Xero account type.</p>'
+    + '<div style="margin-bottom:12px"><button class="btn-accept" onclick="acceptAllTypePredictions()">Accept All Predictions</button>'
+    + ' <span class="progress-label" id="phase2Progress">0 / ' + typeMismatches.length + '</span></div>'
+    + '<table class="phase2-table"><thead><tr>'
+    + '<th>#</th><th>File</th><th>Account</th><th>Code</th>'
+    + '<th>Current Type</th><th>Code Head</th><th>Predicted Type</th><th>Your Decision</th>'
+    + '</tr></thead><tbody>';
+
+  typeMismatches.forEach((tm, i) => {{
+    const allowed = ALLOWED_TYPES_BY_HEAD[tm.codeHead] || [];
+    const savedDecision = typeDecisions[tm.acctId];
+    const selectedType = savedDecision ? savedDecision.newType : '';
+    const isDecided = !!selectedType;
+
+    html += '<tr class="' + (isDecided ? 'reviewed' : '') + '" data-type-id="' + escHtml(tm.acctId) + '">'
+      + '<td>' + (i + 1) + '</td>'
+      + '<td style="font-size:.78em">' + escHtml(tm.file.replace('_validated_final.csv', '')) + '</td>'
+      + '<td><strong>' + escHtml(tm.name) + '</strong><br><span class="detail-row">#' + escHtml(tm.code) + '</span></td>'
+      + '<td><span class="code">' + escHtml(tm.finalCode) + '</span></td>'
+      + '<td style="color:#dc2626;font-weight:600">' + escHtml(tm.currentType) + '</td>'
+      + '<td><span class="tag cat">' + escHtml(tm.codeHead) + '</span></td>'
+      + '<td style="color:#16a34a;font-weight:600">' + escHtml(tm.predictedType) + '</td>'
+      + '<td class="decision-cell"><select onchange="setTypeDecision(\'' + escJs(tm.acctId) + '\',this.value)">';
+
+    html += '<option value="">— choose —</option>';
+    allowed.forEach(t => {{
+      const sel = (selectedType === t) ? ' selected' : '';
+      const marker = (t === tm.predictedType) ? ' (predicted)' : '';
+      html += '<option value="' + escHtml(t) + '"' + sel + '>' + escHtml(t) + marker + '</option>';
+    }});
+    html += '</select>'
+      + ' <button class="btn-accept-sm" onclick="acceptTypePrediction(\'' + escJs(tm.acctId) + '\',\'' + escJs(tm.predictedType) + '\',this)">Accept</button>'
+      + '</td></tr>';
+  }});
+
+  html += '</tbody></table>';
+  section.innerHTML = html;
+  document.querySelector('#mismatchTable').after(section);
+  updatePhase2Progress();
+}}
+
+function escHtml(s) {{
+  const div = document.createElement('div');
+  div.textContent = s || '';
+  return div.innerHTML;
+}}
+
+function escJs(s) {{
+  return (s || '').replace(/\\\\/g, '\\\\\\\\').replace(/'/g, "\\\\'");
+}}
+
+function setTypeDecision(acctId, newType) {{
+  if (!newType) {{
+    delete typeDecisions[acctId];
+  }} else {{
+    typeDecisions[acctId] = {{ newType: newType, timestamp: new Date().toISOString() }};
+  }}
+  const row = document.querySelector('tr[data-type-id="' + acctId + '"]');
+  if (row) row.classList.toggle('reviewed', !!newType);
+  saveTypeDecisions();
+  checkPhase2Complete();
+}}
+
+function acceptTypePrediction(acctId, predicted, btn) {{
+  typeDecisions[acctId] = {{ newType: predicted, timestamp: new Date().toISOString() }};
+  const row = document.querySelector('tr[data-type-id="' + acctId + '"]');
+  if (row) {{
+    row.classList.add('reviewed');
+    const select = row.querySelector('select');
+    if (select) select.value = predicted;
+  }}
+  saveTypeDecisions();
+  checkPhase2Complete();
+}}
+
+function acceptAllTypePredictions() {{
+  document.querySelectorAll('.phase2-table tbody tr').forEach(row => {{
+    const acctId = row.dataset.typeId;
+    const select = row.querySelector('select');
+    if (!select) return;
+    // Find the predicted option (has "(predicted)" text)
+    for (const opt of select.options) {{
+      if (opt.text.includes('(predicted)')) {{
+        select.value = opt.value;
+        typeDecisions[acctId] = {{ newType: opt.value, timestamp: new Date().toISOString() }};
+        row.classList.add('reviewed');
+        break;
+      }}
+    }}
+  }});
+  saveTypeDecisions();
+  checkPhase2Complete();
+}}
+
+function updatePhase2Progress() {{
+  const el = document.getElementById('phase2Progress');
+  if (!el) return;
+  const total = document.querySelectorAll('.phase2-table tbody tr').length;
+  const decided = Object.keys(typeDecisions).length;
+  const relevant = Math.min(decided, total);
+  el.textContent = relevant + ' / ' + total;
+}}
+
+function checkPhase2Complete() {{
+  const total = document.querySelectorAll('.phase2-table tbody tr').length;
+  const decided = document.querySelectorAll('.phase2-table tbody tr.reviewed').length;
+  if (decided >= total) {{
+    showCSVSection();
+  }}
+}}
+
+function showCSVSection() {{
+  if (document.getElementById('csvSection')) return;
+  const section = document.createElement('div');
+  section.id = 'csvSection';
+  section.className = 'csv-section';
+  section.innerHTML = '<h2>Export Chart of Accounts</h2>'
+    + '<p style="margin-bottom:12px;color:#666;font-size:.9em">Download the updated Chart of Accounts with all code and type corrections applied.</p>'
+    + '<button class="btn-download" onclick="downloadCSV()">Download Chart of Accounts CSV</button>';
+  const phase2 = document.getElementById('phase2Section');
+  if (phase2) phase2.after(section);
+  else document.querySelector('#mismatchTable').after(section);
+}}
+
+// ─── Phase 3: CSV Export ───
+function csvEscape(val) {{
+  if (val == null) val = '';
+  val = String(val);
+  if (val.includes(',') || val.includes('"') || val.includes('\\n') || val.includes('\\r')) {{
+    return '"' + val.replace(/"/g, '""') + '"';
+  }}
+  return val;
+}}
+
+function downloadCSV() {{
+  const headers = ['*Code', '*Name', '*Type', '*Tax Type', 'Description', 'Dashboard', 'Expense Claims', 'Enable Payments', '*Report Code'];
+  const rows = [headers.join(',')];
+
+  ALL_ACCOUNTS.forEach(acct => {{
+    const finalCode = getFinalCode(acct);
+    const acctId = acct.file + ':' + acct.code + ':' + acct.name.substring(0, 40);
+    const td = typeDecisions[acctId];
+    const finalType = (td && td.newType) ? td.newType : acct.type;
+
+    rows.push([
+      csvEscape(acct.code),
+      csvEscape(acct.name),
+      csvEscape(finalType),
+      '',  // Tax Type — not in fixture data
+      '',  // Description
+      '',  // Dashboard
+      '',  // Expense Claims
+      '',  // Enable Payments
+      csvEscape(finalCode)
+    ].join(','));
+  }});
+
+  const csvContent = rows.join('\\r\\n');
+  const blob = new Blob([csvContent], {{ type: 'text/csv;charset=utf-8;' }});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'ChartOfAccounts_Updated.csv';
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {{
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }}, 500);
+}}
+
 // ─── Init ───
 try {{
   restoreState();
@@ -840,6 +1217,8 @@ try {{
     document.querySelector('.btn-folder').title = 'Requires HTTP server — use Save button to download';
     updateSaveStatus('idle', 'file:// mode — click Save to download JSON');
   }}
+  // Auto-trigger Phase 2 if Phase 1 was already complete
+  checkPhase1Complete();
 }} catch (e) {{
   console.error('Init error:', e);
   const d = document.createElement('div');
@@ -858,10 +1237,12 @@ try {{
 def main():
     sys_map, code_list = load_system_mappings()
     mismatches = collect_mismatches(sys_map)
-    html_content = generate_html(mismatches, sys_map, code_list)
+    all_accounts = collect_all_accounts()
+    html_content = generate_html(mismatches, sys_map, code_list, all_accounts)
     OUTPUT.write_text(html_content, encoding="utf-8")
     print(f"Written {len(mismatches)} mismatches to {OUTPUT}")
-    print(f"File size: {OUTPUT.stat().st_size:,} bytes")
+    print(f"  All accounts: {len(all_accounts)}")
+    print(f"  File size: {OUTPUT.stat().st_size:,} bytes")
 
 
 if __name__ == "__main__":
