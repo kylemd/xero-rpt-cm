@@ -649,8 +649,13 @@ def main(args):
 
         # Enforce head consistency using ranges/type
         exp_head=expected_head_by_code.get(str(row.get('*Code','')).strip(),'') if expected_head_by_code else ''
+        type_head=head_from_type(row['*Type'])
         if not exp_head:
-            exp_head=head_from_type(row['*Type'])
+            exp_head=type_head
+        elif type_head and exp_head.split('.')[0] != type_head.split('.')[0]:
+            # Template code-range head disagrees with account type at broadest level
+            # (e.g., template says LIA range but type is Equity → EQU).  Trust the type.
+            exp_head=type_head
         chosen_head = chosen.split('.')[0] if chosen else ''
         if exp_head and chosen_head and exp_head!=chosen_head:
             original=chosen

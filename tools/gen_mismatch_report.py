@@ -70,11 +70,13 @@ def categorise(code, validated):
     return "Code Mismatch", "Same category, different sub-classification"
 
 
-def collect_mismatches(sys_map):
+def collect_mismatches(sys_map, file_filter=None):
     mismatches = []
     rule_index = {r.name: r for r in ALL_RULES}
 
     for csv_file in sorted(FIXTURES_DIR.glob("*_validated_final.csv")):
+        if file_filter and file_filter not in csv_file.name:
+            continue
         with open(csv_file, encoding="utf-8") as f:
             reader = csv.DictReader(f)
             for row in reader:
@@ -153,13 +155,15 @@ def collect_mismatches(sys_map):
     return mismatches
 
 
-def collect_all_accounts():
+def collect_all_accounts(file_filter=None):
     """Load every row from every validated fixture CSV.
 
     Returns a list of dicts used by Phase 2 (type review) and Phase 3 (CSV export).
     """
     accounts = []
     for csv_file in sorted(FIXTURES_DIR.glob("*_validated_final.csv")):
+        if file_filter and file_filter not in csv_file.name:
+            continue
         with open(csv_file, encoding="utf-8") as f:
             for row in csv.DictReader(f):
                 validated = row.get("ValidatedReportingCode", "").strip()
@@ -1235,12 +1239,14 @@ try {{
 
 
 def main():
+    file_filter = sys.argv[1] if len(sys.argv) > 1 else None
     sys_map, code_list = load_system_mappings()
-    mismatches = collect_mismatches(sys_map)
-    all_accounts = collect_all_accounts()
+    mismatches = collect_mismatches(sys_map, file_filter)
+    all_accounts = collect_all_accounts(file_filter)
     html_content = generate_html(mismatches, sys_map, code_list, all_accounts)
     OUTPUT.write_text(html_content, encoding="utf-8")
-    print(f"Written {len(mismatches)} mismatches to {OUTPUT}")
+    label = f" (filter: {file_filter})" if file_filter else ""
+    print(f"Written {len(mismatches)} mismatches to {OUTPUT}{label}")
     print(f"  All accounts: {len(all_accounts)}")
     print(f"  File size: {OUTPUT.stat().st_size:,} bytes")
 

@@ -70,6 +70,11 @@ ANONYMIZATION_XFAILS = {
     # Trust beneficiary drawings — numbered suffixes (.1, .2) can't be derived by rules
     ("client_255_validated_final.csv", "9921"): "Trust beneficiary numbering (DRA.1)",
     ("client_255_validated_final.csv", "9922"): "Trust beneficiary numbering (DRA.2)",
+    # New rules give more specific codes than validated data (rule engine improvement)
+    # Trade Creditors: validated as head-only LIA fallback, rule correctly assigns PAY.TRA
+    ("client_008_validated_final.csv", "802"): "Rule improvement: LIA.CUR.PAY.TRA > LIA for trade creditors",
+    # PAYG Withholdings: validated as PAY.PAY in this client but PAY.EMP in 4 other clients
+    ("client_182_validated_final.csv", "825"): "Outlier validation: PAY.PAY vs EMP consensus across 4 clients",
 }
 
 

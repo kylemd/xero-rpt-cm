@@ -370,6 +370,14 @@ _revenue_rules = [
         canon_types={"other income", "revenue", "income"},
         notes="Investment sale proceeds -> other investment income",
     ),
+    Rule(
+        name="product_income",
+        code="REV.TRA.GOO",
+        priority=85,
+        keywords=["product income", "sales of product"],
+        canon_types={"revenue", "income"},
+        notes="Product income/sales of product -> trading goods revenue",
+    ),
 ]
 
 
@@ -451,6 +459,50 @@ _payroll_rules = [
         priority=95,
         keywords=["payg instalment", "payg instalments"],
         notes="PAYG instalment is income tax liability, not payroll",
+    ),
+    Rule(
+        name="payg_withholding_payable",
+        code="LIA.CUR.PAY.EMP",
+        priority=95,
+        keywords=["payg withholding", "payg withholdings"],
+        canon_types={"current liability", "liability"},
+        notes="PAYG Withholdings Payable -> employee payables. "
+              "Validated as EMP across 4 of 5 client datasets.",
+    ),
+    Rule(
+        name="payroll_clearing",
+        code="LIA.CUR.PAY.EMP",
+        priority=94,
+        keywords=["payroll clearing"],
+        canon_types={"current liability", "liability"},
+        notes="Payroll clearing accounts represent employee entitlements",
+    ),
+    Rule(
+        name="leave_payable",
+        code="LIA.CUR.PAY.EMP",
+        priority=93,
+        keywords=["leave"],
+        keywords_all=["payable"],
+        canon_types={"current liability", "liability"},
+        notes="Leave payable (annual, long service, Q leave, TOIL) is employee entitlement",
+    ),
+    Rule(
+        name="employee_provision",
+        code="LIA.CUR.PAY.EMP",
+        priority=93,
+        keywords=["salary", "wages", "toil", "annual leave", "long service"],
+        keywords_all=["provision"],
+        canon_types={"current liability", "liability"},
+        notes="Provisions for employee-related items are employee entitlements",
+    ),
+    Rule(
+        name="sgc_payable",
+        code="LIA.CUR.TAX",
+        priority=93,
+        keywords=["sgc", "scg", "superannuation guarantee"],
+        canon_types={"current liability", "liability"},
+        notes="SGC (Superannuation Guarantee Charge) -> tax liability. "
+              "Paid to ATO as a penalty/charge. Includes common misspelling SCG.",
     ),
 ]
 
@@ -844,6 +896,15 @@ _tax_rules = [
         raw_types={"current liability", "liability"},
         notes="Accrued income on liability type -> deferred income",
     ),
+    Rule(
+        name="ato_integrated_account",
+        code="LIA.CUR.TAX",
+        priority=90,
+        keywords=["ato integrated"],
+        canon_types={"current liability", "liability"},
+        notes="ATO ICA is a mixed tax account (PAYG, GST, FTC) — assign to tax parent. "
+              "Cannot determine deeper sub-level from name alone.",
+    ),
 ]
 
 
@@ -1015,6 +1076,14 @@ _general_expense_rules = [
         keywords=["accounting", "consulting", "legal"],
         canon_types={"expense"},
         notes="Accounting/consulting/legal -> professional fees",
+    ),
+    Rule(
+        name="audit_fees",
+        code="EXP.AUD",
+        priority=75,
+        keywords=["auditor", "audit fee"],
+        canon_types={"expense"},
+        notes="Audit fees/remuneration -> audit expense",
     ),
 
     # Insurance
@@ -1387,6 +1456,39 @@ _remaining_rules = [
         keywords_all=["retention"],
         keywords=["receiv", "debtor"],
         notes="Retention + receivable/debtor -> current receivables",
+    ),
+
+    # Trade creditors
+    Rule(
+        name="trade_creditors",
+        code="LIA.CUR.PAY.TRA",
+        priority=90,
+        keywords=["trade creditor"],
+        canon_types={"current liability", "liability"},
+        notes="Trade creditors/payables -> trade payables",
+    ),
+
+    # Motor vehicle fixed asset
+    Rule(
+        name="motor_vehicle_fixed_asset",
+        code="ASS.NCA.FIX.VEH",
+        priority=80,
+        keywords=["motor vehicle", "mv"],
+        canon_types={"fixed asset"},
+        keywords_exclude=["depreciation", "accumulated", "deprec", "accum",
+                          "car limit", "over limit"],
+        notes="Motor vehicle fixed assets -> vehicle assets. "
+              "Excludes depreciation variants and 'over car limit' tax pool accounts.",
+    ),
+
+    # Inventory
+    Rule(
+        name="inventory_asset",
+        code="ASS.CUR.INY",
+        priority=80,
+        keywords=["inventory"],
+        raw_types={"inventory"},
+        notes="Inventory type accounts -> inventory assets",
     ),
 
     # Preliminary expenses
