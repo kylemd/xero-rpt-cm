@@ -1,5 +1,5 @@
-# Run-Mapping.ps1 — Drag-and-drop launcher for Xero Report Code Mapping
-# Usage: Drag a ChartOfAccounts CSV and a Trial Balance file onto this script.
+# Run-Mapping.ps1 — Interactive launcher for Xero Report Code Mapping
+# Usage: Double-click to open, then drag files into the terminal window when prompted.
 
 param()
 $ErrorActionPreference = "Stop"
@@ -7,44 +7,45 @@ $ErrorActionPreference = "Stop"
 # ── Resolve project root (where this script lives) ──
 $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
-# ── Validate arguments ──
-if ($args.Count -ne 2) {
-    Write-Host ""
-    Write-Host "  Xero Report Code Mapping" -ForegroundColor Cyan
-    Write-Host "  ========================" -ForegroundColor Cyan
-    Write-Host ""
-    Write-Host "  Usage: Drag TWO files onto this script:" -ForegroundColor Yellow
-    Write-Host "    1. ChartOfAccounts CSV  (filename starts with 'ChartOfAccounts')"
-    Write-Host "    2. Trial Balance file   (CSV or XLSX)"
-    Write-Host ""
+# ── Banner ──
+Write-Host ""
+Write-Host "  Xero Report Code Mapping" -ForegroundColor Cyan
+Write-Host "  ========================" -ForegroundColor Cyan
+Write-Host ""
+
+# ── Collect file paths interactively ──
+Write-Host "  Drag your ChartOfAccounts CSV into this window and press Enter:" -ForegroundColor Yellow
+$ChartRaw = Read-Host "  "
+Write-Host ""
+Write-Host "  Drag your Trial Balance file (CSV or XLSX) and press Enter:" -ForegroundColor Yellow
+$TBRaw = Read-Host "  "
+Write-Host ""
+
+# Strip surrounding quotes (Windows drag-and-drop adds them for paths with spaces)
+$ChartFile = $ChartRaw.Trim().Trim('"').Trim("'")
+$TBFile = $TBRaw.Trim().Trim('"').Trim("'")
+
+# ── Validate files exist ──
+if (-not (Test-Path $ChartFile)) {
+    Write-Host "  ERROR: File not found: $ChartFile" -ForegroundColor Red
+    Read-Host "  Press Enter to exit"
+    exit 1
+}
+if (-not (Test-Path $TBFile)) {
+    Write-Host "  ERROR: File not found: $TBFile" -ForegroundColor Red
     Read-Host "  Press Enter to exit"
     exit 1
 }
 
-# ── Resolve full paths ──
-$File1 = Resolve-Path $args[0] -ErrorAction Stop | Select-Object -ExpandProperty Path
-$File2 = Resolve-Path $args[1] -ErrorAction Stop | Select-Object -ExpandProperty Path
+# Resolve to full paths
+$ChartFile = (Resolve-Path $ChartFile).Path
+$TBFile = (Resolve-Path $TBFile).Path
 
-# ── Identify chart vs trial balance ──
-$ChartFile = $null
-$TBFile = $null
-
-foreach ($f in @($File1, $File2)) {
-    $name = [System.IO.Path]::GetFileName($f)
-    if ($name -match '^ChartOfAccounts') {
-        $ChartFile = $f
-    } else {
-        $TBFile = $f
-    }
-}
-
-if (-not $ChartFile -or -not $TBFile) {
-    Write-Host ""
-    Write-Host "  ERROR: Could not identify files." -ForegroundColor Red
-    Write-Host "  One file must start with 'ChartOfAccounts'." -ForegroundColor Red
-    Write-Host "  Got: $([System.IO.Path]::GetFileName($File1))" -ForegroundColor Yellow
-    Write-Host "       $([System.IO.Path]::GetFileName($File2))" -ForegroundColor Yellow
-    Write-Host ""
+# ── Validate chart filename ──
+$chartName = [System.IO.Path]::GetFileName($ChartFile)
+if ($chartName -notmatch '^ChartOfAccounts') {
+    Write-Host "  ERROR: First file must start with 'ChartOfAccounts'." -ForegroundColor Red
+    Write-Host "  Got: $chartName" -ForegroundColor Yellow
     Read-Host "  Press Enter to exit"
     exit 1
 }
@@ -64,11 +65,7 @@ if ($tbExt -notin @('.csv', '.xlsx')) {
     exit 1
 }
 
-Write-Host ""
-Write-Host "  Xero Report Code Mapping" -ForegroundColor Cyan
-Write-Host "  ========================" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "  Chart:          $([System.IO.Path]::GetFileName($ChartFile))" -ForegroundColor Green
+Write-Host "  Chart:          $chartName" -ForegroundColor Green
 Write-Host "  Trial Balance:  $([System.IO.Path]::GetFileName($TBFile))" -ForegroundColor Green
 Write-Host ""
 
