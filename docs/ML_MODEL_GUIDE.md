@@ -1,8 +1,15 @@
 # ML Model Guide - Xero Report Code Mapping
 
+> **Status: Planned / Not Yet Implemented**
+>
+> This document describes the *planned* ML integration architecture. No ML
+> inference code currently exists in the pipeline. The system currently uses
+> a declarative rule engine (`rule_engine.py` + `rules.py`) for keyword-based
+> classification. This guide serves as a design specification for future work.
+
 ## Overview
 
-This guide explains the Machine Learning (ML) components of the Xero Report Code Mapping system, including model architecture, training procedures, and integration with the existing rule-based system.
+This guide explains the planned Machine Learning (ML) components of the Xero Report Code Mapping system, including model architecture, training procedures, and integration with the existing rule-based system.
 
 ## Architecture Overview
 

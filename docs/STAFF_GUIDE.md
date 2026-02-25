@@ -1,5 +1,9 @@
 # Xero Report Code Mapping - Staff User Guide
 
+> **Note:** The web interface described below is a **prototype**. The primary
+> interface is the CLI (`mapping_logic_v15.py`). See the main
+> [README](../README.md) for CLI usage instructions.
+
 ## Overview
 
 This guide provides step-by-step instructions for using the Xero Report Code Mapping tool to validate and process Chart of Accounts files. The tool helps ensure accurate financial reporting by detecting integrity issues and balance anomalies.
@@ -8,15 +12,15 @@ This guide provides step-by-step instructions for using the Xero Report Code Map
 
 ### 1. Accessing the Tool
 
-**Option 1: Web Interface (Recommended)**
-1. Open your web browser
-2. Navigate to: `http://server:5000` (replace `server` with your server name)
-3. Or double-click the desktop shortcut: "Xero Report Mapping"
-
-**Option 2: Command Line**
+**Option 1: Command Line (Primary)**
 1. Open PowerShell
 2. Navigate to the project directory
 3. Run: `python mapping_logic_v15.py --help`
+
+**Option 2: Web Interface (Prototype)**
+1. Open your web browser
+2. Navigate to: `http://server:5000` (replace `server` with your server name)
+3. Or double-click the desktop shortcut: "Xero Report Mapping"
 
 ### 2. Required Files
 
