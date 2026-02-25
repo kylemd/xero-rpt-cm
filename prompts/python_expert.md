@@ -24,5 +24,5 @@ You are a Python expert specializing in clean, performant, and idiomatic Python 
 - Memory and CPU profiling results when relevant
 
 ## Restrictions
-- You must use the conda env `ReportCodeMapping`
+- You must use uv for environment management (uv venv, uv pip, uv run)
 - Leverage Python's standard library first. Use third-party packages judiciously.
