@@ -33,13 +33,15 @@ web_interface/                Flask-based browser UI (prototype)
 
 ## Setup
 
-This project uses a **conda** environment:
+This project uses **uv** for environment management:
 
 ```bash
-conda activate ReportCodeMapping
+uv venv .venv
+uv pip install -e ".[dev]"
 ```
 
-Core dependencies: `pandas`, `openpyxl`. See `pyproject.toml` for the full list.
+Core dependencies: `pandas`, `openpyxl`. Dev dependencies: `pytest`, `pytest-html`.
+See `pyproject.toml` for the full list.
 
 ## Usage
 
@@ -84,8 +86,7 @@ by `data/seed_synonyms.py`.
 ## Tests
 
 ```bash
-conda activate ReportCodeMapping
-pytest tests/ -v
+uv run pytest tests/ -v
 ```
 
 | Suite | File | What it covers |
