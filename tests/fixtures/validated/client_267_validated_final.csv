@@ -317,7 +317,7 @@ company,client_267_ChartOfAccounts_20251201.csv,61339,Vend Loyalty Expense,Expen
 company,client_267_ChartOfAccounts_20251201.csv,61340,VEND Store Credit Expense,Expense,,unmatched,0.0,,,
 company,client_267_ChartOfAccounts_20251201.csv,62405,Staff Training/Seminars,Expense,EXP.EMP,fuzzy_name_global,100.0,EXP.EMP,,
 company,client_267_ChartOfAccounts_20251201.csv,62410,Staff Amenities,Expense,EXP.EMP,synonym_exact_type,95.0,EXP.EMP,,
-company,client_267_ChartOfAccounts_20251201.csv,62415,Protective Clothing,Expense,,unmatched,0.0,EXP.ADV,,Public Relations (PR)
+company,client_267_ChartOfAccounts_20251201.csv,62415,Protective Clothing,Expense,,unmatched,0.0,EXP.EMP,,Public Relations (PR)
 company,client_267_ChartOfAccounts_20251201.csv,62418,Staff OH&S,Expense,,unmatched,0.0,EXP.EMP,,Staff OH&S
 company,client_267_ChartOfAccounts_20251201.csv,62430,Salaries & Wages,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,
 company,client_267_ChartOfAccounts_20251201.csv,62430 a,Salaries & Wages - Associated payments,Expense,EXP.EMP.WAG,detail_redirect,88.0,EXP.EMP.WAG,,

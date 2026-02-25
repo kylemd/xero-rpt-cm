@@ -438,6 +438,14 @@ tr.reviewed:hover td {{ opacity: 1; }}
     # ── JAVASCRIPT ──
     parts.append(f"""
 <script>
+// Global error handler — surface any hidden JS errors visually
+window.onerror = function(msg, url, line, col, err) {{
+  const d = document.createElement('div');
+  d.style.cssText = 'background:#fee2e2;color:#991b1b;padding:12px 16px;margin:8px 0;border-radius:8px;font-family:monospace;font-size:.85em;white-space:pre-wrap';
+  d.textContent = 'JS Error: ' + msg + '\\nLine ' + line + ':' + col;
+  document.body.prepend(d);
+}};
+
 const STORAGE_KEY = 'mismatch_decisions_v1';
 const DIR_HANDLE_DB = 'mismatch_dir_handle';
 const FILENAME = 'mismatch_decisions.json';
@@ -694,7 +702,10 @@ function setReason(id, reason) {{
 
 // ─── Progress ───
 function updateProgress() {{
-  const reviewed = Object.values(decisions).filter(d => d.choice).length;
+  // Only count decisions for rows that exist in the current report
+  const currentIds = new Set();
+  document.querySelectorAll('#mismatchTable tbody tr').forEach(r => currentIds.add(r.dataset.id));
+  const reviewed = Object.entries(decisions).filter(([id, d]) => d.choice && currentIds.has(id)).length;
   document.getElementById('reviewedCount').textContent = reviewed;
   document.getElementById('reviewedPct').textContent = Math.round(reviewed / TOTAL * 100) + '%';
 }}
@@ -821,9 +832,21 @@ function clearAll() {{
 }}
 
 // ─── Init ───
-restoreState();
-applyFilters();
-restoreDirHandle();
+try {{
+  restoreState();
+  applyFilters();
+  restoreDirHandle();
+  if (IS_FILE) {{
+    document.querySelector('.btn-folder').title = 'Requires HTTP server — use Save button to download';
+    updateSaveStatus('idle', 'file:// mode — click Save to download JSON');
+  }}
+}} catch (e) {{
+  console.error('Init error:', e);
+  const d = document.createElement('div');
+  d.style.cssText = 'background:#fee2e2;color:#991b1b;padding:12px 16px;margin:8px 0;border-radius:8px;font-family:monospace;font-size:.85em';
+  d.textContent = 'Init error: ' + e.message;
+  document.body.prepend(d);
+}}
 </script>
 </body>
 </html>

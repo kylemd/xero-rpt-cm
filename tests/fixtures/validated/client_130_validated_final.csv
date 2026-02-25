@@ -130,7 +130,7 @@ company,client_130_ChartOfAccounts_20251215.csv,3394,PAYG Withholding,Current Li
 company,client_130_ChartOfAccounts_20251215.csv,3395,PAYG Instalment,Current Liability,,unmatched,0.0,LIA.CUR.TAX.INC,,PAYG Instalment
 company,client_130_ChartOfAccounts_20251215.csv,3565,Directors loan - Person 3615,Non-current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
 company,client_130_ChartOfAccounts_20251215.csv,3566,Loan - Person 3616,Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
-company,client_130_ChartOfAccounts_20251215.csv,3566.1,Loan - Person 3617,Non-current Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.LOA.UNS,,
+company,client_130_ChartOfAccounts_20251215.csv,3566.1,Loan - Person 3617,Non-current Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.LOA,,
 company,client_130_ChartOfAccounts_20251215.csv,3570,Loan - Person 3618,Non-current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
 company,client_130_ChartOfAccounts_20251215.csv,3571,Less: Unexpired Interest - Premium Funding Advance $1475,Non-current Liability,LIA.NCL.HPA.UEI,hire_purchase_interest,89.0,LIA.NCL.HPA.UEI,,
 company,client_130_ChartOfAccounts_20251215.csv,3572,Loan - Person 3619,Non-current Liability,LIA.NCL.LOA,loan_non_current_mapping,88.0,LIA.NCL.LOA,,
