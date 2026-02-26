@@ -12,6 +12,13 @@ HEAD_ONLY_CODES = {"ASS", "EXP", "REV", "LIA", "EQU"}
 # Sources that indicate a head-only fallback (no specific rule matched)
 FALLBACK_SOURCES = {"FallbackParent", "FallbackHead", "TypeOnly"}
 
+# Account names that should never be promoted by section inference
+# (clearing/generic accounts that are intentionally at head level)
+SECTION_INFERENCE_EXCLUSIONS = [
+    "opening balance", "historical adjustment", "rounding",
+    "suspense", "clearing", "unallocated",
+]
+
 # Context anchors: when an anchor account is detected with an active balance,
 # nearby accounts matching the inference keywords get refined.
 CONTEXT_ANCHORS = [
@@ -172,6 +179,11 @@ def infer_section(
             continue
         predicted = acct.get("predicted", "")
         if predicted not in HEAD_ONLY_CODES:
+            continue
+
+        # Skip clearing/generic accounts that should stay at head level
+        name_lower = acct["name"].lower()
+        if any(excl in name_lower for excl in SECTION_INFERENCE_EXCLUSIONS):
             continue
 
         # Gather neighbours' code prefixes (2-level: ASS.NCA, LIA.CUR, etc.)

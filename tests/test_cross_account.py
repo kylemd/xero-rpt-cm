@@ -127,6 +127,21 @@ class TestSectionInference:
         assert len(match) == 1
         assert match[0]["inferred_code"] == "ASS.NCA"
 
+    def test_opening_balance_excluded(self):
+        """Opening Balance Equity should not be promoted by section inference."""
+        accounts = [
+            {"code": "880", "name": "Retained Earnings", "type": "Equity",
+             "predicted": "EQU.RET", "source": "some_rule"},
+            {"code": "882", "name": "Opening Balance Equity", "type": "Equity",
+             "predicted": "EQU", "source": "FallbackParent"},
+            {"code": "885", "name": "Current Year Earnings", "type": "Equity",
+             "predicted": "EQU.RET", "source": "some_rule"},
+        ]
+        bal = {"880": 50000, "882": 0, "885": 10000}
+        result = infer_section(accounts, bal, set())
+        match = [r for r in result if r["code"] == "882"]
+        assert len(match) == 0
+
     def test_no_inference_when_no_consensus(self):
         """Mixed neighbours should not trigger section inference."""
         accounts = [

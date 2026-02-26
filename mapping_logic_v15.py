@@ -19,6 +19,7 @@ from integrity_validator import IntegrityValidator
 from rule_engine import evaluate_rules, MatchContext
 from rules import ALL_RULES, OWNER_KEYWORDS as _OWNER_KEYWORDS, AUSTRALIAN_BANKS, VEHICLE_MAKES, AUSTRALIAN_LENDERS
 from spell_corrections import build_spell_checker, correct_account_name
+from context_rules import infer_from_context, infer_section
 
 TYPE_EQ = {
     # Removed problematic mappings that collapse distinct types
@@ -742,6 +743,38 @@ def main(args):
                     map_name=sysmap.loc[sysmap['Reporting Code']==prc[idx],'Name']
                     if not map_name.empty:
                         pname[idx]=map_name.iloc[0]
+
+    # Pass 2.5: Cross-account context inference
+    # Uses active trial balance balances + chart structure to refine head-only fallbacks
+    _context_accounts = []
+    for idx, row in coa.iterrows():
+        _context_accounts.append({
+            "code": str(row.get("*Code", "")).strip(),
+            "name": str(row.get("*Name", "")),
+            "type": str(row.get("*Type", "")),
+            "predicted": prc[idx] if isinstance(prc[idx], str) else "",
+            "source": src[idx] if isinstance(src[idx], str) else "",
+        })
+
+    _context_results = infer_from_context(_context_accounts, bal_lookup, overridden_indices)
+    for cr in _context_results:
+        i = cr["index"]
+        prc[i] = cr["inferred_code"]
+        src[i] = cr["reason"]
+        need[i] = "Y"  # Still flag for human review
+
+    # Pass 2.6: Section inference from neighbours
+    # Re-read predicted codes after anchor inference may have changed them
+    for idx in range(len(_context_accounts)):
+        _context_accounts[idx]["predicted"] = prc[idx] if isinstance(prc[idx], str) else ""
+    _section_results = infer_section(_context_accounts, bal_lookup, overridden_indices)
+    for sr in _section_results:
+        i = sr["index"]
+        # Only apply if anchor inference didn't already refine this account
+        if prc[i] in {"ASS", "EXP", "REV", "LIA", "EQU"}:
+            prc[i] = sr["inferred_code"]
+            src[i] = sr["reason"]
+            need[i] = "Y"
 
     # Third pass: if revenue is service-only (only REV.TRA.SER appears within REV.TRA.*),
     # then reclass any EXP.COS* to EXP, as COGS should not exist for pure service revenue.
