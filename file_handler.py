@@ -92,18 +92,20 @@ def sanitize_xlsx_trial_balance(df: pd.DataFrame) -> Tuple[pd.DataFrame, Dict[st
         str(df.iloc[2, 0]).strip().startswith("As at ")):
         
         period_date = str(df.iloc[2, 0]).strip().replace("As at ", "")
-        
+        company_name = str(df.iloc[1, 0]).strip() if len(df) > 1 and pd.notnull(df.iloc[1, 0]) else ""
+
         # Skip first 4 rows
         df = df.iloc[4:].reset_index(drop=True)
-        
+
         # Promote first row to header
         df.columns = df.iloc[0]
         df = df.iloc[1:].reset_index(drop=True)
-        
+
         # Parse amounts according to Xero format
-        df = parse_trial_balance_amounts(df, {"format": "xero_trial_balance", "period": period_date})
-        
-        return df, {"format": "xero_trial_balance", "period": period_date, "sanitized": True}
+        metadata = {"format": "xero_trial_balance", "period": period_date, "company_name": company_name, "sanitized": True}
+        df = parse_trial_balance_amounts(df, metadata)
+
+        return df, metadata
     
     # Non-Xero format: promote row 0 to headers so downstream code gets named columns
     df.columns = df.iloc[0]

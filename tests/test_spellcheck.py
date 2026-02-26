@@ -60,3 +60,17 @@ class TestBuildSpellChecker:
         spell = build_spell_checker(extra_known=["westpac", "commbank"])
         unknown = spell.unknown(["westpac", "commbank"])
         assert len(unknown) == 0
+
+
+class TestTrialBalanceCompanyName:
+    def test_metadata_includes_company_name(self):
+        """Trial balance metadata should include the company name from row 1."""
+        import pathlib
+        from file_handler import load_trial_balance_file
+        tb_path = pathlib.Path(".dev-info/test-client/Trial_Balance.xlsx")
+        if not tb_path.exists():
+            pytest.skip("Test client trial balance not available")
+        _, metadata = load_trial_balance_file(tb_path)
+        assert "company_name" in metadata
+        assert isinstance(metadata["company_name"], str)
+        assert len(metadata["company_name"]) > 0
