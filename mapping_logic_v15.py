@@ -17,7 +17,8 @@ from collections import defaultdict
 from file_handler import load_chart_file, load_trial_balance_file, get_account_code_column, get_closing_balance_column
 from integrity_validator import IntegrityValidator
 from rule_engine import evaluate_rules, MatchContext
-from rules import ALL_RULES, OWNER_KEYWORDS as _OWNER_KEYWORDS
+from rules import ALL_RULES, OWNER_KEYWORDS as _OWNER_KEYWORDS, AUSTRALIAN_BANKS, VEHICLE_MAKES, AUSTRALIAN_LENDERS
+from spell_corrections import build_spell_checker, correct_account_name
 
 TYPE_EQ = {
     # Removed problematic mappings that collapse distinct types
@@ -314,7 +315,14 @@ def main(args):
         print(f"Loaded trial balance: {trial_metadata}")
     except Exception as e:
         sys.exit(f"Error: Failed to read trial balance '{trial_path.name}': {e}")
-    
+
+    # Build spell checker with domain dictionaries
+    _extra_known = AUSTRALIAN_BANKS + VEHICLE_MAKES + AUSTRALIAN_LENDERS
+    _company_name = trial_metadata.get("company_name", "")
+    if _company_name:
+        _extra_known.extend(_company_name.lower().split())
+    spell_checker = build_spell_checker(extra_known=_extra_known)
+
     # Run integrity validation on template charts
     print("Validating template charts...")
     template_findings = validator.validate_chart_dataframe(defaultchart, template_chart_path.name)
@@ -507,9 +515,15 @@ def main(args):
         if code_val and code_val not in expected_head_by_code:
             expected_head_by_code[code_val]=infer_expected_head(code_val)
 
+    spell_log = []
     for idx,row in coa.iterrows():
         existing=str(row['Report Code']).strip() if pd.notnull(row['Report Code']) else ''
-        clean_nm=normalise(strip_noise_suffixes(row['*Name']))
+        _raw_name = row['*Name']
+        _spell_result = correct_account_name(strip_noise_suffixes(_raw_name), spell=spell_checker)
+        _corrected_name = _spell_result["corrected"]
+        if _spell_result["corrections"]:
+            spell_log.append({"idx": idx, "code": row.get("*Code", ""), "original": _raw_name, "corrected": _corrected_name, "corrections": _spell_result["corrections"]})
+        clean_nm=normalise(_corrected_name)
         canon_type=canonical_type(row['*Type'])
         head=existing.split('.')[0] if existing else head_from_type(row['*Type'])
         chosen='';reason='';flag=''
@@ -759,6 +773,12 @@ def main(args):
     coa['NeedsReview']=need
     coa['Source']=src
 
+    # Add corrected names column (only populated when corrections applied)
+    corrected_names = [""] * len(coa)
+    for entry in spell_log:
+        corrected_names[entry["idx"]] = entry["corrected"]
+    coa['CorrectedName'] = corrected_names
+
     out=client_chart_path.with_name('AugmentedChartOfAccounts.csv')
     try:
         coa.to_csv(out,index=False)
@@ -775,6 +795,17 @@ def main(args):
         _pd.DataFrame(clarifications, columns=['AccountCode','PriorReportCode','NewReportCode','UserComment']).to_csv(
             client_chart_path.with_name('ClarificationLog.csv'), index=False
         )
+
+    # Add spell corrections to change report
+    for entry in spell_log:
+        change_rows.append({
+            "RowNumber": entry["idx"] + 1,
+            "FieldName": "*Name",
+            "OriginalValue": entry["original"],
+            "CorrectedValue": entry["corrected"],
+            "IssueType": "SpellCorrection",
+            "Notes": "; ".join(f"{c['original']}->{c['corrected']} ({c['source']})" for c in entry["corrections"]),
+        })
 
     # Emit change/error report if any
     if change_rows:

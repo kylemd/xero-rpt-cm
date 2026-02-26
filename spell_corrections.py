@@ -33,15 +33,20 @@ ABBREVIATIONS: Dict[str, str] = {
 
 # Terms to whitelist in pyspellchecker — valid domain jargon, not typos.
 ACCOUNTING_TERMS: List[str] = [
+    # Tax & regulatory
     "payg", "ato", "gst", "asic", "bas", "fbt", "sgc", "sga", "atsgc",
-    "rcti", "abn", "acn", "tfn", "smsf",
+    "rcti", "abn", "acn", "tfn", "smsf", "ndis", "whs",
+    # Software & entity
     "xero", "myob", "quickbooks",
     "pty", "ltd",
+    # Accounting concepts
     "superannuation", "annuation",
     "div7a", "payable", "receivable", "accrual", "accruals",
     "amortisation", "amortization", "depreciation",
     "franking", "imputation", "gearing",
-    "revaluation",
+    "revaluation", "withholdings",
+    # Common business abbreviations
+    "admin", "qleave",
 ]
 
 
