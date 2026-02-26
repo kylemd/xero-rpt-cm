@@ -803,6 +803,121 @@ class TestSystemMappingsRules:
         assert code == "EXP.ADM"
 
 
+class TestTrack2NewRules:
+    """Rules added for test-client-2 FallbackParent reduction."""
+
+    def test_bank_charges(self):
+        ctx = _ctx("bank fees and charges")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP", f"Expected EXP, got {code} from {name}"
+
+    def test_consultancy_fees(self):
+        ctx = _ctx("consultancy fees")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.PRO", f"Expected EXP.PRO, got {code} from {name}"
+
+    def test_management_fees(self):
+        ctx = _ctx("management fees")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.PRO", f"Expected EXP.PRO, got {code} from {name}"
+
+    def test_collection_expense(self):
+        ctx = _ctx("debt collection")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.PRO", f"Expected EXP.PRO, got {code} from {name}"
+
+    def test_delivery_costs(self):
+        ctx = _ctx("delivery costs")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS", f"Expected EXP.COS, got {code} from {name}"
+
+    def test_freight_expense(self):
+        ctx = _ctx("freight and cartage")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS", f"Expected EXP.COS, got {code} from {name}"
+
+    def test_discount_allowed(self):
+        ctx = _ctx("discount allowed")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP", f"Expected EXP, got {code} from {name}"
+
+    def test_instant_asset_writeoff(self):
+        ctx = _ctx("immediately write off")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.DEP", f"Expected EXP.DEP, got {code} from {name}"
+
+    def test_leasing_charges(self):
+        ctx = _ctx("leasing charges")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.REN.OPE", f"Expected EXP.REN.OPE, got {code} from {name}"
+
+    def test_license_permit_expense(self):
+        ctx = _ctx("licenses fees and permits")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ADM", f"Expected EXP.ADM, got {code} from {name}"
+
+    def test_licence_not_intangible_on_expense(self):
+        """Licence on expense type should be EXP.ADM, not ASS.NCA.INT."""
+        ctx = _ctx("licencing fees")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ADM", f"Expected EXP.ADM, got {code} from {name}"
+
+    def test_employment_expense(self):
+        ctx = _ctx("other employment expense")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.EMP", f"Expected EXP.EMP, got {code} from {name}"
+
+    def test_security_costs(self):
+        ctx = _ctx("security costs")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.OCC", f"Expected EXP.OCC, got {code} from {name}"
+
+    def test_storage_fees(self):
+        ctx = _ctx("storage fees")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.REN", f"Expected EXP.REN, got {code} from {name}"
+
+    def test_tool_replacement(self):
+        ctx = _ctx("tool replacements")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.REP", f"Expected EXP.REP, got {code} from {name}"
+
+    def test_water_sewerage(self):
+        ctx = _ctx("water and sewerage")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.UTI", f"Expected EXP.UTI, got {code} from {name}"
+
+    def test_administration_fee(self):
+        ctx = _ctx("administrations fee ato")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ADM", f"Expected EXP.ADM, got {code} from {name}"
+
+    def test_data_processing(self):
+        ctx = _ctx("data processing charges")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ADM", f"Expected EXP.ADM, got {code} from {name}"
+
+    def test_magazines(self):
+        ctx = _ctx("magazine and journals")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ADM", f"Expected EXP.ADM, got {code} from {name}"
+
+    def test_parking(self):
+        ctx = _ctx("parking")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.VEH", f"Expected EXP.VEH, got {code} from {name}"
+
+    def test_contract_work(self):
+        ctx = _ctx("contract work")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP", f"Expected EXP, got {code} from {name}"
+
+    def test_window_cleaner(self):
+        ctx = _ctx("window cleaner")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.OCC", f"Expected EXP.OCC, got {code} from {name}"
+
+
 def test_no_duplicate_rule_names():
     """Every rule must have a unique name."""
     names = [r.name for r in ALL_RULES]

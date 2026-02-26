@@ -135,6 +135,26 @@ ANONYMIZATION_XFAILS = {
     ("client_267_validated_final.csv", "61334"): "Rule improvement: EXP.ADM > EXP for magazines/books subscriptions",
     # Opening Balance Equity → EQU.RET (validated as EQU.RES; SystemMappings EQU.RET includes opening balances)
     ("client_255_validated_final.csv", "NoCode55"): "Rule improvement: EQU.RET > EQU.RES for opening balance equity",
+
+    # --- Track 2 rule improvements: more specific codes via new keyword rules ---
+    # Consultants/Consultancy → EXP.PRO (validated as EXP head-only; SystemMappings EXP.PRO includes accountancy)
+    ("ChartOfAccounts_38_validated_final.csv", "1585.0"): "Rule improvement: EXP.PRO > EXP for consultants fees",
+    ("client_130_validated_final.csv", "1585"): "Rule improvement: EXP.PRO > EXP for consultants fees",
+    ("client_182_validated_final.csv", "415"): "Rule improvement: EXP.PRO > EXP for consultants",
+    ("client_234_validated_final.csv", "61015"): "Rule improvement: EXP.PRO > EXP for consultants fees",
+    ("client_255_validated_final.csv", "412"): "Rule improvement: EXP.PRO > EXP for consultants fees",
+    # Management Fees → EXP.PRO (validated as EXP head-only)
+    ("client_182_validated_final.csv", "450"): "Rule improvement: EXP.PRO > EXP for management fees",
+    # Licences → EXP.ADM (validated as EXP head-only; SystemMappings says admin)
+    ("client_234_validated_final.csv", "61013"): "Rule improvement: EXP.ADM > EXP for licences",
+    # Freight/Delivery → EXP.COS (validated as EXP/EXP.ADM; SystemMappings EXP.COS includes 'Direct freight')
+    ("client_182_validated_final.csv", "425"): "Rule improvement: EXP.COS > EXP for freight & courier",
+    ("client_234_validated_final.csv", "61020"): "Rule improvement: EXP.COS > EXP.ADM for freight paid",
+    ("client_255_validated_final.csv", "NoCode77"): "Rule improvement: EXP.COS > EXP.ADM for shipping/freight/delivery",
+    # Bank Fees → EXP (validated as EXP.BAD which is incorrect — bank fees are not bad debts)
+    ("client_182_validated_final.csv", "404"): "Validation error: EXP.BAD wrong for bank fees; EXP correct",
+    # Parking → EXP.VEH (validated as EXP.ADM in this client; 2 other clients validate as EXP.VEH)
+    ("client_130_validated_final.csv", "1833"): "Outlier validation: EXP.ADM vs EXP.VEH consensus across 2 other clients",
 }
 
 

@@ -1051,7 +1051,7 @@ _general_expense_rules = [
         name="contractor_expense",
         code="EXP",
         priority=72,
-        keywords=["contractor", "contractors"],
+        keywords=["contractor", "contractors", "contract work"],
         canon_types={"expense"},
         keywords_exclude=["subtrade", "subcontract", "sub contractor"],
         notes="Contractor payments -> general expense. SystemMappings EXP.EMP.WAG "
@@ -1336,10 +1336,10 @@ _general_expense_rules = [
         name="cleaning",
         code="EXP.OCC",
         priority=65,
-        keywords=["cleaning", "laundry"],
+        keywords=["cleaning", "cleaner", "laundry"],
         canon_types={"expense"},
         keywords_exclude=["vehicle", "car", "mv", "motor vehicle"],
-        notes="Cleaning/laundry -> occupancy expense (excludes vehicle washing)",
+        notes="Cleaning/laundry/cleaner -> occupancy expense (excludes vehicle washing)",
     ),
 
     # Depreciation
@@ -1539,6 +1539,203 @@ _general_expense_rules = [
         canon_types={"expense"},
         notes="Operating expenses -> EXP.OPR. SystemMappings leaf code for "
               "expenses associated with production of goods/services.",
+    ),
+
+    # Bank charges (generic — no specific bank name required)
+    Rule(
+        name="bank_charges",
+        code="EXP",
+        priority=68,
+        keywords=["bank fee", "bank fees", "bank charges", "bank charge"],
+        canon_types={"expense"},
+        notes="Generic bank fees/charges -> general expense. "
+              "SystemMappings EXP.INT explicitly excludes bank fees.",
+    ),
+
+    # Consultancy / Management (supplements professional_fees for broader patterns)
+    Rule(
+        name="consultancy_fees",
+        code="EXP.PRO",
+        priority=72,
+        keywords=["consultancy", "consultant"],
+        canon_types={"expense"},
+        keywords_exclude=["bookkeeping", "accounting"],
+        notes="Consultancy/consultant -> professional fees. "
+              "Supplements professional_fees which has 'consulting'.",
+    ),
+    Rule(
+        name="management_fees",
+        code="EXP.PRO",
+        priority=72,
+        keywords=["management fee", "management fees"],
+        canon_types={"expense"},
+        notes="Management fees -> professional fees.",
+    ),
+
+    # Collection / Debt recovery
+    Rule(
+        name="collection_expense",
+        code="EXP.PRO",
+        priority=72,
+        keywords=["collection cost", "collection costs", "debt collection",
+                  "collection fee", "collection fees"],
+        canon_types={"expense"},
+        notes="Collection/debt recovery costs -> professional fees. "
+              "SystemMappings EXP.BAD excludes 'Debt collection fees'.",
+    ),
+
+    # Delivery / Freight
+    Rule(
+        name="delivery_freight",
+        code="EXP.COS",
+        priority=72,
+        keywords=["delivery cost", "delivery costs", "freight", "cartage"],
+        canon_types={"expense"},
+        notes="Delivery/freight/cartage -> cost of sales. "
+              "SystemMappings EXP.COS includes 'Direct freight and cartage'.",
+    ),
+
+    # Discount allowed
+    Rule(
+        name="discount_allowed",
+        code="EXP",
+        priority=65,
+        keywords=["discount allowed", "discounts allowed"],
+        canon_types={"expense"},
+        notes="Discount allowed -> general expense.",
+    ),
+
+    # Instant asset write-off
+    Rule(
+        name="instant_asset_writeoff",
+        code="EXP.DEP",
+        priority=78,
+        keywords=["immediately write off", "instant write off", "instant asset",
+                  "low value asset", "low value pool"],
+        canon_types={"expense"},
+        notes="Instant asset write-off -> depreciation expense. "
+              "Under instant asset write-off threshold, treated as immediate depreciation.",
+    ),
+
+    # Leasing
+    Rule(
+        name="leasing_expense",
+        code="EXP.REN.OPE",
+        priority=72,
+        keywords=["leasing", "lease charge", "lease charges",
+                  "lease payment", "lease payments"],
+        canon_types={"expense"},
+        keywords_exclude=["leasehold"],
+        notes="Leasing charges/payments -> operating lease payments. "
+              "SystemMappings EXP.REN.OPE is for operating leases.",
+    ),
+
+    # Licences, permits (expense type — distinct from intangible asset)
+    Rule(
+        name="license_permit_expense",
+        code="EXP.ADM",
+        priority=72,
+        keywords=["licence", "license", "licencing", "licensing", "permit"],
+        canon_types={"expense"},
+        keywords_exclude=["driver", "driving"],
+        notes="Licences/permits on expense -> administrative expense. "
+              "Distinct from intangible_asset_keywords which handles asset types.",
+    ),
+
+    # Other employment expense
+    Rule(
+        name="employment_expense_other",
+        code="EXP.EMP",
+        priority=65,
+        keywords=["employment expense", "other employment"],
+        canon_types={"expense"},
+        notes="Other/general employment expense -> employment costs.",
+    ),
+
+    # Security
+    Rule(
+        name="security_expense",
+        code="EXP.OCC",
+        priority=72,
+        keywords=["security"],
+        canon_types={"expense"},
+        keywords_exclude=["bond", "deposit"],
+        notes="Security costs -> occupancy expense. "
+              "SystemMappings EXP.OCC includes 'Security'.",
+    ),
+
+    # Storage
+    Rule(
+        name="storage_expense",
+        code="EXP.REN",
+        priority=68,
+        keywords=["storage"],
+        canon_types={"expense"},
+        notes="Storage fees -> rental/lease. Renting storage space is a lease expense.",
+    ),
+
+    # Tool replacements (repairs & maintenance)
+    Rule(
+        name="tool_replacement",
+        code="EXP.REP",
+        priority=72,
+        keywords=["tool replacement", "replacement tool"],
+        canon_types={"expense"},
+        notes="Tool replacements -> repairs & maintenance. "
+              "SystemMappings EXP.REP includes 'Plant and machinery renewal'.",
+    ),
+
+    # Water / sewerage
+    Rule(
+        name="water_sewerage",
+        code="EXP.UTI",
+        priority=72,
+        keywords=["water", "sewerage", "sewage"],
+        canon_types={"expense"},
+        keywords_exclude=["waterproof"],
+        notes="Water/sewerage -> utilities. SystemMappings EXP.UTI includes 'Water'.",
+    ),
+
+    # Administration fees
+    Rule(
+        name="administration_fee",
+        code="EXP.ADM",
+        priority=73,
+        keywords=["administration fee", "admin fee", "administrations fee"],
+        canon_types={"expense"},
+        notes="Administration fees -> administrative expense.",
+    ),
+
+    # Data processing
+    Rule(
+        name="data_processing_expense",
+        code="EXP.ADM",
+        priority=68,
+        keywords=["data processing"],
+        canon_types={"expense"},
+        notes="Data processing charges -> administrative expense.",
+    ),
+
+    # Magazines / periodicals
+    Rule(
+        name="magazines_periodicals",
+        code="EXP.ADM",
+        priority=65,
+        keywords=["magazine", "magazines", "periodical", "periodicals"],
+        canon_types={"expense"},
+        notes="Magazines/periodicals -> administrative expense.",
+    ),
+
+    # Parking
+    Rule(
+        name="parking_expense",
+        code="EXP.VEH",
+        priority=68,
+        keywords=["parking"],
+        canon_types={"expense"},
+        keywords_exclude=["airport"],
+        notes="Parking -> vehicle expense. "
+              "Airport parking is travel (handled by travel rules).",
     ),
 
     # Dividends (from early overrides)

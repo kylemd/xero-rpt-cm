@@ -25,7 +25,8 @@ TYPE_EQ = {
     # Removed problematic mappings that collapse distinct types
     # 'direct costs':'expense','cost of sales':'expense','cost of goods sold':'expense'
     # These should maintain distinct heads (EXP.COS vs EXP)
-    'purchases':'expense','operating expense':'expense','operating expenses':'expense'
+    'purchases':'expense','operating expense':'expense','operating expenses':'expense',
+    'overhead':'expense','overheads':'expense',
 }
 
 # Vehicle detection tokens (normalized)
@@ -108,19 +109,32 @@ def extract_accum_base_key(name_raw: str) -> str:
     - 'Less Accumulated Depreciation on Office Equipment' -> 'office equipment'
     - 'Leasehold Improvements Accumulated Depreciation' -> 'leasehold improvements'
     - 'Accumulated Amortisation of Leasehold Improvements' -> 'leasehold improvements'
+    - 'Office furniture/equipment:Less accumulated depreciation' -> 'office furniture equipment'
+    - 'Furniture and Fittings:Accum. PU depreciation 5' -> 'furniture and fittings'
     Returns empty string when no clear base phrase is detected.
     """
     if pd.isnull(name_raw):
         return ''
     name = str(name_raw).strip()
     nlow = normalise(name)
-    # Common prefix/suffix patterns
+    # Common prefix/suffix patterns (standard format)
     m = re.search(r"less\s+accumulated\s+(depreciation|amortisation|amortization)\s+(on|of)\s+(.+)$", nlow)
     if m:
         return m.group(3).strip()
     m = re.search(r"^accumulated\s+(depreciation|amortisation|amortization)\s+(on|of)\s+(.+)$", nlow)
     if m:
         return m.group(3).strip()
+    # Colon-format: "<base> less [accumulated] depreciation/amortisation"
+    # (Xero subaccount syntax "Parent:Less Accum Dep" normalises to "parent less accum dep")
+    m = re.search(r"^(.+?)\s+less\s+(?:accumulated\s+)?(?:depreciation|amortisation|amortization)\b", nlow)
+    if m:
+        return m.group(1).strip()
+    # Abbreviated colon-format: "<base> accum[ulated] [qualifier] depreciation"
+    m = re.search(r"^(.+?)\s+accum(?:ulated)?\b.*?(?:depreciation|amortisation|amortization)", nlow)
+    if m:
+        base = m.group(1).strip()
+        if len(base) > 2:
+            return base
     # Suffix pattern: '<base> accumulated depreciation/amortisation'
     for tok in ['accumulated depreciation','accumulated amortisation','accumulated amortization']:
         if nlow.endswith(tok):
@@ -576,14 +590,17 @@ def main(args):
             if head==dict_name_type[(clean_nm,canon_type)].split('.')[0]:
                 chosen,reason=dict_name_type[(clean_nm,canon_type)],'DefaultChart'
         # 4) Exact cleaned-Name in SystemMappings (with pre-hyphen trimming on raw name)
+        #    Guard: skip if the matched code's root head conflicts with the account type.
         if not chosen:
             raw_name = strip_noise_suffixes(row['*Name'])
             prefix_raw = str(raw_name).split(' - ')[0]
             pre_hyphen = normalise(prefix_raw)
-            if pre_hyphen in name_to_leaf:
-                chosen,reason=name_to_leaf[pre_hyphen],'DirectNameMatch'
-            elif clean_nm in name_to_leaf:
-                chosen,reason=name_to_leaf[clean_nm],'DirectNameMatch'
+            _dm_code = name_to_leaf.get(pre_hyphen) or name_to_leaf.get(clean_nm)
+            if _dm_code:
+                _dm_root = _dm_code.split('.')[0]
+                _type_root = head_from_type(row['*Type']).split('.')[0]
+                if _dm_root == _type_root:
+                    chosen,reason=_dm_code,'DirectNameMatch'
         # 4b) If name matches a SystemMappings non-leaf and existing code equals that mapping, keep it
         if not chosen:
             raw_name = strip_noise_suffixes(row['*Name'])
@@ -727,22 +744,26 @@ def main(args):
 
     # Second pass: strengthen accumulated depreciation pairing by name lookup
     for idx,row in coa.iterrows():
+        if idx in overridden_indices:
+            continue
         txt_full = normalise(str(row['*Name']))
-        if txt_full.startswith('less') and ('deprec' in txt_full or 'amort' in txt_full):
-            # try to extract base after 'on'
-            parts = re.split(r'\bon\b', txt_full)
-            base_name = parts[-1].strip() if len(parts)>1 else ''
-            if base_name:
-                base_rc = name_to_predicted_rc.get(base_name)
-                # Do not modify rows that were explicitly overridden by audit
-                if idx in overridden_indices:
-                    continue
-                if base_rc and (str(prc[idx]) != base_rc + '.ACC'):
-                    prc[idx] = base_rc + '.ACC'
-                    src[idx] = 'AccumulatedDepreciationRule'
-                    map_name=sysmap.loc[sysmap['Reporting Code']==prc[idx],'Name']
-                    if not map_name.empty:
-                        pname[idx]=map_name.iloc[0]
+        if not ('deprec' in txt_full or 'amort' in txt_full):
+            continue
+        # Use extract_accum_base_key for robust base extraction (handles colon-format too)
+        base_name = extract_accum_base_key(row['*Name'])
+        if not base_name:
+            # Fallback: original "on" split for "Less ... on <base>" format
+            if txt_full.startswith('less'):
+                parts = re.split(r'\bon\b', txt_full)
+                base_name = parts[-1].strip() if len(parts)>1 else ''
+        if base_name:
+            base_rc = name_to_predicted_rc.get(base_name)
+            if base_rc and not base_rc.endswith(('.ACC', '.AMO')) and str(prc[idx]) != base_rc + '.ACC':
+                prc[idx] = base_rc + '.ACC'
+                src[idx] = 'AccumulatedDepreciationRule'
+                map_name=sysmap.loc[sysmap['Reporting Code']==prc[idx],'Name']
+                if not map_name.empty:
+                    pname[idx]=map_name.iloc[0]
 
     # Pass 2.5: Cross-account context inference
     # Uses active trial balance balances + chart structure to refine head-only fallbacks

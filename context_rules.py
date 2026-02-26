@@ -17,6 +17,10 @@ FALLBACK_SOURCES = {"FallbackParent", "FallbackHead", "TypeOnly"}
 SECTION_INFERENCE_EXCLUSIONS = [
     "historical adjustment", "rounding",
     "suspense", "clearing", "unallocated",
+    "general expense", "general expenses",
+    "reconciliation", "discrepancy",
+    "revaluation", "conversion",
+    "private use",
 ]
 
 # Context anchors: when an anchor account is detected with an active balance,
