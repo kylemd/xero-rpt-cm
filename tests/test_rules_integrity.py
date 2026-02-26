@@ -79,6 +79,17 @@ XFAIL_TYPE_COMPAT = {
     ("shares_asset", "current asset"): (
         "Share investments always classified as NCA regardless of raw type"
     ),
+    # director_loan_generic_nca intentionally reclassifies director loans from
+    # liability to asset type (Div7A). Type must be corrected in review interface.
+    ("director_loan_generic_nca", "non-current liability"): (
+        "Div7A: director loans always assets regardless of Xero type"
+    ),
+    ("director_loan_generic_nca", "current liability"): (
+        "Div7A: director loans always assets regardless of Xero type"
+    ),
+    ("director_loan_generic_nca", "liability"): (
+        "Div7A: director loans always assets regardless of Xero type"
+    ),
 }
 
 

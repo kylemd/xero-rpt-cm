@@ -4,7 +4,8 @@ Reads AugmentedChartOfAccounts.csv (pipeline output) and the original client
 chart, produces a self-contained HTML page where users can:
 - Review each account's assigned reporting code
 - Override codes with reasons
-- Correct account types that disagree with code heads
+- See expected account type inline (dynamically updates with code decisions)
+- Red highlighting for Type/Code mismatches
 - Export a Xero-ready ChartOfAccounts CSV
 - Export review decisions as JSON for developer review
 
@@ -113,8 +114,6 @@ h1 {{ margin-bottom: 4px; font-size: 1.5em; }}
 .toolbar input[type=text] {{ width: 220px; }}
 .toolbar .spacer {{ flex: 1; }}
 .toolbar button {{ padding: 6px 14px; border: none; border-radius: 5px; font-size: .85em; font-weight: 600; cursor: pointer; }}
-.btn-phase2 {{ background: #16a34a; color: white; }}
-.btn-phase2:hover {{ background: #15803d; }}
 .btn-export {{ background: #2563eb; color: white; }}
 .btn-export:hover {{ background: #1d4ed8; }}
 .btn-json {{ background: #7c3aed; color: white; }}
@@ -165,22 +164,15 @@ tr.review-highlight:hover td {{ background: #fef9c3 !important; }}
 .decision-cell .reason-label {{ font-size: .72em; color: #888; margin-bottom: 2px; display: none; }}
 .decision-cell .reason-label.show {{ display: block; }}
 
-/* Phase 2: Type Review */
-.phase2-section {{ margin-top: 24px; }}
-.phase2-section h2 {{ margin-bottom: 8px; font-size: 1.3em; color: #166534; }}
-.phase2-table {{ width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.1); font-size: .82em; }}
-.phase2-table th {{ background: #166534; color: white; padding: 8px 10px; text-align: left; font-weight: 600; font-size: .8em; }}
-.phase2-table td {{ padding: 7px 10px; border-bottom: 1px solid #eee; vertical-align: top; }}
-.phase2-table tr:hover td {{ background: #f0fdf4 !important; }}
-.phase2-table tr.reviewed td {{ opacity: .55; }}
-.phase2-table tr.reviewed:hover td {{ opacity: 1; }}
-.phase2-table select {{ padding: 4px 6px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: .9em; }}
-.btn-accept {{ padding: 8px 18px; background: #16a34a; color: white; border: none; border-radius: 5px; font-weight: 600; font-size: .9em; cursor: pointer; }}
-.btn-accept:hover {{ background: #15803d; }}
-.btn-accept-sm {{ padding: 3px 8px; background: #16a34a; color: white; border: none; border-radius: 4px; font-size: .75em; cursor: pointer; margin-left: 4px; }}
-.btn-accept-sm:hover {{ background: #15803d; }}
+/* Expected Type column */
+.expected-type-cell {{ min-width: 150px; }}
+.expected-type-cell select {{ padding: 4px 6px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: .88em; width: 100%; }}
+.expected-type-cell .type-match {{ color: #16a34a; font-weight: 600; font-size: .88em; }}
+.expected-type-cell .type-mismatch {{ color: #dc2626; font-weight: 700; font-size: .88em; }}
+td.cell-mismatch {{ background: #fee2e2 !important; }}
+tr:hover td.cell-mismatch {{ background: #fecaca !important; }}
 
-/* Phase 3: Export */
+/* Export */
 </style>
 </head>
 <body>
@@ -222,7 +214,6 @@ tr.review-highlight:hover td {{ background: #fef9c3 !important; }}
     parts.append('  <input type="text" id="filterSearch" placeholder="Name, code, type, source..." oninput="applyFilters()">\n')
     parts.append('  <span class="count-label" id="visibleCount"></span>\n')
     parts.append('  <span class="spacer"></span>\n')
-    parts.append('  <button class="btn-phase2" onclick="startPhase2()">Start Type Review</button>\n')
     parts.append('  <button class="btn-export" onclick="downloadCSV()">Export CSV</button>\n')
     parts.append('  <button class="btn-json" onclick="downloadJSON()">Export JSON</button>\n')
     parts.append('  <button class="btn-clear" onclick="clearAll()">Clear All</button>\n')
@@ -246,6 +237,7 @@ tr.review-highlight:hover td {{ background: #fef9c3 !important; }}
   <th onclick="sortTable(5)">Assigned Code</th>
   <th onclick="sortTable(6)">Source</th>
   <th style="min-width:270px">Your Decision</th>
+  <th style="min-width:150px">Expected Type</th>
 </tr>
 </thead>
 <tbody>
@@ -273,6 +265,7 @@ tr.review-highlight:hover td {{ background: #fef9c3 !important; }}
             f'data-search="{h(search_text)}" '
             f'data-status="pending" '
             f'data-predicted="{h(a["predicted_code"])}" '
+            f'data-original="{h(a["original_code"])}" '
             f'data-type="{h(a["type"])}">\n'
         )
         parts.append(f'  <td>{i + 1}</td>\n')
@@ -311,6 +304,7 @@ tr.review-highlight:hover td {{ background: #fef9c3 !important; }}
         parts.append(f'    <textarea id="reason_{i}" placeholder="Why override this code?" '
                      f'oninput="setReason(\'{js_id}\',this.value)"></textarea>\n')
         parts.append(f'  </td>\n')
+        parts.append(f'  <td class="expected-type-cell" id="expectedType_{i}"></td>\n')
         parts.append('</tr>\n')
 
     parts.append('</tbody>\n</table>\n')
@@ -337,7 +331,6 @@ const TOTAL = {len(accounts)};
 // ─── State ───
 let decisions = loadDecisions();
 let typeDecisions = loadTypeDecisions();
-let phase2Active = false;
 
 function loadDecisions() {{
   try {{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {{}}; }}
@@ -392,6 +385,7 @@ function setDecision(id, choice) {{
   const selectedRadio = row.querySelector('input[value="' + choice + '"]');
   if (selectedRadio) selectedRadio.closest('label').classList.add('selected');
   saveDecisions();
+  updateExpectedType(parseInt(idx));
 }}
 
 function setOverrideCode(id, code, idx) {{
@@ -401,6 +395,7 @@ function setOverrideCode(id, code, idx) {{
   const descEl = document.getElementById('overrideDesc_' + idx);
   descEl.textContent = CODE_MAP[code] || '';
   saveDecisions();
+  updateExpectedType(idx);
 }}
 
 function setReason(id, reason) {{
@@ -518,9 +513,8 @@ function clearAll() {{
     row.querySelectorAll('.reason-label').forEach(l => l.classList.remove('show'));
     row.querySelectorAll('textarea').forEach(t => {{ t.value = ''; t.classList.remove('show'); }});
   }});
-  const p2 = document.getElementById('phase2Section');
-  if (p2) p2.remove();
   updateProgress();
+  updateAllExpectedTypes();
 }}
 
 // ─── Phase 2: Type Review ───
@@ -595,141 +589,92 @@ function escJs(s) {{
   return (s || '').replace(/\\\\/g, '\\\\\\\\').replace(/'/g, "\\\\'");
 }}
 
-function startPhase2() {{
-  phase2Active = true;
+// ─── Inline Expected Type ───
+function updateExpectedType(i) {{
+  const acct = ACCOUNTS[i];
+  if (!acct) return;
+  const cell = document.getElementById('expectedType_' + i);
+  if (!cell) return;
 
-  // Build type mismatches
-  const typeMismatches = [];
-  ACCOUNTS.forEach((acct, idx) => {{
-    if (SYSTEM_TYPES.has(acct.type)) return;
-    const finalCode = getFinalCode(acct);
-    const codeHead = headFromCode(finalCode);
-    const typeHead = HEAD_FROM_TYPE[acct.type];
-    if (!typeHead || !codeHead) return;
-    if (codeHead !== typeHead) {{
-      const predicted = predictTypeFromCode(finalCode, acct.type);
-      typeMismatches.push({{
-        idx: idx,
-        code: acct.code,
-        name: acct.name,
-        currentType: acct.type,
-        finalCode: finalCode,
-        codeHead: codeHead,
-        predictedType: predicted,
-        acctId: acct.code + ':' + (acct.name || '').substring(0, 40)
-      }});
-    }}
-  }});
+  const currentType = acct.type;
+  const acctId = acct.code + ':' + (acct.name || '').substring(0, 40);
 
-  renderPhase2(typeMismatches);
-}}
-
-function renderPhase2(typeMismatches) {{
-  const existing = document.getElementById('phase2Section');
-  if (existing) existing.remove();
-
-  const section = document.createElement('div');
-  section.id = 'phase2Section';
-  section.className = 'phase2-section';
-
-  if (typeMismatches.length === 0) {{
-    section.innerHTML = '<h2>Type Review</h2>'
-      + '<p style="color:#16a34a;font-weight:600;margin-bottom:12px">No type mismatches found \\u2014 all account types are consistent with their reporting codes.</p>';
-    document.querySelector('#reviewTable').after(section);
+  // System types: no type review needed
+  if (SYSTEM_TYPES.has(currentType)) {{
+    cell.innerHTML = '<span class="type-match">' + escHtml(currentType) + '</span>';
+    cell.classList.remove('cell-mismatch');
     return;
   }}
 
-  let html = '<h2>Type Review <span style="font-weight:400;font-size:.8em;color:#666">('
-    + typeMismatches.length + ' accounts)</span></h2>'
-    + '<p style="margin-bottom:12px;color:#666;font-size:.9em">These accounts have a reporting code head that disagrees with their Xero account type.</p>'
-    + '<div style="margin-bottom:12px"><button class="btn-accept" onclick="acceptAllTypePredictions()">Accept All Predictions</button>'
-    + ' <span class="progress-label" id="phase2Progress">0 / ' + typeMismatches.length + '</span></div>'
-    + '<table class="phase2-table"><thead><tr>'
-    + '<th>#</th><th>Account Code</th><th>Account Name</th><th>Reporting Code</th>'
-    + '<th>Current Type</th><th>Code Head</th><th>Predicted Type</th><th>Your Decision</th>'
-    + '</tr></thead><tbody>';
+  const finalCode = getFinalCode(acct);
+  const codeHead = headFromCode(finalCode);
+  const typeHead = HEAD_FROM_TYPE[currentType];
+  const hasMismatch = typeHead && codeHead && codeHead !== typeHead;
 
-  typeMismatches.forEach((tm, i) => {{
-    const allowed = ALLOWED_TYPES_BY_HEAD[tm.codeHead] || [];
-    const savedDecision = typeDecisions[tm.acctId];
-    const selectedType = savedDecision ? savedDecision.newType : '';
-    const isDecided = !!selectedType;
+  if (!hasMismatch) {{
+    cell.innerHTML = '<span class="type-match">' + escHtml(currentType) + '</span>';
+    cell.classList.remove('cell-mismatch');
+    // Clear stale type decision if mismatch no longer exists
+    if (typeDecisions[acctId]) {{
+      delete typeDecisions[acctId];
+      saveTypeDecisions();
+    }}
+    return;
+  }}
 
-    html += '<tr class="' + (isDecided ? 'reviewed' : '') + '" data-type-id="' + escHtml(tm.acctId) + '">'
-      + '<td>' + (i + 1) + '</td>'
-      + '<td><span class="code">' + escHtml(tm.code) + '</span></td>'
-      + '<td><strong>' + escHtml(tm.name) + '</strong></td>'
-      + '<td><span class="code assigned">' + escHtml(tm.finalCode) + '</span></td>'
-      + '<td style="color:#dc2626;font-weight:600">' + escHtml(tm.currentType) + '</td>'
-      + '<td><span class="tag" style="background:#fee2e2;color:#991b1b">' + escHtml(tm.codeHead) + '</span></td>'
-      + '<td style="color:#16a34a;font-weight:600">' + escHtml(tm.predictedType) + '</td>'
-      + '<td class="decision-cell"><select onchange="setTypeDecision(\\'' + escJs(tm.acctId) + '\\',this.value)">';
+  // Mismatch: show dropdown with allowed types
+  const predicted = predictTypeFromCode(finalCode, currentType);
+  const allowed = ALLOWED_TYPES_BY_HEAD[codeHead] || [];
+  const savedTd = typeDecisions[acctId];
+  const selectedType = (savedTd && savedTd.newType) ? savedTd.newType : predicted;
 
-    html += '<option value="">\\u2014 choose \\u2014</option>';
-    allowed.forEach(t => {{
-      const sel = (selectedType === t) ? ' selected' : '';
-      const marker = (t === tm.predictedType) ? ' (predicted)' : '';
-      html += '<option value="' + escHtml(t) + '"' + sel + '>' + escHtml(t) + marker + '</option>';
-    }});
-    html += '</select>'
-      + ' <button class="btn-accept-sm" onclick="acceptTypePrediction(\\'' + escJs(tm.acctId) + '\\',\\'' + escJs(tm.predictedType) + '\\',this)">Accept</button>'
-      + '</td></tr>';
+  let html = '<select onchange="setInlineTypeDecision(\'' + escJs(acctId) + '\',this.value)">';
+  allowed.forEach(t => {{
+    const sel = (t === selectedType) ? ' selected' : '';
+    const marker = (t === predicted) ? ' \\u2190 predicted' : '';
+    html += '<option value="' + escHtml(t) + '"' + sel + '>' + escHtml(t) + marker + '</option>';
   }});
+  html += '</select>';
+  cell.innerHTML = html;
+  cell.classList.add('cell-mismatch');
 
-  html += '</tbody></table>';
-  section.innerHTML = html;
-  document.querySelector('#reviewTable').after(section);
-  updatePhase2Progress();
+  // Auto-save predicted type if no explicit decision yet
+  if (!savedTd || !savedTd.newType) {{
+    typeDecisions[acctId] = {{ newType: predicted, timestamp: new Date().toISOString() }};
+    saveTypeDecisions();
+  }}
 }}
 
-function setTypeDecision(acctId, newType) {{
+function updateAllExpectedTypes() {{
+  for (let i = 0; i < ACCOUNTS.length; i++) {{
+    updateExpectedType(i);
+  }}
+}}
+
+function setInlineTypeDecision(acctId, newType) {{
   if (!newType) {{
     delete typeDecisions[acctId];
   }} else {{
     typeDecisions[acctId] = {{ newType: newType, timestamp: new Date().toISOString() }};
   }}
-  const row = document.querySelector('tr[data-type-id="' + CSS.escape(acctId) + '"]');
-  if (row) row.classList.toggle('reviewed', !!newType);
   saveTypeDecisions();
 }}
 
-function acceptTypePrediction(acctId, predicted, btn) {{
-  typeDecisions[acctId] = {{ newType: predicted, timestamp: new Date().toISOString() }};
-  const row = document.querySelector('tr[data-type-id="' + CSS.escape(acctId) + '"]');
-  if (row) {{
-    row.classList.add('reviewed');
-    const select = row.querySelector('select');
-    if (select) select.value = predicted;
-  }}
-  saveTypeDecisions();
-}}
+// ─── Static mismatch: Type vs Original Code ───
+function checkStaticMismatches() {{
+  document.querySelectorAll('#reviewTable tbody tr').forEach(row => {{
+    const type = row.dataset.type;
+    const originalCode = row.dataset.original || '';
+    if (!type || !originalCode || SYSTEM_TYPES.has(type)) return;
 
-function acceptAllTypePredictions() {{
-  document.querySelectorAll('.phase2-table tbody tr').forEach(row => {{
-    const acctId = row.dataset.typeId;
-    const select = row.querySelector('select');
-    if (!select) return;
-    for (const opt of select.options) {{
-      if (opt.text.includes('(predicted)')) {{
-        select.value = opt.value;
-        typeDecisions[acctId] = {{ newType: opt.value, timestamp: new Date().toISOString() }};
-        row.classList.add('reviewed');
-        break;
-      }}
+    const typeHead = HEAD_FROM_TYPE[type];
+    const codeHead = headFromCode(originalCode);
+    if (typeHead && codeHead && typeHead !== codeHead) {{
+      // Type cell (col 3) and Original Code cell (col 4)
+      row.cells[3].classList.add('cell-mismatch');
+      row.cells[4].classList.add('cell-mismatch');
     }}
   }});
-  saveTypeDecisions();
-}}
-
-function updatePhase2Progress() {{
-  const el = document.getElementById('phase2Progress');
-  if (!el) return;
-  const total = document.querySelectorAll('.phase2-table tbody tr').length;
-  // Count only type decisions matching rows in the current phase2 table
-  const typeIds = new Set();
-  document.querySelectorAll('.phase2-table tbody tr').forEach(r => typeIds.add(r.dataset.typeId));
-  const decided = Object.keys(typeDecisions).filter(id => typeIds.has(id)).length;
-  el.textContent = decided + ' / ' + total;
 }}
 
 // ─── Phase 3: Export ───
@@ -828,6 +773,8 @@ function downloadJSON() {{
 // ─── Init ───
 try {{
   restoreState();
+  checkStaticMismatches();
+  updateAllExpectedTypes();
   applyFilters();
 }} catch (e) {{
   console.error('Init error:', e);

@@ -322,11 +322,11 @@ _revenue_rules = [
         name="government_grant",
         code="REV.GRA.GOV",
         priority=80,
-        keywords=["grant", "service nsw"],
+        keywords=["grant", "government", "service nsw"],
         canon_types={"other income", "revenue", "income"},
         keywords_exclude=["covid"],
-        notes="Audit fix: 'grant' now guarded by revenue/other income type. "
-              "'apprentice' and 'rebate' removed (too broad).",
+        notes="Government grants/subsidies on revenue types. "
+              "'government' added per user decision (Government subsidies = REV.GRA.GOV).",
     ),
     Rule(
         name="reimbursement_income",
@@ -377,6 +377,15 @@ _revenue_rules = [
         keywords=["product income", "sales of product"],
         canon_types={"revenue", "income"},
         notes="Product income/sales of product -> trading goods revenue",
+    ),
+    Rule(
+        name="rental_income",
+        code="REV.INV.REN",
+        priority=80,
+        keywords=["rental income", "rental"],
+        canon_types={"other income", "revenue", "income"},
+        notes="Rental income -> investment rental income. "
+              "Per user decision: revenue/income + 'rental' = REV.INV.REN.",
     ),
 ]
 
@@ -494,6 +503,24 @@ _payroll_rules = [
         keywords_all=["provision"],
         canon_types={"current liability", "liability"},
         notes="Provisions for employee-related items are employee entitlements",
+    ),
+    Rule(
+        name="payroll_tax_payable",
+        code="LIA.CUR.TAX",
+        priority=96,
+        keywords=["payroll tax"],
+        canon_types={"current liability", "liability"},
+        notes="Payroll tax payable is a tax liability, NOT an employee entitlement. "
+              "Higher priority than payroll_payable to prevent PAY.EMP assignment.",
+    ),
+    Rule(
+        name="payroll_tax_expense",
+        code="EXP.EMP",
+        priority=85,
+        keywords=["payroll tax"],
+        canon_types={"expense"},
+        notes="Payroll tax expense correlates with employee remuneration but is not "
+              "wages directly paid to employees, hence EXP.EMP not EXP.EMP.WAG.",
     ),
     Rule(
         name="sgc_payable",
@@ -669,12 +696,24 @@ _loan_rules = [
         notes="Loan TO director (fallback) -> non-current director loan asset",
     ),
     Rule(
+        name="director_loan_generic_nca",
+        code="ASS.NCA.DIR",
+        priority=95,
+        keywords_all=["director", "loan"],
+        raw_types={"non-current liability", "non current liability",
+                   "current liability", "liability"},
+        notes="Director loan on liability type -> reclassify as NCA director loan. "
+              "Per user decision: directors loans should always be assets (Div7A). "
+              "Type must be corrected in the review interface.",
+    ),
+    Rule(
         name="directors_loan_from",
         code="LIA.NCL.LOA",
-        priority=94,
+        priority=80,
         keywords=["director's loan", "directors loan", "director s loan"],
+        keywords_exclude=["to director"],
         notes="Director's loan (FROM director) -> non-current loan liability. "
-              "'director s loan' catches normalised apostrophe form.",
+              "Lower priority fallback — Div7A rule above catches most cases.",
     ),
     Rule(
         name="loan_to_pty",
@@ -1047,9 +1086,10 @@ _general_expense_rules = [
         name="advertising",
         code="EXP.ADV",
         priority=72,
-        keywords=["advertising", "marketing"],
+        keywords=["advertising", "marketing", "sponsorship"],
         canon_types={"expense"},
-        notes="Advertising/marketing -> advertising expense",
+        notes="Advertising/marketing/sponsorship -> advertising expense. "
+              "'sponsorship' added per user decision (strongly implies advertising).",
     ),
     Rule(
         name="branding",
@@ -1073,9 +1113,10 @@ _general_expense_rules = [
         name="professional_fees",
         code="EXP.PRO",
         priority=72,
-        keywords=["accounting", "consulting", "legal"],
+        keywords=["accounting", "accountancy", "bookkeeping", "consulting", "legal"],
         canon_types={"expense"},
-        notes="Accounting/consulting/legal -> professional fees",
+        notes="Professional fees: accounting, accountancy, bookkeeping, consulting, legal. "
+              "'accountancy' and 'bookkeeping' added per user decision.",
     ),
     Rule(
         name="audit_fees",
@@ -1136,6 +1177,14 @@ _general_expense_rules = [
     ),
 
     # Administration
+    Rule(
+        name="filing_fees",
+        code="EXP.ADM",
+        priority=73,
+        keywords=["filing fee", "asic"],
+        canon_types={"expense"},
+        notes="Filing fees (ASIC regulatory fee) -> admin expense.",
+    ),
     Rule(
         name="office_admin",
         code="EXP.ADM",
@@ -1246,9 +1295,19 @@ _general_expense_rules = [
         name="long_service_leave",
         code="EXP.EMP",
         priority=72,
-        keywords_all=["long service", "levy"],
+        keywords=["long service leave", "long service"],
         canon_types={"expense"},
-        notes="Long service leave levy -> employee expenses",
+        notes="Long service leave expense -> employee expenses. "
+              "Broadened from requiring 'levy' to match all long service leave variants.",
+    ),
+    Rule(
+        name="qleave_expense",
+        code="EXP.EMP",
+        priority=73,
+        keywords=["qleave", "q leave"],
+        canon_types={"expense"},
+        notes="QLeave (Queensland Long Service Leave) -> employee expenses. "
+              "Has direct correlation with employee remuneration.",
     ),
 
     # Fines/penalties
@@ -1261,7 +1320,26 @@ _general_expense_rules = [
         notes="Fines/penalties -> non-deductible expense",
     ),
 
-    # Cost of goods sold catch-all
+    # Cost of goods/sales
+    Rule(
+        name="cost_of_sales_name",
+        code="EXP.COS",
+        priority=78,
+        keywords=["cost of sales"],
+        canon_types={"expense", "direct costs"},
+        notes="Cost of Sales in name -> COGS. Per user decision: type=Direct Costs "
+              "and name includes 'cost of sales' matches this code specifically.",
+    ),
+    Rule(
+        name="cos_abbreviation",
+        code="EXP.COS",
+        priority=76,
+        keywords=["- cos", "-cos"],
+        raw_types={"direct costs", "cost of sales", "purchases"},
+        keywords_exclude=["cost"],
+        notes="COS abbreviation after dash on direct costs type -> COGS. "
+              "Excludes 'cost' to avoid false positive on 'Freight Cost for Purchases'.",
+    ),
     Rule(
         name="cost_of_goods_sold",
         code="EXP.COS",
@@ -1275,6 +1353,30 @@ _general_expense_rules = [
         priority=55,
         raw_types={"cost of sales"},
         notes="Cost of sales type catch-all -> COGS",
+    ),
+
+    # Rent
+    Rule(
+        name="rent_expense",
+        code="EXP.REN",
+        priority=72,
+        keywords=[" rent"],
+        canon_types={"expense"},
+        keywords_exclude=["hire", "truck", "vehicle", "plant", "equipment"],
+        notes="Rent expense. Uses ' rent' (leading space) to avoid false positives on "
+              "'parental' (no space before 'rent'). Excludes equipment/vehicle hire. "
+              "Per user decision: type=Expense + name contains 'rent' = EXP.REN.",
+    ),
+
+    # Tax adjustments / Extraordinary
+    Rule(
+        name="tax_adjustment_expense",
+        code="EXP.EXT",
+        priority=75,
+        keywords=["tax adjustment"],
+        canon_types={"expense"},
+        notes="Tax adjustment expense is an extraordinary item — journal to reconcile "
+              "P&L to taxable income. Per user decision.",
     ),
 
     # Interest expense (from early overrides)
@@ -1330,12 +1432,13 @@ _general_expense_rules = [
 
     # Dividends (from early overrides)
     Rule(
-        name="dividends_paid_equity",
-        code="EQU.RET.DIV",
+        name="dividends_equity",
+        code="EQU.RET.DIV.ORD",
         priority=80,
-        keywords=["dividends paid"],
+        keywords=["dividend"],
         canon_types={"equity"},
-        notes="Dividends paid on equity -> retained earnings dividends",
+        notes="Dividend on equity type -> ordinary dividends from retained earnings. "
+              "Per user decision: equity + 'dividend' = EQU.RET.DIV.ORD.",
     ),
     Rule(
         name="dividend_payable_expense",
@@ -1419,6 +1522,34 @@ _equity_rules = [
         keywords_all=["accumulated", "loss"],
         notes="Accumulated losses -> equity retained earnings",
     ),
+    Rule(
+        name="asset_revaluation_reserve",
+        code="EQU.RES.REV",
+        priority=80,
+        keywords=["revaluation reserve", "asset revaluation"],
+        canon_types={"equity"},
+        notes="Asset revaluation reserve -> equity revaluation reserve. "
+              "Per SystemMappings.csv row 94.",
+    ),
+    Rule(
+        name="historical_adjustment_equity",
+        code="EQU.RET",
+        priority=78,
+        keywords=["historical adjustment"],
+        canon_types={"equity"},
+        notes="Historical adjustments relate to prior-year adjustments and represent "
+              "movements in retained earnings. Per user decision.",
+    ),
+    Rule(
+        name="tax_adjustment_reserve",
+        code="EQU.RET",
+        priority=78,
+        keywords=["tax adjustment reserve", "tax adjustment"],
+        canon_types={"equity"},
+        notes="Tax adjustment reserve impacts retained earnings. The journal reconciling "
+              "P&L to taxable income should have no overall impact on retained earnings. "
+              "Per user decision.",
+    ),
 ]
 
 
@@ -1439,8 +1570,9 @@ _remaining_rules = [
         name="sundry_debtors",
         code="ASS.CUR.REC",
         priority=75,
-        keywords=["sundry debtors"],
-        notes="Sundry debtors -> current receivables",
+        keywords=["sundry debtor"],
+        notes="Sundry debtors/debtor -> current receivables (not trade). "
+              "Per user decision: sundry != trade, but IS a receivable.",
     ),
     Rule(
         name="retentions_receivable",
@@ -1458,7 +1590,7 @@ _remaining_rules = [
         notes="Retention + receivable/debtor -> current receivables",
     ),
 
-    # Trade creditors
+    # Trade / Sundry creditors
     Rule(
         name="trade_creditors",
         code="LIA.CUR.PAY.TRA",
@@ -1467,8 +1599,39 @@ _remaining_rules = [
         canon_types={"current liability", "liability"},
         notes="Trade creditors/payables -> trade payables",
     ),
+    Rule(
+        name="sundry_creditors",
+        code="LIA.CUR.PAY",
+        priority=85,
+        keywords=["sundry creditor"],
+        canon_types={"current liability", "liability"},
+        keywords_exclude=["trade", "ato", "fbt", "tax"],
+        notes="Sundry creditors -> payables (not trade). "
+              "Excludes ATO/FBT/tax variants (those are LIA.CUR.TAX). "
+              "Per user decision: sundry != trade, but IS a payable.",
+    ),
 
-    # Motor vehicle fixed asset
+    # Fixed assets — furniture, PPE, motor vehicle
+    Rule(
+        name="furniture_fittings_asset",
+        code="ASS.NCA.FIX.PLA",
+        priority=78,
+        keywords=["furniture", "fittings"],
+        canon_types={"fixed asset"},
+        keywords_exclude=["depreciation", "accumulated", "deprec", "accum"],
+        notes="Furniture & fittings -> plant & equipment fixed assets. "
+              "Per user decision: falls under ASS.NCA.FIX.PLA.",
+    ),
+    Rule(
+        name="ppe_asset",
+        code="ASS.NCA.FIX.PLA",
+        priority=78,
+        keywords=["plant & equipment", "plant and equipment", "property plant"],
+        canon_types={"fixed asset"},
+        keywords_exclude=["depreciation", "accumulated", "deprec", "accum"],
+        notes="Property, Plant & Equipment -> fixed assets plant. "
+              "Per user decision: name clearly belongs in ASS.NCA.FIX.PLA.",
+    ),
     Rule(
         name="motor_vehicle_fixed_asset",
         code="ASS.NCA.FIX.VEH",

@@ -75,6 +75,48 @@ ANONYMIZATION_XFAILS = {
     ("client_008_validated_final.csv", "802"): "Rule improvement: LIA.CUR.PAY.TRA > LIA for trade creditors",
     # PAYG Withholdings: validated as PAY.PAY in this client but PAY.EMP in 4 other clients
     ("client_182_validated_final.csv", "825"): "Outlier validation: PAY.PAY vs EMP consensus across 4 clients",
+
+    # --- Rule improvements: new rules assign more specific codes than validated head-only ---
+    # Filing fees → EXP.ADM (validated as EXP head-only)
+    ("ChartOfAccounts_38_validated_final.csv", "1685.0"): "Rule improvement: EXP.ADM > EXP for filing fees",
+    ("client_130_validated_final.csv", "1685"): "Rule improvement: EXP.ADM > EXP for filing fees",
+    ("client_182_validated_final.csv", "405"): "Rule improvement: EXP.ADM > EXP for filing fees",
+    ("client_234_validated_final.csv", "61018"): "Rule improvement: EXP.ADM > EXP for filing fees",
+    ("client_267_validated_final.csv", "60022"): "Rule improvement: EXP.ADM > EXP for filing fee",
+    # Bookkeeping/Accountancy → EXP.PRO (validated as EXP head-only)
+    ("client_130_validated_final.csv", "1547"): "Rule improvement: EXP.PRO > EXP for bookkeeping",
+    ("client_234_validated_final.csv", "61001"): "Rule improvement: EXP.PRO > EXP for accountancy",
+    ("client_234_validated_final.csv", "61002"): "Rule improvement: EXP.PRO > EXP for bookkeeping fees",
+    ("client_234_validated_final.csv", "66001"): "Rule improvement: EXP.PRO > EXP for accountancy 950",
+    ("client_267_validated_final.csv", "60004"): "Rule improvement: EXP.PRO > EXP for bookkeeping",
+    # Sponsorship → EXP.ADV (validated as EXP head-only)
+    ("client_008_validated_final.csv", "482"): "Rule improvement: EXP.ADV > EXP for sponsorship",
+    # Cost of Sales → EXP.COS (validated as EXP head-only)
+    ("client_008_validated_final.csv", "353"): "Rule improvement: EXP.COS > EXP for misc cost of sales",
+    # Long Service Leave → EXP.EMP (validated as EXP head-only)
+    ("client_008_validated_final.csv", "440"): "Rule improvement: EXP.EMP > EXP for provisional long service leave",
+    # Sundry Creditors → LIA.CUR.PAY (validated as LIA.CUR.PAY.TRA)
+    ("client_130_validated_final.csv", "3049"): "User correction: sundry != trade, PAY not PAY.TRA",
+
+    # --- User corrections: domain expert overrides validated codes ---
+    # Dividends → EQU.RET.DIV.ORD (validated as EQU.RET.DIV — more specific)
+    ("ChartOfAccounts_38_validated_final.csv", "4160.0"): "User correction: EQU.RET.DIV.ORD > EQU.RET.DIV for dividends",
+    ("client_008_validated_final.csv", "965"): "User correction: EQU.RET.DIV.ORD > EQU.RET.DIV for dividends",
+    ("client_130_validated_final.csv", "4160"): "User correction: EQU.RET.DIV.ORD > EQU.RET.DIV for dividends",
+    ("client_234_validated_final.csv", "39500"): "User correction: EQU.RET.DIV.ORD > EQU.RET.DIV for dividends",
+    ("client_234_validated_final.csv", "39600"): "User correction: EQU.RET.DIV.ORD > EQU.RET.DIV for dividends",
+    ("client_234_validated_final.csv", "39700"): "User correction: EQU.RET.DIV.ORD > EQU.RET.DIV for dividends",
+    ("client_267_validated_final.csv", "39200"): "User correction: EQU.RET.DIV.ORD > EQU.RET.DIV for dividends",
+    # Director loans → ASS.NCA.DIR (Div7A: always assets, validated as LIA.NCL.LOA)
+    ("ChartOfAccounts_38_validated_final.csv", "3565.0"): "Div7A: director loans should be assets not liabilities",
+    ("client_130_validated_final.csv", "3565"): "Div7A: director loans should be assets not liabilities",
+    ("client_234_validated_final.csv", "21608"): "Div7A: director loans should be assets not liabilities",
+    ("client_255_validated_final.csv", "900"): "Div7A: director loans should be assets not liabilities",
+    # Payroll Tax → EXP.EMP (validated as EXP.EMP.WAG — user says EMP not WAG)
+    ("client_234_validated_final.csv", "61054"): "User correction: EXP.EMP not WAG for payroll tax",
+    ("client_267_validated_final.csv", "62435"): "User correction: EXP.EMP not WAG for payroll tax",
+    # Payroll Tax Payable → LIA.CUR.TAX (validated as LIA.CUR.PAY.EMP — it's a tax not entitlement)
+    ("client_234_validated_final.csv", "21305"): "User correction: LIA.CUR.TAX not PAY.EMP for payroll tax payable",
 }
 
 

@@ -1,7 +1,14 @@
-# Run-Mapping.ps1 — Interactive launcher for Xero Report Code Mapping
-# Usage: Double-click to open, then drag files into the terminal window when prompted.
+# Run-Mapping.ps1 — Launcher for Xero Report Code Mapping
+# Usage:
+#   Interactive:  Double-click to open, then drag files into the terminal window when prompted.
+#   CLI:          .\Run-Mapping.ps1 -Chart "path\to\ChartOfAccounts.csv" -TrialBalance "path\to\TB.xlsx" -Template Company
 
-param()
+param(
+    [string]$Chart,
+    [string]$TrialBalance,
+    [ValidateSet("Company", "Trust", "SoleTrader", "Partnership", "XeroHandi")]
+    [string]$Template
+)
 $ErrorActionPreference = "Stop"
 
 # ── Resolve project root (where this script lives) ──
@@ -13,17 +20,24 @@ Write-Host "  Xero Report Code Mapping" -ForegroundColor Cyan
 Write-Host "  ========================" -ForegroundColor Cyan
 Write-Host ""
 
-# ── Collect file paths interactively ──
-Write-Host "  Drag your ChartOfAccounts CSV into this window and press Enter:" -ForegroundColor Yellow
-$ChartRaw = Read-Host "  "
-Write-Host ""
-Write-Host "  Drag your Trial Balance file (CSV or XLSX) and press Enter:" -ForegroundColor Yellow
-$TBRaw = Read-Host "  "
-Write-Host ""
+# ── Collect file paths (skip prompts if arguments supplied) ──
+if ($Chart) {
+    $ChartFile = $Chart.Trim().Trim('"').Trim("'")
+} else {
+    Write-Host "  Drag your ChartOfAccounts CSV into this window and press Enter:" -ForegroundColor Yellow
+    $ChartRaw = Read-Host "  "
+    Write-Host ""
+    $ChartFile = $ChartRaw.Trim().Trim('"').Trim("'")
+}
 
-# Strip surrounding quotes (Windows drag-and-drop adds them for paths with spaces)
-$ChartFile = $ChartRaw.Trim().Trim('"').Trim("'")
-$TBFile = $TBRaw.Trim().Trim('"').Trim("'")
+if ($TrialBalance) {
+    $TBFile = $TrialBalance.Trim().Trim('"').Trim("'")
+} else {
+    Write-Host "  Drag your Trial Balance file (CSV or XLSX) and press Enter:" -ForegroundColor Yellow
+    $TBRaw = Read-Host "  "
+    Write-Host ""
+    $TBFile = $TBRaw.Trim().Trim('"').Trim("'")
+}
 
 # ── Validate files exist ──
 if (-not (Test-Path $ChartFile)) {
@@ -69,30 +83,32 @@ Write-Host "  Chart:          $chartName" -ForegroundColor Green
 Write-Host "  Trial Balance:  $([System.IO.Path]::GetFileName($TBFile))" -ForegroundColor Green
 Write-Host ""
 
-# ── Template selection ──
-$templates = @("Company", "Trust", "SoleTrader", "Partnership", "XeroHandi")
-Write-Host "  Select template:" -ForegroundColor Yellow
-for ($i = 0; $i -lt $templates.Count; $i++) {
-    Write-Host "    $($i + 1). $($templates[$i])"
+# ── Template selection (skip prompt if -Template supplied) ──
+if (-not $Template) {
+    $templates = @("Company", "Trust", "SoleTrader", "Partnership", "XeroHandi")
+    Write-Host "  Select template:" -ForegroundColor Yellow
+    for ($i = 0; $i -lt $templates.Count; $i++) {
+        Write-Host "    $($i + 1). $($templates[$i])"
+    }
+    Write-Host ""
+    $choice = Read-Host "  Enter number (1-$($templates.Count))"
+    $idx = [int]$choice - 1
+    if ($idx -lt 0 -or $idx -ge $templates.Count) {
+        Write-Host "  ERROR: Invalid selection." -ForegroundColor Red
+        Read-Host "  Press Enter to exit"
+        exit 1
+    }
+    $Template = $templates[$idx]
 }
 Write-Host ""
-$choice = Read-Host "  Enter number (1-$($templates.Count))"
-$idx = [int]$choice - 1
-if ($idx -lt 0 -or $idx -ge $templates.Count) {
-    Write-Host "  ERROR: Invalid selection." -ForegroundColor Red
-    Read-Host "  Press Enter to exit"
-    exit 1
-}
-$template = $templates[$idx]
-Write-Host ""
-Write-Host "  Template: $template" -ForegroundColor Green
+Write-Host "  Template: $Template" -ForegroundColor Green
 Write-Host ""
 
 # ── Run mapping pipeline ──
 Write-Host "  Running mapping pipeline..." -ForegroundColor Cyan
 Push-Location $ProjectRoot
 try {
-    & uv run python mapping_logic_v15.py "$ChartFile" "$TBFile" --chart $template
+    & uv run python mapping_logic_v15.py "$ChartFile" "$TBFile" --chart $Template
     if ($LASTEXITCODE -ne 0) {
         Write-Host ""
         Write-Host "  ERROR: Mapping pipeline failed (exit code $LASTEXITCODE)." -ForegroundColor Red
@@ -139,7 +155,12 @@ if (Test-Path $htmlReport) {
     Write-Host "  WARNING: ReviewReport.html not found." -ForegroundColor Yellow
 }
 
+# ── Determine if running in CLI mode (all args provided) ──
+$cliMode = $Chart -and $TrialBalance
+
 Write-Host ""
 Write-Host "  Done!" -ForegroundColor Green
 Write-Host ""
-Read-Host "  Press Enter to exit"
+if (-not $cliMode) {
+    Read-Host "  Press Enter to exit"
+}

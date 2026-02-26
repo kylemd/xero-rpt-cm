@@ -332,10 +332,11 @@ class TestLoanRules:
         assert code == "ASS.CUR.DIR"
 
     def test_directors_loan(self):
+        """Director loan on liability -> reclassify as NCA director loan (Div7A)."""
         ctx = _ctx("directors loan", raw_type="Non-Current Liability",
                     canon_type="non-current liability")
         code, _ = evaluate_rules(ALL_RULES, ctx)
-        assert code == "LIA.NCL.LOA"
+        assert code == "ASS.NCA.DIR"
 
     def test_directors_loan_apostrophe_on_asset(self):
         """'Director's Loan' normalised to 'director s loan' on current asset -> ASS.CUR.DIR."""
@@ -345,11 +346,11 @@ class TestLoanRules:
         assert code == "ASS.CUR.DIR"
 
     def test_directors_loan_apostrophe_on_liability(self):
-        """'Director's Loan' normalised to 'director s loan' on liability -> LIA.NCL.LOA."""
+        """'Director's Loan' on liability -> NCA director loan (Div7A override)."""
         ctx = _ctx("director s loan from john smith", raw_type="Non-Current Liability",
                     canon_type="non-current liability")
         code, _ = evaluate_rules(ALL_RULES, ctx)
-        assert code == "LIA.NCL.LOA"
+        assert code == "ASS.NCA.DIR"
 
     def test_premium_funding(self):
         ctx = _ctx("premium funding gallagher", raw_type="Current Liability",
@@ -549,9 +550,10 @@ class TestGeneralExpenseRules:
         assert code == "EXP.COS"
 
     def test_dividends_paid_equity(self):
+        """Dividends on equity -> ordinary dividends from retained earnings."""
         ctx = _ctx("dividends paid", raw_type="Equity", canon_type="equity")
         code, _ = evaluate_rules(ALL_RULES, ctx)
-        assert code == "EQU.RET.DIV"
+        assert code == "EQU.RET.DIV.ORD"
 
     def test_dividend_payable_expense(self):
         ctx = _ctx("dividend paid or payable", raw_type="Expense", canon_type="expense")
