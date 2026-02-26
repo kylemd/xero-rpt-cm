@@ -707,6 +707,15 @@ _loan_rules = [
               "Type must be corrected in the review interface.",
     ),
     Rule(
+        name="director_loan_generic_ca",
+        code="ASS.CUR.DIR",
+        priority=94,
+        keywords_all=["director", "loan"],
+        raw_types={"current asset", "asset"},
+        notes="Director loan on current asset type -> current director loan. "
+              "Catches generic 'YYYY Director Loan' names that don't include 'to'.",
+    ),
+    Rule(
         name="directors_loan_from",
         code="LIA.NCL.LOA",
         priority=80,
@@ -1536,9 +1545,10 @@ _equity_rules = [
         code="EQU.RET",
         priority=78,
         keywords=["historical adjustment"],
-        canon_types={"equity"},
+        canon_types={"equity", "current liability", "liability", "historical"},
         notes="Historical adjustments relate to prior-year adjustments and represent "
-              "movements in retained earnings. Per user decision.",
+              "movements in retained earnings regardless of Xero account type. "
+              "Type must be corrected in the review interface. Per user decision.",
     ),
     Rule(
         name="tax_adjustment_reserve",

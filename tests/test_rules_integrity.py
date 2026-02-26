@@ -90,6 +90,17 @@ XFAIL_TYPE_COMPAT = {
     ("director_loan_generic_nca", "liability"): (
         "Div7A: director loans always assets regardless of Xero type"
     ),
+    # historical_adjustment_equity intentionally assigns EQU.RET to liability-typed
+    # accounts. Historical adjustments are retained earnings regardless of Xero type.
+    ("historical_adjustment_equity", "current liability"): (
+        "Historical adjustments are retained earnings regardless of Xero type"
+    ),
+    ("historical_adjustment_equity", "liability"): (
+        "Historical adjustments are retained earnings regardless of Xero type"
+    ),
+    ("historical_adjustment_equity", "historical"): (
+        "Historical adjustments are retained earnings regardless of Xero type"
+    ),
 }
 
 

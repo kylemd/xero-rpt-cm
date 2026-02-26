@@ -117,6 +117,12 @@ ANONYMIZATION_XFAILS = {
     ("client_267_validated_final.csv", "62435"): "User correction: EXP.EMP not WAG for payroll tax",
     # Payroll Tax Payable → LIA.CUR.TAX (validated as LIA.CUR.PAY.EMP — it's a tax not entitlement)
     ("client_234_validated_final.csv", "21305"): "User correction: LIA.CUR.TAX not PAY.EMP for payroll tax payable",
+    # Historical Adjustment → EQU.RET (validated as LIA.CUR — user says retained earnings)
+    ("ChartOfAccounts_38_validated_final.csv", "840.0"): "User correction: EQU.RET not LIA.CUR for historical adjustment",
+    ("client_130_validated_final.csv", "840"): "User correction: EQU.RET not LIA.CUR for historical adjustment",
+    ("client_182_validated_final.csv", "840"): "User correction: EQU.RET not LIA.CUR for historical adjustment",
+    ("client_234_validated_final.csv", "840"): "User correction: EQU.RET not LIA.CUR for historical adjustment",
+    ("client_255_validated_final.csv", "840"): "User correction: EQU.RET not LIA.CUR for historical adjustment",
 }
 
 
