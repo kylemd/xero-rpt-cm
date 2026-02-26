@@ -56,6 +56,7 @@ def load_augmented(path):
                 "predicted_name": row.get("predictedMappingName", "").strip(),
                 "needs_review": row.get("NeedsReview", "").strip(),
                 "source": row.get("Source", "").strip(),
+                "corrected_name": row.get("CorrectedName", "").strip(),
             })
     return accounts
 
@@ -255,6 +256,7 @@ tr:hover td.cell-mismatch {{ background: #fecaca !important; }}
         search_text = " ".join([
             a["code"], a["name"], a["type"], a["source"],
             a["predicted_code"], a["original_code"], a["needs_review"],
+            a["corrected_name"],
         ]).lower()
 
         parts.append(
@@ -270,7 +272,11 @@ tr:hover td.cell-mismatch {{ background: #fecaca !important; }}
         )
         parts.append(f'  <td>{i + 1}</td>\n')
         parts.append(f'  <td><span class="code">{h(a["code"])}</span></td>\n')
-        parts.append(f'  <td><strong>{h(a["name"])}</strong></td>\n')
+        if a["corrected_name"]:
+            parts.append(f'  <td><strong>{h(a["corrected_name"])}</strong>'
+                         f'<br><span class="detail-row" style="font-style:italic">Originally: {h(a["name"])}</span></td>\n')
+        else:
+            parts.append(f'  <td><strong>{h(a["name"])}</strong></td>\n')
         parts.append(f'  <td>{h(a["type"])}</td>\n')
 
         # Original code
