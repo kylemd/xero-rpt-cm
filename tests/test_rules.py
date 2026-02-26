@@ -676,6 +676,133 @@ class TestRemainingRules:
         # This is OK — it'll be handled by template matching in the pipeline
 
 
+class TestSystemMappingsRules:
+    """Rules derived from SystemMappings.csv gap analysis."""
+
+    # --- HIGH priority ---
+    def test_contractor_expense(self):
+        ctx = _ctx("contractors", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP"
+
+    def test_contractor_not_subcontract(self):
+        """Contractor rule should not match subcontract (caught by subcontractor rule)."""
+        ctx = _ctx("subcontract labour", raw_type="Expense", canon_type="expense")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert name != "contractor_expense"
+
+    def test_subscription_expense(self):
+        ctx = _ctx("dues and subscriptions", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ADM"
+
+    def test_digital_subscriptions(self):
+        ctx = _ctx("digital subscriptions", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ADM"
+
+    def test_fbt_expense(self):
+        ctx = _ctx("fringe benefit tax", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.FBT"
+
+    def test_fbt_expense_not_reimbursement(self):
+        """FBT reimbursement should go to REV.OTH, not EXP.FBT."""
+        ctx = _ctx("fbt reimbursement", raw_type="Other Income",
+                    canon_type="other income")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert name != "fbt_expense"
+
+    def test_income_tax_expense(self):
+        ctx = _ctx("income tax expense", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.INC"
+
+    def test_income_tax_not_withholding(self):
+        """PAYG withholding should not match income_tax_expense."""
+        ctx = _ctx("payg withholding tax", raw_type="Expense", canon_type="expense")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert name != "income_tax_expense"
+
+    def test_directors_fees_expense(self):
+        ctx = _ctx("director fees", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP"
+
+    def test_trustee_fees_expense(self):
+        ctx = _ctx("trustee fees", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP"
+
+    def test_opening_balance_equity(self):
+        ctx = _ctx("opening balance equity", raw_type="Equity", canon_type="equity")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EQU.RET"
+
+    # --- MEDIUM priority ---
+    def test_doubtful_debt_provision(self):
+        ctx = _ctx("provision for doubtful debts", raw_type="Expense",
+                    canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.BAD.DOU"
+
+    def test_term_deposit_nca(self):
+        ctx = _ctx("term deposit", raw_type="Non-Current Asset",
+                    canon_type="non-current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.INV.TER"
+
+    def test_term_deposit_ca(self):
+        ctx = _ctx("term deposit", raw_type="Current Asset",
+                    canon_type="current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.TER"
+
+    def test_deferred_income(self):
+        ctx = _ctx("deferred income", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.DEF"
+
+    def test_unearned_revenue(self):
+        ctx = _ctx("unearned revenue", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.DEF"
+
+    def test_operating_expense(self):
+        ctx = _ctx("operating expenses", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.OPR"
+
+    def test_employee_reimbursement(self):
+        ctx = _ctx("employee reimbursements", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.EMP"
+
+    def test_intangible_asset_website(self):
+        ctx = _ctx("website development", raw_type="Fixed Asset",
+                    canon_type="fixed asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.INT"
+
+    def test_intangible_asset_franchise(self):
+        ctx = _ctx("franchise fee", raw_type="Fixed Asset",
+                    canon_type="fixed asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.INT"
+
+    def test_formation_expense(self):
+        ctx = _ctx("formation expense", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ADM"
+
+    def test_incorporation_expense(self):
+        ctx = _ctx("incorporation costs", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.ADM"
+
+
 def test_no_duplicate_rule_names():
     """Every rule must have a unique name."""
     names = [r.name for r in ALL_RULES]

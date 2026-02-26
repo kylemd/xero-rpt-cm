@@ -123,6 +123,18 @@ ANONYMIZATION_XFAILS = {
     ("client_182_validated_final.csv", "840"): "User correction: EQU.RET not LIA.CUR for historical adjustment",
     ("client_234_validated_final.csv", "840"): "User correction: EQU.RET not LIA.CUR for historical adjustment",
     ("client_255_validated_final.csv", "840"): "User correction: EQU.RET not LIA.CUR for historical adjustment",
+
+    # --- SystemMappings-driven rule improvements ---
+    # Subscriptions → EXP.ADM (validated as EXP head-only; SystemMappings says admin)
+    ("ChartOfAccounts_38_validated_final.csv", "1925.0"): "Rule improvement: EXP.ADM > EXP for subscriptions",
+    ("client_130_validated_final.csv", "1925"): "Rule improvement: EXP.ADM > EXP for subscriptions",
+    ("client_182_validated_final.csv", "485"): "Rule improvement: EXP.ADM > EXP for subscriptions",
+    ("client_234_validated_final.csv", "61030"): "Rule improvement: EXP.ADM > EXP for subscriptions",
+    ("client_255_validated_final.csv", "430"): "Rule improvement: EXP.ADM > EXP for subscriptions & memberships",
+    ("client_267_validated_final.csv", "60097"): "Rule improvement: EXP.ADM > EXP for subscriptions",
+    ("client_267_validated_final.csv", "61334"): "Rule improvement: EXP.ADM > EXP for magazines/books subscriptions",
+    # Opening Balance Equity → EQU.RET (validated as EQU.RES; SystemMappings EQU.RET includes opening balances)
+    ("client_255_validated_final.csv", "NoCode55"): "Rule improvement: EQU.RET > EQU.RES for opening balance equity",
 }
 
 

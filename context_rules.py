@@ -15,7 +15,7 @@ FALLBACK_SOURCES = {"FallbackParent", "FallbackHead", "TypeOnly"}
 # Account names that should never be promoted by section inference
 # (clearing/generic accounts that are intentionally at head level)
 SECTION_INFERENCE_EXCLUSIONS = [
-    "opening balance", "historical adjustment", "rounding",
+    "historical adjustment", "rounding",
     "suspense", "clearing", "unallocated",
 ]
 

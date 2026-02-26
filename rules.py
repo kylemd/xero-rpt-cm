@@ -937,12 +937,42 @@ _tax_rules = [
         notes="BAS clearing account -> tax liability",
     ),
     Rule(
+        name="fbt_expense",
+        code="EXP.FBT",
+        priority=80,
+        keywords=["fringe benefit tax", "fbt expense", "fbt payable"],
+        canon_types={"expense"},
+        keywords_exclude=["reimbursement", "reimburse"],
+        notes="Fringe benefit tax expense -> EXP.FBT. SystemMappings leaf code. "
+              "Excludes reimbursements which go to REV.OTH via fbt_reimbursement.",
+    ),
+    Rule(
+        name="income_tax_expense",
+        code="EXP.INC",
+        priority=80,
+        keywords=["income tax expense", "income tax", "deferred tax expense"],
+        canon_types={"expense"},
+        keywords_exclude=["withholding", "payg"],
+        notes="Income tax expense -> EXP.INC. SystemMappings leaf code. "
+              "Excludes withholding tax (different treatment).",
+    ),
+    Rule(
         name="accrued_income_liability",
         code="LIA.CUR.DEF",
         priority=80,
         keywords=["accrued income"],
         raw_types={"current liability", "liability"},
         notes="Accrued income on liability type -> deferred income",
+    ),
+    Rule(
+        name="deferred_income",
+        code="LIA.CUR.DEF",
+        priority=78,
+        keywords=["deferred income", "deferred revenue", "unearned revenue",
+                  "income in advance", "advance billing"],
+        canon_types={"current liability", "liability"},
+        notes="Deferred/unearned income -> LIA.CUR.DEF. SystemMappings leaf code. "
+              "Supplements accrued_income_liability which only catches 'accrued income'.",
     ),
     Rule(
         name="ato_integrated_account",
@@ -960,6 +990,18 @@ _tax_rules = [
 # Audit fix: removed broad 'staff' catch-all. Staff-related rules now
 # require specific context (amenities, training, uniforms, etc.)
 _general_expense_rules = [
+    # Directors / Trustee fees
+    Rule(
+        name="directors_fees_expense",
+        code="EXP",
+        priority=82,
+        keywords=["director fee", "director fees", "directors fees",
+                  "trustee fee", "trustee fees"],
+        canon_types={"expense"},
+        notes="Directors/trustee fees -> general expense. SystemMappings "
+              "explicitly excludes these from EXP.EMP.WAG.",
+    ),
+
     # Materials / COS
     Rule(
         name="closing_stock",
@@ -1004,6 +1046,16 @@ _general_expense_rules = [
         notes="Subcontractor under expense -> general expense",
     ),
     Rule(
+        name="contractor_expense",
+        code="EXP",
+        priority=72,
+        keywords=["contractor", "contractors"],
+        canon_types={"expense"},
+        keywords_exclude=["subtrade", "subcontract", "sub contractor"],
+        notes="Contractor payments -> general expense. SystemMappings EXP.EMP.WAG "
+              "excludes subcontractors; EXP root includes 'Consultants'.",
+    ),
+    Rule(
         name="labour_hire_direct",
         code="EXP.COS",
         priority=78,
@@ -1028,6 +1080,15 @@ _general_expense_rules = [
         keywords=["uniform", "clothing", "protective clothing"],
         canon_types={"expense"},
         notes="Uniforms/clothing -> employee expenses",
+    ),
+    Rule(
+        name="employee_reimbursement",
+        code="EXP.EMP",
+        priority=72,
+        keywords=["employee reimbursement", "staff reimbursement"],
+        canon_types={"expense"},
+        notes="Employee reimbursement expense -> EXP.EMP. "
+              "Reimbursements to employees are employment costs.",
     ),
 
     # Equipment hire
@@ -1193,6 +1254,25 @@ _general_expense_rules = [
         keywords=["filing fee", "asic"],
         canon_types={"expense"},
         notes="Filing fees (ASIC regulatory fee) -> admin expense.",
+    ),
+    Rule(
+        name="subscription_expense",
+        code="EXP.ADM",
+        priority=72,
+        keywords=["subscription", "subscriptions", "dues"],
+        canon_types={"expense"},
+        notes="Subscriptions and dues -> administrative expense. "
+              "SystemMappings EXP root includes 'Licences and subscriptions'.",
+    ),
+    Rule(
+        name="formation_expense",
+        code="EXP.ADM",
+        priority=72,
+        keywords=["formation expense", "formation cost", "incorporation"],
+        canon_types={"expense"},
+        keywords_exclude=["written off", "writtenoff", "write off", "amortis"],
+        notes="Company formation/incorporation costs -> administrative expense. "
+              "Excludes write-offs/amortisation of formation costs (EXP.AMO).",
     ),
     Rule(
         name="office_admin",
@@ -1432,11 +1512,31 @@ _general_expense_rules = [
 
     # Bad debts (from early overrides)
     Rule(
+        name="doubtful_debt_provision",
+        code="EXP.BAD.DOU",
+        priority=78,
+        keywords=["provision for doubtful", "provision for bad", "doubtful debt provision"],
+        canon_types={"expense"},
+        notes="Provision for doubtful debts -> EXP.BAD.DOU. SystemMappings "
+              "distinguishes provision from write-off (EXP.BAD).",
+    ),
+    Rule(
         name="bad_debts",
         code="EXP.BAD",
         priority=78,
         keywords=["bad debt"],
         notes="Bad debt expense",
+    ),
+
+    # Operating expense (low priority catch-all)
+    Rule(
+        name="operating_expense",
+        code="EXP.OPR",
+        priority=65,
+        keywords=["operating expense", "operating expenses", "operational expense"],
+        canon_types={"expense"},
+        notes="Operating expenses -> EXP.OPR. SystemMappings leaf code for "
+              "expenses associated with production of goods/services.",
     ),
 
     # Dividends (from early overrides)
@@ -1560,6 +1660,15 @@ _equity_rules = [
               "P&L to taxable income should have no overall impact on retained earnings. "
               "Per user decision.",
     ),
+    Rule(
+        name="opening_balance_equity",
+        code="EQU.RET",
+        priority=78,
+        keywords=["opening balance"],
+        canon_types={"equity"},
+        notes="Opening balance equity -> retained earnings. SystemMappings "
+              "EQU.RET includes 'Retained earnings brought forward'.",
+    ),
 ]
 
 
@@ -1671,6 +1780,42 @@ _remaining_rules = [
         priority=75,
         keywords=["preliminary expenses"],
         notes="Preliminary expenses -> non-current asset",
+    ),
+
+    # Term deposits
+    Rule(
+        name="term_deposit_nca",
+        code="ASS.NCA.INV.TER",
+        priority=78,
+        keywords=["term deposit"],
+        canon_types={"non-current asset"},
+        notes="Term deposit on non-current asset -> ASS.NCA.INV.TER. "
+              "SystemMappings leaf code for long-term deposits.",
+    ),
+    Rule(
+        name="term_deposit_ca",
+        code="ASS.CUR.TER",
+        priority=78,
+        keywords=["term deposit"],
+        canon_types={"current asset", "asset"},
+        keywords_exclude=["rental bond", "bond"],
+        notes="Term deposit on current asset -> ASS.CUR.TER. "
+              "SystemMappings leaf code for short-term deposits. "
+              "Excludes rental bonds (security deposits, not financial term deposits).",
+    ),
+
+    # Intangible assets
+    Rule(
+        name="intangible_asset_keywords",
+        code="ASS.NCA.INT",
+        priority=72,
+        keywords=["franchise", "website", "customer list", "branding",
+                  "patent", "trademark", "copyright", "licence", "license"],
+        canon_types={"non-current asset", "fixed asset"},
+        keywords_exclude=["accumulated", "amortis", "depreciation", "deprec", "accum"],
+        notes="Intangible asset keywords -> ASS.NCA.INT. SystemMappings "
+              "includes franchises, websites, customer lists, branding. "
+              "Excludes accumulated amortisation/depreciation accounts.",
     ),
 
     # Prepaid / Prepayments

@@ -127,8 +127,13 @@ class TestSectionInference:
         assert len(match) == 1
         assert match[0]["inferred_code"] == "ASS.NCA"
 
-    def test_opening_balance_excluded(self):
-        """Opening Balance Equity should not be promoted by section inference."""
+    def test_opening_balance_promoted(self):
+        """Opening Balance Equity CAN be promoted by section inference.
+
+        Previously excluded because no rule handled it; now the rule engine
+        assigns EQU.RET via opening_balance_equity rule, so section inference
+        would only reach it if the rule engine didn't fire first.
+        """
         accounts = [
             {"code": "880", "name": "Retained Earnings", "type": "Equity",
              "predicted": "EQU.RET", "source": "some_rule"},
@@ -140,7 +145,9 @@ class TestSectionInference:
         bal = {"880": 50000, "882": 0, "885": 10000}
         result = infer_section(accounts, bal, set())
         match = [r for r in result if r["code"] == "882"]
-        assert len(match) == 0
+        # Section inference now agrees with the rule engine: EQU.RET
+        assert len(match) == 1
+        assert match[0]["inferred_code"] == "EQU.RET"
 
     def test_no_inference_when_no_consensus(self):
         """Mixed neighbours should not trigger section inference."""
