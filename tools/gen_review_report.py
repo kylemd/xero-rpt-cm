@@ -355,7 +355,6 @@ function loadTypeDecisions() {{
 
 function saveTypeDecisions() {{
   localStorage.setItem(TYPE_STORAGE_KEY, JSON.stringify(typeDecisions));
-  updatePhase2Progress();
 }}
 
 // ─── Decision handlers ───
@@ -533,6 +532,15 @@ const HEAD_FROM_TYPE = {{
   'Other Income': 'REV', 'Revenue': 'REV', 'Sales': 'REV'
 }};
 
+// Prefix-level constraints: types that require a specific code prefix
+const REQUIRED_PREFIX_BY_TYPE = {{
+  'Direct Costs': 'EXP.COS',
+  'Depreciation': 'EXP.DEP',
+  'Fixed Asset': 'ASS.NCA.FIX',
+  'Inventory': 'ASS.CUR.INY',
+  'Prepayment': 'ASS.CUR.REC.PRE',
+}};
+
 const ALLOWED_TYPES_BY_HEAD = {{
   'ASS': ['Current Asset', 'Fixed Asset', 'Inventory', 'Non-current Asset', 'Prepayment'],
   'EQU': ['Equity'],
@@ -615,11 +623,26 @@ function updateExpectedType(i) {{
   const finalCode = getFinalCode(acct);
   const codeHead = headFromCode(finalCode);
   const typeHead = HEAD_FROM_TYPE[currentType];
-  const hasMismatch = typeHead && codeHead && codeHead !== typeHead;
+  const headMismatch = typeHead && codeHead && codeHead !== typeHead;
+
+  // Prefix-level mismatch: e.g. Direct Costs requires EXP.COS prefix
+  const requiredPrefix = REQUIRED_PREFIX_BY_TYPE[currentType];
+  const prefixMismatch = !headMismatch && requiredPrefix && finalCode
+    && !finalCode.toUpperCase().startsWith(requiredPrefix);
+  const hasMismatch = headMismatch || prefixMismatch;
+
+  // Find the Type cell (column 3) in the row
+  const row = cell.closest('tr');
+  const typeCell = row ? row.cells[3] : null;
 
   if (!hasMismatch) {{
     cell.innerHTML = '<span class="type-match">' + escHtml(currentType) + '</span>';
     cell.classList.remove('cell-mismatch');
+    // Reset Type cell to original value
+    if (typeCell) {{
+      typeCell.textContent = currentType;
+      typeCell.classList.remove('cell-mismatch');
+    }}
     // Clear stale type decision if mismatch no longer exists
     if (typeDecisions[acctId]) {{
       delete typeDecisions[acctId];
@@ -634,7 +657,7 @@ function updateExpectedType(i) {{
   const savedTd = typeDecisions[acctId];
   const selectedType = (savedTd && savedTd.newType) ? savedTd.newType : predicted;
 
-  let html = '<select onchange="setInlineTypeDecision(\'' + escJs(acctId) + '\',this.value)">';
+  let html = '<select onchange="setInlineTypeDecision(\\'' + escJs(acctId) + '\\',this.value,' + i + ')">';
   allowed.forEach(t => {{
     const sel = (t === selectedType) ? ' selected' : '';
     const marker = (t === predicted) ? ' \\u2190 predicted' : '';
@@ -643,6 +666,13 @@ function updateExpectedType(i) {{
   html += '</select>';
   cell.innerHTML = html;
   cell.classList.add('cell-mismatch');
+
+  // Update the Type column (col 3) to show suggested override
+  if (typeCell && predicted !== currentType) {{
+    typeCell.innerHTML = '<span style="text-decoration:line-through;color:#999">' + escHtml(currentType)
+      + '</span><br><span style="color:#dc2626;font-weight:700">' + escHtml(selectedType) + '</span>';
+    typeCell.classList.add('cell-mismatch');
+  }}
 
   // Auto-save predicted type if no explicit decision yet
   if (!savedTd || !savedTd.newType) {{
@@ -653,17 +683,35 @@ function updateExpectedType(i) {{
 
 function updateAllExpectedTypes() {{
   for (let i = 0; i < ACCOUNTS.length; i++) {{
-    updateExpectedType(i);
+    try {{ updateExpectedType(i); }} catch (e) {{ console.warn('updateExpectedType(' + i + '):', e); }}
   }}
 }}
 
-function setInlineTypeDecision(acctId, newType) {{
+function setInlineTypeDecision(acctId, newType, idx) {{
   if (!newType) {{
     delete typeDecisions[acctId];
   }} else {{
     typeDecisions[acctId] = {{ newType: newType, timestamp: new Date().toISOString() }};
   }}
   saveTypeDecisions();
+  // Update the Type column to reflect the new selection
+  if (idx != null) {{
+    const acct = ACCOUNTS[idx];
+    if (acct) {{
+      const row = document.querySelector('tr[data-id="' + CSS.escape(acctId) + '"]');
+      if (row && row.cells[3]) {{
+        const currentType = acct.type;
+        if (newType !== currentType) {{
+          row.cells[3].innerHTML = '<span style="text-decoration:line-through;color:#999">' + escHtml(currentType)
+            + '</span><br><span style="color:#dc2626;font-weight:700">' + escHtml(newType) + '</span>';
+          row.cells[3].classList.add('cell-mismatch');
+        }} else {{
+          row.cells[3].textContent = currentType;
+          row.cells[3].classList.remove('cell-mismatch');
+        }}
+      }}
+    }}
+  }}
 }}
 
 // ─── Static mismatch: Type vs Original Code ───

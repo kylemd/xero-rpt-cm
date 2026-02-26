@@ -384,8 +384,10 @@ _revenue_rules = [
         priority=80,
         keywords=["rental income", "rental"],
         canon_types={"other income", "revenue", "income"},
+        keywords_exclude=["parental"],
         notes="Rental income -> investment rental income. "
-              "Per user decision: revenue/income + 'rental' = REV.INV.REN.",
+              "Per user decision: revenue/income + 'rental' = REV.INV.REN. "
+              "Excludes 'parental' to prevent substring match on 'Paid Parental Leave'.",
     ),
 ]
 
