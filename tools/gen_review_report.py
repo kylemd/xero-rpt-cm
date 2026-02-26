@@ -824,9 +824,52 @@ function downloadJSON() {{
   }}, 500);
 }}
 
+// ─── Auto-confirm matches ───
+function autoConfirmMatches() {{
+  let count = 0;
+  document.querySelectorAll('#reviewTable tbody tr').forEach(row => {{
+    const id = row.dataset.id;
+    const predicted = row.dataset.predicted;
+    const original = row.dataset.original;
+    const type = row.dataset.type;
+    // Skip if no codes, codes differ, or user already made a decision
+    if (!predicted || !original || predicted !== original) return;
+    if (decisions[id] && decisions[id].choice) return;
+
+    // Skip if the account type is incompatible with the predicted code
+    if (type && !SYSTEM_TYPES.has(type)) {{
+      const typeHead = HEAD_FROM_TYPE[type];
+      const codeHead = headFromCode(predicted);
+      // Head-level mismatch (e.g. Revenue type with EXP code)
+      if (typeHead && codeHead && typeHead !== codeHead) return;
+      // Prefix-level mismatch (e.g. Direct Costs requires EXP.COS prefix)
+      const requiredPrefix = REQUIRED_PREFIX_BY_TYPE[type];
+      if (requiredPrefix && !predicted.toUpperCase().startsWith(requiredPrefix)) return;
+    }}
+
+    // Batch-set the accept decision (without per-row save)
+    decisions[id] = {{ choice: 'accept', timestamp: new Date().toISOString(), auto: true }};
+    row.dataset.status = 'accepted';
+    row.classList.add('reviewed');
+    const radios = row.querySelectorAll('input[type=radio]');
+    radios.forEach(r => {{
+      if (r.value === 'accept') {{
+        r.checked = true;
+        r.closest('label').classList.add('selected');
+      }}
+    }});
+    count++;
+  }});
+  if (count > 0) {{
+    saveDecisions();
+    console.log('Auto-confirmed ' + count + ' accounts where predicted === original and type compatible');
+  }}
+}}
+
 // ─── Init ───
 try {{
   restoreState();
+  autoConfirmMatches();
   checkStaticMismatches();
   updateAllExpectedTypes();
   applyFilters();
