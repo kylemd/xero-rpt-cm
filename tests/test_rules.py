@@ -1133,6 +1133,47 @@ class TestIndustryRules:
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code != "EXP.COS"
 
+    # --- Auto dealer revenue rules ---
+    def test_auto_sales_goods(self):
+        ctx = _ctx("easycars sales", raw_type="Revenue", canon_type="revenue", industry="auto")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.TRA.GOO", f"Expected REV.TRA.GOO, got {code} from {name}"
+
+    def test_auto_consignment_sales_goods(self):
+        ctx = _ctx("consignment sales", raw_type="Revenue", canon_type="revenue", industry="auto")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.TRA.GOO"
+
+    def test_auto_sales_not_goods_without_industry(self):
+        ctx = _ctx("widget sales", raw_type="Revenue", canon_type="revenue")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert name != "auto_sales_goods"
+
+    def test_auto_warranty_service(self):
+        ctx = _ctx("warranty delivery extras", raw_type="Revenue", canon_type="revenue", industry="auto")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.TRA.SER"
+
+    def test_auto_consignment_fees_commission(self):
+        ctx = _ctx("consignment fees received", raw_type="Revenue", canon_type="revenue", industry="auto")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.OTH.COM"
+
+    def test_auto_car_rental_service(self):
+        ctx = _ctx("sales car rentals", raw_type="Revenue", canon_type="revenue", industry="auto")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.TRA.SER"
+
+    def test_auto_transport_towing_cos(self):
+        ctx = _ctx("transport towing", raw_type="Expense", canon_type="expense", industry="auto")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS"
+
+    def test_auto_transport_not_cos_without_industry(self):
+        ctx = _ctx("transport towing", raw_type="Expense", canon_type="expense")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert name != "auto_transport_towing_cos"
+
 
 def test_no_duplicate_rule_names():
     """Every rule must have a unique name."""

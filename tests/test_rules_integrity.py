@@ -101,6 +101,17 @@ XFAIL_TYPE_COMPAT = {
     ("historical_adjustment_equity", "historical"): (
         "Historical adjustments are retained earnings regardless of Xero type"
     ),
+    # auto_consignment_fees_commission intentionally reclassifies Revenue-typed
+    # consignment fees to REV.OTH.COM (commission). Type change prompted in review.
+    ("auto_consignment_fees_commission", "revenue"): (
+        "Auto: consignment fees are commissions; type change to Other Income prompted in review"
+    ),
+    ("auto_consignment_fees_commission", "income"): (
+        "Auto: consignment fees are commissions; type change to Other Income prompted in review"
+    ),
+    ("auto_consignment_fees_commission", "sales"): (
+        "Auto: consignment fees are commissions; type change to Other Income prompted in review"
+    ),
 }
 
 

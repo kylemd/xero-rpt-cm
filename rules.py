@@ -2311,6 +2311,57 @@ _industry_rules: list[Rule] = [
         industries={"auto"},
         notes="Auto dealers: MV expenses are cost of sales, not overhead.",
     ),
+
+    # --- Auto dealer: revenue subtype rules ---
+    # For auto dealers, generic "sales" / "consignment" revenue is sale of goods (cars).
+    # Service-type keywords (warranty, delivery, extras) stay as trading services.
+    Rule(
+        name="auto_sales_goods",
+        code="REV.TRA.GOO",
+        priority=84,
+        keywords=["sales", "consignment sale"],
+        canon_types={"revenue", "income", "sales"},
+        industries={"auto"},
+        keywords_exclude=["warranty", "delivery", "extras", "service",
+                          "rental", "rent", "fee"],
+        notes="Auto dealers: sales/consignment revenue is sale of goods (vehicles).",
+    ),
+    Rule(
+        name="auto_service_revenue",
+        code="REV.TRA.SER",
+        priority=84,
+        keywords=["warranty", "delivery", "extras", "service"],
+        canon_types={"revenue", "income", "sales"},
+        industries={"auto"},
+        notes="Auto dealers: warranty/delivery/service items are trading services.",
+    ),
+    Rule(
+        name="auto_consignment_fees_commission",
+        code="REV.OTH.COM",
+        priority=84,
+        keywords=["consignment fee", "consignment fees"],
+        canon_types={"revenue", "income", "other income", "sales"},
+        industries={"auto"},
+        notes="Auto dealers: consignment fees received are commission income.",
+    ),
+    Rule(
+        name="auto_car_rental_revenue",
+        code="REV.TRA.SER",
+        priority=86,
+        keywords=["car rental", "car rentals", "vehicle rental"],
+        canon_types={"revenue", "income", "sales"},
+        industries={"auto"},
+        notes="Auto dealers: car rentals are trading services, not investment rental.",
+    ),
+    Rule(
+        name="auto_transport_towing_cos",
+        code="EXP.COS",
+        priority=82,
+        keywords=["transport", "towing"],
+        canon_types={"expense", "direct costs"},
+        industries={"auto"},
+        notes="Auto dealers: transport & towing is cost of sales (getting cars to lot).",
+    ),
 ]
 
 

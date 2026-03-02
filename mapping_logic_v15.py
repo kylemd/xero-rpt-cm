@@ -876,6 +876,29 @@ def main(args):
                     'Notes': 'COGS not applicable when only service revenue (REV.TRA.SER) exists; moved to EXP'
                 })
 
+    # Fourth pass: Auto industry — reclassify EXP.VEH* to EXP.COS
+    # For auto dealers, vehicle expenses are cost of sales, not overhead.
+    # This overrides DefaultChart matches that assigned EXP.VEH from the template.
+    if _norm_industry == 'auto':
+        for i, rc in enumerate(prc):
+            if isinstance(rc, str) and (rc == 'EXP.VEH' or rc.startswith('EXP.VEH.')):
+                # Skip accumulated depreciation entries
+                nm_lower = normalise(str(coa.iloc[i]['*Name']))
+                if any(tok in nm_lower for tok in ['deprec', 'accumulated', 'amort', 'accum']):
+                    continue
+                original = rc
+                prc[i] = 'EXP.COS'
+                src[i] = 'AutoIndustryVehicleCOS'
+                need[i] = 'Y'
+                change_rows.append({
+                    'RowNumber': i + 2,
+                    'FieldName': 'predictedReportCode',
+                    'OriginalValue': original,
+                    'CorrectedValue': prc[i],
+                    'IssueType': 'AutoIndustryReclass',
+                    'Notes': f'Auto dealer: {original} reclassified to EXP.COS (vehicle expenses are COGS)'
+                })
+
     coa['predictedReportCode']=prc
     coa['predictedMappingName']=pname
     coa['NeedsReview']=need
