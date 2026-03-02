@@ -155,6 +155,23 @@ ANONYMIZATION_XFAILS = {
     ("client_182_validated_final.csv", "404"): "Validation error: EXP.BAD wrong for bank fees; EXP correct",
     # Parking → EXP.VEH (validated as EXP.ADM in this client; 2 other clients validate as EXP.VEH)
     ("client_130_validated_final.csv", "1833"): "Outlier validation: EXP.ADM vs EXP.VEH consensus across 2 other clients",
+
+    # --- WS4 new rule improvements ---
+    # General Pool → ASS.NCA.FIX (validated as FIX.PLA or head-only ASS; FIX is correct for general pool)
+    ("ChartOfAccounts_38_validated_final.csv", "2860.0"): "Rule improvement: ASS.NCA.FIX > ASS.NCA.FIX.PLA for general pool",
+    ("client_008_validated_final.csv", "750"): "Rule improvement: ASS.NCA.FIX > ASS for general pool",
+    ("client_130_validated_final.csv", "2860"): "Rule improvement: ASS.NCA.FIX > ASS.NCA.FIX.PLA for general pool",
+    ("client_255_validated_final.csv", "NoCode29"): "Rule improvement: ASS.NCA.FIX > ASS.NCA.FIX.PLA for general pool assets",
+    # Accum Dep on General Pool — validated as head-only ASS; now cascade from base asset
+    ("client_008_validated_final.csv", "751"): "Rule improvement: accum dep follows general pool base asset",
+    # Discounts Allowed → EXP.COS (validated as EXP; user decision: customer discounts = cost of revenue)
+    ("client_008_validated_final.csv", "417"): "Rule improvement: EXP.COS > EXP for discounts allowed",
+    # Formation Costs → ASS.NCA.INT (validated as ASS.NCA.INT.IMP; INT is correct parent)
+    ("client_008_validated_final.csv", "663"): "Rule improvement: ASS.NCA.INT > ASS.NCA.INT.IMP for formation costs",
+    # Cost of Goods Sold → EXP.COS.PUR (validated as EXP.COS; PUR is more specific)
+    ("client_182_validated_final.csv", "310"): "Rule improvement: EXP.COS.PUR > EXP.COS for cost of goods sold",
+    # Integrated Client Account → LIA.CUR.TAX (validated as LIA.CUR; TAX is more specific)
+    ("client_234_validated_final.csv", "21401"): "Rule improvement: LIA.CUR.TAX > LIA.CUR for ICA",
 }
 
 

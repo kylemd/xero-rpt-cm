@@ -47,6 +47,8 @@ ACCOUNTING_TERMS: List[str] = [
     "revaluation", "withholdings",
     # Common business abbreviations
     "admin", "qleave",
+    # Australian acronyms (insurance, tax, entity)
+    "eftpos", "ctp", "sbe", "lct", "ica",
 ]
 
 
@@ -86,25 +88,17 @@ def _boost_frequencies(spell: SpellChecker, words: List[str]) -> None:
             spell.word_frequency._dictionary[w] = _DOMAIN_BOOST
 
 
-def correct_account_name(
-    name: str,
-    spell: Optional[SpellChecker] = None,
+def _correct_tokens(
+    text: str,
+    spell: Optional[SpellChecker],
 ) -> Dict:
-    """Correct an account name via abbreviation expansion then spell-check.
+    """Correct tokens in *text* via abbreviation expansion then spell-check.
 
-    Args:
-        name: Raw account name from the chart of accounts.
-        spell: Pre-built SpellChecker instance. If None, only abbreviation
-               expansion is applied (no typo correction).
-
-    Returns:
-        Dict with keys:
-            corrected: The corrected name string.
-            corrections: List of {original, corrected, source} dicts.
+    This is the inner workhorse — operates on a single text segment.
     """
-    tokens = name.split()
-    corrections = []
-    result_tokens = []
+    tokens = text.split()
+    corrections: list = []
+    result_tokens: list = []
 
     for token in tokens:
         lower = token.lower()
@@ -145,3 +139,37 @@ def correct_account_name(
 
     corrected = " ".join(result_tokens)
     return {"corrected": corrected, "corrections": corrections}
+
+
+def correct_account_name(
+    name: str,
+    spell: Optional[SpellChecker] = None,
+) -> Dict:
+    """Correct an account name via abbreviation expansion then spell-check.
+
+    Splits on the first `` - `` (space-dash-space) separator.  Only the
+    *prefix* (the accounting description) is spell-checked; the suffix
+    (often a business name, personal name, or location) passes through
+    untouched.  This prevents false corrections on proper nouns like
+    "Hendra", "M Vieira", or "EasyCars".
+
+    Args:
+        name: Raw account name from the chart of accounts.
+        spell: Pre-built SpellChecker instance. If None, only abbreviation
+               expansion is applied (no typo correction).
+
+    Returns:
+        Dict with keys:
+            corrected: The corrected name string.
+            corrections: List of {original, corrected, source} dicts.
+    """
+    # Split on first " - " to protect business/personal name suffixes
+    sep = " - "
+    idx = name.find(sep)
+    if idx >= 0:
+        prefix = name[:idx]
+        suffix = name[idx:]  # includes " - …"
+        result = _correct_tokens(prefix, spell)
+        result["corrected"] = result["corrected"] + suffix
+        return result
+    return _correct_tokens(name, spell)

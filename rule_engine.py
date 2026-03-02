@@ -33,6 +33,7 @@ class Rule:
         template:         Only matches when using this template name (e.g. "company").
         owner_context:    If True, requires OWNER_KEYWORDS match in text.
         name_only:        If True, match only against account name (not name+description).
+        industries:       If non-empty, only match when client industry is in this set.
         notes:            Human-readable audit notes.
     """
     name: str
@@ -47,6 +48,7 @@ class Rule:
     template: str | None = None
     owner_context: bool = False
     name_only: bool = False
+    industries: set[str] = field(default_factory=set)
     notes: str = ""
 
 
@@ -61,6 +63,7 @@ class MatchContext:
         canon_type:        Canonical type after TYPE_EQ mapping.
         template_name:     Template chart name (e.g. "company", "trust").
         owner_keywords:    List of owner keyword strings for owner_context check.
+        industry:          Normalised industry string (e.g. "construction", "auto").
     """
     normalised_text: str
     raw_type: str
@@ -68,6 +71,7 @@ class MatchContext:
     template_name: str
     normalised_name: str = ""
     owner_keywords: list[str] = field(default_factory=list)
+    industry: str = ""
 
 
 def _rule_matches(rule: Rule, ctx: MatchContext) -> bool:
@@ -99,6 +103,10 @@ def _rule_matches(rule: Rule, ctx: MatchContext) -> bool:
     if rule.owner_context:
         if not any(kw in ctx.normalised_text for kw in ctx.owner_keywords):
             return False
+
+    # Industry constraint
+    if rule.industries and ctx.industry not in rule.industries:
+        return False
 
     return True
 

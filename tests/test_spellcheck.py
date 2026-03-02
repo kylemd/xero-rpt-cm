@@ -8,7 +8,7 @@ from spell_corrections import (
 
 class TestAbbreviations:
     def test_scg_expands_to_sgc(self):
-        result = correct_account_name("ATO - SCG payable", spell=None)
+        result = correct_account_name("SCG payable", spell=None)
         assert "sgc" in result["corrected"].lower()
 
     def test_lsl_expands(self):
@@ -60,6 +60,54 @@ class TestBuildSpellChecker:
         spell = build_spell_checker(extra_known=["westpac", "commbank"])
         unknown = spell.unknown(["westpac", "commbank"])
         assert len(unknown) == 0
+
+
+class TestDashSeparator:
+    """Spell correction should only apply to text before ' - ' separator."""
+
+    @pytest.fixture
+    def spell(self):
+        return build_spell_checker(extra_known=[])
+
+    def test_hendra_preserved(self, spell):
+        result = correct_account_name("Motor Vehicle Expenses - Hendra", spell=spell)
+        assert "Hendra" in result["corrected"]
+
+    def test_vieira_preserved(self, spell):
+        result = correct_account_name("Loan - M Vieira", spell=spell)
+        assert "Vieira" in result["corrected"]
+
+    def test_prefix_still_corrected(self, spell):
+        result = correct_account_name("Revalution Reserve - XYZ Corp", spell=spell)
+        assert "revaluation" in result["corrected"].lower()
+        assert "XYZ Corp" in result["corrected"]
+
+    def test_no_separator_still_works(self, spell):
+        result = correct_account_name("Revalution Reserve", spell=spell)
+        assert "revaluation" in result["corrected"].lower()
+
+
+class TestAcronymWhitelist:
+    """Australian acronyms should not be spell-corrected."""
+
+    @pytest.fixture
+    def spell(self):
+        return build_spell_checker(extra_known=[])
+
+    def test_eftpos_not_corrected(self, spell):
+        result = correct_account_name("EFTPOS Charges", spell=spell)
+        assert "EFTPOS" in result["corrected"]
+        assert all(c["original"] != "EFTPOS" for c in result["corrections"])
+
+    def test_ctp_not_corrected(self, spell):
+        result = correct_account_name("CTP Insurance", spell=spell)
+        assert "CTP" in result["corrected"]
+        assert all(c["original"] != "CTP" for c in result["corrections"])
+
+    def test_sbe_not_corrected(self, spell):
+        result = correct_account_name("SBE Pool", spell=spell)
+        assert "SBE" in result["corrected"]
+        assert all(c["original"] != "SBE" for c in result["corrections"])
 
 
 class TestTrialBalanceCompanyName:

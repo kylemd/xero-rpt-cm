@@ -57,6 +57,7 @@ def load_augmented(path):
                 "needs_review": row.get("NeedsReview", "").strip(),
                 "source": row.get("Source", "").strip(),
                 "corrected_name": row.get("CorrectedName", "").strip(),
+                "has_balance": row.get("HasBalance", "").strip(),
             })
     return accounts
 
@@ -78,6 +79,7 @@ def generate_html(accounts, sys_map, code_list):
 
     # Pre-compute counts
     needs_review_count = sum(1 for a in accounts if a["needs_review"] == "Y")
+    inactive_count = sum(1 for a in accounts if a.get("has_balance", "Y") != "Y")
     source_set = sorted(set(a["source"] for a in accounts if a["source"]))
 
     # Embed data as JSON for JS
@@ -195,6 +197,8 @@ tr:hover td.cell-mismatch {{ background: #fecaca !important; }}
     parts.append(f'  <div class="card"><h3>Accepted</h3><div class="num green" id="acceptedCount">0</div></div>\n')
     parts.append(f'  <div class="card"><h3>Pending</h3><div class="num" id="pendingCount">{len(accounts)}</div>'
                  f'<div class="detail" id="progressPct">0%</div></div>\n')
+    parts.append(f'  <div class="card"><h3>Inactive</h3><div class="num" style="color:#9ca3af">{inactive_count}</div>'
+                 f'<div class="detail">No balance</div></div>\n')
     parts.append('</div>\n')
 
     # ── TOOLBAR ──
@@ -207,6 +211,9 @@ tr:hover td.cell-mismatch {{ background: #fecaca !important; }}
         src_count = sum(1 for a in accounts if a["source"] == src)
         parts.append(f'    <option value="{h(src)}">{h(src)} ({src_count})</option>\n')
     parts.append('  </select>\n')
+
+    parts.append('  <label>Activity:</label>\n  <select id="filterActivity" onchange="applyFilters()">\n')
+    parts.append('    <option value="active" selected>Active</option>\n    <option value="inactive">Inactive</option>\n    <option value="">All</option>\n  </select>\n')
 
     parts.append('  <label>Status:</label>\n  <select id="filterStatus" onchange="applyFilters()">\n')
     parts.append('    <option value="">All</option>\n    <option value="pending">Pending</option>\n    <option value="accepted">Accepted</option>\n    <option value="overridden">Overridden</option>\n  </select>\n')
@@ -249,6 +256,7 @@ tr:hover td.cell-mismatch {{ background: #fecaca !important; }}
         esc_id = h(row_id)
         js_id = js_str(row_id)
         review_class = "review-highlight" if a["needs_review"] == "Y" else ""
+        activity = "active" if a.get("has_balance", "Y") == "Y" else "inactive"
 
         assigned_desc = sys_map.get(a["predicted_code"], "")
         original_desc = sys_map.get(a["original_code"], "")
@@ -268,7 +276,8 @@ tr:hover td.cell-mismatch {{ background: #fecaca !important; }}
             f'data-status="pending" '
             f'data-predicted="{h(a["predicted_code"])}" '
             f'data-original="{h(a["original_code"])}" '
-            f'data-type="{h(a["type"])}">\n'
+            f'data-type="{h(a["type"])}" '
+            f'data-activity="{activity}">\n'
         )
         parts.append(f'  <td>{i + 1}</td>\n')
         parts.append(f'  <td><span class="code">{h(a["code"])}</span></td>\n')
@@ -465,6 +474,7 @@ function applyFilters() {{
   const review = document.getElementById('filterReview').value;
   const source = document.getElementById('filterSource').value;
   const status = document.getElementById('filterStatus').value;
+  const activity = document.getElementById('filterActivity').value;
   const search = document.getElementById('filterSearch').value.toLowerCase();
   const rows = document.querySelectorAll('#reviewTable tbody tr');
   let visible = 0;
@@ -472,6 +482,7 @@ function applyFilters() {{
     const ok = (!review || row.dataset.review === review)
             && (!source || row.dataset.source === source)
             && (!status || row.dataset.status === status)
+            && (!activity || row.dataset.activity === activity)
             && (!search || row.dataset.search.includes(search));
     if (ok) {{
       row.classList.remove('hidden');
@@ -539,6 +550,13 @@ const REQUIRED_PREFIX_BY_TYPE = {{
   'Fixed Asset': 'ASS.NCA.FIX',
   'Inventory': 'ASS.CUR.INY',
   'Prepayment': 'ASS.CUR.REC.PRE',
+  'Revenue': 'REV.TRA',
+  'Sales': 'REV.TRA',
+  'Other Income': 'REV.OTH',
+  'Current Asset': 'ASS.CUR',
+  'Non-current Asset': 'ASS.NCA',
+  'Current Liability': 'LIA.CUR',
+  'Non-current Liability': 'LIA.NCL',
 }};
 
 const ALLOWED_TYPES_BY_HEAD = {{

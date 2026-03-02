@@ -17,7 +17,7 @@ from collections import defaultdict
 from file_handler import load_chart_file, load_trial_balance_file, get_account_code_column, get_closing_balance_column
 from integrity_validator import IntegrityValidator
 from rule_engine import evaluate_rules, MatchContext
-from rules import ALL_RULES, OWNER_KEYWORDS as _OWNER_KEYWORDS, AUSTRALIAN_BANKS, VEHICLE_MAKES, AUSTRALIAN_LENDERS
+from rules import ALL_RULES, OWNER_KEYWORDS as _OWNER_KEYWORDS, AUSTRALIAN_BANKS, VEHICLE_MAKES, AUSTRALIAN_LENDERS, normalise_industry
 from spell_corrections import build_spell_checker, correct_account_name
 from context_rules import infer_from_context, infer_section
 
@@ -96,6 +96,28 @@ def head_from_type(t:str)->str:
     
     # Default fallback
     return 'EXP'
+
+def _head_group(head: str) -> str:
+    """Return the broad group for a reporting code head.
+
+    Groups:
+        'PL' — Profit & Loss (REV, EXP) — can cross within
+        'BS' — Balance Sheet  (ASS, LIA) — can cross within
+        'EQ' — Equity         (EQU)      — never crosses
+    """
+    root = head.split('.')[0] if head else ''
+    if root in {'REV', 'EXP'}:
+        return 'PL'
+    if root in {'ASS', 'LIA'}:
+        return 'BS'
+    if root == 'EQU':
+        return 'EQ'
+    return ''
+
+# High-confidence sources that should bypass the cross-head guard
+_CROSS_HEAD_SKIP_SOURCES = frozenset({
+    'DefaultChart', 'AlreadyCorrect', 'ExistingCodeValid', 'ExistingCodeValidByName',
+})
 
 def similarity(a:str,b:str)->float:
     return difflib.SequenceMatcher(None,a,b).ratio()
@@ -560,33 +582,7 @@ def main(args):
         # Define t for use by later steps (7c borrowing costs, etc.)
         t=row['*Type'].strip().lower()
 
-        # 1) Rule engine: declarative keyword rules (replaces old keyword_match + early overrides)
-        if not chosen:
-            ctx = MatchContext(
-                normalised_text=txt_inline,
-                normalised_name=clean_nm,
-                raw_type=row['*Type'].strip(),
-                canon_type=canon_type,
-                template_name=str(args.chart_template_name or ''),
-                owner_keywords=_OWNER_KEYWORDS,
-            )
-            rc, rule_name = evaluate_rules(ALL_RULES, ctx)
-            if rc:
-                chosen, reason = rc, rule_name
-
-        # 1c) Accumulated depreciation/amortisation name-based resolution (before code-based matching)
-        if not chosen:
-            base_key = extract_accum_base_key(row['*Name'])
-            if base_key:
-                rc_acc = accum_base_to_rc.get(base_key)
-                if not rc_acc:
-                    base_rc = name_to_predicted_rc.get(base_key)
-                    if base_rc and not base_rc.endswith(('.ACC','.AMO')):
-                        rc_acc = base_rc + '.ACC'
-                if rc_acc:
-                    chosen,reason = rc_acc, 'AccumulatedDepreciationRule'
-
-        # 2) DefaultChart Code match (guarded by head and some name similarity)
+        # 1) DefaultChart Code match (guarded by head and some name similarity)
         if not chosen:
             code_key=str(row['*Code']).strip()
             if code_key in default_by_code and default_by_code[code_key]['reporting_code']:
@@ -598,10 +594,37 @@ def main(args):
                     nm_sim=similarity(clean_nm, candidate['clean_name'])
                     if nm_sim>=0.60:
                         chosen,reason=candidate['reporting_code'],'DefaultChart'
-        # 3) Exact (cleaned-name + canonical-type) match in DefaultChart within same head
+        # 2) Exact (cleaned-name + canonical-type) match in DefaultChart within same head
         if not chosen and (clean_nm, canon_type) in dict_name_type and dict_name_type[(clean_nm,canon_type)]:
             if head==dict_name_type[(clean_nm,canon_type)].split('.')[0]:
                 chosen,reason=dict_name_type[(clean_nm,canon_type)],'DefaultChart'
+
+        # 3) Rule engine: declarative keyword rules
+        if not chosen:
+            ctx = MatchContext(
+                normalised_text=txt_inline,
+                normalised_name=clean_nm,
+                raw_type=row['*Type'].strip(),
+                canon_type=canon_type,
+                template_name=str(args.chart_template_name or ''),
+                owner_keywords=_OWNER_KEYWORDS,
+                industry=normalise_industry(str(args.industry or '')),
+            )
+            rc, rule_name = evaluate_rules(ALL_RULES, ctx)
+            if rc:
+                chosen, reason = rc, rule_name
+
+        # 3b) Accumulated depreciation/amortisation name-based resolution (before code-based matching)
+        if not chosen:
+            base_key = extract_accum_base_key(row['*Name'])
+            if base_key:
+                rc_acc = accum_base_to_rc.get(base_key)
+                if not rc_acc:
+                    base_rc = name_to_predicted_rc.get(base_key)
+                    if base_rc and not base_rc.endswith(('.ACC','.AMO')):
+                        rc_acc = base_rc + '.ACC'
+                if rc_acc:
+                    chosen,reason = rc_acc, 'AccumulatedDepreciationRule'
         # 4) Exact cleaned-Name in SystemMappings (with pre-hyphen trimming on raw name)
         #    Guard: skip if the matched code's root head conflicts with the account type.
         if not chosen:
@@ -665,9 +688,6 @@ def main(args):
             # Borrowing Costs → Prepayments (current asset)
             if ('borrowing costs' in txt_inline) and t in {'current asset'}:
                 chosen,reason='ASS.CUR.REC.PRE','KeywordRule'
-            # Building industry: all revenue is trading services
-            elif str(args.industry or '').lower().startswith('building') and canon_type in {'revenue','income','other income'}:
-                chosen,reason='REV.TRA.SER','IndustryRule'
 
         if not chosen:
             # Prefer exact-ish match on names when both contain key tokens like accumulated/depreciation
@@ -691,6 +711,26 @@ def main(args):
 
         if not chosen:
             chosen,reason,flag=head,'FallbackParent','Y'
+
+        # Cross-head guard: prevent reclassification across incompatible type groups
+        # P&L (REV,EXP) can cross within; BS (ASS,LIA) can cross within; EQ never crosses
+        if chosen and reason not in _CROSS_HEAD_SKIP_SOURCES:
+            acct_group = _head_group(head_from_type(row['*Type']))
+            chosen_group = _head_group(chosen)
+            if acct_group and chosen_group and acct_group != chosen_group:
+                original = chosen
+                # Revert to original code if it belongs to the correct group
+                if existing and _head_group(existing) == acct_group and existing in leaf_set:
+                    chosen, reason = existing, 'CrossHeadGuard'
+                else:
+                    # Fall back to head-only code from account type
+                    chosen = head_from_type(row['*Type'])
+                    reason = 'CrossHeadGuard'
+                flag = 'Y'
+                change_rows.append({'RowNumber': idx+2, 'FieldName': 'predictedReportCode',
+                    'OriginalValue': original, 'CorrectedValue': chosen,
+                    'IssueType': 'CrossHeadViolation',
+                    'Notes': f'Group {chosen_group} from {original} vs account group {acct_group}'})
 
         # Enforce head consistency using ranges/type
         exp_head=expected_head_by_code.get(str(row.get('*Code','')).strip(),'') if expected_head_by_code else ''
@@ -817,8 +857,9 @@ def main(args):
         if isinstance(rc, str) and rc.startswith('REV.TRA'):
             rev_tra_codes[rc]=True
     unique_rev_tra=set([rc for rc in rev_tra_codes.keys()])
-    # Disable ServiceOnly reclass for Building industry per instruction
-    service_only = (str(args.industry or '').strip().lower().startswith('building') == False) and bool(unique_rev_tra) and (not direct_cost_nonzero)
+    # Disable ServiceOnly reclass for Construction industry per instruction
+    _norm_industry = normalise_industry(str(args.industry or ''))
+    service_only = (_norm_industry != 'construction') and bool(unique_rev_tra) and (not direct_cost_nonzero)
     if service_only:
         for i, rc in enumerate(prc):
             if isinstance(rc, str) and (rc=='EXP.COS' or rc.startswith('EXP.COS.')):
@@ -845,6 +886,14 @@ def main(args):
     for entry in spell_log:
         corrected_names[entry["idx"]] = entry["corrected"]
     coa['CorrectedName'] = corrected_names
+
+    # HasBalance: 'Y' if trial balance shows activity, else 'N'
+    has_balance = []
+    for _, row in coa.iterrows():
+        acct_code = str(row.get('*Code', '')).strip()
+        bal = bal_lookup.get(acct_code, 0)
+        has_balance.append('Y' if abs(float(bal or 0)) > 0.01 else 'N')
+    coa['HasBalance'] = has_balance
 
     out=client_chart_path.with_name('AugmentedChartOfAccounts.csv')
     try:

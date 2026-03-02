@@ -389,6 +389,59 @@ _revenue_rules = [
               "Per user decision: revenue/income + 'rental' = REV.INV.REN. "
               "Excludes 'parental' to prevent substring match on 'Paid Parental Leave'.",
     ),
+
+    # Commission income
+    Rule(
+        name="commission_income",
+        code="REV.OTH.COM",
+        priority=72,
+        keywords=["commission"],
+        canon_types={"revenue", "income", "other income"},
+        notes="Commission income -> other income commissions.",
+    ),
+
+    # Surcharge income (only on Other Income type; Revenue surcharges are trading)
+    Rule(
+        name="surcharge_income",
+        code="REV.OTH",
+        priority=72,
+        keywords=["surcharge"],
+        canon_types={"other income"},
+        notes="Surcharge income on Other Income type -> other income. "
+              "Revenue-typed surcharges (e.g. Square Surcharges) stay as trading.",
+    ),
+
+    # Rebates / refunds income
+    Rule(
+        name="rebates_refunds_income",
+        code="REV.OTH",
+        priority=68,
+        keywords=["rebate", "refund"],
+        canon_types={"revenue", "income", "other income"},
+        keywords_exclude=["deposit"],
+        notes="Rebates/refunds on income type -> other income.",
+    ),
+
+    # Deposit income
+    Rule(
+        name="deposit_income",
+        code="REV.OTH",
+        priority=65,
+        keywords=["deposit"],
+        canon_types={"revenue", "income", "other income"},
+        notes="Deposit income -> other income.",
+    ),
+
+    # Sale of business
+    Rule(
+        name="sale_of_business",
+        code="REV.OTH.INV",
+        priority=78,
+        keywords=["sale of business"],
+        type_exclude={"equity", "current asset", "non-current asset", "fixed asset"},
+        notes="Sale of business -> gain on disposal of investments. "
+              "Excludes asset/equity types (e.g. 'Goodwill on Sale of Business' on equity).",
+    ),
 ]
 
 
@@ -984,6 +1037,45 @@ _tax_rules = [
         canon_types={"current liability", "liability"},
         notes="ATO ICA is a mixed tax account (PAYG, GST, FTC) — assign to tax parent. "
               "Cannot determine deeper sub-level from name alone.",
+    ),
+
+    # Income tax instalments
+    Rule(
+        name="income_tax_instalments",
+        code="LIA.CUR.TAX.INC",
+        priority=85,
+        keywords=["income tax instalment", "tax instalment"],
+        keywords_exclude=["payg instalment"],
+        canon_types={"current liability", "liability"},
+        notes="Income tax instalments -> income tax liability. "
+              "Guarded to liability types only (some charts mistype as asset).",
+    ),
+
+    # ATO payable / ICA
+    Rule(
+        name="ato_payable_ica",
+        code="LIA.CUR.TAX",
+        priority=85,
+        keywords=["ato payable", "ato ica", "integrated client"],
+        notes="ATO payable / ICA -> tax liability.",
+    ),
+
+    # ATO income tax liability
+    Rule(
+        name="ato_income_tax_liability",
+        code="LIA.CUR.TAX.INC",
+        priority=85,
+        keywords=["ato income tax", "income tax account"],
+        notes="ATO income tax / income tax account -> income tax liability.",
+    ),
+
+    # Unlodged BAS
+    Rule(
+        name="unlodged_bas",
+        code="LIA.CUR.TAX",
+        priority=80,
+        keywords=["unlodged bas"],
+        notes="Unlodged BAS -> tax liability.",
     ),
 ]
 
@@ -1598,11 +1690,11 @@ _general_expense_rules = [
     # Discount allowed
     Rule(
         name="discount_allowed",
-        code="EXP",
+        code="EXP.COS",
         priority=65,
         keywords=["discount allowed", "discounts allowed"],
         canon_types={"expense"},
-        notes="Discount allowed -> general expense.",
+        notes="Discount allowed -> cost of sales (customer discounts reduce revenue).",
     ),
 
     # Instant asset write-off
@@ -1763,6 +1855,43 @@ _general_expense_rules = [
         keywords_all=["dividend", "payable"],
         canon_types={"expense"},
         notes="Dividend + payable on expense -> dividend expense",
+    ),
+
+    # Stock movement / adjustment
+    Rule(
+        name="stock_movement_expense",
+        code="EXP.COS",
+        priority=72,
+        keywords=["stock movement", "stock adjust"],
+        notes="Stock movement/adjustment -> cost of sales.",
+    ),
+
+    # COGS prefix (broad)
+    Rule(
+        name="cogs_prefix",
+        code="EXP.COS",
+        priority=75,
+        keywords=["cogs", "cost of goods"],
+        keywords_exclude=["cost of goods sold"],
+        notes="COGS / cost of goods (not 'cost of goods sold') -> cost of sales.",
+    ),
+
+    # Cost of Goods Sold (specific phrase)
+    Rule(
+        name="cost_of_goods_sold_specific",
+        code="EXP.COS.PUR",
+        priority=78,
+        keywords=["cost of goods sold"],
+        notes="Cost of goods sold (specific) -> purchases.",
+    ),
+
+    # Shareholder salaries (must outprioritise wages_expense P93)
+    Rule(
+        name="shareholder_salaries",
+        code="EXP.EMP.SHA",
+        priority=95,
+        keywords=["shareholder salar", "shareholder wage"],
+        notes="Shareholder salaries/wages -> shareholder salaries.",
     ),
 ]
 
@@ -2047,11 +2176,147 @@ _remaining_rules = [
         notes="WIPAA on balance sheet -> WIP inventory asset. "
               "Lower priority than wipaa_cost so P&L types match first.",
     ),
+
+    # Stock on hand
+    Rule(
+        name="stock_on_hand",
+        code="ASS.CUR.INY",
+        priority=78,
+        keywords=["stock on hand", "stock in hand"],
+        canon_types={"current asset", "inventory"},
+        notes="Stock on hand -> inventory asset.",
+    ),
+
+    # Stock (general, on asset types)
+    Rule(
+        name="stock_asset_general",
+        code="ASS.CUR.INY",
+        priority=65,
+        keywords=["stock"],
+        canon_types={"current asset", "inventory"},
+        keywords_exclude=["closing", "opening", "movement", "adjust",
+                          "depreciation", "prepaid", "transit"],
+        notes="General 'stock' on asset type -> inventory. "
+              "Excludes opening/closing/movement/adjusting/prepaid/transit entries.",
+    ),
+
+    # Formation / incorporation costs (asset)
+    Rule(
+        name="formation_costs_asset",
+        code="ASS.NCA.INT",
+        priority=78,
+        keywords=["formation cost", "incorporation cost", "establishment cost"],
+        canon_types={"non-current asset", "fixed asset"},
+        notes="Formation/incorporation/establishment costs on NCA -> intangibles.",
+    ),
+
+    # General pool / SBE pool
+    Rule(
+        name="general_pool_asset",
+        code="ASS.NCA.FIX",
+        priority=78,
+        keywords=["general pool", "sbe pool", "small business pool"],
+        keywords_exclude=["accumulated", "deprec", "amort", "accum"],
+        notes="General pool / SBE pool -> fixed assets. "
+              "Excludes accumulated depreciation entries.",
+    ),
+
+    # Investment asset (generic)
+    Rule(
+        name="investment_asset_generic",
+        code="ASS.NCA.INV",
+        priority=68,
+        keywords=["investment"],
+        canon_types={"non-current asset"},
+        keywords_exclude=["property", "shares", "unit trust", "managed fund"],
+        notes="Generic 'investment' on NCA type -> financial assets. "
+              "Excludes specific investment types.",
+    ),
+
+    # Goodwill
+    Rule(
+        name="goodwill_asset",
+        code="ASS.NCA.INT.GOO",
+        priority=80,
+        keywords=["goodwill"],
+        keywords_exclude=["accumulated", "amortis", "deprec", "accum",
+                          "sale of business"],
+        type_exclude={"equity", "revenue", "income", "other income", "expense"},
+        notes="Goodwill -> intangible goodwill. "
+              "Excludes accumulated amortisation/depreciation and non-asset types.",
+    ),
+]
+
+
+# --- Industry aliases & normalisation ---
+INDUSTRY_ALIASES: dict[str, str] = {
+    "building": "construction",
+    "builder": "construction",
+    "construction": "construction",
+    "auto": "auto",
+    "automotive": "auto",
+    "auto dealer": "auto",
+    "motor dealer": "auto",
+    "car dealer": "auto",
+    "motor vehicle dealer": "auto",
+}
+
+
+def normalise_industry(raw: str) -> str:
+    """Normalise a raw industry string to a canonical key.
+
+    Returns empty string for unknown or unset industries.
+    """
+    if not raw:
+        return ""
+    key = raw.strip().lower()
+    return INDUSTRY_ALIASES.get(key, "")
+
+
+# --- Industry-specific rules ---
+_industry_rules: list[Rule] = [
+    Rule(
+        name="construction_revenue_services",
+        code="REV.TRA.SER",
+        priority=82,
+        keywords=["revenue", "income", "sales", "fees", "receipts"],
+        canon_types={"revenue", "income", "other income", "sales"},
+        industries={"construction"},
+        notes="Construction: all revenue is trading services.",
+    ),
+    Rule(
+        name="construction_subcontractors_cos",
+        code="EXP.COS",
+        priority=82,
+        keywords=["subcontract"],
+        industries={"construction"},
+        notes="Construction: subcontractors are cost of sales.",
+    ),
+    Rule(
+        name="construction_materials_cos",
+        code="EXP.COS.PUR",
+        priority=82,
+        keywords=["material", "materials", "supplies"],
+        canon_types={"expense", "direct costs"},
+        industries={"construction"},
+        notes="Construction: materials/supplies are purchases (cost of sales).",
+    ),
+    Rule(
+        name="auto_mv_expenses_cos",
+        code="EXP.COS",
+        priority=82,
+        keywords=["motor vehicle", "vehicle"],
+        canon_types={"expense", "direct costs"},
+        keywords_exclude=["depreciation", "deprec", "accumulated", "amort"],
+        industries={"auto"},
+        notes="Auto dealers: MV expenses are cost of sales, not overhead.",
+    ),
 ]
 
 
 # --- Collect all rules ---
 ALL_RULES: list[Rule] = [
+    *_industry_rules,
     *_bank_rules,
     *_owner_rules,
     *_revenue_rules,

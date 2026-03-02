@@ -4,7 +4,7 @@ from rule_engine import Rule, evaluate_rules, MatchContext
 from rules import ALL_RULES, OWNER_KEYWORDS
 
 
-def _ctx(text, raw_type="Expense", canon_type="expense", template="company"):
+def _ctx(text, raw_type="Expense", canon_type="expense", template="company", industry=""):
     return MatchContext(
         normalised_text=text,
         normalised_name=text,
@@ -12,6 +12,7 @@ def _ctx(text, raw_type="Expense", canon_type="expense", template="company"):
         canon_type=canon_type,
         template_name=template,
         owner_keywords=OWNER_KEYWORDS,
+        industry=industry,
     )
 
 
@@ -547,7 +548,7 @@ class TestGeneralExpenseRules:
         ctx = _ctx("cost of goods sold", raw_type="Direct Costs",
                     canon_type="direct costs")
         code, _ = evaluate_rules(ALL_RULES, ctx)
-        assert code == "EXP.COS"
+        assert code == "EXP.COS.PUR"
 
     def test_dividends_paid_equity(self):
         """Dividends on equity -> ordinary dividends from retained earnings."""
@@ -839,7 +840,7 @@ class TestTrack2NewRules:
     def test_discount_allowed(self):
         ctx = _ctx("discount allowed")
         code, name = evaluate_rules(ALL_RULES, ctx)
-        assert code == "EXP", f"Expected EXP, got {code} from {name}"
+        assert code == "EXP.COS", f"Expected EXP.COS, got {code} from {name}"
 
     def test_instant_asset_writeoff(self):
         ctx = _ctx("immediately write off")
@@ -916,6 +917,221 @@ class TestTrack2NewRules:
         ctx = _ctx("window cleaner")
         code, name = evaluate_rules(ALL_RULES, ctx)
         assert code == "EXP.OCC", f"Expected EXP.OCC, got {code} from {name}"
+
+
+class TestWS4NewRevenueRules:
+    """WS4: New revenue rules."""
+
+    def test_commission_income(self):
+        ctx = _ctx("commission received", raw_type="Other Income", canon_type="other income")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.OTH.COM"
+
+    def test_commission_not_on_expense(self):
+        ctx = _ctx("commission paid", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code != "REV.OTH.COM"
+
+    def test_surcharge_income(self):
+        ctx = _ctx("credit card surcharge", raw_type="Other Income", canon_type="other income")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.OTH"
+
+    def test_surcharge_not_on_revenue(self):
+        """Revenue-typed surcharges (e.g. Square Surcharges) should NOT be reclassified."""
+        ctx = _ctx("square surcharges", raw_type="Revenue", canon_type="revenue")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert name != "surcharge_income"
+
+    def test_rebate_income(self):
+        ctx = _ctx("fuel rebate", raw_type="Other Income", canon_type="other income")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.OTH"
+
+    def test_rebate_excludes_deposit(self):
+        ctx = _ctx("deposit refund", raw_type="Other Income", canon_type="other income")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert name != "rebates_refunds_income"
+
+    def test_deposit_income(self):
+        ctx = _ctx("deposit received", raw_type="Revenue", canon_type="revenue")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.OTH"
+
+    def test_sale_of_business(self):
+        ctx = _ctx("sale of business", raw_type="Other Income", canon_type="other income")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.OTH.INV"
+
+
+class TestWS4NewExpenseRules:
+    """WS4: New expense rules."""
+
+    def test_stock_movement(self):
+        ctx = _ctx("stock movement")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS"
+
+    def test_stock_adjustment(self):
+        ctx = _ctx("stock adjustment")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS"
+
+    def test_cogs_prefix(self):
+        ctx = _ctx("cogs - retail")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS"
+
+    def test_cost_of_goods_sold_specific(self):
+        ctx = _ctx("cost of goods sold")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS.PUR"
+
+    def test_shareholder_salaries(self):
+        ctx = _ctx("shareholder salary")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.EMP.SHA"
+
+    def test_shareholder_wages(self):
+        ctx = _ctx("shareholder wages")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.EMP.SHA"
+
+    def test_discount_allowed_now_cos(self):
+        """discount_allowed should now map to EXP.COS (updated from EXP)."""
+        ctx = _ctx("discount allowed")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS"
+
+
+class TestWS4NewAssetRules:
+    """WS4: New asset rules."""
+
+    def test_stock_on_hand(self):
+        ctx = _ctx("stock on hand", raw_type="Current Asset", canon_type="current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.INY"
+
+    def test_stock_asset_general(self):
+        ctx = _ctx("stock", raw_type="Inventory", canon_type="inventory")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.CUR.INY"
+
+    def test_stock_excludes_closing(self):
+        ctx = _ctx("closing stock", raw_type="Inventory", canon_type="inventory")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert name != "stock_asset_general"
+
+    def test_formation_costs(self):
+        ctx = _ctx("formation costs", raw_type="Non-current Asset", canon_type="non-current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.INT"
+
+    def test_incorporation_costs(self):
+        ctx = _ctx("incorporation cost", raw_type="Fixed Asset", canon_type="fixed asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.INT"
+
+    def test_general_pool(self):
+        ctx = _ctx("general pool", raw_type="Fixed Asset", canon_type="fixed asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.FIX"
+
+    def test_sbe_pool(self):
+        ctx = _ctx("sbe pool", raw_type="Fixed Asset", canon_type="fixed asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.FIX"
+
+    def test_investment_generic(self):
+        ctx = _ctx("investment portfolio", raw_type="Non-current Asset", canon_type="non-current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.INV"
+
+    def test_investment_excludes_property(self):
+        """'investment property' should not match the generic investment rule."""
+        ctx = _ctx("investment property", raw_type="Non-current Asset", canon_type="non-current asset")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert name != "investment_asset_generic"
+
+    def test_goodwill(self):
+        ctx = _ctx("goodwill", raw_type="Non-current Asset", canon_type="non-current asset")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "ASS.NCA.INT.GOO"
+
+    def test_goodwill_excludes_accumulated(self):
+        ctx = _ctx("accumulated amortisation goodwill", raw_type="Non-current Asset", canon_type="non-current asset")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert name != "goodwill_asset"
+
+
+class TestWS4NewTaxRules:
+    """WS4: New tax liability rules."""
+
+    def test_income_tax_instalments(self):
+        ctx = _ctx("income tax instalment", raw_type="Current Liability", canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.TAX.INC"
+
+    def test_income_tax_instalment_excludes_payg(self):
+        ctx = _ctx("payg instalment", raw_type="Current Liability", canon_type="current liability")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert name != "income_tax_instalments"
+
+    def test_ato_payable(self):
+        ctx = _ctx("ato payable", raw_type="Current Liability", canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.TAX"
+
+    def test_ato_ica(self):
+        ctx = _ctx("ato ica", raw_type="Current Liability", canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.TAX"
+
+    def test_ato_income_tax(self):
+        ctx = _ctx("ato income tax", raw_type="Current Liability", canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.TAX.INC"
+
+    def test_unlodged_bas(self):
+        ctx = _ctx("unlodged bas", raw_type="Current Liability", canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.TAX"
+
+
+class TestIndustryRules:
+    """Industry-specific rules (WS7)."""
+
+    def test_construction_revenue_services(self):
+        ctx = _ctx("sales revenue", raw_type="Revenue", canon_type="revenue", industry="construction")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "REV.TRA.SER", f"Expected REV.TRA.SER, got {code} from {name}"
+
+    def test_construction_revenue_not_without_industry(self):
+        """Without construction industry, revenue should NOT be forced to REV.TRA.SER."""
+        ctx = _ctx("sales revenue", raw_type="Revenue", canon_type="revenue")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code != "REV.TRA.SER"
+
+    def test_construction_subcontractors(self):
+        ctx = _ctx("subcontractor costs", raw_type="Direct Costs", canon_type="direct costs", industry="construction")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS"
+
+    def test_construction_materials(self):
+        ctx = _ctx("building materials", raw_type="Expense", canon_type="expense", industry="construction")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS.PUR"
+
+    def test_auto_mv_expenses(self):
+        ctx = _ctx("motor vehicle expenses", raw_type="Expense", canon_type="expense", industry="auto")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.COS"
+
+    def test_auto_mv_not_without_industry(self):
+        """Without auto industry, MV expenses go to EXP.VEH not EXP.COS."""
+        ctx = _ctx("motor vehicle expenses fuel", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code != "EXP.COS"
 
 
 def test_no_duplicate_rule_names():
