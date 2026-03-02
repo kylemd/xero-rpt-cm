@@ -31,7 +31,10 @@ def load_chart_file(path: pathlib.Path) -> pd.DataFrame:
     file_ext = path.suffix.lower()
     
     if file_ext == '.csv':
-        return pd.read_csv(path, dtype={"*Code": "string"})
+        try:
+            return pd.read_csv(path, dtype={"*Code": "string"})
+        except UnicodeDecodeError:
+            return pd.read_csv(path, dtype={"*Code": "string"}, encoding="cp1252")
     elif file_ext == '.xlsx':
         return pd.read_excel(path, engine='openpyxl', dtype={"*Code": "string"})
     else:
@@ -87,10 +90,10 @@ def sanitize_xlsx_trial_balance(df: pd.DataFrame) -> Tuple[pd.DataFrame, Dict[st
         Tuple of (sanitized DataFrame, metadata dict)
     """
     # Check if this is a Xero trial balance format
-    if (len(df) >= 4 and 
-        str(df.iloc[0, 0]).strip() == "Trial Balance" and 
+    if (len(df) >= 4 and
+        str(df.iloc[0, 0]).strip() == "Trial Balance" and
         str(df.iloc[2, 0]).strip().startswith("As at ")):
-        
+
         period_date = str(df.iloc[2, 0]).strip().replace("As at ", "")
         company_name = str(df.iloc[1, 0]).strip() if len(df) > 1 and pd.notnull(df.iloc[1, 0]) else ""
 

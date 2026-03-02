@@ -325,8 +325,21 @@ def main(args):
     trial_path = pathlib.Path(args.client_trialbalance)
     if not trial_path.exists():
         sys.exit(f"Error: Trial balance not found: {trial_path}")
+    _tb_name_lower = trial_path.stem.lower()
+    if "trial" not in _tb_name_lower or "balance" not in _tb_name_lower:
+        sys.exit(
+            f"Error: '{trial_path.name}' does not appear to be a Trial Balance.\n"
+            f"       The filename must contain both 'Trial' and 'Balance'.\n"
+            f"       Please provide the correct Xero Trial Balance export."
+        )
     try:
         trial, trial_metadata = load_trial_balance_file(trial_path)
+        if trial_metadata.get("format") != "xero_trial_balance":
+            sys.exit(
+                f"Error: '{trial_path.name}' is not a valid Xero Trial Balance.\n"
+                f"       Cell A1 must equal 'Trial Balance'. Found format: {trial_metadata.get('format', 'unknown')}.\n"
+                f"       Please provide the correct Xero Trial Balance export."
+            )
         print(f"Loaded trial balance: {trial_metadata}")
     except Exception as e:
         sys.exit(f"Error: Failed to read trial balance '{trial_path.name}': {e}")
