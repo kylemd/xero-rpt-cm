@@ -808,27 +808,62 @@ function csvEscape(val) {{
   return val;
 }}
 
+// Derive a Reporting Name from the account name when one isn't already set.
+// ATO ICA  -> "ATO Integrated Client Account"
+// ATO ITA  -> "ATO Income Tax Account"
+// Div7A + YYYY -> the 4-digit year (e.g. "Div 7A Loan 2021" -> "2021")
+function deriveReportingName(acct) {{
+  if (acct.reporting_name && acct.reporting_name !== acct.name) {{
+    return acct.reporting_name;
+  }}
+  const name = acct.name || '';
+  const lower = name.toLowerCase();
+
+  // ATO ICA — matches "ATO ICA", "ATO - ICA", "ATO (ICA)", etc.
+  if (/\\bato\\b/.test(lower) && /\\bica\\b/.test(lower)) {{
+    return 'ATO Integrated Client Account';
+  }}
+  if (/integrated client account/i.test(name)) {{
+    return 'ATO Integrated Client Account';
+  }}
+
+  // ATO ITA — matches "ATO ITA", "ATO - ITA", "ATO Income Tax Account", etc.
+  if (/\\bato\\b/.test(lower) && /\\bita\\b/.test(lower)) {{
+    return 'ATO Income Tax Account';
+  }}
+  if (/\\bato\\b/.test(lower) && /income tax account/i.test(name)) {{
+    return 'ATO Income Tax Account';
+  }}
+
+  // Div7A — reporting name is the 4-digit year in the account name
+  if (/\\bdiv\\s*7\\s*a\\b|\\bdivision\\s*7\\s*a\\b/i.test(name)) {{
+    const m = name.match(/\\b((?:19|20)\\d{{2}})\\b/);
+    if (m) return m[1];
+  }}
+
+  return '';
+}}
+
 function downloadCSV() {{
   const headers = ['*Code', 'Report Code', '*Name', 'Reporting Name', '*Type', '*Tax Code', 'Description', 'Dashboard', 'Expense Claims', 'Enable Payments'];
   const rows = [headers.join(',')];
 
   ACCOUNTS.forEach(acct => {{
     const finalCode = getFinalCode(acct);
-    // Preserve original Reporting Name only; clear it if identical to the account name (redundant)
-    const reportingName = (acct.reporting_name && acct.reporting_name !== acct.name) ? acct.reporting_name : '';
+    const reportingName = deriveReportingName(acct);
     const acctId = acct.code + ':' + (acct.name || '').substring(0, 40);
     const td = typeDecisions[acctId];
     let finalType = (td && td.newType) ? td.newType : predictTypeFromCode(finalCode, acct.type);
     // System-typed accounts (Bank, Accounts Receivable, Accounts Payable, GST, Historical,
     // Rounding, Tracking, Unpaid Expense Claims, Retained Earnings) are locked — Xero will
     // error on import if their type is changed. Always preserve the original type.
-    if (SYSTEM_TYPES.has(acct.type)) {
+    if (SYSTEM_TYPES.has(acct.type)) {{
       finalType = acct.type;
-    } else if (SYSTEM_TYPES.has(finalType)) {
+    }} else if (SYSTEM_TYPES.has(finalType)) {{
       // A non-system account must never be exported with a system type.
       // GST specifically should become Current Liability; others revert to original.
       finalType = (finalType === 'GST') ? 'Current Liability' : acct.type;
-    }
+    }}
 
     rows.push([
       csvEscape(acct.code),
