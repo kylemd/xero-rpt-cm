@@ -91,7 +91,7 @@ def js_str(s: str) -> str:
     return html_mod.escape(s, quote=True)
 
 
-def generate_html(accounts, sys_map, code_list, chart_type_map=None):
+def generate_html(accounts, sys_map, code_list, chart_type_map=None, report_id="default"):
     """Generate the full HTML review report as a self-contained page."""
     h = html_mod.escape
 
@@ -376,8 +376,8 @@ window.onerror = function(msg, url, line, col, err) {{
   document.body.prepend(d);
 }};
 
-const STORAGE_KEY = 'review_decisions_v1';
-const TYPE_STORAGE_KEY = 'review_type_decisions_v2';
+const STORAGE_KEY = 'review_decisions_v1_{report_id}';
+const TYPE_STORAGE_KEY = 'review_type_decisions_v2_{report_id}';
 const CODES = {code_json};
 const CODE_MAP = Object.fromEntries(CODES);
 const SYS_MAP = {sys_map_json};
@@ -1026,7 +1026,8 @@ def main():
     accounts = load_augmented(augmented_path)
     chart_type_map = load_chart_types(args.entity_type)
 
-    html_content = generate_html(accounts, sys_map, code_list, chart_type_map)
+    report_id = augmented_path.parent.name
+    html_content = generate_html(accounts, sys_map, code_list, chart_type_map, report_id=report_id)
     print(f"  Entity type: {args.entity_type} ({len(chart_type_map)} code-type mappings loaded)")
 
     output_path = augmented_path.with_name("ReviewReport.html")
