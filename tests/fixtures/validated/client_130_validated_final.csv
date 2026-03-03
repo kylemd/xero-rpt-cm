@@ -36,12 +36,12 @@ company,client_130_ChartOfAccounts_20251215.csv,1635,Disbursements,Expense,,unma
 company,client_130_ChartOfAccounts_20251215.csv,1645,Donations,Expense,EXP,detail_include,91.0,EXP,,
 company,client_130_ChartOfAccounts_20251215.csv,1646,Gift/Donation,Expense,EXP,fuzzy_name_global,100.0,EXP,,
 company,client_130_ChartOfAccounts_20251215.csv,1655,Electricity,Expense,EXP.UTI,detail_include,91.0,EXP.UTI,,
-company,client_130_ChartOfAccounts_20251215.csv,1660,Entertainment,Expense,EXP.ENT,synonym_exact_type,95.0,EXP.ENT,,
+company,client_130_ChartOfAccounts_20251215.csv,1660,Entertainment,Expense,EXP.ENT,synonym_exact_type,95.0,EXP.ENT.NON,,
 company,client_130_ChartOfAccounts_20251215.csv,1661,Gift,Expense,EXP,synonym_exact_type,95.0,EXP,,
 company,client_130_ChartOfAccounts_20251215.csv,1662,Referrer Gifts,Expense,EXP,detail_include,91.0,EXP,,
 company,client_130_ChartOfAccounts_20251215.csv,1685,Filing Fees,Expense,EXP,synonym_exact_type,95.0,EXP,,
 company,client_130_ChartOfAccounts_20251215.csv,1740,Hire/Rent of  Plant & Equipment,Expense,EXP,fuzzy_name_global,100.0,EXP,,
-company,client_130_ChartOfAccounts_20251215.csv,1752,Immediate write off assets,Expense,,unmatched,0.0,EXP,,Immediate write off assets
+company,client_130_ChartOfAccounts_20251215.csv,1752,Immediate write off assets,Expense,,unmatched,0.0,EXP.DEP,,Immediate write off assets
 company,client_130_ChartOfAccounts_20251215.csv,1755,Insurance,Expense,EXP.COS.PUR.FAR.WOO,detail_include,91.0,EXP.INS,,
 company,client_130_ChartOfAccounts_20251215.csv,1756,Workers Compensation,Expense,,unmatched,0.0,EXP.EMP,,Workers Compensation
 company,client_130_ChartOfAccounts_20251215.csv,1756.1,Workers Comp - Direct employees,Direct Costs,EXP.COS,direct_costs_head,82.0,EXP.COS,,

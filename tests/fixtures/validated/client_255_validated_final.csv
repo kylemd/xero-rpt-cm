@@ -12,9 +12,9 @@ partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,406,Bank charges and
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,408,Borrowing Charges,Expense,,unmatched,0.0,EXP.INT,,Borrowing charges (interest expense)
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,410,Rubbish Removal,Expense,EXP.EMP,leave_provision_expense,86.0,EXP.EMP,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,412,Consultants fees,Expense,EXP,detail_include,91.0,EXP,,
-partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,413,Client Gifts,Expense,EXP,detail_include,91.0,EXP,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,413,Client Gifts,Expense,EXP,detail_include,91.0,EXP.ADV,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,416,Immediate Asset Write Off,Expense,,unmatched,0.0,EXP.DEP,,Immediate asset write off (depreciation)
-partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,420,Entertainment,Expense,EXP.ENT,code_match,100.0,EXP.ENT,,
+partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,420,Entertainment,Expense,EXP.ENT,code_match,100.0,EXP.ENT.NON,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,427,Hire of Plant and Equip,Expense,EXP,code_match,100.0,EXP,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,430,Subscriptions & Memberships,Expense,EXP,synonym_exact_type,95.0,EXP,,
 partnership,client_255_ChartOfAccounts_20251013T045129Z.csv,433,Insurance,Expense,EXP.INS,code_match,100.0,EXP.INS,,

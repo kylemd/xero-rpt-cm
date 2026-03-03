@@ -889,9 +889,15 @@ class TestTrack2NewRules:
         assert code == "EXP.UTI", f"Expected EXP.UTI, got {code} from {name}"
 
     def test_administration_fee(self):
-        ctx = _ctx("administrations fee ato")
+        ctx = _ctx("administration fee")
         code, name = evaluate_rules(ALL_RULES, ctx)
         assert code == "EXP.ADM", f"Expected EXP.ADM, got {code} from {name}"
+
+    def test_ato_administration_fee(self):
+        # ATO administration fees are non-deductible (fines/penalties)
+        ctx = _ctx("administrations fee ato")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.NON", f"Expected EXP.NON, got {code} from {name}"
 
     def test_data_processing(self):
         ctx = _ctx("data processing charges")

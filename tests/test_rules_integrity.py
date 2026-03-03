@@ -112,6 +112,38 @@ XFAIL_TYPE_COMPAT = {
     ("auto_consignment_fees_commission", "sales"): (
         "Auto: consignment fees are commissions; type change to Other Income prompted in review"
     ),
+    # div7a_loan_nca intentionally reclassifies Div7A loans from liability to asset
+    # (Div7A, ITAA 1936 s.109). Type must be corrected in review interface.
+    ("div7a_loan_nca", "non-current liability"): (
+        "Div7A: loans to directors always assets regardless of Xero type"
+    ),
+    ("div7a_loan_nca", "non current liability"): (
+        "Div7A: loans to directors always assets regardless of Xero type"
+    ),
+    ("div7a_loan_nca", "current liability"): (
+        "Div7A: loans to directors always assets regardless of Xero type"
+    ),
+    ("div7a_loan_nca", "liability"): (
+        "Div7A: loans to directors always assets regardless of Xero type"
+    ),
+    # div7a_loan_nca also matches current asset type but outputs ASS.NCA.DIR (non-current).
+    # For CA-typed Div7A loans, div7a_loan_ca (p=98) wins first, so this entry
+    # only fires if div7a_loan_ca doesn't match (edge case). Still intentional.
+    ("div7a_loan_nca", "current asset"): (
+        "Div7A NCA fallback; div7a_loan_ca (p=98) wins for CA-typed accounts in practice"
+    ),
+    ("div7a_loan_nca", "asset"): (
+        "Div7A NCA fallback; div7a_loan_ca (p=98) wins for generic asset-typed accounts"
+    ),
+    # rental_bonds_held intentionally assigns LIA.CUR.PAY to current-asset-typed accounts.
+    # Some Xero setups book client-held rental bonds as assets instead of liabilities.
+    # Per user decision: account 607 (test-client-4).
+    ("rental_bonds_held", "current asset"): (
+        "Client-held rental bonds are liabilities regardless of Xero asset type"
+    ),
+    ("rental_bonds_held", "asset"): (
+        "Client-held rental bonds are liabilities regardless of Xero asset type"
+    ),
 }
 
 

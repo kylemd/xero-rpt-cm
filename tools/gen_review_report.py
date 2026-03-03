@@ -195,6 +195,16 @@ td.cell-mismatch {{ background: #fee2e2 !important; }}
 tr:hover td.cell-mismatch {{ background: #fecaca !important; }}
 
 /* Export */
+
+/* Import warning banner */
+.import-warning {{
+  display: flex; align-items: flex-start; gap: 12px;
+  background: #fffbeb; border: 1px solid #f59e0b; border-left: 4px solid #f59e0b;
+  border-radius: 6px; padding: 12px 16px; margin: 12px 0 16px;
+  color: #92400e; font-size: .92em; line-height: 1.5;
+}}
+.import-warning .warn-icon {{ font-size: 1.2em; flex-shrink: 0; margin-top: 1px; }}
+.import-warning strong {{ display: block; margin-bottom: 2px; color: #78350f; }}
 </style>
 </head>
 <body>
@@ -206,6 +216,18 @@ tr:hover td.cell-mismatch {{ background: #fecaca !important; }}
         f'<p class="subtitle">{len(accounts)} accounts &bull; '
         f'{needs_review_count} flagged for review &bull; '
         f'Decisions save to browser automatically</p>\n'
+    )
+
+    # ── IMPORT WARNING ──
+    parts.append(
+        '<div class="import-warning">'
+        '<span class="warn-icon">&#9888;</span>'
+        '<div><strong>Already imported this chart into Xero?</strong>'
+        'Re-export the Chart of Accounts from Xero before using this report. '
+        'Xero may have archived accounts during import, and the exported file '
+        'reflects the current live state. Working from an older export may produce '
+        'incorrect mappings for accounts that have been archived or modified.</div>'
+        '</div>\n'
     )
 
     # ── SUMMARY CARDS ──
@@ -796,7 +818,17 @@ function downloadCSV() {{
     const reportingName = (acct.reporting_name && acct.reporting_name !== acct.name) ? acct.reporting_name : '';
     const acctId = acct.code + ':' + (acct.name || '').substring(0, 40);
     const td = typeDecisions[acctId];
-    const finalType = (td && td.newType) ? td.newType : acct.type;
+    let finalType = (td && td.newType) ? td.newType : predictTypeFromCode(finalCode, acct.type);
+    // System-typed accounts (Bank, Accounts Receivable, Accounts Payable, GST, Historical,
+    // Rounding, Tracking, Unpaid Expense Claims, Retained Earnings) are locked — Xero will
+    // error on import if their type is changed. Always preserve the original type.
+    if (SYSTEM_TYPES.has(acct.type)) {
+      finalType = acct.type;
+    } else if (SYSTEM_TYPES.has(finalType)) {
+      // A non-system account must never be exported with a system type.
+      // GST specifically should become Current Liability; others revert to original.
+      finalType = (finalType === 'GST') ? 'Current Liability' : acct.type;
+    }
 
     rows.push([
       csvEscape(acct.code),

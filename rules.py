@@ -349,9 +349,25 @@ _revenue_rules = [
         name="fbt_reimbursement",
         code="REV.OTH",
         priority=78,
-        keywords=["fbt contribution", "fbt reimbursement", "fbt reimburse"],
+        keywords=["fbt contribution", "fbt employee contribution",
+                  "fbt reimbursement", "fbt reimburse"],
         canon_types={"other income", "revenue", "income"},
-        notes="FBT reimbursements -> other income",
+        notes="FBT reimbursements/employee contributions -> other income. "
+              "'fbt employee contribution' catches 'FBT Employee contribution income' "
+              "where 'employee' separates fbt from contribution.",
+    ),
+    Rule(
+        name="small_business_restructure_gain",
+        code="REV.OTH",
+        priority=78,
+        keywords=["gain on small business restructure",
+                  "small business restructure", "small business restructuring"],
+        keywords_exclude=["fund", "reserve"],
+        canon_types={"other income", "revenue", "income"},
+        notes="Gain on small business restructure -> other income. "
+              "Debt-forgiveness gains under SBR are assessable other income. "
+              "Excludes 'fund'/'reserve' to avoid clashing with "
+              "small_business_restructuring_reserve (EQU.RES).",
     ),
     Rule(
         name="sale_of_asset_gain",
@@ -582,9 +598,21 @@ _payroll_rules = [
         code="LIA.CUR.TAX",
         priority=93,
         keywords=["sgc", "scg", "superannuation guarantee"],
+        keywords_exclude=["sge", "employer"],
         canon_types={"current liability", "liability"},
         notes="SGC (Superannuation Guarantee Charge) -> tax liability. "
-              "Paid to ATO as a penalty/charge. Includes common misspelling SCG.",
+              "Paid to ATO as a penalty/charge. Includes common misspelling SCG. "
+              "Excludes SGE (Super Guarantee Employer) which is an employee payable.",
+    ),
+    Rule(
+        name="sge_employer_payable",
+        code="LIA.CUR.PAY.EMP",
+        priority=94,
+        keywords=["sge", "super guarantee employer", "superannuation guarantee employer"],
+        canon_types={"current liability", "liability"},
+        notes="SGE (Super Guarantee Employer) -> employee payables liability. "
+              "ATO account name for outstanding employer superannuation contributions "
+              "owing to employees. Priority above sgc_payable to prevent SGC match.",
     ),
 ]
 
@@ -771,6 +799,33 @@ _loan_rules = [
               "Catches generic 'YYYY Director Loan' names that don't include 'to'.",
     ),
     Rule(
+        name="div7a_loan_nca",
+        code="ASS.NCA.DIR",
+        priority=97,
+        keywords=["div7a", "div 7a", "division 7a"],
+        keywords_all=["loan"],
+        raw_types={"non-current asset", "non current asset", "asset",
+                   "current asset",
+                   "non-current liability", "non current liability",
+                   "current liability", "liability"},
+        notes="Division 7A loan -> non-current director loan asset. "
+              "Div7A (ITAA 1936 s.109) requires company loans to directors/associates "
+              "to be at market terms. These are always assets (loans TO directors). "
+              "Catches 'Div7A loan 2016', 'Div 7A Loan - 2025', etc. "
+              "Type guard covers all common Xero account types for Div7A accounts "
+              "(NCA, CA, or incorrectly-typed liability accounts).",
+    ),
+    Rule(
+        name="div7a_loan_ca",
+        code="ASS.CUR.DIR",
+        priority=98,
+        keywords=["div7a", "div 7a", "division 7a"],
+        keywords_all=["loan"],
+        raw_types={"current asset", "asset"},
+        notes="Division 7A loan on current asset type -> current director loan. "
+              "Priority 98 (above div7a_loan_nca at 97) so CA type wins for CA accounts.",
+    ),
+    Rule(
         name="directors_loan_from",
         code="LIA.NCL.LOA",
         priority=80,
@@ -951,6 +1006,21 @@ _loan_rules = [
         keywords_all=["finance"],
         canon_types={"non-current liability", "current liability", "liability"},
         notes="Vehicle make + finance -> hire purchase liability",
+    ),
+    Rule(
+        name="vehicle_make_loan_liability",
+        code="LIA.NCL.HPA",
+        priority=78,
+        keywords=VEHICLE_MAKES,
+        keywords_all=["loan"],
+        keywords_exclude=AUSTRALIAN_BANKS,
+        canon_types={"non-current liability", "current liability", "liability"},
+        notes="Vehicle make + loan -> hire purchase liability. "
+              "Catches 'Loan - Toyota Kluger', 'Loan - Tesla Model 3' etc. "
+              "Excludes Australian bank names to prevent false positives where "
+              "a model code (e.g. 'x3') appears as a substring in a bank account "
+              "number (e.g. 'Citibank Loan xx3415'). "
+              "Companion to vehicle_make_finance_liability.",
     ),
     Rule(
         name="lender_liability",
@@ -1345,9 +1415,10 @@ _general_expense_rules = [
         name="filing_fees",
         code="EXP.ADM",
         priority=73,
-        keywords=["filing fee", "asic"],
+        keywords=["filing fee", "filing fees", "filling fee", "filling fees", "asic"],
         canon_types={"expense"},
-        notes="Filing fees (ASIC regulatory fee) -> admin expense.",
+        notes="Filing fees (ASIC regulatory fee) -> admin expense. "
+              "'Filling fee/s' is a common client misspelling of 'Filing fee/s'.",
     ),
     Rule(
         name="subscription_expense",
@@ -1493,6 +1564,52 @@ _general_expense_rules = [
               "Has direct correlation with employee remuneration.",
     ),
 
+    # Client gifts / lead generation / graphic design (advertising)
+    Rule(
+        name="client_gift_advertising",
+        code="EXP.ADV",
+        priority=75,
+        keywords=["client gift", "client gifts"],
+        canon_types={"expense"},
+        notes="Client gifts -> advertising/marketing. "
+              "Under ATO rules, client gifts are deductible as advertising "
+              "unless over $300 per item (which would be entertainment). "
+              "Per user decision: account 410.1.",
+    ),
+    Rule(
+        name="lead_generation_advertising",
+        code="EXP.ADV",
+        priority=75,
+        keywords=["lead gen", "lead generation", "lead generating"],
+        canon_types={"expense"},
+        notes="Lead generation -> advertising/marketing expense. "
+              "Per user decision: account 413.",
+    ),
+    Rule(
+        name="graphic_design_advertising",
+        code="EXP.ADV",
+        priority=75,
+        keywords=["graphic design", "graphics design", "graphic designer",
+                  "graphic design expense", "graphics"],
+        canon_types={"expense"},
+        keywords_exclude=["software", "subscription"],
+        notes="Graphic design -> advertising/marketing expense. "
+              "Graphics design work is typically for marketing materials. "
+              "Per user decision: account 430.",
+    ),
+    Rule(
+        name="recruitment_employee",
+        code="EXP.EMP",
+        priority=75,
+        keywords=["recruitment", "recruiting", "recruiter"],
+        canon_types={"expense"},
+        keywords_exclude=["advertising"],
+        notes="Recruitment costs -> employee expenses. "
+              "Costs to obtain new employees are part of employment costs. "
+              "Excludes 'advertising' so 'Advertising - Recruitment' stays as EXP.ADV. "
+              "Per user decision: account 467.",
+    ),
+
     # Fines/penalties
     Rule(
         name="fines_penalties",
@@ -1603,6 +1720,21 @@ _general_expense_rules = [
         canon_types={"expense"},
         notes="Entertainment + non-deductible -> non-deductible entertainment",
     ),
+    Rule(
+        name="entertainment_default",
+        code="EXP.ENT.NON",
+        priority=73,
+        keywords=["entertainment"],
+        canon_types={"expense"},
+        keywords_exclude=["client meeting", "client meal", "meal entertainment",
+                          "not deductible", "non deductible", "meals"],
+        notes="Entertainment (generic) -> non-deductible by default. "
+              "All business entertainment is non-deductible unless it is a client "
+              "meeting/meal (EXP.ENT). Priority below client_entertainment (78) "
+              "and entertainment_non_deductible (82) which handle specific cases. "
+              "Excludes 'meals' to avoid matching 'Meals and entertainment' accounts "
+              "which may be validated as employee expenses (EXP.EMP).",
+    ),
 
     # Bad debts (from early overrides)
     Rule(
@@ -1703,10 +1835,25 @@ _general_expense_rules = [
         code="EXP.DEP",
         priority=78,
         keywords=["immediately write off", "instant write off", "instant asset",
-                  "low value asset", "low value pool"],
-        canon_types={"expense"},
+                  "low value asset", "low value pool",
+                  "assets <$20,000", "assets under $20,000", "assets below $20,000",
+                  "assets <$20000", "assets under $20000"],
+        canon_types={"expense", "depreciation"},
         notes="Instant asset write-off -> depreciation expense. "
-              "Under instant asset write-off threshold, treated as immediate depreciation.",
+              "Under ATO instant asset write-off threshold, assets are fully written off "
+              "as immediate depreciation. Catches named thresholds like 'Assets <$20,000'.",
+    ),
+    Rule(
+        name="asset_woff_writeoff",
+        code="EXP.DEP",
+        priority=77,
+        keywords_all=["asset"],
+        keywords=["woff", "write off", "writeoff"],
+        canon_types={"expense", "depreciation"},
+        keywords_exclude=["depreciation", "deprec", "accumulated", "sale"],
+        notes="Asset + write-off abbreviation -> depreciation expense. "
+              "Catches 'asset woff', 'asset write off' shorthand accounts "
+              "used for instant asset write-off under ATO threshold rules.",
     ),
 
     # Leasing
@@ -1789,6 +1936,18 @@ _general_expense_rules = [
     ),
 
     # Administration fees
+    Rule(
+        name="ato_administration_fee",
+        code="EXP.NON",
+        priority=80,
+        keywords=["administration fee", "admin fee", "administrations fee"],
+        keywords_all=["ato"],
+        canon_types={"expense"},
+        notes="ATO administration fee -> non-deductible expense. "
+              "Administration fees charged by the ATO (e.g. SGC admin fees, "
+              "late lodgement fees) are treated as penalties/fines (EXP.NON). "
+              "Priority 80 outranks administration_fee (73) for ATO-specific names.",
+    ),
     Rule(
         name="administration_fee",
         code="EXP.ADM",
@@ -1893,6 +2052,38 @@ _general_expense_rules = [
         keywords=["shareholder salar", "shareholder wage"],
         notes="Shareholder salaries/wages -> shareholder salaries.",
     ),
+
+    # Foreign currency gains/losses
+    Rule(
+        name="bank_revaluation_forex",
+        code="EXP.FOR",
+        priority=78,
+        keywords=["bank revaluation", "bank revaluations",
+                  "fx revaluation", "currency revaluation",
+                  "foreign currency gain", "foreign currency loss",
+                  "foreign exchange gain", "foreign exchange loss",
+                  "realised forex", "unrealised forex",
+                  "realised foreign currency", "unrealised foreign currency"],
+        canon_types={"expense", "direct costs"},
+        notes="Bank/currency revaluations and forex gains/losses -> EXP.FOR. "
+              "Bank account revaluations arise from foreign currency movements. "
+              "Restricted to expense types; income-typed forex accounts use REV.OTH. "
+              "Per user decision: 'Bank Revaluations' -> foreign currency gains/losses.",
+    ),
+    Rule(
+        name="forex_other_income",
+        code="REV.OTH",
+        priority=78,
+        keywords=["foreign currency gain", "foreign currency loss",
+                  "foreign exchange gain", "foreign exchange loss",
+                  "realised forex", "unrealised forex",
+                  "realised foreign currency", "unrealised foreign currency",
+                  "fx gain", "fx loss"],
+        canon_types={"other income", "revenue", "income"},
+        notes="Forex gains/losses on income-typed accounts -> other income. "
+              "Xero may book unrealised/realised currency gains under Other Income. "
+              "Companion to bank_revaluation_forex which handles expense-typed accounts.",
+    ),
 ]
 
 
@@ -1920,6 +2111,18 @@ _equity_rules = [
         priority=83,
         keywords=["paid up capital"],
         notes="Issued/paid up capital -> equity ordinary shares",
+    ),
+    Rule(
+        name="fully_part_paid_shares",
+        code="EQU.SHA.ORD",
+        priority=83,
+        keywords=["fully paid shares", "partly paid shares", "part paid shares",
+                  "fully paid ordinary", "partly paid ordinary",
+                  "fully/part paid shares"],
+        canon_types={"equity"},
+        notes="Fully/partly paid shares -> ordinary share capital. "
+              "Per user decision: 'fully paid shares' and 'part paid shares' are "
+              "alternative terms for share capital (EQU.SHA.ORD).",
     ),
     Rule(
         name="issued_paid_capital",
@@ -1969,6 +2172,18 @@ _equity_rules = [
               "Per SystemMappings.csv row 94.",
     ),
     Rule(
+        name="small_business_restructuring_reserve",
+        code="EQU.RES",
+        priority=80,
+        keywords=["small business restructuring fund", "restructuring fund",
+                  "restructure fund", "solvency reserve"],
+        canon_types={"equity"},
+        notes="Small Business Restructuring fund -> general reserves. "
+              "SBR funds set aside from retained earnings are general reserves "
+              "(EQU.RES) per SystemMappings: 'General reserves where entity sets "
+              "aside part of retained earnings for a specified purpose'.",
+    ),
+    Rule(
         name="historical_adjustment_equity",
         code="EQU.RET",
         priority=78,
@@ -2010,6 +2225,23 @@ _remaining_rules = [
         keywords=["cash on hand", "petty cash", "undeposited funds"],
         notes="Cash/petty cash/undeposited funds -> cash flow asset. "
               "Per SystemMappings.csv: ASS.CUR.CAS.FLO is 'Cash on Hand'.",
+    ),
+
+    # Rental bonds held (money held on behalf of clients = liability)
+    Rule(
+        name="rental_bonds_held",
+        code="LIA.CUR.PAY",
+        priority=82,
+        keywords=["rental bond", "rental bonds", "security bond", "security bonds"],
+        keywords_all=["held"],
+        raw_types={"current liability", "current asset", "asset", "liability"},
+        keywords_exclude=["expense", "cost", "income"],
+        notes="Rental bonds HELD -> current payable liability. "
+              "Requires 'held' in name: distinguishes bonds held on behalf of clients "
+              "(liability) from bonds paid as a deposit (asset, e.g. 'Rental Bond - "
+              "Term Deposit' or 'Rental Bond - Sublease'). "
+              "Cross-type: accepts current asset type when Xero incorrectly books "
+              "client-held bonds as assets. Per user decision: account 607.",
     ),
 
     # Sundry debtors / Retentions
@@ -2205,9 +2437,14 @@ _remaining_rules = [
         name="formation_costs_asset",
         code="ASS.NCA.INT",
         priority=78,
-        keywords=["formation cost", "incorporation cost", "establishment cost"],
+        keywords=["formation cost", "formation costs",
+                  "formation expense", "formation expenses",
+                  "incorporation cost", "incorporation costs",
+                  "establishment cost", "establishment costs"],
         canon_types={"non-current asset", "fixed asset"},
-        notes="Formation/incorporation/establishment costs on NCA -> intangibles.",
+        notes="Formation/incorporation/establishment costs on NCA -> intangibles. "
+              "Extends to 'formation expenses' (the plural and 'expense' noun variant) "
+              "per user decision: formation expenses as NCA are always intangibles.",
     ),
 
     # General pool / SBE pool

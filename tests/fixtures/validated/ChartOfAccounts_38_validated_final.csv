@@ -38,7 +38,7 @@ Code,Name,Type,Tax Code,InputReportingCode,ValidatedReportingCode,MatchReason,Sc
 1601.0,Website - Hosting,Expense,GST on Expenses,EXP,EXP.UTI,unmatched,0.0,True,,,,No,No,No,,Website hosting (utility)
 1616.0,Depreciation,Expense,BAS Excluded,EXP.DEP,EXP.DEP,detail_include,91.0,True,,,,No,No,No,,
 1655.0,Electricity,Expense,GST on Expenses,EXP,EXP.UTI,detail_include,91.0,True,,,,No,No,No,,
-1660.0,Entertainment,Expense,GST on Expenses,EXP,EXP.ENT,synonym_exact_type,95.0,False,GST Free Expenses,"Expected one of: GST Free Expenses, got: GST on Expenses",,No,No,No,,
+1660.0,Entertainment,Expense,GST on Expenses,EXP,EXP.ENT.NON,synonym_exact_type,95.0,False,GST Free Expenses,"Expected one of: GST Free Expenses, got: GST on Expenses",,No,No,No,,
 1675.0,Fees & Charges,Expense,GST on Expenses,EXP,EXP,unmatched,0.0,True,,,,No,No,No,,Fees & charges (general expense)
 1685.0,Filing Fees,Expense,GST Free Expenses,EXP,EXP,synonym_exact_type,95.0,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,,No,No,No,,
 1689.0,Freight Expense outbound,Direct Costs,GST on Expenses,EXP,EXP.COS,direct_costs_head,82.0,True,GST on Expenses,,"direct costs, cost in getting the product to the customer",No,No,No,,
@@ -46,7 +46,7 @@ Code,Name,Type,Tax Code,InputReportingCode,ValidatedReportingCode,MatchReason,Sc
 1691.0,Deliver Sherpa Uber,Direct Costs,GST on Expenses,EXP.COS.PUR,EXP.COS,direct_costs_head,82.0,True,GST on Expenses,,,No,No,No,,
 1715.0,General Expenses,Expense,GST on Expenses,EXP,EXP,detail_include,91.0,True,,,,No,No,No,,
 1740.0,Hire/Rent of  Plant & Equipment,Expense,GST on Expenses,EXP.REN,EXP,fuzzy_name_global,100.0,True,"BAS Excluded, GST Free Expenses, GST on Expenses",,,No,No,No,,
-1752.0,Immediate Asset Write Off,Expense,GST on Expenses,EXP,EXP,unmatched,0.0,True,,,,No,No,No,,Asset write-off
+1752.0,Immediate Asset Write Off,Expense,GST on Expenses,EXP,EXP.DEP,unmatched,0.0,True,,,,No,No,No,,Asset write-off
 1755.0,Insurance,Expense,GST on Expenses,EXP,EXP.INS,detail_include,91.0,True,,,,No,No,No,,
 1760.0,Interest Expense - Australia,Expense,GST Free Expenses,EXP.INT,EXP.INT,leave_provision_expense,86.0,False,"BAS Excluded, GST on Expenses","Expected one of: BAS Excluded, GST on Expenses, got: GST Free Expenses",,No,No,No,,
 1764.0,Internet Costs,Expense,GST on Expenses,EXP,EXP.UTI,fuzzy_name_global,100.0,True,GST on Expenses,,,No,No,No,,

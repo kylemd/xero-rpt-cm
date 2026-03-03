@@ -243,7 +243,7 @@ company,client_267_ChartOfAccounts_20251201.csv,60003,Digital Advertising,Expens
 company,client_267_ChartOfAccounts_20251201.csv,60004,Bookkeeping,Expense,EXP,synonym_exact_type,95.0,EXP,,
 company,client_267_ChartOfAccounts_20251201.csv,60005,Bank charges,Expense,EXP,detail_include,91.0,EXP,,
 company,client_267_ChartOfAccounts_20251201.csv,60006,abc,Expense,,unmatched,0.0,,,
-company,client_267_ChartOfAccounts_20251201.csv,60007,Client Gifts,Expense,EXP,detail_include,91.0,EXP,,
+company,client_267_ChartOfAccounts_20251201.csv,60007,Client Gifts,Expense,EXP,detail_include,91.0,EXP.ADV,,
 company,client_267_ChartOfAccounts_20251201.csv,60008,Credit card interest,Expense,,unmatched,0.0,EXP.INT,,Credit card interest
 company,client_267_ChartOfAccounts_20251201.csv,60009,Entertainment Clients (non-deductible),Expense,EXP.ENT.NON,fuzzy_name_type,87.5,EXP.ENT.NON,,
 company,client_267_ChartOfAccounts_20251201.csv,60010,Depreciation - Prop & office,Expense,EXP.DEP,detail_include,91.0,EXP.DEP,,
