@@ -121,13 +121,11 @@ class IntegrityValidator:
         # Check expected head mapping
         if account_type_lower in self.type_head_mapping:
             expected_head = self.type_head_mapping[account_type_lower]
-            actual_head = reporting_code.split('.')[0] if '.' in reporting_code else reporting_code
-            
-            if actual_head != expected_head:
+            if not reporting_code.upper().startswith(expected_head.upper()):
                 result['valid'] = False
                 result['errors'].append(
                     f"Type '{account_type}' expects reporting head '{expected_head}', "
-                    f"found '{actual_head}'"
+                    f"found '{reporting_code}'"
                 )
         
         # Check allowed codes for this type

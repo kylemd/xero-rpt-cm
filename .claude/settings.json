@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import sys,json; d=json.load(sys.stdin); p=d.get('tool_input',{}).get('file_path',''); print('BLOCKED: Validated fixtures must only be updated via tools/apply_decisions.py -- never edited directly.',file=sys.stderr) if 'fixtures/validated' in p else None; sys.exit(1 if 'fixtures/validated' in p else 0)\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c \"INPUT=$(cat); echo \\\"$INPUT\\\" | python -c \\\"import sys,json; d=json.load(sys.stdin); p=d.get('tool_input',{}).get('file_path',''); sys.exit(0 if any(x in p for x in ['rules.py','rule_engine.py']) else 1)\\\" && uv run pytest tests/test_rules.py tests/test_rule_engine.py tests/test_rules_integrity.py -q --no-header 2>&1 | tail -15\""
+          }
+        ]
+      }
+    ]
+  }
+}

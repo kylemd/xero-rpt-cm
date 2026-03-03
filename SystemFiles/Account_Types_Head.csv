@@ -13,7 +13,7 @@ Historical,LIA.CUR,TRUE
 Liability,LIA,FALSE
 Non-current Asset,ASS.NCA,FALSE
 Non-current Liability,LIA.NCL,FALSE
-Other Income,REV.OTH,FALSE
+Other Income,REV,FALSE
 Overhead,EXP,FALSE
 Prepayment,ASS.CUR.REC,FALSE
 Retained Earnings,EQU.RET,TRUE

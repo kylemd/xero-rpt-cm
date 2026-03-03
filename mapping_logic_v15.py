@@ -542,7 +542,7 @@ def main(args):
     
     # Normalize *Code to avoid decimals like 200.0
     if '*Code' in coa.columns:
-        original_codes=coa['*Code'].astype(str).tolist()
+        original_codes=coa['*Code'].fillna('').astype(str).tolist()
         coerced_codes=[]
         for i,ov in enumerate(original_codes):
             s=str(ov).strip()

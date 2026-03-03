@@ -19,6 +19,24 @@ import pathlib
 import sys
 
 SYSTEM_MAPPINGS = pathlib.Path(__file__).parent.parent / "SystemFiles" / "SystemMappings.csv"
+CHART_OF_ACCOUNTS = pathlib.Path(__file__).parent.parent / "ChartOfAccounts"
+
+_TYPE_NORMALISE = {"other income": "Other Income"}
+
+
+def load_chart_types(entity_type: str) -> dict:
+    """Return {REPORTING_CODE.upper(): XeroType} from ChartOfAccounts/{entity_type}.csv."""
+    chart_path = CHART_OF_ACCOUNTS / f"{entity_type}.csv"
+    code_type: dict[str, str] = {}
+    if chart_path.exists():
+        with open(chart_path, encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                rc = row.get("Reporting Code", "").strip().upper()
+                t = row.get("Type", "").strip()
+                t = _TYPE_NORMALISE.get(t.lower(), t)
+                if rc and t and rc not in code_type:
+                    code_type[rc] = t
+    return code_type
 
 
 def load_system_mappings():
@@ -73,7 +91,7 @@ def js_str(s: str) -> str:
     return html_mod.escape(s, quote=True)
 
 
-def generate_html(accounts, sys_map, code_list):
+def generate_html(accounts, sys_map, code_list, chart_type_map=None):
     """Generate the full HTML review report as a self-contained page."""
     h = html_mod.escape
 
@@ -84,6 +102,7 @@ def generate_html(accounts, sys_map, code_list):
 
     # Embed data as JSON for JS
     code_json = json.dumps(code_list, ensure_ascii=False)
+    chart_type_json = json.dumps(chart_type_map or {}, ensure_ascii=False)
     sys_map_json = json.dumps(sys_map, ensure_ascii=False)
     accounts_json = json.dumps(accounts, ensure_ascii=False)
 
@@ -216,7 +235,7 @@ tr:hover td.cell-mismatch {{ background: #fecaca !important; }}
     parts.append('    <option value="active" selected>Active</option>\n    <option value="inactive">Inactive</option>\n    <option value="">All</option>\n  </select>\n')
 
     parts.append('  <label>Status:</label>\n  <select id="filterStatus" onchange="applyFilters()">\n')
-    parts.append('    <option value="">All</option>\n    <option value="pending">Pending</option>\n    <option value="accepted">Accepted</option>\n    <option value="overridden">Overridden</option>\n  </select>\n')
+    parts.append('    <option value="">All</option>\n    <option value="pending">Pending</option>\n    <option value="accepted">Accepted</option>\n    <option value="overridden">Overridden</option>\n    <option value="override-no-reason">Override - no reason</option>\n  </select>\n')
 
     parts.append('  <label>Search:</label>\n')
     parts.append('  <input type="text" id="filterSearch" placeholder="Name, code, type, source..." oninput="applyFilters()">\n')
@@ -336,7 +355,7 @@ window.onerror = function(msg, url, line, col, err) {{
 }};
 
 const STORAGE_KEY = 'review_decisions_v1';
-const TYPE_STORAGE_KEY = 'review_type_decisions_v1';
+const TYPE_STORAGE_KEY = 'review_type_decisions_v2';
 const CODES = {code_json};
 const CODE_MAP = Object.fromEntries(CODES);
 const SYS_MAP = {sys_map_json};
@@ -479,10 +498,17 @@ function applyFilters() {{
   const rows = document.querySelectorAll('#reviewTable tbody tr');
   let visible = 0;
   rows.forEach(row => {{
+    let statusMatch = true;
+    if (status === 'override-no-reason') {{
+      const d = decisions[row.dataset.id];
+      statusMatch = d && d.choice === 'override' && !d.reason;
+    }} else if (status) {{
+      statusMatch = row.dataset.status === status;
+    }}
     const ok = (!review || row.dataset.review === review)
             && (!source || row.dataset.source === source)
-            && (!status || row.dataset.status === status)
-            && (!activity || row.dataset.activity === activity)
+            && statusMatch
+            && (!activity || row.dataset.activity === activity || (activity === 'active' && row.dataset.review === 'Y'))
             && (!search || row.dataset.search.includes(search));
     if (ok) {{
       row.classList.remove('hidden');
@@ -552,7 +578,6 @@ const REQUIRED_PREFIX_BY_TYPE = {{
   'Prepayment': 'ASS.CUR.REC.PRE',
   'Revenue': 'REV.TRA',
   'Sales': 'REV.TRA',
-  'Other Income': 'REV.OTH',
   'Current Asset': 'ASS.CUR',
   'Non-current Asset': 'ASS.NCA',
   'Current Liability': 'LIA.CUR',
@@ -572,6 +597,10 @@ const SYSTEM_TYPES = new Set([
   'Historical', 'Rounding', 'Tracking', 'Unpaid Expense Claims', 'Retained Earnings'
 ]);
 
+// Authoritative reporting-code → Xero type lookup from the entity's default chart.
+// Keys are upper-cased reporting codes; values are Xero type strings.
+const CODE_TYPE_MAP = {chart_type_json};
+
 function headFromCode(code) {{
   return code ? code.split('.')[0] : '';
 }}
@@ -579,6 +608,8 @@ function headFromCode(code) {{
 function predictTypeFromCode(code, currentType) {{
   if (!code) return currentType;
   const c = code.toUpperCase();
+  // Check authoritative chart lookup first
+  if (CODE_TYPE_MAP[c]) return CODE_TYPE_MAP[c];
   if (c.startsWith('ASS.CUR.INY'))       return 'Inventory';
   if (c.startsWith('ASS.NCA.FIX'))       return 'Fixed Asset';
   if (c.startsWith('ASS.CUR.REC.PRE'))   return 'Prepayment';
@@ -593,6 +624,7 @@ function predictTypeFromCode(code, currentType) {{
   if (c.startsWith('LIA.NCL'))            return 'Non-current Liability';
   if (c.startsWith('LIA'))               return 'Current Liability';
   if (c.startsWith('REV.OTH'))            return 'Other Income';
+  if (c.startsWith('REV.INV'))            return 'Other Income';
   if (c.startsWith('REV')) {{
     if (currentType === 'Sales')          return 'Sales';
     return 'Revenue';
@@ -692,11 +724,6 @@ function updateExpectedType(i) {{
     typeCell.classList.add('cell-mismatch');
   }}
 
-  // Auto-save predicted type if no explicit decision yet
-  if (!savedTd || !savedTd.newType) {{
-    typeDecisions[acctId] = {{ newType: predicted, timestamp: new Date().toISOString() }};
-    saveTypeDecisions();
-  }}
 }}
 
 function updateAllExpectedTypes() {{
@@ -765,7 +792,8 @@ function downloadCSV() {{
 
   ACCOUNTS.forEach(acct => {{
     const finalCode = getFinalCode(acct);
-    const reportingName = SYS_MAP[finalCode] || '';
+    // Preserve original Reporting Name only; clear it if identical to the account name (redundant)
+    const reportingName = (acct.reporting_name && acct.reporting_name !== acct.name) ? acct.reporting_name : '';
     const acctId = acct.code + ':' + (acct.name || '').substring(0, 40);
     const td = typeDecisions[acctId];
     const finalType = (td && td.newType) ? td.newType : acct.type;
@@ -906,12 +934,21 @@ try {{
     return "".join(parts)
 
 
-def main():
-    if len(sys.argv) < 2:
-        print("Usage: gen_review_report.py <augmented.csv>")
-        sys.exit(1)
+_VALID_ENTITY_TYPES = ["Company", "Trust", "Partnership", "SoleTrader", "XeroHandi"]
 
-    augmented_path = pathlib.Path(sys.argv[1])
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Generate HTML mapping review report.")
+    parser.add_argument("augmented_csv", help="Path to AugmentedChartOfAccounts.csv")
+    parser.add_argument(
+        "--type", dest="entity_type", default="Company",
+        choices=_VALID_ENTITY_TYPES,
+        help="Entity type to use for type lookups (default: Company)",
+    )
+    args = parser.parse_args()
+
+    augmented_path = pathlib.Path(args.augmented_csv)
 
     if not augmented_path.exists():
         print(f"ERROR: {augmented_path} not found")
@@ -919,8 +956,10 @@ def main():
 
     sys_map, code_list = load_system_mappings()
     accounts = load_augmented(augmented_path)
+    chart_type_map = load_chart_types(args.entity_type)
 
-    html_content = generate_html(accounts, sys_map, code_list)
+    html_content = generate_html(accounts, sys_map, code_list, chart_type_map)
+    print(f"  Entity type: {args.entity_type} ({len(chart_type_map)} code-type mappings loaded)")
 
     output_path = augmented_path.with_name("ReviewReport.html")
     output_path.write_text(html_content, encoding="utf-8")
