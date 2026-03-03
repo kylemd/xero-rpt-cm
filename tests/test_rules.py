@@ -794,14 +794,16 @@ class TestSystemMappingsRules:
         assert code == "ASS.NCA.INT"
 
     def test_formation_expense(self):
+        # Formation expenses are amortised over 5 years (ITAA 97 s.40-880) -> EXP.AMO
         ctx = _ctx("formation expense", raw_type="Expense", canon_type="expense")
         code, _ = evaluate_rules(ALL_RULES, ctx)
-        assert code == "EXP.ADM"
+        assert code == "EXP.AMO"
 
     def test_incorporation_expense(self):
+        # Incorporation costs are the same black-hole expenditure class -> EXP.AMO
         ctx = _ctx("incorporation costs", raw_type="Expense", canon_type="expense")
         code, _ = evaluate_rules(ALL_RULES, ctx)
-        assert code == "EXP.ADM"
+        assert code == "EXP.AMO"
 
 
 class TestTrack2NewRules:

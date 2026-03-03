@@ -616,7 +616,8 @@ const ALLOWED_TYPES_BY_HEAD = {{
 
 const SYSTEM_TYPES = new Set([
   'Bank', 'Accounts Receivable', 'Accounts Payable', 'GST',
-  'Historical', 'Rounding', 'Tracking', 'Unpaid Expense Claims', 'Retained Earnings'
+  'Historical', 'Rounding', 'Tracking', 'Unpaid Expense Claims', 'Retained Earnings',
+  'Inventory', 'Prepayment'
 ]);
 
 // Authoritative reporting-code → Xero type lookup from the entity's default chart.

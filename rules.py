@@ -537,8 +537,9 @@ _payroll_rules = [
         name="payg_instalment",
         code="LIA.CUR.TAX.INC",
         priority=95,
-        keywords=["payg instalment", "payg instalments"],
-        notes="PAYG instalment is income tax liability, not payroll",
+        keywords=["payg instalment", "payg instalments", "paygi"],
+        notes="PAYG instalment / PAYGI (PAYG Income Tax Instalments) -> income tax liability. "
+              "PAYGI is the common abbreviation used in Xero account names.",
     ),
     Rule(
         name="payg_withholding_payable",
@@ -855,6 +856,42 @@ _loan_rules = [
         notes="Audit fix: Loan + pty on LIABILITY type -> related party liability",
     ),
     Rule(
+        name="upe_asset",
+        code="ASS.CUR.REL",
+        priority=88,
+        keywords=["upe", "unpaid present entitlement"],
+        raw_types={"current asset", "non-current asset", "non current asset", "asset"},
+        notes="UPE (Unpaid Present Entitlement) -> current related party receivable. "
+              "A UPE arises when a trust has distributed income to a beneficiary "
+              "but not yet paid it. For the recipient entity this is ASS.CUR.REL. "
+              "For the trust side it would be LIA.CUR.REL. "
+              "Per user decision: account 884.2 (test-client-5).",
+    ),
+    Rule(
+        name="trust_distribution_receivable",
+        code="ASS.CUR.REL",
+        priority=85,
+        keywords=["trust distribution receivable", "distribution receivable",
+                  "trust distribution payable receivable"],
+        raw_types={"current asset", "asset"},
+        notes="Trust distribution receivable -> related party current asset. "
+              "Distributions from a related trust not yet received are "
+              "receivable from a related party (ASS.CUR.REL). "
+              "Per user decision: account 650 (test-client-5).",
+    ),
+    Rule(
+        name="unsecured_related_loan",
+        code="LIA.CUR.REL",
+        priority=78,
+        keywords_all=["loan", "unsecured"],
+        raw_types={"current liability", "non-current liability",
+                   "non current liability", "liability"},
+        notes="Unsecured loans on liability type -> current related party liability. "
+              "Unsecured intercompany loans are typically demand loans (callable immediately) "
+              "and are commonly between related entities. Classified as CUR. "
+              "Per user decisions: accounts 882, 885 (test-client-5).",
+    ),
+    Rule(
         name="related_party_nca",
         code="ASS.NCA.REL",
         priority=85,
@@ -1115,10 +1152,10 @@ _tax_rules = [
         code="LIA.CUR.TAX.INC",
         priority=85,
         keywords=["income tax instalment", "tax instalment"],
-        keywords_exclude=["payg instalment"],
         canon_types={"current liability", "liability"},
         notes="Income tax instalments -> income tax liability. "
-              "Guarded to liability types only (some charts mistype as asset).",
+              "Guarded to liability types only (some charts mistype as asset). "
+              "PAYGI/PAYG Instalments handled by payg_instalment rule (p=95).",
     ),
 
     # ATO payable / ICA
@@ -1431,13 +1468,15 @@ _general_expense_rules = [
     ),
     Rule(
         name="formation_expense",
-        code="EXP.ADM",
+        code="EXP.AMO",
         priority=72,
         keywords=["formation expense", "formation cost", "incorporation"],
         canon_types={"expense"},
-        keywords_exclude=["written off", "writtenoff", "write off", "amortis"],
-        notes="Company formation/incorporation costs -> administrative expense. "
-              "Excludes write-offs/amortisation of formation costs (EXP.AMO).",
+        keywords_exclude=["written off", "writtenoff", "write off"],
+        notes="Formation/incorporation expenses -> amortisation expense (EXP.AMO). "
+              "Formation costs are black-hole expenditure deductible over 5 years "
+              "(ITAA 97 s.40-880); EXP.AMO correctly reflects the annual amortisation. "
+              "Excludes write-off variants handled by balance sheet rules.",
     ),
     Rule(
         name="office_admin",
@@ -2289,6 +2328,16 @@ _remaining_rules = [
               "Excludes ATO/FBT/tax variants (those are LIA.CUR.TAX). "
               "Per user decision: sundry != trade, but IS a payable.",
     ),
+    Rule(
+        name="fees_payable",
+        code="LIA.CUR.PAY",
+        priority=75,
+        keywords=["fees payable", "fee payable"],
+        canon_types={"current liability", "liability"},
+        keywords_exclude=["ato", "tax", "fbt"],
+        notes="'Fees Payable' (e.g. Accounting Fees Payable) -> current payable. "
+              "Per user decision: account 810 (test-client-5).",
+    ),
 
     # Fixed assets — furniture, PPE, motor vehicle
     Rule(
@@ -2442,9 +2491,25 @@ _remaining_rules = [
                   "incorporation cost", "incorporation costs",
                   "establishment cost", "establishment costs"],
         canon_types={"non-current asset", "fixed asset"},
+        keywords_exclude=["less", "written off", "write off", "amortis"],
         notes="Formation/incorporation/establishment costs on NCA -> intangibles. "
               "Extends to 'formation expenses' (the plural and 'expense' noun variant) "
-              "per user decision: formation expenses as NCA are always intangibles.",
+              "per user decision: formation expenses as NCA are always intangibles. "
+              "Excludes 'less written off' accounts (accumulated amortisation -> ASS.NCA.INT.AMO).",
+    ),
+    Rule(
+        name="formation_costs_written_off",
+        code="ASS.NCA.INT.AMO",
+        priority=89,
+        keywords=["formation cost", "formation costs",
+                  "formation expense", "formation expenses",
+                  "incorporation cost", "establishment cost"],
+        keywords_all=["less"],
+        canon_types={"non-current asset", "fixed asset", "asset"},
+        notes="'Formation Costs - Less Written Off' -> accumulated amortisation of intangibles "
+              "(ASS.NCA.INT.AMO). The 'less' prefix indicates this is the contra-asset "
+              "reducing the gross formation costs on the balance sheet. "
+              "Per user decision: account 731 (test-client-5).",
     ),
 
     # General pool / SBE pool
