@@ -49,6 +49,8 @@ ACCOUNTING_TERMS: List[str] = [
     "admin", "qleave",
     # Australian acronyms (insurance, tax, entity)
     "eftpos", "ctp", "sbe", "lct", "ica",
+    # Business entity / industry codes
+    "sge",
 ]
 
 

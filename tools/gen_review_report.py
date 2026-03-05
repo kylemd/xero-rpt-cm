@@ -384,9 +384,16 @@ const SYS_MAP = {sys_map_json};
 const ACCOUNTS = {accounts_json};
 const TOTAL = {len(accounts)};
 
+// ─── Account lookup (id -> account) ───
+const ACCT_BY_ID = Object.fromEntries(
+  ACCOUNTS.map(a => [a.code + ':' + (a.name || '').substring(0, 40), a])
+);
+
 // ─── State ───
 let decisions = loadDecisions();
 let typeDecisions = loadTypeDecisions();
+pruneStaleDecisions();
+pruneStaleTypeDecisions();
 
 function loadDecisions() {{
   try {{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {{}}; }}
@@ -407,11 +414,46 @@ function saveTypeDecisions() {{
   localStorage.setItem(TYPE_STORAGE_KEY, JSON.stringify(typeDecisions));
 }}
 
+// ─── Stale-decision pruning ───
+// When the pipeline re-runs and changes predicted_code for an account,
+// any cached decision for that account is invalidated so the reviewer
+// sees the fresh pipeline output rather than a stale override.
+function pruneStaleDecisions() {{
+  let changed = false;
+  Object.keys(decisions).forEach(id => {{
+    const d = decisions[id];
+    const acct = ACCT_BY_ID[id];
+    if (!acct || d.baseline === undefined) return;
+    if (d.baseline !== acct.predicted_code) {{
+      delete decisions[id];
+      changed = true;
+    }}
+  }});
+  if (changed) saveDecisions();
+}}
+
+function pruneStaleTypeDecisions() {{
+  let changed = false;
+  Object.keys(typeDecisions).forEach(id => {{
+    const d = typeDecisions[id];
+    const acct = ACCT_BY_ID[id];
+    if (!acct || d.baseline === undefined) return;
+    if (d.baseline !== acct.predicted_code) {{
+      delete typeDecisions[id];
+      changed = true;
+    }}
+  }});
+  if (changed) saveTypeDecisions();
+}}
+
 // ─── Decision handlers ───
 function setDecision(id, choice) {{
   if (!decisions[id]) decisions[id] = {{}};
   decisions[id].choice = choice;
   decisions[id].timestamp = new Date().toISOString();
+  if (decisions[id].baseline === undefined) {{
+    decisions[id].baseline = ACCT_BY_ID[id]?.predicted_code ?? '';
+  }}
   const row = document.querySelector('tr[data-id="' + CSS.escape(id) + '"]');
   if (!row) return;
   row.dataset.status = choice === 'accept' ? 'accepted' : 'overridden';
@@ -447,6 +489,9 @@ function setOverrideCode(id, code, idx) {{
   if (!decisions[id]) decisions[id] = {{}};
   decisions[id].code = code;
   decisions[id].timestamp = new Date().toISOString();
+  if (decisions[id].baseline === undefined) {{
+    decisions[id].baseline = ACCT_BY_ID[id]?.predicted_code ?? '';
+  }}
   const descEl = document.getElementById('overrideDesc_' + idx);
   descEl.textContent = CODE_MAP[code] || '';
   saveDecisions();
@@ -759,7 +804,12 @@ function setInlineTypeDecision(acctId, newType, idx) {{
   if (!newType) {{
     delete typeDecisions[acctId];
   }} else {{
-    typeDecisions[acctId] = {{ newType: newType, timestamp: new Date().toISOString() }};
+    const existingBaseline = typeDecisions[acctId]?.baseline;
+    typeDecisions[acctId] = {{
+      newType: newType,
+      timestamp: new Date().toISOString(),
+      baseline: existingBaseline ?? (ACCT_BY_ID[acctId]?.predicted_code ?? ''),
+    }};
   }}
   saveTypeDecisions();
   // Update the Type column to reflect the new selection

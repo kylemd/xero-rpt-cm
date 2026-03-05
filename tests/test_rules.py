@@ -372,6 +372,40 @@ class TestLoanRules:
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "ASS.NCA.LOA"
 
+    def test_vehicle_make_only_ford(self):
+        """Ford Transit Custom Van on NCL (no 'loan'/'finance') -> HPA."""
+        ctx = _ctx("ford transit custom van", raw_type="Non-Current Liability",
+                    canon_type="non-current liability")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.NCL.HPA", f"Expected HPA, got {code} via {name}"
+
+    def test_vehicle_make_only_tesla(self):
+        """Tesla Model Y on NCL (no trigger word) -> HPA."""
+        ctx = _ctx("tesla model y", raw_type="Non-Current Liability",
+                    canon_type="non-current liability")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.NCL.HPA", f"Expected HPA, got {code} via {name}"
+
+    def test_vehicle_make_only_no_false_positive_revenue(self):
+        """'venue' must not match inside 'revenue received in advance'."""
+        ctx = _ctx("revenue received in advance - vend", raw_type="Liability",
+                    canon_type="liability")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code != "LIA.NCL.HPA", f"False positive: {name}"
+
+    def test_vehicle_make_only_balloon_excluded(self):
+        """Balloon payment on VW Golf -> not HPA (is LOA via lender_liability or generic_loan)."""
+        ctx = _ctx("ballon pay out vwgolf cec81x", raw_type="Liability",
+                    canon_type="liability")
+        code, name = evaluate_rules(ALL_RULES, ctx)
+        assert code != "LIA.NCL.HPA", f"Balloon payment should not be HPA, got {name}"
+
+    def test_other_creditors(self):
+        ctx = _ctx("other creditors", raw_type="Current Liability",
+                    canon_type="current liability")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "LIA.CUR.PAY"
+
 
 class TestTaxRules:
     """Tax and GST rules."""
@@ -428,6 +462,17 @@ class TestGeneralExpenseRules:
         ctx = _ctx("amortisation", raw_type="Expense", canon_type="expense")
         code, _ = evaluate_rules(ALL_RULES, ctx)
         assert code == "EXP.AMO"
+
+    def test_borrowing_expenses_interest(self):
+        ctx = _ctx("borrowing expenses", raw_type="Expense", canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.INT"
+
+    def test_borrowing_costs_interest(self):
+        ctx = _ctx("mv borrowing costs establishment fee", raw_type="Expense",
+                   canon_type="expense")
+        code, _ = evaluate_rules(ALL_RULES, ctx)
+        assert code == "EXP.INT"
 
     def test_subcontractor_direct(self):
         ctx = _ctx("subcontractor costs", raw_type="Direct Costs",

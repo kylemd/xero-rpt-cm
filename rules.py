@@ -60,11 +60,11 @@ VEHICLE_MAKES = [
     # --- Passenger makes & abbreviations ---
     "toyota", "corolla", "camry", "rav4", "yaris", "prado", "kluger", "landcruiser",
     "mazda", "cx-5", "cx-3", "cx-9", "mazda3", "mazda2", "bt-50",
-    "hyundai", "i30", "tucson", "kona", "santa fe", "venue",
+    "hyundai", "i30", "tucson", "kona", "santa fe",
     "kia", "sportage", "cerato", "seltos", "carnival", "tasman",
     "ford", "focus", "mustang", "escape", "puma",
     "volkswagen", "vw", "golf", "polo", "tiguan", "t-roc", "amarok",
-    "mercedes-benz", "merc", "mb", "c-class", "e-class", "glc", "gle", "a-class",
+    "mercedes-benz", "merc", "c-class", "e-class", "glc", "gle", "a-class",
     "bmw", "3 series", "x3", "x5", "1 series",
     "audi", "a3", "a4", "q5", "q7",
     "subaru", "subi", "forester", "outback", "xv", "impreza", "wrx",
@@ -73,32 +73,33 @@ VEHICLE_MAKES = [
     "nissan", "x-trail", "qashqai", "patrol", "juke",
     "suzuki", "vitara", "swift", "jimny", "s-cross", "baleno",
     "jeep", "wrangler", "grand cherokee", "compass",
-    "land rover", "lr", "defender", "discovery", "range rover",
-    "lexus", "rx", "nx", "is", "ux",
+    "land rover", "defender", "discovery", "range rover",
+    "lexus", "rx", "nx", "ux",
     "tesla", "model 3", "model y",
-    "peugeot", "2008", "3008", "5008",
-    "mg", "zs", "hs", "mg3", "mg4",
+    "peugeot",
+    "mg3", "mg4",
+    "vespa", "lwb",
     # --- Commercial makes & abbreviations ---
     "hilux", "hiace", "landcruiser 70",
     "ranger", "transit", "transit custom",
     "isuzu", "d-max", "mu-x", "n-series", "f-series",
-    "hino", "300", "500", "700",
+    "hino",
     "mitsubishi fuso", "fuso", "canter", "fighter", "shogun",
     "fiat", "ducato", "scudo",
-    "volvo trucks", "fh", "fm", "fe",
-    "kenworth", "kw", "t610", "t410",
+    "volvo trucks",
+    "kenworth", "t610", "t410",
     "daf", "cf", "lf", "xf",
     "man", "tgs", "tgx", "tge",
     "scania", "p-series", "r-series",
     "sprinter", "actros", "vito",
     "iveco", "daily", "eurocargo",
     "western star", "4700", "4800",
-    "ud trucks", "ud", "quon", "croner",
+    "ud trucks", "quon", "croner",
     "mack", "granite", "anthem",
     "freightliner", "cascadia", "coronado",
     "foton", "tunland", "aumark",
     "great wall", "gwm", "ute", "cannon",
-    "ram", "1500", "2500",
+    "ram",
 ]
 
 AUSTRALIAN_LENDERS = [
@@ -157,6 +158,9 @@ AUSTRALIAN_LENDERS = [
     "motor finance wizard", "mfw",
     "loan market",
     "mortgage choice",
+    # Business lenders
+    "bizcap",
+    "quickfee",
 ]
 
 VEHICLE_TOKENS = [
@@ -1060,6 +1064,20 @@ _loan_rules = [
               "Companion to vehicle_make_finance_liability.",
     ),
     Rule(
+        name="vehicle_make_only_liability",
+        code="LIA.NCL.HPA",
+        priority=77,
+        keywords=VEHICLE_MAKES,
+        keywords_exclude=[*AUSTRALIAN_BANKS, *AUSTRALIAN_LENDERS,
+                          "balloon", "ballon", "revenue", "income"],
+        canon_types={"non-current liability", "current liability", "liability"},
+        notes="Vehicle make on liability (no 'loan'/'finance' keyword required) -> hire purchase. "
+              "Catches balance-sheet HP accounts named by vehicle only, e.g. "
+              "'Ford Transit Custom Van', 'Tesla Model Y' on NCL type. "
+              "Lower priority than the loan/finance variants so those fire first. "
+              "Excludes bank/lender names, balloon payments, and revenue-type words.",
+    ),
+    Rule(
         name="lender_liability",
         code="LIA.NCL.LOA",
         priority=72,
@@ -1221,6 +1239,16 @@ _general_expense_rules = [
         canon_types={"expense", "direct costs"},
         keywords_exclude=["closing"],
         notes="Materials/building materials -> cost of purchases (excludes closing stock)",
+    ),
+    Rule(
+        name="borrowing_expense_interest",
+        code="EXP.INT",
+        priority=82,
+        keywords=["borrowing expenses", "borrowing expense", "borrowing costs"],
+        canon_types={"expense"},
+        notes="Borrowing expenses/costs on expense account -> interest expense. "
+              "Loan establishment fees and borrowing costs are a finance cost (EXP.INT). "
+              "Consistent with validated data across multiple clients.",
     ),
     Rule(
         name="amortisation",
@@ -2337,6 +2365,14 @@ _remaining_rules = [
         keywords_exclude=["ato", "tax", "fbt"],
         notes="'Fees Payable' (e.g. Accounting Fees Payable) -> current payable. "
               "Per user decision: account 810 (test-client-5).",
+    ),
+    Rule(
+        name="other_creditors",
+        code="LIA.CUR.PAY",
+        priority=72,
+        keywords=["other creditors", "other creditor"],
+        canon_types={"current liability", "liability"},
+        notes="'Other Creditors' -> current payable.",
     ),
 
     # Fixed assets — furniture, PPE, motor vehicle
