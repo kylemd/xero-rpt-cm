@@ -1,0 +1,1567 @@
+[
+  {
+    "reportingCode": "ASS",
+    "name": "Assets",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.CUR",
+    "name": "Current assets",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.CUR.CAS",
+    "name": "Cash and cash equivalents",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.CUR.CAS.BAN",
+    "name": "Bank accounts/(overdraft)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.CAS.FLO",
+    "name": "Cash floats",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.DIR",
+    "name": "Loans to directors (current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.INY",
+    "name": "Inventories",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.CUR.INY.WIP",
+    "name": "Work in progress",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.LOA",
+    "name": "Loan assets (current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.REC",
+    "name": "Trade and other receivables",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.CUR.REC.ADA",
+    "name": "Allowance for doubtful debts",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.REC.PRE",
+    "name": "Prepayments",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.REC.TRA",
+    "name": "Trade receivables",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.REL",
+    "name": "Related party receivables - current",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.TER",
+    "name": "Term deposits (current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.UDA",
+    "name": "User defined current asset",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.CUR.UDA.1",
+    "name": "User defined current asset 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.UDA.2",
+    "name": "User defined current asset 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.CUR.UDA.3",
+    "name": "User defined current asset 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA",
+    "name": "Non current assets",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.DIR",
+    "name": "Loans to directors (non-current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX",
+    "name": "Fixed assets",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.BUC",
+    "name": "Buildings at cost",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.BUC.ACC",
+    "name": "Accumulated depreciation of buildings",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.IMP",
+    "name": "Impairment of fixed assets",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.LAC",
+    "name": "Land at cost",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.LAC.REV",
+    "name": "Land revaluation",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.LEA",
+    "name": "Leasehold improvements at cost",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.LEA.ACC",
+    "name": "Accumulated amortisation of leasehold improvements",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.PLA",
+    "name": "Plant and equipment at cost",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.PLA.ACC",
+    "name": "Accumulated depreciation of plant and equipment",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.REV",
+    "name": "Buildings revaluation",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.VEH",
+    "name": "Vehicles at cost",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.FIX.VEH.ACC",
+    "name": "Accumulated depreciation of vehicles",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.INT",
+    "name": "Intangibles",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.INT.AMO",
+    "name": "Accumulated amortisation of intangibles",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.INT.DIS",
+    "name": "Distribution rights",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.INT.DIS.AMO",
+    "name": "Distribution rights amortisation",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.INT.DIS.IMP",
+    "name": "Distribution rights impairment",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.INT.GOO",
+    "name": "Goodwill",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.INT.GOO.IMP",
+    "name": "Goodwill impairment",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.INT.IMP",
+    "name": "Impairment of intangibles",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.INV",
+    "name": "Financial assets",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.INV.PRE",
+    "name": "Preference shares",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.INV.SHA",
+    "name": "Shares and debentures",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.INV.TER",
+    "name": "Term deposits",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.LOA",
+    "name": "Loan assets (non-current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.REA",
+    "name": "Research and development",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.REA.IMP",
+    "name": "Impairment of research and development",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.REL",
+    "name": "Related party receivables - non current",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.UDA",
+    "name": "User defined non current asset",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "ASS.NCA.UDA.1",
+    "name": "User defined non current asset 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.UDA.2",
+    "name": "User defined non current asset 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "ASS.NCA.UDA.3",
+    "name": "User defined non current asset 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU",
+    "name": "Equity/Proprietors' funds",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EQU.ADV",
+    "name": "Owners/Partners funds introduced",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EQU.ADV.1",
+    "name": "Owners/Partners funds introduced 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.ADV.10",
+    "name": "Owners/Partners funds introduced 10",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.ADV.2",
+    "name": "Owners/Partners funds introduced 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.ADV.3",
+    "name": "Owners/Partners funds introduced 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.ADV.4",
+    "name": "Owners/Partners funds introduced 4",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.ADV.5",
+    "name": "Owners/Partners funds introduced 5",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.ADV.6",
+    "name": "Owners/Partners funds introduced 6",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.ADV.7",
+    "name": "Owners/Partners funds introduced 7",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.ADV.8",
+    "name": "Owners/Partners funds introduced 8",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.ADV.9",
+    "name": "Owners/Partners funds introduced 9",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.DRA",
+    "name": "Owners/Partners drawings",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EQU.DRA.1",
+    "name": "Owners/Partners drawings 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.DRA.10",
+    "name": "Owners/Partners drawings 10",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.DRA.2",
+    "name": "Owners/Partners drawings 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.DRA.3",
+    "name": "Owners/Partners drawings 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.DRA.4",
+    "name": "Owners/Partners drawings 4",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.DRA.5",
+    "name": "Owners/Partners drawings 5",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.DRA.6",
+    "name": "Owners/Partners drawings 6",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.DRA.7",
+    "name": "Owners/Partners drawings 7",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.DRA.8",
+    "name": "Owners/Partners drawings 8",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.DRA.9",
+    "name": "Owners/Partners drawings 9",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.GIF",
+    "name": "Gifting",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.PFT",
+    "name": "Owners/partners profit distribution",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EQU.PFT.1",
+    "name": "Owners/partners profit distribution 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.PFT.10",
+    "name": "Owners/partners profit distribution 10",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.PFT.2",
+    "name": "Owners/partners profit distribution 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.PFT.3",
+    "name": "Owners/partners profit distribution 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.PFT.4",
+    "name": "Owners/partners profit distribution 4",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.PFT.5",
+    "name": "Owners/partners profit distribution 5",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.PFT.6",
+    "name": "Owners/partners profit distribution 6",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.PFT.7",
+    "name": "Owners/partners profit distribution 7",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.PFT.8",
+    "name": "Owners/partners profit distribution 8",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.PFT.9",
+    "name": "Owners/partners profit distribution 9",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.RES",
+    "name": "Reserves",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EQU.RES.FOR",
+    "name": "Foreign currency translation reserve",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.RES.LRR",
+    "name": "Livestock revaluation reserve",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.RES.REV",
+    "name": "Revaluation reserves",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.RET",
+    "name": "Retained earnings/Accumulated funds",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EQU.RET.CUR",
+    "name": "Current year earnings",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.RET.DIV",
+    "name": "Dividends paid reserve",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EQU.RET.DIV.ORD",
+    "name": "Dividends paid on ordinary shares",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.RET.DIV.PRE",
+    "name": "Dividends paid on preference shares",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.SET",
+    "name": "Settlement sum",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.SHA",
+    "name": "Share capital",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EQU.SHA.ORD",
+    "name": "Ordinary shares",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EQU.SHA.ORD.BUY",
+    "name": "Share buy-back (at nominal value)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.SHA.PRE",
+    "name": "Convertible redeemable preference shares",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.UDE",
+    "name": "User defined equity",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EQU.UDE.1",
+    "name": "User defined equity 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.UDE.2",
+    "name": "User defined equity 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EQU.UDE.3",
+    "name": "User defined equity 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP",
+    "name": "Expense",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.ADM",
+    "name": "Administrative expenses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.ADV",
+    "name": "Advertising & marketing",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.AMO",
+    "name": "Amortisation of intangibles expense",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.AUD",
+    "name": "Audit fees",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.BAD",
+    "name": "Bad debts",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.BAD.DOU",
+    "name": "Provision for doubtful debts",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.CFL",
+    "name": "Losses applied from prior periods",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS",
+    "name": "Cost of goods sold",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.COS.CLO",
+    "name": "Closing inventory",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.COS.CLO.FAR",
+    "name": "Closing livestock",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.COS.CLO.FAR.BEE",
+    "name": "Closing livestock - beef cattle",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.CLO.FAR.DAI",
+    "name": "Closing livestock - dairy cattle",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.CLO.FAR.DER",
+    "name": "Closing livestock - deer",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.CLO.FAR.GOA",
+    "name": "Closing livestock - goats",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.CLO.FAR.HRS",
+    "name": "Closing livestock - horses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.CLO.FAR.PIG",
+    "name": "Closing livestock - pigs",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.CLO.FAR.SHE",
+    "name": "Closing livestock - sheep",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.OPE",
+    "name": "Opening inventory",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.COS.OPE.FAR",
+    "name": "Opening livestock",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.COS.OPE.FAR.BEE",
+    "name": "Opening livestock - beef cattle",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.OPE.FAR.DAI",
+    "name": "Opening livestock - dairy cattle",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.OPE.FAR.DER",
+    "name": "Opening livestock - deer",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.OPE.FAR.GOA",
+    "name": "Opening livestock - goats",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.OPE.FAR.HRS",
+    "name": "Opening livestock - horses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.OPE.FAR.PIG",
+    "name": "Opening livestock - pigs",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.OPE.FAR.SHE",
+    "name": "Opening livestock - sheep",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.PUR",
+    "name": "Purchases",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.COS.PUR.FAR",
+    "name": "Direct costs - farming",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.COS.PUR.FAR.BEE",
+    "name": "Direct costs - beef cattle",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.PUR.FAR.DAI",
+    "name": "Direct costs - dairy cattle",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.PUR.FAR.DER",
+    "name": "Direct costs - deer",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.PUR.FAR.GOA",
+    "name": "Direct costs - goats",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.PUR.FAR.HOR",
+    "name": "Direct costs - horticultural produce",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.PUR.FAR.HRS",
+    "name": "Direct costs - horses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.PUR.FAR.MIL",
+    "name": "Direct costs - dairy produce / milk",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.PUR.FAR.PIG",
+    "name": "Direct costs - pigs",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.PUR.FAR.SHE",
+    "name": "Direct costs - sheep",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.PUR.FAR.WOO",
+    "name": "Direct costs - wool",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.WPC",
+    "name": "Closing WIP",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.COS.WPO",
+    "name": "Opening WIP",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.DEP",
+    "name": "Depreciation",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.DIS",
+    "name": "Distribution to beneficiary/partner",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.DIV",
+    "name": "Dividends paid expense",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.EMP",
+    "name": "Employment Costs",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.EMP.SHA",
+    "name": "Shareholder salaries",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.EMP.SUP",
+    "name": "Superannuation expenses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.EMP.WAG",
+    "name": "Wages and salaries",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.ENT",
+    "name": "Entertainment",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.ENT.NON",
+    "name": "Non deductible entertainment",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.EXT",
+    "name": "Non recurring items",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.FAR",
+    "name": "Farm expenses",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.FAR.ANI",
+    "name": "Animal health",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.FAR.CRO",
+    "name": "Cropping",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.FAR.FEE",
+    "name": "Feed",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.FAR.FER",
+    "name": "Fertiliser",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.FAR.PAS",
+    "name": "Pasture",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.FBT",
+    "name": "Fringe Benefit Tax",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.FOR",
+    "name": "Foreign currency gains/losses",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.FOR.RGL",
+    "name": "Realised foreign currency gains and losses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.FOR.UGL",
+    "name": "Unrealised foreign currency gains and losses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.IMP",
+    "name": "Impairment loss",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.INC",
+    "name": "Income tax expense",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.INS",
+    "name": "Insurance expenses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.INT",
+    "name": "Interest and finance charges",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.INV",
+    "name": "Investment expenses",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.INV.REN",
+    "name": "Rental investment expenses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.LOS",
+    "name": "Loss on disposal of property, plant and equipment",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.NON",
+    "name": "Other non deductible items",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.OCC",
+    "name": "Occupancy expense",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.OPR",
+    "name": "Operating expenses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.PRO",
+    "name": "Professional fees",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.REN",
+    "name": "Rental and lease payments",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.REN.OPE",
+    "name": "Operating lease payments",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.REP",
+    "name": "Repairs & maintenance",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.TRA",
+    "name": "Travel and accomodation",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.TRA.INT",
+    "name": "International travel and accomodation",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.TRA.NAT",
+    "name": "National travel and accommodation",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.UDE",
+    "name": "User defined expense",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "EXP.UDE.1",
+    "name": "User defined expense 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.UDE.2",
+    "name": "User defined expense 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.UDE.3",
+    "name": "User defined expense 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.UDE.4",
+    "name": "User defined expense 4",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.UDE.5",
+    "name": "User defined expense 5",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.UTI",
+    "name": "Utilities",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "EXP.VEH",
+    "name": "Vehicle expenses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA",
+    "name": "Liabilities",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.CUR",
+    "name": "Current Liabilities",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.CUR.CHM",
+    "name": "Chattel mortgage (Current)",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.CUR.CHM.UEI",
+    "name": "Chattel mortgage: Unexpired Interest (Current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.DEF",
+    "name": "Deferred income",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.CUR.DEF.GOV",
+    "name": "Deferred government grants income",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.DEF.LEA",
+    "name": "Deferred lease incentives",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.HPA",
+    "name": "Hire purchase (current)",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.CUR.HPA.UEI",
+    "name": "Hire purchase: unexpired interest (current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.LOA",
+    "name": "Loans (current)",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.CUR.LOA.DIR",
+    "name": "Loans from directors (current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.LOA.SEC",
+    "name": "Secured loans (current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.LOA.SET",
+    "name": "Loans from beneficiaries/settlors (current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.LOA.UNS",
+    "name": "Unsecured loans (current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.PAY",
+    "name": "Trade and other payables",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.CUR.PAY.DIV",
+    "name": "Dividends payable",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.PAY.EMP",
+    "name": "Employee entitlements (wages, annual leave, etc)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.PAY.PAY",
+    "name": "PAYG",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.PAY.TRA",
+    "name": "Trade payables",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.PRO",
+    "name": "Provisions",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.REL",
+    "name": "Related party payables - current",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.TAX",
+    "name": "Tax",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.CUR.TAX.DEF",
+    "name": "Deferred tax",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.TAX.GST",
+    "name": "Goods and services tax",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.TAX.INC",
+    "name": "Income Tax",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.CUR.TAX.INC.FRA",
+    "name": "Franking credits attached to dividends received",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.TAX.INC.IMP",
+    "name": "Imputation credits attached to dividends received",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.TAX.INC.OTH",
+    "name": "Other tax credits",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.TAX.INC.PAI",
+    "name": "Income tax paid",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.TAX.INC.REF",
+    "name": "Income tax refunded",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.TAX.INC.TAX",
+    "name": "Tax credits",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.TAX.INC.WTP",
+    "name": "Witholding tax paid",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.UDL",
+    "name": "User defined current liability",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.CUR.UDL.1",
+    "name": "User defined current liability 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.UDL.2",
+    "name": "User defined current liability 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.CUR.UDL.3",
+    "name": "User defined current liability 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL",
+    "name": "Non current liabilities",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.NCL.ADV",
+    "name": "Beneficiary/shareholder advance accounts",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.NCL.ADV.1",
+    "name": "Beneficiary/shareholder advance accounts 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.ADV.10",
+    "name": "Beneficiary/shareholder advance accounts 10",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.ADV.2",
+    "name": "Beneficiary/shareholder advance accounts 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.ADV.3",
+    "name": "Beneficiary/shareholder advance accounts 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.ADV.4",
+    "name": "Beneficiary/shareholder advance accounts 4",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.ADV.5",
+    "name": "Beneficiary/shareholder advance accounts 5",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.ADV.6",
+    "name": "Beneficiary/shareholder advance accounts 6",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.ADV.7",
+    "name": "Beneficiary/shareholder advance accounts 7",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.ADV.8",
+    "name": "Beneficiary/shareholder advance accounts 8",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.ADV.9",
+    "name": "Beneficiary/shareholder advance accounts 9",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.CHM",
+    "name": "Chattel mortgage (non-current)",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.NCL.CHM.UEI",
+    "name": "Chattel mortgage: less unexpired interest (non-current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.DRA",
+    "name": "Beneficiary/shareholder drawings",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.NCL.DRA.1",
+    "name": "Beneficiary/shareholder drawings 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.DRA.10",
+    "name": "Beneficiary/shareholder drawings 10",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.DRA.2",
+    "name": "Beneficiary/shareholder drawings 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.DRA.3",
+    "name": "Beneficiary/shareholder drawings 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.DRA.4",
+    "name": "Beneficiary/shareholder drawings 4",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.DRA.5",
+    "name": "Beneficiary/shareholder drawings 5",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.DRA.6",
+    "name": "Beneficiary/shareholder drawings 6",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.DRA.7",
+    "name": "Beneficiary/shareholder drawings 7",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.DRA.8",
+    "name": "Beneficiary/shareholder drawings 8",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.DRA.9",
+    "name": "Beneficiary/shareholder drawings 9",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.HPA",
+    "name": "Hire purchase (non-current)",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.NCL.HPA.UEI",
+    "name": "Hire purchase: unexpired interest (non-current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.LOA",
+    "name": "Loans (non current)",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.NCL.LOA.DIR",
+    "name": "Loans from directors (non current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.LOA.SEC",
+    "name": "Secured loans (non current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.LOA.SET",
+    "name": "Loans from beneficiaries/settlors (non current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.LOA.UNS",
+    "name": "Unsecured loans (non current)",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.PFT",
+    "name": "Beneficiary/shareholder profit distribution",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.NCL.PFT.1",
+    "name": "Beneficiary/shareholder profit distribution 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.PFT.10",
+    "name": "Beneficiary/shareholder profit distribution 10",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.PFT.2",
+    "name": "Beneficiary/shareholder profit distribution 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.PFT.3",
+    "name": "Beneficiary/shareholder profit distribution 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.PFT.4",
+    "name": "Beneficiary/shareholder profit distribution 4",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.PFT.5",
+    "name": "Beneficiary/shareholder profit distribution 5",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.PFT.6",
+    "name": "Beneficiary/shareholder profit distribution 6",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.PFT.7",
+    "name": "Beneficiary/shareholder profit distribution 7",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.PFT.8",
+    "name": "Beneficiary/shareholder profit distribution 8",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.PFT.9",
+    "name": "Beneficiary/shareholder profit distribution 9",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.REL",
+    "name": "Related party payables - non current",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.UDL",
+    "name": "User defined non current liability",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "LIA.NCL.UDL.1",
+    "name": "User defined non current liability 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.UDL.2",
+    "name": "User defined non current liability 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "LIA.NCL.UDL.3",
+    "name": "User defined non current liability 3",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV",
+    "name": "Revenue",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "REV.COM",
+    "name": "Comprehensive Income",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "REV.COM.CCF",
+    "name": "Net change in fair value of cashflow hedges taken to equity",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.COM.CFI",
+    "name": "Cashflow hedges transferred to inventory",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.COM.CFP",
+    "name": "Cashflow hedges transferred to profit and loss",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.COM.REV",
+    "name": "Gain/(loss) on revaluation of land and buildings",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.GRA",
+    "name": "Grants",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "REV.GRA.GOV",
+    "name": "Government grants",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.INV",
+    "name": "Investment revenue",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "REV.INV.DIV",
+    "name": "Dividends",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.INV.INT",
+    "name": "Interest",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.INV.REN",
+    "name": "Rents",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.NON",
+    "name": "Non-taxable income",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.OTH",
+    "name": "Other revenue",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "REV.OTH.CAP",
+    "name": "Capital gain on disposal of asset",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.OTH.COM",
+    "name": "Commissions",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.OTH.GAI",
+    "name": "Gain on disposal of property, plant & equipment",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.OTH.INV",
+    "name": "Gain on disposal of investments",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA",
+    "name": "Trading revenue",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "REV.TRA.FAR",
+    "name": "Farm income",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "REV.TRA.FAR.BEE",
+    "name": "Sale of beef cattle",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA.FAR.DAI",
+    "name": "Sale of dairy cattle",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA.FAR.DER",
+    "name": "Sale of deer",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA.FAR.GOA",
+    "name": "Sale of goats",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA.FAR.HOR",
+    "name": "Sale of horticultural produce",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA.FAR.HRS",
+    "name": "Sale of horses",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA.FAR.MIL",
+    "name": "Sale of dairy produce / milk",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA.FAR.PIG",
+    "name": "Sale of pigs",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA.FAR.SHE",
+    "name": "Sale of sheep",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA.FAR.WOO",
+    "name": "Sale of wool",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA.GOO",
+    "name": "Sale of goods",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.TRA.SER",
+    "name": "Services",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.UDR",
+    "name": "User defined revenue",
+    "isLeaf": false
+  },
+  {
+    "reportingCode": "REV.UDR.1",
+    "name": "User defined revenue 1",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.UDR.2",
+    "name": "User defined revenue 2",
+    "isLeaf": true
+  },
+  {
+    "reportingCode": "REV.UDR.3",
+    "name": "User defined revenue 3",
+    "isLeaf": true
+  }
+]
