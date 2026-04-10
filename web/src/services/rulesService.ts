@@ -16,10 +16,10 @@ const CACHE_KEY = 'rules_cache';
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 
 const RAW_URL =
-  'https://raw.githubusercontent.com/kylemd/xero-report-code-mapper/main/web/data/rules.json';
+  'https://raw.githubusercontent.com/kylemd/xero-rpt-cm/main/web/data/rules.json';
 
 const REPO_OWNER = 'kylemd';
-const REPO_NAME = 'xero-report-code-mapper';
+const REPO_NAME = 'xero-rpt-cm';
 const FILE_PATH = 'web/data/rules.json';
 
 // ---------------------------------------------------------------------------
