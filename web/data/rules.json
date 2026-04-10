@@ -1,0 +1,5068 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-10T01:37:52.469Z",
+  "dictionaries": {
+    "OWNER_KEYWORDS": [
+      "owner a",
+      "owner b",
+      "proprietor",
+      "drawings",
+      "capital contributed",
+      "funds introduced"
+    ],
+    "CREDIT_CARD_NAMES": [
+      "amplify",
+      "credit card",
+      "visa",
+      "mastercard",
+      "american express",
+      "amex"
+    ],
+    "AUSTRALIAN_BANKS": [
+      "commonwealth bank",
+      "cba",
+      "commbank",
+      "westpac",
+      "wbc",
+      "anz",
+      "nab",
+      "national australia bank",
+      "macquarie bank",
+      "macquarie",
+      "mqg",
+      "bendigo bank",
+      "bendigo",
+      "ben",
+      "suncorp",
+      "bank of queensland",
+      "boq",
+      "bankwest",
+      "bw",
+      "ing bank",
+      "ing direct",
+      "amp bank",
+      "amp",
+      "hsbc",
+      "citibank",
+      "citi",
+      "st george",
+      "stgeorge",
+      "stg",
+      "banksa",
+      "bsa",
+      "bank of melbourne",
+      "bom",
+      "me bank",
+      "ubank",
+      "rabobank",
+      "rabo",
+      "heritage bank",
+      "heritage",
+      "beyond bank",
+      "beyond",
+      "great southern bank",
+      "gsb",
+      "tyro",
+      "stripe",
+      "square"
+    ],
+    "VEHICLE_MAKES": [
+      "toyota",
+      "corolla",
+      "camry",
+      "rav4",
+      "yaris",
+      "prado",
+      "kluger",
+      "landcruiser",
+      "mazda",
+      "cx-5",
+      "cx-3",
+      "cx-9",
+      "mazda3",
+      "mazda2",
+      "bt-50",
+      "hyundai",
+      "i30",
+      "tucson",
+      "kona",
+      "santa fe",
+      "kia",
+      "sportage",
+      "cerato",
+      "seltos",
+      "carnival",
+      "tasman",
+      "ford",
+      "focus",
+      "mustang",
+      "escape",
+      "puma",
+      "volkswagen",
+      "vw",
+      "golf",
+      "polo",
+      "tiguan",
+      "t-roc",
+      "amarok",
+      "mercedes-benz",
+      "merc",
+      "c-class",
+      "e-class",
+      "glc",
+      "gle",
+      "a-class",
+      "bmw",
+      "3 series",
+      "x3",
+      "x5",
+      "1 series",
+      "audi",
+      "a3",
+      "a4",
+      "q5",
+      "q7",
+      "subaru",
+      "subi",
+      "forester",
+      "outback",
+      "xv",
+      "impreza",
+      "wrx",
+      "mitsubishi",
+      "mitsu",
+      "outlander",
+      "asx",
+      "eclipse cross",
+      "pajero",
+      "honda",
+      "cr-v",
+      "hr-v",
+      "civic",
+      "jazz",
+      "accord",
+      "nissan",
+      "x-trail",
+      "qashqai",
+      "patrol",
+      "juke",
+      "suzuki",
+      "vitara",
+      "swift",
+      "jimny",
+      "s-cross",
+      "baleno",
+      "jeep",
+      "wrangler",
+      "grand cherokee",
+      "compass",
+      "land rover",
+      "defender",
+      "discovery",
+      "range rover",
+      "lexus",
+      "rx",
+      "nx",
+      "ux",
+      "tesla",
+      "model 3",
+      "model y",
+      "peugeot",
+      "mg3",
+      "mg4",
+      "vespa",
+      "lwb",
+      "hilux",
+      "hiace",
+      "landcruiser 70",
+      "ranger",
+      "transit",
+      "transit custom",
+      "isuzu",
+      "d-max",
+      "mu-x",
+      "n-series",
+      "f-series",
+      "hino",
+      "mitsubishi fuso",
+      "fuso",
+      "canter",
+      "fighter",
+      "shogun",
+      "fiat",
+      "ducato",
+      "scudo",
+      "volvo trucks",
+      "kenworth",
+      "t610",
+      "t410",
+      "daf",
+      "cf",
+      "lf",
+      "xf",
+      "man",
+      "tgs",
+      "tgx",
+      "tge",
+      "scania",
+      "p-series",
+      "r-series",
+      "sprinter",
+      "actros",
+      "vito",
+      "iveco",
+      "daily",
+      "eurocargo",
+      "western star",
+      "4700",
+      "4800",
+      "ud trucks",
+      "quon",
+      "croner",
+      "mack",
+      "granite",
+      "anthem",
+      "freightliner",
+      "cascadia",
+      "coronado",
+      "foton",
+      "tunland",
+      "aumark",
+      "great wall",
+      "gwm",
+      "ute",
+      "cannon",
+      "ram"
+    ],
+    "AUSTRALIAN_LENDERS": [
+      "commonwealth bank",
+      "cba",
+      "westpac",
+      "wbc",
+      "anz",
+      "nab",
+      "macquarie",
+      "mqg",
+      "st george",
+      "stg",
+      "bankwest",
+      "bw",
+      "suncorp",
+      "pepper money",
+      "pepper",
+      "liberty",
+      "firstmac",
+      "resimac",
+      "la trobe",
+      "bluestone",
+      "think tank",
+      "bmm",
+      "prospa",
+      "judo",
+      "plenti",
+      "wisr",
+      "nmef",
+      "capital finance",
+      "angle finance",
+      "metro finance",
+      "rapid finance",
+      "cnhi",
+      "agco",
+      "dll",
+      "flexirent",
+      "humm",
+      "flexigroup",
+      "visa",
+      "mastercard",
+      "mc",
+      "american express",
+      "amex",
+      "diners club",
+      "diners",
+      "altitude",
+      "platinum",
+      "low rate",
+      "qantas money",
+      "coles",
+      "afterpay",
+      "toyota finance",
+      "tfs",
+      "nissan finance",
+      "nfs",
+      "ally",
+      "bmw financial",
+      "bmw fs",
+      "mbfs",
+      "vw finance",
+      "vw fs",
+      "stratton",
+      "motor finance wizard",
+      "mfw",
+      "loan market",
+      "mortgage choice",
+      "bizcap",
+      "quickfee"
+    ],
+    "VEHICLE_TOKENS": [
+      "mv",
+      "motor vehicle",
+      "car",
+      "truck",
+      "vehicle"
+    ],
+    "VEHICLE_EXPENSE_TOKENS": [
+      "fuel",
+      "petrol",
+      "oil",
+      "repairs",
+      "maintenance",
+      "repairs maintenance",
+      "servicing",
+      "insurance",
+      "ctp",
+      "green slip",
+      "rego",
+      "registration",
+      "parking",
+      "road tolls",
+      "tolls",
+      "washing",
+      "cleaning",
+      "expenses"
+    ],
+    "COMMON_FIRST_NAMES": [
+      "trent",
+      "john",
+      "mary",
+      "peter",
+      "sarah",
+      "david",
+      "michael",
+      "james",
+      "robert",
+      "jennifer",
+      "susan",
+      "william"
+    ],
+    "PAYROLL_KW": [
+      "payroll",
+      "wages payable",
+      "superannuation",
+      "payg",
+      "withholding"
+    ],
+    "BANK_NAMES": [
+      "commonwealth bank",
+      "cba",
+      "commbank",
+      "westpac",
+      "wbc",
+      "anz",
+      "nab",
+      "national australia bank",
+      "macquarie bank",
+      "macquarie",
+      "mqg",
+      "bendigo bank",
+      "bendigo",
+      "ben",
+      "suncorp",
+      "bank of queensland",
+      "boq",
+      "bankwest",
+      "bw",
+      "ing bank",
+      "ing direct",
+      "amp bank",
+      "amp",
+      "hsbc",
+      "citibank",
+      "citi",
+      "st george",
+      "stgeorge",
+      "stg",
+      "banksa",
+      "bsa",
+      "bank of melbourne",
+      "bom",
+      "me bank",
+      "ubank",
+      "rabobank",
+      "rabo",
+      "heritage bank",
+      "heritage",
+      "beyond bank",
+      "beyond",
+      "great southern bank",
+      "gsb",
+      "tyro",
+      "stripe",
+      "square"
+    ]
+  },
+  "industryAliases": {
+    "building": "construction",
+    "builder": "construction",
+    "construction": "construction",
+    "auto": "auto",
+    "automotive": "auto",
+    "auto dealer": "auto",
+    "motor dealer": "auto",
+    "car dealer": "auto",
+    "motor vehicle dealer": "auto"
+  },
+  "rules": [
+    {
+      "name": "bank_credit_card",
+      "code": "LIA.CUR.PAY",
+      "priority": 105,
+      "keywords": [
+        "$CREDIT_CARD_NAMES"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "bank"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Bank type account with credit card name -> current payable"
+    },
+    {
+      "name": "bank_petty_cash",
+      "code": "ASS.CUR.CAS.FLO",
+      "priority": 102,
+      "keywords": [
+        "petty cash"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "bank"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Bank type + petty cash -> cash flow asset (per SystemMappings.csv)"
+    },
+    {
+      "name": "bank_cc_abbreviation",
+      "code": "LIA.CUR.PAY",
+      "priority": 104,
+      "keywords": [
+        " cc"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "bank"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Bank account with 'CC' abbreviation (credit card) -> current payable. "
+    },
+    {
+      "name": "bank_default",
+      "code": "ASS.CUR.CAS.BAN",
+      "priority": 100,
+      "keywords": [],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "$CREDIT_CARD_NAMES",
+        " cc"
+      ],
+      "rawTypes": [
+        "bank"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Bank type account without credit card name -> bank account asset"
+    },
+    {
+      "name": "liability_credit_card",
+      "code": "LIA.CUR.PAY",
+      "priority": 100,
+      "keywords": [
+        "$CREDIT_CARD_NAMES"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current liability",
+        "liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Credit card name on a liability account -> current payable"
+    },
+    {
+      "name": "owner_drawings_company",
+      "code": "LIA.NCL.DRA",
+      "priority": 96,
+      "keywords": [
+        "drawings"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [
+        "equity"
+      ],
+      "template": "company",
+      "ownerContext": true,
+      "notes": "Owner keyword + 'drawings' on Company template -> liability drawings "
+    },
+    {
+      "name": "owner_drawings",
+      "code": "EQU.DRA",
+      "priority": 95,
+      "keywords": [
+        "drawings"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "ownerContext": true,
+      "notes": "Owner keyword + 'drawings' -> equity drawings (non-company fallback)"
+    },
+    {
+      "name": "owner_funds_introduced_company",
+      "code": "LIA.NCL.ADV",
+      "priority": 93,
+      "keywords": [
+        "capital contributed",
+        "funds introduced"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "share capital"
+      ],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [
+        "equity"
+      ],
+      "template": "company",
+      "ownerContext": true,
+      "notes": "Owner keyword + capital/funds + Company template -> NCL advance "
+    },
+    {
+      "name": "owner_funds_introduced_other",
+      "code": "EQU.ADV",
+      "priority": 92,
+      "keywords": [
+        "capital contributed",
+        "funds introduced"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "share capital"
+      ],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "ownerContext": true,
+      "notes": "Owner keyword + capital/funds + non-Company template -> equity advance. "
+    },
+    {
+      "name": "gross_receipts",
+      "code": "REV.TRA.SER",
+      "priority": 85,
+      "keywords": [
+        "gross receipts"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "revenue",
+        "income",
+        "other income"
+      ],
+      "typeExclude": [],
+      "notes": "Gross receipts for revenue types -> trading services"
+    },
+    {
+      "name": "covid_grant",
+      "code": "REV.NON",
+      "priority": 90,
+      "keywords": [],
+      "keywordsAll": [
+        "covid",
+        "grant"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Covid-related grants -> non-assessable income. "
+    },
+    {
+      "name": "jobkeeper",
+      "code": "REV.GRA.GOV",
+      "priority": 90,
+      "keywords": [
+        "jobkeeper",
+        "job keeper",
+        "jobsaver"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Government wage subsidies -> government grants"
+    },
+    {
+      "name": "cash_flow_boost",
+      "code": "REV.NON",
+      "priority": 90,
+      "keywords": [
+        "cash flow boost",
+        "cashflow boost",
+        "ato cash boost",
+        "cash boost",
+        "non assessable"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Government cash flow boost -> non-assessable income"
+    },
+    {
+      "name": "government_grant",
+      "code": "REV.GRA.GOV",
+      "priority": 80,
+      "keywords": [
+        "grant",
+        "government",
+        "service nsw"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "covid"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "other income",
+        "revenue",
+        "income"
+      ],
+      "typeExclude": [],
+      "notes": "Government grants/subsidies on revenue types. "
+    },
+    {
+      "name": "reimbursement_income",
+      "code": "REV.OTH",
+      "priority": 75,
+      "keywords": [
+        "reimburse",
+        "reimbursement"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "other income",
+        "revenue",
+        "income"
+      ],
+      "typeExclude": [],
+      "notes": "Reimbursements received -> other income"
+    },
+    {
+      "name": "workers_comp_recovery",
+      "code": "REV.OTH",
+      "priority": 78,
+      "keywords": [
+        "workers comp recovery",
+        "workcover recovery",
+        "workers compensation recovery"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "other income",
+        "revenue",
+        "income"
+      ],
+      "typeExclude": [],
+      "notes": "Workers comp recoveries -> other income"
+    },
+    {
+      "name": "fbt_reimbursement",
+      "code": "REV.OTH",
+      "priority": 78,
+      "keywords": [
+        "fbt contribution",
+        "fbt employee contribution",
+        "fbt reimbursement",
+        "fbt reimburse"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "other income",
+        "revenue",
+        "income"
+      ],
+      "typeExclude": [],
+      "notes": "FBT reimbursements/employee contributions -> other income. "
+    },
+    {
+      "name": "small_business_restructure_gain",
+      "code": "REV.OTH",
+      "priority": 78,
+      "keywords": [
+        "gain on small business restructure",
+        "small business restructure",
+        "small business restructuring"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "fund",
+        "reserve"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "other income",
+        "revenue",
+        "income"
+      ],
+      "typeExclude": [],
+      "notes": "Gain on small business restructure -> other income. "
+    },
+    {
+      "name": "sale_of_asset_gain",
+      "code": "REV.OTH.GAI",
+      "priority": 80,
+      "keywords": [
+        "sale of fixed asset",
+        "sale of asset",
+        "profit loss on sale of fixed asset"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [
+        "expense"
+      ],
+      "notes": "Profit/loss on sale of fixed asset -> other gains (not on expense type)"
+    },
+    {
+      "name": "sale_proceeds",
+      "code": "REV.OTH.INV",
+      "priority": 78,
+      "keywords": [
+        "sale proceeds",
+        "sale proceed"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "other income",
+        "revenue",
+        "income"
+      ],
+      "typeExclude": [],
+      "notes": "Investment sale proceeds -> other investment income"
+    },
+    {
+      "name": "product_income",
+      "code": "REV.TRA.GOO",
+      "priority": 85,
+      "keywords": [
+        "product income",
+        "sales of product"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "revenue",
+        "income"
+      ],
+      "typeExclude": [],
+      "notes": "Product income/sales of product -> trading goods revenue"
+    },
+    {
+      "name": "rental_income",
+      "code": "REV.INV.REN",
+      "priority": 80,
+      "keywords": [
+        "rental income",
+        "rental"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "parental"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "other income",
+        "revenue",
+        "income"
+      ],
+      "typeExclude": [],
+      "notes": "Rental income -> investment rental income. "
+    },
+    {
+      "name": "commission_income",
+      "code": "REV.OTH.COM",
+      "priority": 72,
+      "keywords": [
+        "commission"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "revenue",
+        "income",
+        "other income"
+      ],
+      "typeExclude": [],
+      "notes": "Commission income -> other income commissions."
+    },
+    {
+      "name": "surcharge_income",
+      "code": "REV.OTH",
+      "priority": 72,
+      "keywords": [
+        "surcharge"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "other income"
+      ],
+      "typeExclude": [],
+      "notes": "Surcharge income on Other Income type -> other income. "
+    },
+    {
+      "name": "rebates_refunds_income",
+      "code": "REV.OTH",
+      "priority": 68,
+      "keywords": [
+        "rebate",
+        "refund"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "deposit"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "revenue",
+        "income",
+        "other income"
+      ],
+      "typeExclude": [],
+      "notes": "Rebates/refunds on income type -> other income."
+    },
+    {
+      "name": "deposit_income",
+      "code": "REV.OTH",
+      "priority": 65,
+      "keywords": [
+        "deposit"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "revenue",
+        "income",
+        "other income"
+      ],
+      "typeExclude": [],
+      "notes": "Deposit income -> other income."
+    },
+    {
+      "name": "sale_of_business",
+      "code": "REV.OTH.INV",
+      "priority": 78,
+      "keywords": [
+        "sale of business"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [
+        "equity",
+        "current asset",
+        "non-current asset",
+        "fixed asset"
+      ],
+      "notes": "Sale of business -> gain on disposal of investments. "
+    },
+    {
+      "name": "wages_direct_cost",
+      "code": "EXP.COS",
+      "priority": 95,
+      "keywords": [
+        "wages",
+        "salary",
+        "salaries"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "direct costs",
+        "cost of sales",
+        "purchases"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Wages/salary under direct costs type -> COGS. "
+    },
+    {
+      "name": "wages_expense",
+      "code": "EXP.EMP.WAG",
+      "priority": 93,
+      "keywords": [
+        "wages",
+        "salary",
+        "salaries"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "non salary"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Wages/salary under expense type -> employee wages. "
+    },
+    {
+      "name": "super_direct_cost",
+      "code": "EXP.COS",
+      "priority": 93,
+      "keywords": [
+        "superannuation"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "payable"
+      ],
+      "rawTypes": [
+        "direct costs",
+        "cost of sales",
+        "purchases"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Superannuation under direct costs -> COGS"
+    },
+    {
+      "name": "super_expense",
+      "code": "EXP.EMP.SUP",
+      "priority": 91,
+      "keywords": [
+        "superannuation"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "payable"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Superannuation under expense -> employee super"
+    },
+    {
+      "name": "super_payable",
+      "code": "LIA.CUR.PAY.EMP",
+      "priority": 92,
+      "keywords": [
+        "superannuation"
+      ],
+      "keywordsAll": [
+        "superannuation",
+        "payable"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Superannuation payable -> employee payables liability"
+    },
+    {
+      "name": "super_payable_by_type",
+      "code": "LIA.CUR.PAY.EMP",
+      "priority": 92,
+      "keywords": [
+        "superannuation"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Superannuation under current liability type -> employee payables"
+    },
+    {
+      "name": "wages_payable",
+      "code": "LIA.CUR.PAY.EMP",
+      "priority": 95,
+      "keywords": [
+        "wages payable",
+        "paygw"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current liability",
+        "liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Wages payable/PAYGW -> employee payables liability. "
+    },
+    {
+      "name": "payroll_payable",
+      "code": "LIA.CUR.PAY.EMP",
+      "priority": 94,
+      "keywords": [],
+      "keywordsAll": [
+        "payroll",
+        "payable"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Payroll payable -> employee payables liability"
+    },
+    {
+      "name": "payg_instalment",
+      "code": "LIA.CUR.TAX.INC",
+      "priority": 95,
+      "keywords": [
+        "payg instalment",
+        "payg instalments",
+        "paygi"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "PAYG instalment / PAYGI (PAYG Income Tax Instalments) -> income tax liability. "
+    },
+    {
+      "name": "payg_withholding_payable",
+      "code": "LIA.CUR.PAY.EMP",
+      "priority": 95,
+      "keywords": [
+        "payg withholding",
+        "payg withholdings"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "PAYG Withholdings Payable -> employee payables. "
+    },
+    {
+      "name": "payroll_clearing",
+      "code": "LIA.CUR.PAY.EMP",
+      "priority": 94,
+      "keywords": [
+        "payroll clearing"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Payroll clearing accounts represent employee entitlements"
+    },
+    {
+      "name": "leave_payable",
+      "code": "LIA.CUR.PAY.EMP",
+      "priority": 93,
+      "keywords": [
+        "leave"
+      ],
+      "keywordsAll": [
+        "payable"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Leave payable (annual, long service, Q leave, TOIL) is employee entitlement"
+    },
+    {
+      "name": "employee_provision",
+      "code": "LIA.CUR.PAY.EMP",
+      "priority": 93,
+      "keywords": [
+        "salary",
+        "wages",
+        "toil",
+        "annual leave",
+        "long service"
+      ],
+      "keywordsAll": [
+        "provision"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Provisions for employee-related items are employee entitlements"
+    },
+    {
+      "name": "payroll_tax_payable",
+      "code": "LIA.CUR.TAX",
+      "priority": 96,
+      "keywords": [
+        "payroll tax"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Payroll tax payable is a tax liability, NOT an employee entitlement. "
+    },
+    {
+      "name": "payroll_tax_expense",
+      "code": "EXP.EMP",
+      "priority": 85,
+      "keywords": [
+        "payroll tax"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Payroll tax expense correlates with employee remuneration but is not "
+    },
+    {
+      "name": "sgc_payable",
+      "code": "LIA.CUR.TAX",
+      "priority": 93,
+      "keywords": [
+        "sgc",
+        "scg",
+        "superannuation guarantee"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "sge",
+        "employer"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "SGC (Superannuation Guarantee Charge) -> tax liability. "
+    },
+    {
+      "name": "sge_employer_payable",
+      "code": "LIA.CUR.PAY.EMP",
+      "priority": 94,
+      "keywords": [
+        "sge",
+        "super guarantee employer",
+        "superannuation guarantee employer"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "SGE (Super Guarantee Employer) -> employee payables liability. "
+    },
+    {
+      "name": "green_slip",
+      "code": "EXP.VEH",
+      "priority": 70,
+      "keywords": [
+        "green slip"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Green slip (CTP insurance) -> vehicle expenses"
+    },
+    {
+      "name": "mv_fuel",
+      "code": "EXP.VEH",
+      "priority": 72,
+      "keywords": [],
+      "keywordsAll": [
+        "mv",
+        "fuel"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "MV fuel -> vehicle expenses"
+    },
+    {
+      "name": "motor_vehicle_fuel",
+      "code": "EXP.VEH",
+      "priority": 72,
+      "keywords": [],
+      "keywordsAll": [
+        "motor vehicle",
+        "fuel"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Motor vehicle fuel -> vehicle expenses"
+    },
+    {
+      "name": "vehicle_fuel",
+      "code": "EXP.VEH",
+      "priority": 72,
+      "keywords": [],
+      "keywordsAll": [
+        "vehicle",
+        "fuel"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Vehicle fuel -> vehicle expenses"
+    },
+    {
+      "name": "mv_interest",
+      "code": "EXP.VEH",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "mv",
+        "interest"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "MV interest -> vehicle expenses"
+    },
+    {
+      "name": "motor_vehicle_interest",
+      "code": "EXP.VEH",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "motor vehicle",
+        "interest"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Motor vehicle interest -> vehicle expenses"
+    },
+    {
+      "name": "vehicle_interest",
+      "code": "EXP.VEH",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "vehicle",
+        "interest"
+      ],
+      "keywordsExclude": [
+        "unexpired"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Vehicle interest -> vehicle expenses (excludes UEI)"
+    },
+    {
+      "name": "motor_vehicle_insurance",
+      "code": "EXP.VEH",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "motor vehicle",
+        "insurance"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Motor vehicle insurance -> vehicle expenses"
+    },
+    {
+      "name": "vehicle_insurance",
+      "code": "EXP.VEH",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "vehicle",
+        "insurance"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Vehicle insurance -> vehicle expenses"
+    },
+    {
+      "name": "mv_insurance",
+      "code": "EXP.VEH",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "mv",
+        "insurance"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "MV insurance -> vehicle expenses. "
+    },
+    {
+      "name": "registration_insurance",
+      "code": "EXP.VEH",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "registration",
+        "insurance"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Registration and insurance -> vehicle expenses. "
+    },
+    {
+      "name": "vehicle_rego",
+      "code": "EXP.VEH",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "vehicle",
+        "registration"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Vehicle registration -> vehicle expenses"
+    },
+    {
+      "name": "motor_vehicle_rego",
+      "code": "EXP.VEH",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "motor vehicle",
+        "registration"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Motor vehicle registration -> vehicle expenses"
+    },
+    {
+      "name": "mv_expenses",
+      "code": "EXP.VEH",
+      "priority": 72,
+      "keywords": [],
+      "keywordsAll": [
+        "mv",
+        "expenses"
+      ],
+      "keywordsExclude": [
+        "depreciation",
+        "deprec",
+        "accumulated"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "MV expenses (excluding depreciation) -> vehicle expenses"
+    },
+    {
+      "name": "motor_vehicle_expenses",
+      "code": "EXP.VEH",
+      "priority": 72,
+      "keywords": [
+        "motor vehicle expenses",
+        "motor vehicle running"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "depreciation",
+        "deprec",
+        "accumulated"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Motor vehicle expenses -> vehicle expenses"
+    },
+    {
+      "name": "trailer_expense",
+      "code": "EXP.VEH",
+      "priority": 70,
+      "keywords": [
+        "trailer"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Trailer expenses -> vehicle expenses"
+    },
+    {
+      "name": "director_loan_to_ca",
+      "code": "ASS.CUR.DIR",
+      "priority": 96,
+      "keywords": [
+        "loan to director",
+        "loans to director",
+        "loans to directors",
+        "to director",
+        "to directors",
+        "director s loan"
+      ],
+      "keywordsAll": [
+        "loan"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current asset",
+        "asset"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Loan TO director on current asset -> current director loan. "
+    },
+    {
+      "name": "director_loan_to",
+      "code": "ASS.NCA.DIR",
+      "priority": 95,
+      "keywords": [
+        "loan to director",
+        "loans to director",
+        "loans to directors",
+        "to director",
+        "to directors"
+      ],
+      "keywordsAll": [
+        "loan"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Loan TO director (fallback) -> non-current director loan asset"
+    },
+    {
+      "name": "director_loan_generic_nca",
+      "code": "ASS.NCA.DIR",
+      "priority": 95,
+      "keywords": [],
+      "keywordsAll": [
+        "director",
+        "loan"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "non-current liability",
+        "non current liability",
+        "current liability",
+        "liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Director loan on liability type -> reclassify as NCA director loan. "
+    },
+    {
+      "name": "director_loan_generic_ca",
+      "code": "ASS.CUR.DIR",
+      "priority": 94,
+      "keywords": [],
+      "keywordsAll": [
+        "director",
+        "loan"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current asset",
+        "asset"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Director loan on current asset type -> current director loan. "
+    },
+    {
+      "name": "div7a_loan_nca",
+      "code": "ASS.NCA.DIR",
+      "priority": 97,
+      "keywords": [
+        "div7a",
+        "div 7a",
+        "division 7a"
+      ],
+      "keywordsAll": [
+        "loan"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "non-current asset",
+        "non current asset",
+        "asset",
+        "current asset",
+        "non-current liability",
+        "non current liability",
+        "current liability",
+        "liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Division 7A loan -> non-current director loan asset. "
+    },
+    {
+      "name": "div7a_loan_ca",
+      "code": "ASS.CUR.DIR",
+      "priority": 98,
+      "keywords": [
+        "div7a",
+        "div 7a",
+        "division 7a"
+      ],
+      "keywordsAll": [
+        "loan"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current asset",
+        "asset"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Division 7A loan on current asset type -> current director loan. "
+    },
+    {
+      "name": "directors_loan_from",
+      "code": "LIA.NCL.LOA",
+      "priority": 80,
+      "keywords": [
+        "director's loan",
+        "directors loan",
+        "director s loan"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "to director"
+      ],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Director's loan (FROM director) -> non-current loan liability. "
+    },
+    {
+      "name": "loan_to_pty",
+      "code": "ASS.NCA.REL",
+      "priority": 90,
+      "keywords": [
+        "pty",
+        "pty ltd",
+        "pty limited"
+      ],
+      "keywordsAll": [
+        "loan"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "non-current asset",
+        "non current asset",
+        "current asset",
+        "asset"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Audit fix: Loan + pty on ASSET type -> related party asset. "
+    },
+    {
+      "name": "loan_from_pty",
+      "code": "LIA.NCL.REL",
+      "priority": 90,
+      "keywords": [
+        "pty",
+        "pty ltd",
+        "pty limited"
+      ],
+      "keywordsAll": [
+        "loan"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "non-current liability",
+        "non current liability",
+        "current liability",
+        "liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Audit fix: Loan + pty on LIABILITY type -> related party liability"
+    },
+    {
+      "name": "upe_asset",
+      "code": "ASS.CUR.REL",
+      "priority": 88,
+      "keywords": [
+        "upe",
+        "unpaid present entitlement"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current asset",
+        "non-current asset",
+        "non current asset",
+        "asset"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "UPE (Unpaid Present Entitlement) -> current related party receivable. "
+    },
+    {
+      "name": "trust_distribution_receivable",
+      "code": "ASS.CUR.REL",
+      "priority": 85,
+      "keywords": [
+        "trust distribution receivable",
+        "distribution receivable",
+        "trust distribution payable receivable"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current asset",
+        "asset"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Trust distribution receivable -> related party current asset. "
+    },
+    {
+      "name": "unsecured_related_loan",
+      "code": "LIA.CUR.REL",
+      "priority": 78,
+      "keywords": [],
+      "keywordsAll": [
+        "loan",
+        "unsecured"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current liability",
+        "non-current liability",
+        "non current liability",
+        "liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Unsecured loans on liability type -> current related party liability. "
+    },
+    {
+      "name": "related_party_nca",
+      "code": "ASS.NCA.REL",
+      "priority": 85,
+      "keywords": [
+        "related party"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "non-current asset",
+        "non current asset"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Explicit 'related party' on NCA type -> related party NCA. "
+    },
+    {
+      "name": "related_party_ca",
+      "code": "ASS.CUR.REL",
+      "priority": 85,
+      "keywords": [
+        "related party"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current asset",
+        "asset"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Explicit 'related party' on current asset type -> related party CA."
+    },
+    {
+      "name": "vehicle_loan",
+      "code": "LIA.NCL.HPA",
+      "priority": 88,
+      "keywords": [
+        "motor vehicle",
+        "car"
+      ],
+      "keywordsAll": [
+        "loan"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Vehicle loan -> hire purchase liability (non-current)"
+    },
+    {
+      "name": "hp_interest_expense",
+      "code": "EXP.INT",
+      "priority": 87,
+      "keywords": [
+        "hire purchase",
+        "hp",
+        "chattel mortgage"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "HP/chattel mortgage on expense type -> interest expense"
+    },
+    {
+      "name": "hp_uei_current",
+      "code": "LIA.CUR.HPA.UEI",
+      "priority": 86,
+      "keywords": [
+        "hire purchase",
+        "hp"
+      ],
+      "keywordsAll": [
+        "int"
+      ],
+      "keywordsExclude": [
+        "unexpired"
+      ],
+      "rawTypes": [
+        "current liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "HP + interest/int abbreviation on current liability -> current UEI. "
+    },
+    {
+      "name": "hp_current",
+      "code": "LIA.CUR.HPA",
+      "priority": 85,
+      "keywords": [
+        "hire purchase",
+        "hp"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "unexpired",
+        "interest",
+        " int"
+      ],
+      "rawTypes": [
+        "current liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Hire purchase on current liability -> current HPA. "
+    },
+    {
+      "name": "hp_non_current",
+      "code": "LIA.NCL.HPA",
+      "priority": 85,
+      "keywords": [
+        "hire purchase",
+        "hp"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "unexpired",
+        "interest"
+      ],
+      "rawTypes": [
+        "non-current liability",
+        "non current liability",
+        "liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Hire purchase on non-current/generic liability -> non-current HPA"
+    },
+    {
+      "name": "hp_fallback",
+      "code": "LIA.NCL.HPA",
+      "priority": 80,
+      "keywords": [
+        "hire purchase",
+        "hp"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "unexpired",
+        "interest"
+      ],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [
+        "expense"
+      ],
+      "notes": "Hire purchase fallback -> non-current HPA (excludes expense type)"
+    },
+    {
+      "name": "chattel_mortgage",
+      "code": "LIA.NCL.CHM",
+      "priority": 85,
+      "keywords": [
+        "chattel mortgage"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "unexpired",
+        "interest"
+      ],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [
+        "expense"
+      ],
+      "notes": "Chattel mortgage -> non-current chattel mortgage. "
+    },
+    {
+      "name": "chattel_mortgage_uei",
+      "code": "LIA.NCL.CHM.UEI",
+      "priority": 89,
+      "keywords": [
+        "chattel mortgage"
+      ],
+      "keywordsAll": [
+        "unexpired"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Chattel mortgage + unexpired interest -> chattel mortgage UEI. "
+    },
+    {
+      "name": "uei_non_current",
+      "code": "LIA.NCL.HPA.UEI",
+      "priority": 88,
+      "keywords": [
+        "unexpired interest"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Unexpired interest -> non-current UEI (HP fallback). "
+    },
+    {
+      "name": "premium_funding",
+      "code": "LIA.CUR.LOA.UNS",
+      "priority": 80,
+      "keywords": [
+        "premium funding",
+        "iqumulate",
+        "gallagher"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current liability",
+        "liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Premium funding (insurance financing) -> unsecured current loan"
+    },
+    {
+      "name": "generic_loan_ncl",
+      "code": "LIA.NCL.LOA",
+      "priority": 60,
+      "keywords": [
+        "loan"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "non-current liability",
+        "non current liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Generic loan on non-current liability -> non-current loan"
+    },
+    {
+      "name": "generic_loan_cl",
+      "code": "LIA.NCL.LOA",
+      "priority": 60,
+      "keywords": [
+        "loan"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current liability",
+        "liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Generic loan on current/generic liability -> non-current loan "
+    },
+    {
+      "name": "generic_loan_nca",
+      "code": "ASS.NCA.LOA",
+      "priority": 60,
+      "keywords": [
+        "loan"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "non-current asset",
+        "non current asset"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Generic loan on non-current asset -> NCA loan. "
+    },
+    {
+      "name": "generic_loan_ca",
+      "code": "ASS.CUR.REL",
+      "priority": 60,
+      "keywords": [
+        "loan"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current asset",
+        "asset"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Generic loan on current asset -> related party CA"
+    },
+    {
+      "name": "vehicle_make_finance_liability",
+      "code": "LIA.NCL.HPA",
+      "priority": 78,
+      "keywords": [
+        "$VEHICLE_MAKES"
+      ],
+      "keywordsAll": [
+        "finance"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "non-current liability",
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Vehicle make + finance -> hire purchase liability"
+    },
+    {
+      "name": "vehicle_make_loan_liability",
+      "code": "LIA.NCL.HPA",
+      "priority": 78,
+      "keywords": [
+        "$VEHICLE_MAKES"
+      ],
+      "keywordsAll": [
+        "loan"
+      ],
+      "keywordsExclude": [
+        "$AUSTRALIAN_BANKS"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "non-current liability",
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Vehicle make + loan -> hire purchase liability. "
+    },
+    {
+      "name": "vehicle_make_only_liability",
+      "code": "LIA.NCL.HPA",
+      "priority": 77,
+      "keywords": [
+        "$VEHICLE_MAKES"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "$AUSTRALIAN_BANKS",
+        "$AUSTRALIAN_LENDERS",
+        "balloon",
+        "ballon",
+        "revenue",
+        "income"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "non-current liability",
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Vehicle make on liability (no 'loan'/'finance' keyword required) -> hire purchase. "
+    },
+    {
+      "name": "lender_liability",
+      "code": "LIA.NCL.LOA",
+      "priority": 72,
+      "keywords": [
+        "$AUSTRALIAN_LENDERS"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "fee",
+        "charge",
+        "interest expense",
+        "car",
+        "motor vehicle",
+        "vehicle",
+        "mv"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "non-current liability",
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Recognised Australian lender name -> loan liability. "
+    },
+    {
+      "name": "gst_liability",
+      "code": "LIA.CUR.TAX.GST",
+      "priority": 85,
+      "keywords": [
+        "gst",
+        "goods and services tax"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "fee",
+        "fees",
+        "stripe",
+        "bank",
+        "pre paid",
+        "prepaid"
+      ],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [
+        "expense"
+      ],
+      "notes": "GST (not on expense accounts, not fees, not prepaid) -> GST tax liability"
+    },
+    {
+      "name": "bas_payable",
+      "code": "LIA.CUR.TAX",
+      "priority": 83,
+      "keywords": [
+        "bas payable"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "BAS payable -> tax liability"
+    },
+    {
+      "name": "bas_clearing",
+      "code": "LIA.CUR.TAX",
+      "priority": 83,
+      "keywords": [
+        "bas clearing"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "BAS clearing account -> tax liability"
+    },
+    {
+      "name": "fbt_expense",
+      "code": "EXP.FBT",
+      "priority": 80,
+      "keywords": [
+        "fringe benefit tax",
+        "fbt expense",
+        "fbt payable"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "reimbursement",
+        "reimburse"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Fringe benefit tax expense -> EXP.FBT. SystemMappings leaf code. "
+    },
+    {
+      "name": "income_tax_expense",
+      "code": "EXP.INC",
+      "priority": 80,
+      "keywords": [
+        "income tax expense",
+        "income tax",
+        "deferred tax expense"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "withholding",
+        "payg"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Income tax expense -> EXP.INC. SystemMappings leaf code. "
+    },
+    {
+      "name": "accrued_income_liability",
+      "code": "LIA.CUR.DEF",
+      "priority": 80,
+      "keywords": [
+        "accrued income"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "current liability",
+        "liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Accrued income on liability type -> deferred income"
+    },
+    {
+      "name": "deferred_income",
+      "code": "LIA.CUR.DEF",
+      "priority": 78,
+      "keywords": [
+        "deferred income",
+        "deferred revenue",
+        "unearned revenue",
+        "income in advance",
+        "advance billing"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Deferred/unearned income -> LIA.CUR.DEF. SystemMappings leaf code. "
+    },
+    {
+      "name": "ato_integrated_account",
+      "code": "LIA.CUR.TAX",
+      "priority": 90,
+      "keywords": [
+        "ato integrated"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "ATO ICA is a mixed tax account (PAYG, GST, FTC) — assign to tax parent. "
+    },
+    {
+      "name": "income_tax_instalments",
+      "code": "LIA.CUR.TAX.INC",
+      "priority": 85,
+      "keywords": [
+        "income tax instalment",
+        "tax instalment"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Income tax instalments -> income tax liability. "
+    },
+    {
+      "name": "ato_payable_ica",
+      "code": "LIA.CUR.TAX",
+      "priority": 85,
+      "keywords": [
+        "ato payable",
+        "ato ica",
+        "integrated client"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "ATO payable / ICA -> tax liability."
+    },
+    {
+      "name": "ato_income_tax_liability",
+      "code": "LIA.CUR.TAX.INC",
+      "priority": 85,
+      "keywords": [
+        "ato income tax",
+        "income tax account"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "ATO income tax / income tax account -> income tax liability."
+    },
+    {
+      "name": "unlodged_bas",
+      "code": "LIA.CUR.TAX",
+      "priority": 80,
+      "keywords": [
+        "unlodged bas"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Unlodged BAS -> tax liability."
+    },
+    {
+      "name": "directors_fees_expense",
+      "code": "EXP",
+      "priority": 82,
+      "keywords": [
+        "director fee",
+        "director fees",
+        "directors fees",
+        "trustee fee",
+        "trustee fees"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Directors/trustee fees -> general expense. SystemMappings "
+    },
+    {
+      "name": "closing_stock",
+      "code": "EXP.COS.CLO",
+      "priority": 78,
+      "keywords": [
+        "closing"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense",
+        "direct costs"
+      ],
+      "typeExclude": [],
+      "notes": "Closing stock/materials -> cost of sales closing. "
+    },
+    {
+      "name": "materials_purchase",
+      "code": "EXP.COS.PUR",
+      "priority": 75,
+      "keywords": [
+        "materials",
+        "building materials"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "closing"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense",
+        "direct costs"
+      ],
+      "typeExclude": [],
+      "notes": "Materials/building materials -> cost of purchases (excludes closing stock)"
+    },
+    {
+      "name": "borrowing_expense_interest",
+      "code": "EXP.INT",
+      "priority": 82,
+      "keywords": [
+        "borrowing expenses",
+        "borrowing expense",
+        "borrowing costs"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Borrowing expenses/costs on expense account -> interest expense. "
+    },
+    {
+      "name": "amortisation",
+      "code": "EXP.AMO",
+      "priority": 75,
+      "keywords": [
+        "amortis"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Amortisation expense"
+    },
+    {
+      "name": "subcontractor_direct",
+      "code": "EXP.COS",
+      "priority": 78,
+      "keywords": [
+        "subtrades",
+        "subcontract"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "direct costs",
+        "cost of sales",
+        "purchases"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Subcontractor under direct costs -> COGS"
+    },
+    {
+      "name": "subcontractor_expense",
+      "code": "EXP.OPR",
+      "priority": 72,
+      "keywords": [
+        "subtrades",
+        "subcontract"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Subcontractor under expense type -> operating expense (production-related)."
+    },
+    {
+      "name": "contractor_expense",
+      "code": "EXP.OPR",
+      "priority": 72,
+      "keywords": [
+        "contractor",
+        "contractors",
+        "contract work"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "subtrade",
+        "subcontract",
+        "sub contractor"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Contractor payments -> operating expense. Subcontractors handled by subcontractor_expense."
+    },
+    {
+      "name": "labour_hire_direct",
+      "code": "EXP.COS",
+      "priority": 78,
+      "keywords": [
+        "labour hire"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "direct costs",
+        "cost of sales",
+        "purchases"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Labour hire under direct costs -> COGS"
+    },
+    {
+      "name": "training_education",
+      "code": "EXP.EMP",
+      "priority": 72,
+      "keywords": [
+        "education",
+        "training",
+        "conference",
+        "cpd"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Training/education/conference -> employee expenses"
+    },
+    {
+      "name": "uniforms_clothing",
+      "code": "EXP.EMP",
+      "priority": 72,
+      "keywords": [
+        "uniform",
+        "clothing",
+        "protective clothing"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Uniforms/clothing -> employee expenses"
+    },
+    {
+      "name": "employee_reimbursement",
+      "code": "EXP.EMP",
+      "priority": 72,
+      "keywords": [
+        "employee reimbursement",
+        "staff reimbursement"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Employee reimbursement expense -> EXP.EMP. "
+    },
+    {
+      "name": "car_hire_expense",
+      "code": "EXP.VEH",
+      "priority": 72,
+      "keywords": [],
+      "keywordsAll": [
+        "car",
+        "hire"
+      ],
+      "keywordsExclude": [
+        "purchase"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Car hire -> vehicle expenses"
+    },
+    {
+      "name": "equipment_hire_direct",
+      "code": "EXP.COS",
+      "priority": 75,
+      "keywords": [
+        "hire"
+      ],
+      "keywordsAll": [
+        "hire"
+      ],
+      "keywordsExclude": [
+        "purchase",
+        "labour"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "direct costs"
+      ],
+      "typeExclude": [],
+      "notes": "Equipment/plant hire under direct costs -> COGS. "
+    },
+    {
+      "name": "equipment_hire_expense",
+      "code": "EXP",
+      "priority": 68,
+      "keywords": [],
+      "keywordsAll": [
+        "hire"
+      ],
+      "keywordsExclude": [
+        "purchase",
+        "labour",
+        "car"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Equipment hire under expense -> general expense (excludes car hire)"
+    },
+    {
+      "name": "home_warranty",
+      "code": "EXP.COS",
+      "priority": 78,
+      "keywords": [
+        "home warranty"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Home warranty insurance -> cost of sales (construction)"
+    },
+    {
+      "name": "tools_misc_direct",
+      "code": "EXP.COS.PUR",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "tools",
+        "miscellaneous"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "direct costs",
+        "cost of sales",
+        "purchases"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Tools and miscellaneous under direct costs -> COGS purchases"
+    },
+    {
+      "name": "donations",
+      "code": "EXP",
+      "priority": 65,
+      "keywords": [
+        "donation",
+        "charity"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Donations/charity -> general expense"
+    },
+    {
+      "name": "advertising",
+      "code": "EXP.ADV",
+      "priority": 72,
+      "keywords": [
+        "advertising",
+        "marketing",
+        "sponsorship"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Advertising/marketing/sponsorship -> advertising expense. "
+    },
+    {
+      "name": "branding",
+      "code": "EXP.ADV",
+      "priority": 72,
+      "keywords": [
+        "rebrand",
+        "re-brand",
+        "rebranding",
+        "branding",
+        "brand"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Branding/rebranding -> advertising expense"
+    },
+    {
+      "name": "gifts",
+      "code": "EXP",
+      "priority": 68,
+      "keywords": [
+        "gift",
+        "gifts"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Gifts/donations -> general expense (not advertising)"
+    },
+    {
+      "name": "professional_fees",
+      "code": "EXP.PRO",
+      "priority": 72,
+      "keywords": [
+        "accounting",
+        "accountancy",
+        "bookkeeping",
+        "consulting",
+        "legal"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Professional fees: accounting, accountancy, bookkeeping, consulting, legal. "
+    },
+    {
+      "name": "audit_fees",
+      "code": "EXP.AUD",
+      "priority": 75,
+      "keywords": [
+        "auditor",
+        "audit fee"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Audit fees/remuneration -> audit expense"
+    },
+    {
+      "name": "workers_comp_insurance",
+      "code": "EXP.EMP",
+      "priority": 78,
+      "keywords": [
+        "workers compensation",
+        "workcover",
+        "workers cover",
+        "workers comp"
+      ],
+      "keywordsAll": [
+        "insurance"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Workers comp + insurance -> employee expenses"
+    },
+    {
+      "name": "car_insurance",
+      "code": "EXP.VEH",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "car",
+        "insurance"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Car insurance -> vehicle expense (not general insurance). "
+    },
+    {
+      "name": "general_insurance",
+      "code": "EXP.INS",
+      "priority": 70,
+      "keywords": [
+        "insurance"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "General insurance -> insurance expense"
+    },
+    {
+      "name": "phone_internet",
+      "code": "EXP.UTI",
+      "priority": 72,
+      "keywords": [
+        "phone",
+        "mobile",
+        "telephone",
+        "internet"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Phone/mobile/internet -> utilities"
+    },
+    {
+      "name": "power_heating",
+      "code": "EXP.UTI",
+      "priority": 72,
+      "keywords": [
+        "light",
+        "power",
+        "electricity",
+        "gas",
+        "heating"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "flight",
+        "flights",
+        "highlight",
+        "spotlight"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Light/power/electricity/gas -> utilities. "
+    },
+    {
+      "name": "filing_fees",
+      "code": "EXP.ADM",
+      "priority": 73,
+      "keywords": [
+        "filing fee",
+        "filing fees",
+        "filling fee",
+        "filling fees",
+        "asic"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Filing fees (ASIC regulatory fee) -> admin expense. "
+    },
+    {
+      "name": "subscription_expense",
+      "code": "EXP.ADM",
+      "priority": 72,
+      "keywords": [
+        "subscription",
+        "subscriptions",
+        "dues"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Subscriptions and dues -> administrative expense. "
+    },
+    {
+      "name": "formation_expense",
+      "code": "EXP.AMO",
+      "priority": 72,
+      "keywords": [
+        "formation expense",
+        "formation cost",
+        "incorporation"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "written off",
+        "writtenoff",
+        "write off"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Formation/incorporation expenses -> amortisation expense (EXP.AMO). "
+    },
+    {
+      "name": "office_admin",
+      "code": "EXP.ADM",
+      "priority": 70,
+      "keywords": [
+        "office expenses",
+        "printing",
+        "stationery",
+        "postage"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Office expenses/printing/stationery/postage -> admin"
+    },
+    {
+      "name": "council_rates",
+      "code": "EXP.OCC",
+      "priority": 72,
+      "keywords": [
+        "rate",
+        "rates",
+        "fee",
+        "fees"
+      ],
+      "keywordsAll": [
+        "council"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Council rates/fees -> occupancy"
+    },
+    {
+      "name": "staff_amenities",
+      "code": "EXP.EMP",
+      "priority": 72,
+      "keywords": [
+        "staff amenities",
+        "amenities",
+        "amenties"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Staff amenities -> employee expenses. "
+    },
+    {
+      "name": "staff_training",
+      "code": "EXP.EMP",
+      "priority": 73,
+      "keywords": [
+        "staff training"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Staff training -> employee expenses"
+    },
+    {
+      "name": "bank_fees",
+      "code": "EXP",
+      "priority": 65,
+      "keywords": [
+        "$BANK_NAMES"
+      ],
+      "keywordsAll": [
+        "fee"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Bank name + fee -> general expense"
+    },
+    {
+      "name": "merchant_fees",
+      "code": "EXP",
+      "priority": 65,
+      "keywords": [],
+      "keywordsAll": [
+        "merchant",
+        "fee"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Merchant fees -> general expense"
+    },
+    {
+      "name": "cleaning",
+      "code": "EXP.OCC",
+      "priority": 65,
+      "keywords": [
+        "cleaning",
+        "cleaner",
+        "laundry"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "vehicle",
+        "car",
+        "mv",
+        "motor vehicle"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Cleaning/laundry/cleaner -> occupancy expense (excludes vehicle washing)"
+    },
+    {
+      "name": "depreciation_expense",
+      "code": "EXP.DEP",
+      "priority": 72,
+      "keywords": [
+        "depreciation",
+        "deprec"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "accumulated"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Depreciation expense (excludes accumulated dep)"
+    },
+    {
+      "name": "travel_international",
+      "code": "EXP.TRA.INT",
+      "priority": 75,
+      "keywords": [],
+      "keywordsAll": [
+        "travel",
+        "international"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "International travel -> international travel expense"
+    },
+    {
+      "name": "travel_domestic",
+      "code": "EXP.TRA.NAT",
+      "priority": 73,
+      "keywords": [
+        "travel",
+        "accommodation"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "international"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Domestic travel/accommodation (not international) -> national travel. "
+    },
+    {
+      "name": "work_safety",
+      "code": "EXP.EMP",
+      "priority": 72,
+      "keywords": [
+        "work safety",
+        "safety"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Work safety -> employee expenses"
+    },
+    {
+      "name": "long_service_leave",
+      "code": "EXP.EMP",
+      "priority": 72,
+      "keywords": [
+        "long service leave",
+        "long service"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Long service leave expense -> employee expenses. "
+    },
+    {
+      "name": "qleave_expense",
+      "code": "EXP.EMP",
+      "priority": 73,
+      "keywords": [
+        "qleave",
+        "q leave"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "QLeave (Queensland Long Service Leave) -> employee expenses. "
+    },
+    {
+      "name": "client_gift_advertising",
+      "code": "EXP.ADV",
+      "priority": 75,
+      "keywords": [
+        "client gift",
+        "client gifts"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Client gifts -> advertising/marketing. "
+    },
+    {
+      "name": "lead_generation_advertising",
+      "code": "EXP.ADV",
+      "priority": 75,
+      "keywords": [
+        "lead gen",
+        "lead generation",
+        "lead generating"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Lead generation -> advertising/marketing expense. "
+    },
+    {
+      "name": "graphic_design_advertising",
+      "code": "EXP.ADV",
+      "priority": 75,
+      "keywords": [
+        "graphic design",
+        "graphics design",
+        "graphic designer",
+        "graphic design expense",
+        "graphics"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "software",
+        "subscription"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Graphic design -> advertising/marketing expense. "
+    },
+    {
+      "name": "recruitment_employee",
+      "code": "EXP.EMP",
+      "priority": 75,
+      "keywords": [
+        "recruitment",
+        "recruiting",
+        "recruiter"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "advertising"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Recruitment costs -> employee expenses. "
+    },
+    {
+      "name": "fines_penalties",
+      "code": "EXP.NON",
+      "priority": 72,
+      "keywords": [
+        "fine",
+        "fines",
+        "penalty",
+        "penalties"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Fines/penalties -> non-deductible expense"
+    },
+    {
+      "name": "cost_of_sales_name",
+      "code": "EXP.COS",
+      "priority": 78,
+      "keywords": [
+        "cost of sales"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense",
+        "direct costs"
+      ],
+      "typeExclude": [],
+      "notes": "Cost of Sales in name -> COGS. Per user decision: type=Direct Costs "
+    },
+    {
+      "name": "cos_abbreviation",
+      "code": "EXP.COS",
+      "priority": 76,
+      "keywords": [
+        "- cos",
+        "-cos"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "cost"
+      ],
+      "rawTypes": [
+        "direct costs",
+        "cost of sales",
+        "purchases"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "COS abbreviation after dash on direct costs type -> COGS. "
+    },
+    {
+      "name": "cost_of_goods_sold",
+      "code": "EXP.COS",
+      "priority": 60,
+      "keywords": [
+        "cost of goods sold"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Cost of goods sold -> COGS (catch-all)"
+    },
+    {
+      "name": "cost_of_sales_type",
+      "code": "EXP.COS",
+      "priority": 55,
+      "keywords": [],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "cost of sales"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Cost of sales type catch-all -> COGS"
+    },
+    {
+      "name": "rent_expense",
+      "code": "EXP.REN",
+      "priority": 72,
+      "keywords": [
+        " rent"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "hire",
+        "truck",
+        "vehicle",
+        "plant",
+        "equipment"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Rent expense. Uses ' rent' (leading space) to avoid false positives on "
+    },
+    {
+      "name": "tax_adjustment_expense",
+      "code": "EXP.EXT",
+      "priority": 75,
+      "keywords": [
+        "tax adjustment"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Tax adjustment expense is an extraordinary item — journal to reconcile "
+    },
+    {
+      "name": "ato_interest_expense",
+      "code": "EXP.INT",
+      "priority": 82,
+      "keywords": [
+        "interest"
+      ],
+      "keywordsAll": [
+        "ato"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "ATO interest charges -> interest expense. "
+    },
+    {
+      "name": "interest_expense",
+      "code": "EXP.INT",
+      "priority": 80,
+      "keywords": [
+        "interest expense"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Interest expense -> interest expense"
+    },
+    {
+      "name": "client_entertainment",
+      "code": "EXP.ENT",
+      "priority": 78,
+      "keywords": [
+        "client meeting",
+        "client meetings",
+        "client meal",
+        "meal entertainment"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Client meetings/meals -> entertainment"
+    },
+    {
+      "name": "entertainment_non_deductible",
+      "code": "EXP.ENT.NON",
+      "priority": 82,
+      "keywords": [
+        "not deductible",
+        "non deductible",
+        "non-deductible",
+        "not-deductible"
+      ],
+      "keywordsAll": [
+        "entertainment"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Entertainment + non-deductible -> non-deductible entertainment"
+    },
+    {
+      "name": "entertainment_default",
+      "code": "EXP.ENT.NON",
+      "priority": 73,
+      "keywords": [
+        "entertainment"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "client meeting",
+        "client meal",
+        "meal entertainment",
+        "not deductible",
+        "non deductible",
+        "meals"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Entertainment (generic) -> non-deductible by default. "
+    },
+    {
+      "name": "doubtful_debt_provision",
+      "code": "EXP.BAD.DOU",
+      "priority": 78,
+      "keywords": [
+        "provision for doubtful",
+        "provision for bad",
+        "doubtful debt provision"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Provision for doubtful debts -> EXP.BAD.DOU. SystemMappings "
+    },
+    {
+      "name": "bad_debts",
+      "code": "EXP.BAD",
+      "priority": 78,
+      "keywords": [
+        "bad debt"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Bad debt expense"
+    },
+    {
+      "name": "operating_expense",
+      "code": "EXP.OPR",
+      "priority": 65,
+      "keywords": [
+        "operating expense",
+        "operating expenses",
+        "operational expense"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Operating expenses -> EXP.OPR. SystemMappings leaf code for "
+    },
+    {
+      "name": "bank_charges",
+      "code": "EXP",
+      "priority": 68,
+      "keywords": [
+        "bank fee",
+        "bank fees",
+        "bank charges",
+        "bank charge"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Generic bank fees/charges -> general expense. "
+    },
+    {
+      "name": "consultancy_fees",
+      "code": "EXP.PRO",
+      "priority": 72,
+      "keywords": [
+        "consultancy",
+        "consultant"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "bookkeeping",
+        "accounting"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Consultancy/consultant -> professional fees. "
+    },
+    {
+      "name": "management_fees",
+      "code": "EXP.PRO",
+      "priority": 72,
+      "keywords": [
+        "management fee",
+        "management fees"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Management fees -> professional fees."
+    },
+    {
+      "name": "collection_expense",
+      "code": "EXP.PRO",
+      "priority": 72,
+      "keywords": [
+        "collection cost",
+        "collection costs",
+        "debt collection",
+        "collection fee",
+        "collection fees"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Collection/debt recovery costs -> professional fees. "
+    },
+    {
+      "name": "delivery_freight",
+      "code": "EXP.COS",
+      "priority": 72,
+      "keywords": [
+        "delivery cost",
+        "delivery costs",
+        "freight",
+        "cartage"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Delivery/freight/cartage -> cost of sales. "
+    },
+    {
+      "name": "discount_allowed",
+      "code": "EXP.COS",
+      "priority": 65,
+      "keywords": [
+        "discount allowed",
+        "discounts allowed"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Discount allowed -> cost of sales (customer discounts reduce revenue)."
+    },
+    {
+      "name": "instant_asset_writeoff",
+      "code": "EXP.DEP",
+      "priority": 78,
+      "keywords": [
+        "immediately write off",
+        "instant write off",
+        "instant asset",
+        "low value asset",
+        "low value pool",
+        "assets <$20,000",
+        "assets under $20,000",
+        "assets below $20,000",
+        "assets <$20000",
+        "assets under $20000"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense",
+        "depreciation"
+      ],
+      "typeExclude": [],
+      "notes": "Instant asset write-off -> depreciation expense. "
+    },
+    {
+      "name": "asset_woff_writeoff",
+      "code": "EXP.DEP",
+      "priority": 77,
+      "keywords": [
+        "woff",
+        "write off",
+        "writeoff"
+      ],
+      "keywordsAll": [
+        "asset"
+      ],
+      "keywordsExclude": [
+        "depreciation",
+        "deprec",
+        "accumulated",
+        "sale"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense",
+        "depreciation"
+      ],
+      "typeExclude": [],
+      "notes": "Asset + write-off abbreviation -> depreciation expense. "
+    },
+    {
+      "name": "leasing_expense",
+      "code": "EXP.REN.OPE",
+      "priority": 72,
+      "keywords": [
+        "leasing",
+        "lease charge",
+        "lease charges",
+        "lease payment",
+        "lease payments"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "leasehold"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Leasing charges/payments -> operating lease payments. "
+    },
+    {
+      "name": "license_permit_expense",
+      "code": "EXP.ADM",
+      "priority": 72,
+      "keywords": [
+        "licence",
+        "license",
+        "licencing",
+        "licensing",
+        "permit"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "driver",
+        "driving"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Licences/permits on expense -> administrative expense. "
+    },
+    {
+      "name": "employment_expense_other",
+      "code": "EXP.EMP",
+      "priority": 65,
+      "keywords": [
+        "employment expense",
+        "other employment"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Other/general employment expense -> employment costs."
+    },
+    {
+      "name": "security_expense",
+      "code": "EXP.OCC",
+      "priority": 72,
+      "keywords": [
+        "security"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "bond",
+        "deposit"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Security costs -> occupancy expense. "
+    },
+    {
+      "name": "storage_expense",
+      "code": "EXP.REN",
+      "priority": 68,
+      "keywords": [
+        "storage"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Storage fees -> rental/lease. Renting storage space is a lease expense."
+    },
+    {
+      "name": "tool_replacement",
+      "code": "EXP.REP",
+      "priority": 72,
+      "keywords": [
+        "tool replacement",
+        "replacement tool"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Tool replacements -> repairs & maintenance. "
+    },
+    {
+      "name": "water_sewerage",
+      "code": "EXP.UTI",
+      "priority": 72,
+      "keywords": [
+        "water",
+        "sewerage",
+        "sewage"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "waterproof"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Water/sewerage -> utilities. SystemMappings EXP.UTI includes 'Water'."
+    },
+    {
+      "name": "ato_administration_fee",
+      "code": "EXP.NON",
+      "priority": 80,
+      "keywords": [
+        "administration fee",
+        "admin fee",
+        "administrations fee"
+      ],
+      "keywordsAll": [
+        "ato"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "ATO administration fee -> non-deductible expense. "
+    },
+    {
+      "name": "administration_fee",
+      "code": "EXP.ADM",
+      "priority": 73,
+      "keywords": [
+        "administration fee",
+        "admin fee",
+        "administrations fee"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Administration fees -> administrative expense."
+    },
+    {
+      "name": "data_processing_expense",
+      "code": "EXP.ADM",
+      "priority": 68,
+      "keywords": [
+        "data processing"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Data processing charges -> administrative expense."
+    },
+    {
+      "name": "magazines_periodicals",
+      "code": "EXP.ADM",
+      "priority": 65,
+      "keywords": [
+        "magazine",
+        "magazines",
+        "periodical",
+        "periodicals"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Magazines/periodicals -> administrative expense."
+    },
+    {
+      "name": "parking_expense",
+      "code": "EXP.VEH",
+      "priority": 68,
+      "keywords": [
+        "parking"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "airport"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Parking -> vehicle expense. "
+    },
+    {
+      "name": "dividends_equity",
+      "code": "EQU.RET.DIV.ORD",
+      "priority": 80,
+      "keywords": [
+        "dividend"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "equity"
+      ],
+      "typeExclude": [],
+      "notes": "Dividend on equity type -> ordinary dividends from retained earnings. "
+    },
+    {
+      "name": "dividend_payable_expense",
+      "code": "EXP.DIV",
+      "priority": 80,
+      "keywords": [
+        "dividend paid or payable",
+        "dividends paid or payable"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Dividend paid/payable on expense -> dividend expense"
+    },
+    {
+      "name": "dividend_payable_by_keyword",
+      "code": "EXP.DIV",
+      "priority": 78,
+      "keywords": [],
+      "keywordsAll": [
+        "dividend",
+        "payable"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense"
+      ],
+      "typeExclude": [],
+      "notes": "Dividend + payable on expense -> dividend expense"
+    },
+    {
+      "name": "stock_movement_expense",
+      "code": "EXP.COS",
+      "priority": 72,
+      "keywords": [
+        "stock movement",
+        "stock adjust"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Stock movement/adjustment -> cost of sales."
+    },
+    {
+      "name": "cogs_prefix",
+      "code": "EXP.COS",
+      "priority": 75,
+      "keywords": [
+        "cogs",
+        "cost of goods"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "cost of goods sold"
+      ],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "COGS / cost of goods (not 'cost of goods sold') -> cost of sales."
+    },
+    {
+      "name": "cost_of_goods_sold_specific",
+      "code": "EXP.COS.PUR",
+      "priority": 78,
+      "keywords": [
+        "cost of goods sold"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Cost of goods sold (specific) -> purchases."
+    },
+    {
+      "name": "shareholder_salaries",
+      "code": "EXP.EMP.SHA",
+      "priority": 95,
+      "keywords": [
+        "shareholder salar",
+        "shareholder wage"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Shareholder salaries/wages -> shareholder salaries."
+    },
+    {
+      "name": "bank_revaluation_forex",
+      "code": "EXP.FOR",
+      "priority": 78,
+      "keywords": [
+        "bank revaluation",
+        "bank revaluations",
+        "fx revaluation",
+        "currency revaluation",
+        "foreign currency gain",
+        "foreign currency loss",
+        "foreign exchange gain",
+        "foreign exchange loss",
+        "realised forex",
+        "unrealised forex",
+        "realised foreign currency",
+        "unrealised foreign currency"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense",
+        "direct costs"
+      ],
+      "typeExclude": [],
+      "notes": "Bank/currency revaluations and forex gains/losses -> EXP.FOR. "
+    },
+    {
+      "name": "forex_other_income",
+      "code": "REV.OTH",
+      "priority": 78,
+      "keywords": [
+        "foreign currency gain",
+        "foreign currency loss",
+        "foreign exchange gain",
+        "foreign exchange loss",
+        "realised forex",
+        "unrealised forex",
+        "realised foreign currency",
+        "unrealised foreign currency",
+        "fx gain",
+        "fx loss"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "other income",
+        "revenue",
+        "income"
+      ],
+      "typeExclude": [],
+      "notes": "Forex gains/losses on income-typed accounts -> other income. "
+    },
+    {
+      "name": "share_capital_equity",
+      "code": "EQU.SHA.ORD",
+      "priority": 90,
+      "keywords": [
+        "share capital"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "equity"
+      ],
+      "typeExclude": [],
+      "notes": "Share capital on equity -> ordinary shares. "
+    },
+    {
+      "name": "ordinary_shares",
+      "code": "EQU.SHA.ORD",
+      "priority": 85,
+      "keywords": [
+        "ordinary shares"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Ordinary shares -> equity shares"
+    },
+    {
+      "name": "paid_up_capital",
+      "code": "EQU.SHA.ORD",
+      "priority": 83,
+      "keywords": [
+        "paid up capital"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Issued/paid up capital -> equity ordinary shares"
+    },
+    {
+      "name": "fully_part_paid_shares",
+      "code": "EQU.SHA.ORD",
+      "priority": 83,
+      "keywords": [
+        "fully paid shares",
+        "partly paid shares",
+        "part paid shares",
+        "fully paid ordinary",
+        "partly paid ordinary",
+        "fully/part paid shares"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "equity"
+      ],
+      "typeExclude": [],
+      "notes": "Fully/partly paid shares -> ordinary share capital. "
+    },
+    {
+      "name": "issued_paid_capital",
+      "code": "EQU.SHA.ORD",
+      "priority": 83,
+      "keywords": [],
+      "keywordsAll": [
+        "issued",
+        "paid",
+        "capital"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Issued and paid capital -> equity ordinary shares"
+    },
+    {
+      "name": "shares_asset",
+      "code": "ASS.NCA.INV.SHA",
+      "priority": 80,
+      "keywords": [
+        "shares"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "asset",
+        "current asset",
+        "non-current asset",
+        "non current asset"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Shares on asset accounts -> investment shares"
+    },
+    {
+      "name": "retained_earnings_type",
+      "code": "EQU.RET",
+      "priority": 85,
+      "keywords": [],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "retained earnings"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Retained Earnings type -> equity retained earnings"
+    },
+    {
+      "name": "retained_earnings_keyword",
+      "code": "EQU.RET",
+      "priority": 80,
+      "keywords": [
+        "profit",
+        "earnings"
+      ],
+      "keywordsAll": [
+        "retained"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "'Retained' + 'profit' or 'earnings' -> equity retained earnings. "
+    },
+    {
+      "name": "accumulated_losses",
+      "code": "EQU.RET",
+      "priority": 80,
+      "keywords": [],
+      "keywordsAll": [
+        "accumulated",
+        "loss"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Accumulated losses -> equity retained earnings"
+    },
+    {
+      "name": "asset_revaluation_reserve",
+      "code": "EQU.RES.REV",
+      "priority": 80,
+      "keywords": [
+        "revaluation reserve",
+        "asset revaluation"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "equity"
+      ],
+      "typeExclude": [],
+      "notes": "Asset revaluation reserve -> equity revaluation reserve. "
+    },
+    {
+      "name": "small_business_restructuring_reserve",
+      "code": "EQU.RES",
+      "priority": 80,
+      "keywords": [
+        "small business restructuring fund",
+        "restructuring fund",
+        "restructure fund",
+        "solvency reserve"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "equity"
+      ],
+      "typeExclude": [],
+      "notes": "Small Business Restructuring fund -> general reserves. "
+    },
+    {
+      "name": "historical_adjustment_equity",
+      "code": "EQU.RET",
+      "priority": 78,
+      "keywords": [
+        "historical adjustment"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "equity",
+        "current liability",
+        "liability",
+        "historical"
+      ],
+      "typeExclude": [],
+      "notes": "Historical adjustments relate to prior-year adjustments and represent "
+    },
+    {
+      "name": "tax_adjustment_reserve",
+      "code": "EQU.RET",
+      "priority": 78,
+      "keywords": [
+        "tax adjustment reserve",
+        "tax adjustment"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "equity"
+      ],
+      "typeExclude": [],
+      "notes": "Tax adjustment reserve impacts retained earnings. The journal reconciling "
+    },
+    {
+      "name": "opening_balance_equity",
+      "code": "EQU.RET",
+      "priority": 78,
+      "keywords": [
+        "opening balance"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "equity"
+      ],
+      "typeExclude": [],
+      "notes": "Opening balance equity -> retained earnings. SystemMappings "
+    },
+    {
+      "name": "cash_on_hand",
+      "code": "ASS.CUR.CAS.FLO",
+      "priority": 78,
+      "keywords": [
+        "cash on hand",
+        "petty cash",
+        "undeposited funds"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Cash/petty cash/undeposited funds -> cash flow asset. "
+    },
+    {
+      "name": "rental_bonds_held",
+      "code": "LIA.CUR.PAY",
+      "priority": 82,
+      "keywords": [
+        "rental bond",
+        "rental bonds",
+        "security bond",
+        "security bonds"
+      ],
+      "keywordsAll": [
+        "held"
+      ],
+      "keywordsExclude": [
+        "expense",
+        "cost",
+        "income"
+      ],
+      "rawTypes": [
+        "current liability",
+        "current asset",
+        "asset",
+        "liability"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Rental bonds HELD -> current payable liability. "
+    },
+    {
+      "name": "sundry_debtors",
+      "code": "ASS.CUR.REC",
+      "priority": 75,
+      "keywords": [
+        "sundry debtor"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Sundry debtors/debtor -> current receivables (not trade). "
+    },
+    {
+      "name": "retentions_receivable",
+      "code": "ASS.CUR.REC",
+      "priority": 75,
+      "keywords": [
+        "retention receivable",
+        "retentions receivable"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Retentions receivable -> current receivables"
+    },
+    {
+      "name": "retention_debtor",
+      "code": "ASS.CUR.REC",
+      "priority": 73,
+      "keywords": [
+        "receiv",
+        "debtor"
+      ],
+      "keywordsAll": [
+        "retention"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Retention + receivable/debtor -> current receivables"
+    },
+    {
+      "name": "trade_creditors",
+      "code": "LIA.CUR.PAY.TRA",
+      "priority": 90,
+      "keywords": [
+        "trade creditor"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Trade creditors/payables -> trade payables"
+    },
+    {
+      "name": "sundry_creditors",
+      "code": "LIA.CUR.PAY",
+      "priority": 85,
+      "keywords": [
+        "sundry creditor"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "trade",
+        "ato",
+        "fbt",
+        "tax"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "Sundry creditors -> payables (not trade). "
+    },
+    {
+      "name": "fees_payable",
+      "code": "LIA.CUR.PAY",
+      "priority": 75,
+      "keywords": [
+        "fees payable",
+        "fee payable"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "ato",
+        "tax",
+        "fbt"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "'Fees Payable' (e.g. Accounting Fees Payable) -> current payable. "
+    },
+    {
+      "name": "other_creditors",
+      "code": "LIA.CUR.PAY",
+      "priority": 72,
+      "keywords": [
+        "other creditors",
+        "other creditor"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current liability",
+        "liability"
+      ],
+      "typeExclude": [],
+      "notes": "'Other Creditors' -> current payable."
+    },
+    {
+      "name": "furniture_fittings_asset",
+      "code": "ASS.NCA.FIX.PLA",
+      "priority": 78,
+      "keywords": [
+        "furniture",
+        "fittings"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "depreciation",
+        "accumulated",
+        "deprec",
+        "accum"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "fixed asset"
+      ],
+      "typeExclude": [],
+      "notes": "Furniture & fittings -> plant & equipment fixed assets. "
+    },
+    {
+      "name": "ppe_asset",
+      "code": "ASS.NCA.FIX.PLA",
+      "priority": 78,
+      "keywords": [
+        "plant & equipment",
+        "plant and equipment",
+        "property plant"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "depreciation",
+        "accumulated",
+        "deprec",
+        "accum"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "fixed asset"
+      ],
+      "typeExclude": [],
+      "notes": "Property, Plant & Equipment -> fixed assets plant. "
+    },
+    {
+      "name": "motor_vehicle_fixed_asset",
+      "code": "ASS.NCA.FIX.VEH",
+      "priority": 80,
+      "keywords": [
+        "motor vehicle",
+        "mv"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "depreciation",
+        "accumulated",
+        "deprec",
+        "accum",
+        "car limit",
+        "over limit"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "fixed asset"
+      ],
+      "typeExclude": [],
+      "notes": "Motor vehicle fixed assets -> vehicle assets. "
+    },
+    {
+      "name": "inventory_asset",
+      "code": "ASS.CUR.INY",
+      "priority": 80,
+      "keywords": [
+        "inventory"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "inventory"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Inventory type accounts -> inventory assets"
+    },
+    {
+      "name": "preliminary_expenses",
+      "code": "ASS.NCA",
+      "priority": 75,
+      "keywords": [
+        "preliminary expenses"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Preliminary expenses -> non-current asset"
+    },
+    {
+      "name": "term_deposit_nca",
+      "code": "ASS.NCA.INV.TER",
+      "priority": 78,
+      "keywords": [
+        "term deposit"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "non-current asset"
+      ],
+      "typeExclude": [],
+      "notes": "Term deposit on non-current asset -> ASS.NCA.INV.TER. "
+    },
+    {
+      "name": "term_deposit_ca",
+      "code": "ASS.CUR.TER",
+      "priority": 78,
+      "keywords": [
+        "term deposit"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "rental bond",
+        "bond"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "current asset",
+        "asset"
+      ],
+      "typeExclude": [],
+      "notes": "Term deposit on current asset -> ASS.CUR.TER. "
+    },
+    {
+      "name": "intangible_asset_keywords",
+      "code": "ASS.NCA.INT",
+      "priority": 72,
+      "keywords": [
+        "franchise",
+        "website",
+        "customer list",
+        "branding",
+        "patent",
+        "trademark",
+        "copyright",
+        "licence",
+        "license"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "accumulated",
+        "amortis",
+        "depreciation",
+        "deprec",
+        "accum"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "non-current asset",
+        "fixed asset"
+      ],
+      "typeExclude": [],
+      "notes": "Intangible asset keywords -> ASS.NCA.INT. SystemMappings "
+    },
+    {
+      "name": "prepaid_asset",
+      "code": "ASS.CUR.REC.PRE",
+      "priority": 72,
+      "keywords": [
+        "pre paid",
+        "prepaid",
+        "prepayment"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "stock",
+        "interest"
+      ],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Prepaid/prepayment -> current prepaid receivable. "
+    },
+    {
+      "name": "wipaa_cost",
+      "code": "EXP.COS",
+      "priority": 78,
+      "keywords": [
+        "wipaa"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [
+        "direct costs",
+        "cost of sales",
+        "purchases",
+        "expense",
+        "operating expense",
+        "operating expenses"
+      ],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "WIPAA under P&L types -> cost of sales"
+    },
+    {
+      "name": "wipaa_asset",
+      "code": "ASS.CUR.INY.WIP",
+      "priority": 75,
+      "keywords": [
+        "wipaa"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "WIPAA on balance sheet -> WIP inventory asset. "
+    },
+    {
+      "name": "stock_on_hand",
+      "code": "ASS.CUR.INY",
+      "priority": 78,
+      "keywords": [
+        "stock on hand",
+        "stock in hand"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "current asset",
+        "inventory"
+      ],
+      "typeExclude": [],
+      "notes": "Stock on hand -> inventory asset."
+    },
+    {
+      "name": "stock_asset_general",
+      "code": "ASS.CUR.INY",
+      "priority": 65,
+      "keywords": [
+        "stock"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "closing",
+        "opening",
+        "movement",
+        "adjust",
+        "depreciation",
+        "prepaid",
+        "transit"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "current asset",
+        "inventory"
+      ],
+      "typeExclude": [],
+      "notes": "General 'stock' on asset type -> inventory. "
+    },
+    {
+      "name": "formation_costs_asset",
+      "code": "ASS.NCA.INT",
+      "priority": 78,
+      "keywords": [
+        "formation cost",
+        "formation costs",
+        "formation expense",
+        "formation expenses",
+        "incorporation cost",
+        "incorporation costs",
+        "establishment cost",
+        "establishment costs"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "less",
+        "written off",
+        "write off",
+        "amortis"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "non-current asset",
+        "fixed asset"
+      ],
+      "typeExclude": [],
+      "notes": "Formation/incorporation/establishment costs on NCA -> intangibles. "
+    },
+    {
+      "name": "formation_costs_written_off",
+      "code": "ASS.NCA.INT.AMO",
+      "priority": 89,
+      "keywords": [
+        "formation cost",
+        "formation costs",
+        "formation expense",
+        "formation expenses",
+        "incorporation cost",
+        "establishment cost"
+      ],
+      "keywordsAll": [
+        "less"
+      ],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "non-current asset",
+        "fixed asset",
+        "asset"
+      ],
+      "typeExclude": [],
+      "notes": "'Formation Costs - Less Written Off' -> accumulated amortisation of intangibles "
+    },
+    {
+      "name": "general_pool_asset",
+      "code": "ASS.NCA.FIX",
+      "priority": 78,
+      "keywords": [
+        "general pool",
+        "sbe pool",
+        "small business pool"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "accumulated",
+        "deprec",
+        "amort",
+        "accum"
+      ],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "General pool / SBE pool -> fixed assets. "
+    },
+    {
+      "name": "investment_asset_generic",
+      "code": "ASS.NCA.INV",
+      "priority": 68,
+      "keywords": [
+        "investment"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "property",
+        "shares",
+        "unit trust",
+        "managed fund"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "non-current asset"
+      ],
+      "typeExclude": [],
+      "notes": "Generic 'investment' on NCA type -> financial assets. "
+    },
+    {
+      "name": "goodwill_asset",
+      "code": "ASS.NCA.INT.GOO",
+      "priority": 80,
+      "keywords": [
+        "goodwill"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "accumulated",
+        "amortis",
+        "deprec",
+        "accum",
+        "sale of business"
+      ],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [
+        "equity",
+        "revenue",
+        "income",
+        "other income",
+        "expense"
+      ],
+      "notes": "Goodwill -> intangible goodwill. "
+    },
+    {
+      "name": "construction_revenue_services",
+      "code": "REV.TRA.SER",
+      "priority": 82,
+      "keywords": [
+        "revenue",
+        "income",
+        "sales",
+        "fees",
+        "receipts"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "revenue",
+        "income",
+        "other income",
+        "sales"
+      ],
+      "typeExclude": [],
+      "notes": "Construction: all revenue is trading services.",
+      "industries": [
+        "construction"
+      ]
+    },
+    {
+      "name": "construction_subcontractors_cos",
+      "code": "EXP.COS",
+      "priority": 82,
+      "keywords": [
+        "subcontract"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [],
+      "typeExclude": [],
+      "notes": "Construction: subcontractors are cost of sales.",
+      "industries": [
+        "construction"
+      ]
+    },
+    {
+      "name": "construction_materials_cos",
+      "code": "EXP.COS.PUR",
+      "priority": 82,
+      "keywords": [
+        "material",
+        "materials",
+        "supplies"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense",
+        "direct costs"
+      ],
+      "typeExclude": [],
+      "notes": "Construction: materials/supplies are purchases (cost of sales).",
+      "industries": [
+        "construction"
+      ]
+    },
+    {
+      "name": "auto_mv_expenses_cos",
+      "code": "EXP.COS",
+      "priority": 82,
+      "keywords": [
+        "motor vehicle",
+        "vehicle"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "depreciation",
+        "deprec",
+        "accumulated",
+        "amort"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense",
+        "direct costs"
+      ],
+      "typeExclude": [],
+      "notes": "Auto dealers: MV expenses are cost of sales, not overhead.",
+      "industries": [
+        "auto"
+      ]
+    },
+    {
+      "name": "auto_sales_goods",
+      "code": "REV.TRA.GOO",
+      "priority": 84,
+      "keywords": [
+        "sales",
+        "consignment sale"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [
+        "warranty",
+        "delivery",
+        "extras",
+        "service",
+        "rental",
+        "rent",
+        "fee"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "revenue",
+        "income",
+        "sales"
+      ],
+      "typeExclude": [],
+      "notes": "Auto dealers: sales/consignment revenue is sale of goods (vehicles).",
+      "industries": [
+        "auto"
+      ]
+    },
+    {
+      "name": "auto_service_revenue",
+      "code": "REV.TRA.SER",
+      "priority": 84,
+      "keywords": [
+        "warranty",
+        "delivery",
+        "extras",
+        "service"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "revenue",
+        "income",
+        "sales"
+      ],
+      "typeExclude": [],
+      "notes": "Auto dealers: warranty/delivery/service items are trading services.",
+      "industries": [
+        "auto"
+      ]
+    },
+    {
+      "name": "auto_consignment_fees_commission",
+      "code": "REV.OTH.COM",
+      "priority": 84,
+      "keywords": [
+        "consignment fee",
+        "consignment fees"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "revenue",
+        "income",
+        "other income",
+        "sales"
+      ],
+      "typeExclude": [],
+      "notes": "Auto dealers: consignment fees received are commission income.",
+      "industries": [
+        "auto"
+      ]
+    },
+    {
+      "name": "auto_car_rental_revenue",
+      "code": "REV.TRA.SER",
+      "priority": 86,
+      "keywords": [
+        "car rental",
+        "car rentals",
+        "vehicle rental"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "revenue",
+        "income",
+        "sales"
+      ],
+      "typeExclude": [],
+      "notes": "Auto dealers: car rentals are trading services, not investment rental.",
+      "industries": [
+        "auto"
+      ]
+    },
+    {
+      "name": "auto_transport_towing_cos",
+      "code": "EXP.COS",
+      "priority": 82,
+      "keywords": [
+        "transport",
+        "towing"
+      ],
+      "keywordsAll": [],
+      "keywordsExclude": [],
+      "rawTypes": [],
+      "canonTypes": [
+        "expense",
+        "direct costs"
+      ],
+      "typeExclude": [],
+      "notes": "Auto dealers: transport & towing is cost of sales (getting cars to lot).",
+      "industries": [
+        "auto"
+      ]
+    }
+  ]
+}

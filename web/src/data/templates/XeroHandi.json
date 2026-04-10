@@ -1,0 +1,2900 @@
+[
+  {
+    "code": "105",
+    "reportingCode": "REV.TRA.GOO",
+    "name": "Sale of  Goods",
+    "type": "Sales",
+    "reportingName": ""
+  },
+  {
+    "code": "1100",
+    "reportingCode": "EXP.COS.OPE",
+    "name": "Opening Raw Materials",
+    "type": "Direct Costs",
+    "reportingName": ""
+  },
+  {
+    "code": "1108",
+    "reportingCode": "EXP.COS.OPE",
+    "name": "Opening Finished Goods",
+    "type": "Direct Costs",
+    "reportingName": ""
+  },
+  {
+    "code": "1115",
+    "reportingCode": "EXP.COS.PUR",
+    "name": "Purchases",
+    "type": "Direct Costs",
+    "reportingName": ""
+  },
+  {
+    "code": "1126",
+    "reportingCode": "EXP",
+    "name": "Goods for Own Use",
+    "type": "Direct Costs",
+    "reportingName": ""
+  },
+  {
+    "code": "1130",
+    "reportingCode": "EXP.COS.CLO",
+    "name": "Closing Raw Materials",
+    "type": "Direct Costs",
+    "reportingName": ""
+  },
+  {
+    "code": "1135",
+    "reportingCode": "EXP.COS.WPC",
+    "name": "Closing Work in Progress",
+    "type": "Direct Costs",
+    "reportingName": ""
+  },
+  {
+    "code": "1138",
+    "reportingCode": "EXP.COS.CLO",
+    "name": "Closing Finished Goods",
+    "type": "Direct Costs",
+    "reportingName": ""
+  },
+  {
+    "code": "1160",
+    "reportingCode": "EXP.COS",
+    "name": "Direct Labour",
+    "type": "Direct Costs",
+    "reportingName": ""
+  },
+  {
+    "code": "1165",
+    "reportingCode": "EXP.COS",
+    "name": "Contr, S/Contr & Commission (1165)",
+    "type": "Direct Costs",
+    "reportingName": ""
+  },
+  {
+    "code": "1510",
+    "reportingCode": "EXP.PRO",
+    "name": "Accountancy",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1515",
+    "reportingCode": "EXP.ADV",
+    "name": "Advertising & Promotion",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1518",
+    "reportingCode": "EXP.PRO",
+    "name": "Agency Fees",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1525",
+    "reportingCode": "EXP.AMO",
+    "name": "Amortisation Expense",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1535",
+    "reportingCode": "EXP.PRO",
+    "name": "Audit Fees",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1536",
+    "reportingCode": "EXP.PRO",
+    "name": "Auditors - Other Services",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1540",
+    "reportingCode": "EXP.BAD",
+    "name": "Bad Debts",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1545",
+    "reportingCode": "EXP.ADM",
+    "name": "Bank Fees & Charges",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1550",
+    "reportingCode": "EXP.INT",
+    "name": "Borrowing Expenses",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1555",
+    "reportingCode": "EXP",
+    "name": "Crates & Packing",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1560",
+    "reportingCode": "EXP",
+    "name": "Casual Labour",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1565",
+    "reportingCode": "EXP.OCC",
+    "name": "Cleaning/Rubbish Removal",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1575",
+    "reportingCode": "EXP",
+    "name": "Commissions",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1576",
+    "reportingCode": "EXP",
+    "name": "Commissions - Assoc Persons",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1580",
+    "reportingCode": "EXP",
+    "name": "Conference/Seminar Costs",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1585",
+    "reportingCode": "EXP",
+    "name": "Consultants Fees",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1590",
+    "reportingCode": "EXP",
+    "name": "Contract Payments",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1605",
+    "reportingCode": "EXP",
+    "name": "Debt Collection",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1610",
+    "reportingCode": "EXP",
+    "name": "Delivery",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1615",
+    "reportingCode": "EXP.DEP",
+    "name": "Depreciation - Plant",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1616",
+    "reportingCode": "EXP.DEP",
+    "name": "Depreciation - Buildings",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1617",
+    "reportingCode": "EXP.DEP",
+    "name": "Depreciation - Other",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1618",
+    "reportingCode": "EXP.AMO",
+    "name": "Amortisation",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1619",
+    "reportingCode": "EXP.IMP",
+    "name": "Write-Down to Recoverable Amount",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1625",
+    "reportingCode": "EXP.EMP",
+    "name": "Directors Fees",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1630",
+    "reportingCode": "EXP.EMP.WAG",
+    "name": "Directors Salaries",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1635",
+    "reportingCode": "EXP",
+    "name": "Disbursements",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1640",
+    "reportingCode": "EXP",
+    "name": "Discounts Allowed",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1645",
+    "reportingCode": "EXP",
+    "name": "Donations",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1655",
+    "reportingCode": "EXP.UTI",
+    "name": "Electricity",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1660",
+    "reportingCode": "EXP.ENT",
+    "name": "Entertainment",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1665",
+    "reportingCode": "EXP",
+    "name": "Environmental Protection",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1670",
+    "reportingCode": "EXP",
+    "name": "Contr, S/Contr & Commission (1670)",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1675",
+    "reportingCode": "EXP.ADM",
+    "name": "Fees & Charges",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1685",
+    "reportingCode": "EXP.ADM",
+    "name": "Filing Fees",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1690",
+    "reportingCode": "EXP",
+    "name": "Fines",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1705",
+    "reportingCode": "EXP.FBT",
+    "name": "Fringe Benefits Tax",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1710",
+    "reportingCode": "EXP",
+    "name": "Fuel & Oil",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1715",
+    "reportingCode": "EXP.ADM",
+    "name": "General Expenses",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1735",
+    "reportingCode": "EXP.UTI",
+    "name": "Heating",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1740",
+    "reportingCode": "EXP.REN",
+    "name": "Hire/Rent of Plant & Equipment",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1745",
+    "reportingCode": "EXP.INT",
+    "name": "Hire Purchase Charges",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1748",
+    "reportingCode": "EXP.EMP",
+    "name": "Holiday Pay",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1750",
+    "reportingCode": "EXP.OCC",
+    "name": "Home Office",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1755",
+    "reportingCode": "EXP.INS",
+    "name": "Insurance",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1760",
+    "reportingCode": "EXP.INT",
+    "name": "Interest Expense - Australia",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1761",
+    "reportingCode": "EXP.INT",
+    "name": "Interest Expense - Overseas",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1763",
+    "reportingCode": "EXP.INT",
+    "name": "Interest Deductions",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1765",
+    "reportingCode": "EXP",
+    "name": "Journals & Periodicals",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1768",
+    "reportingCode": "EXP",
+    "name": "Land Degradation Expenses",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1770",
+    "reportingCode": "EXP",
+    "name": "Laundry",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1775",
+    "reportingCode": "EXP.REN",
+    "name": "Lease Payments",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1776",
+    "reportingCode": "EXP.REN",
+    "name": "Lease Payments - Realty",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1777",
+    "reportingCode": "EXP.REN",
+    "name": "Lease Payments - Overseas",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1780",
+    "reportingCode": "EXP.PRO",
+    "name": "Legal Fees",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1790",
+    "reportingCode": "EXP.UTI",
+    "name": "Light & Power",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1795",
+    "reportingCode": "EXP",
+    "name": "Livestock Expenses",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1797",
+    "reportingCode": "EXP.EMP",
+    "name": "Long Service Leave",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1798",
+    "reportingCode": "EXP",
+    "name": "Management Fees",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1800",
+    "reportingCode": "EXP",
+    "name": "Materials & Supplies",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1803",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Car - Depreciation",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1804",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Car - Fuel & Oil",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1805",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Car - Interest",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1806",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Car - Lease",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1807",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Car - Rego/Insurance",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1808",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Car - Repairs",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1809",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Car - Other",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1810",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Commercial - Depreciation",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1811",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Commercial - Fuel & Oil",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1812",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Commercial - Interest",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1813",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Commercial - Lease",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1814",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Commercial - Reg/Insurance",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1815",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Commercial - Repairs",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1816",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Commercial - Other",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1817",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Other - Depreciation",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1818",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Other - Fuel & Oil",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1819",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Other - Interest",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1820",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Other - Lease",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1821",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Other - Rego/Insurance",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1822",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Other - Repairs",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1823",
+    "reportingCode": "EXP.VEH",
+    "name": "M/V Other - Other",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1824",
+    "reportingCode": "EXP.DIS",
+    "name": "P'Ship/Trust Dist'N Deductions",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1825",
+    "reportingCode": "EXP",
+    "name": "Payroll Tax",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1835",
+    "reportingCode": "EXP.ADM",
+    "name": "Postage",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1840",
+    "reportingCode": "EXP.ADM",
+    "name": "Printing & Stationery",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1845",
+    "reportingCode": "EXP",
+    "name": "Protective Clothing",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1850",
+    "reportingCode": "EXP.OCC",
+    "name": "Rates & Land Taxes",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1855",
+    "reportingCode": "EXP.OCC",
+    "name": "Rent on Land & Buildings",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1860",
+    "reportingCode": "EXP",
+    "name": "Registration & Insurance",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1865",
+    "reportingCode": "EXP.REP",
+    "name": "Repairs & Maintenance",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1870",
+    "reportingCode": "EXP",
+    "name": "Replacements (Tools, Etc)",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1871",
+    "reportingCode": "EXP",
+    "name": "Research & Development",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1872",
+    "reportingCode": "EXP",
+    "name": "Royalty Deductions",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1873",
+    "reportingCode": "EXP",
+    "name": "Royalty Payments - Australia",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1874",
+    "reportingCode": "EXP",
+    "name": "Royalty Payments - Overseas",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1875",
+    "reportingCode": "EXP.OCC",
+    "name": "Rubbish Removal",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1880",
+    "reportingCode": "EXP.EMP.WAG",
+    "name": "Salaries - Ordinary",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1885",
+    "reportingCode": "EXP.EMP.WAG",
+    "name": "Salaries - Associated Persons",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1890",
+    "reportingCode": "EXP",
+    "name": "Sales Tax",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1900",
+    "reportingCode": "EXP",
+    "name": "Security",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1905",
+    "reportingCode": "EXP.ADM",
+    "name": "Service Fees",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1915",
+    "reportingCode": "EXP",
+    "name": "Staff Amenities",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1920",
+    "reportingCode": "EXP",
+    "name": "Staff Training",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1925",
+    "reportingCode": "EXP.ADM",
+    "name": "Subscriptions",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1927",
+    "reportingCode": "EXP",
+    "name": "Subcontractors",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1930",
+    "reportingCode": "EXP",
+    "name": "Sundry Expenses",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1935",
+    "reportingCode": "EXP.EMP.SUP",
+    "name": "Superannuation",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1936",
+    "reportingCode": "EXP.EMP.SUP",
+    "name": "Superannuation - Assoc Persons",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1940",
+    "reportingCode": "EXP.UTI",
+    "name": "Telephone",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1945",
+    "reportingCode": "EXP",
+    "name": "Terms Charges",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1950",
+    "reportingCode": "EXP.TRA",
+    "name": "Travel, Accom & Conference",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1965",
+    "reportingCode": "EXP.EMP.WAG",
+    "name": "Wages",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1984",
+    "reportingCode": "EXP",
+    "name": "Deficiency in Trust Assets",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "1989",
+    "reportingCode": "EXP.CFL",
+    "name": "Prior Period Losses Applied",
+    "type": "Expense",
+    "reportingName": "Prior Period Losses Applied"
+  },
+  {
+    "code": "19901",
+    "reportingCode": "EXP.DIV",
+    "name": "Dividends Paid Expense - Shareholder 1",
+    "type": "Expense",
+    "reportingName": "Shareholder 1"
+  },
+  {
+    "code": "19902",
+    "reportingCode": "EXP.DIV",
+    "name": "Dividends Paid Expense - Shareholder 2",
+    "type": "Expense",
+    "reportingName": "Shareholder 2"
+  },
+  {
+    "code": "19903",
+    "reportingCode": "EXP.DIV",
+    "name": "Dividends Paid Expense - Shareholder 3",
+    "type": "Expense",
+    "reportingName": "Shareholder 3"
+  },
+  {
+    "code": "19904",
+    "reportingCode": "EXP.DIV",
+    "name": "Dividends Paid Expense - Shareholder 4",
+    "type": "Expense",
+    "reportingName": "Shareholder 4"
+  },
+  {
+    "code": "19905",
+    "reportingCode": "EXP.DIV",
+    "name": "Dividends Paid Expense - Shareholder 5",
+    "type": "Expense",
+    "reportingName": "Shareholder 5"
+  },
+  {
+    "code": "19906",
+    "reportingCode": "EXP.DIV",
+    "name": "Dividends Paid Expense - Shareholder 6",
+    "type": "Expense",
+    "reportingName": "Shareholder 6"
+  },
+  {
+    "code": "19907",
+    "reportingCode": "EXP.DIV",
+    "name": "Dividends Paid Expense - Shareholder 7",
+    "type": "Expense",
+    "reportingName": "Shareholder 7"
+  },
+  {
+    "code": "19908",
+    "reportingCode": "EXP.DIV",
+    "name": "Dividends Paid Expense - Shareholder 8",
+    "type": "Expense",
+    "reportingName": "Shareholder 8"
+  },
+  {
+    "code": "19909",
+    "reportingCode": "EXP.DIV",
+    "name": "Dividends Paid Expense - Shareholder 9",
+    "type": "Expense",
+    "reportingName": "Shareholder 9"
+  },
+  {
+    "code": "19910",
+    "reportingCode": "EXP.DIV",
+    "name": "Dividends Paid Expense - Shareholder 10",
+    "type": "Expense",
+    "reportingName": "Shareholder 10"
+  },
+  {
+    "code": "2000",
+    "reportingCode": "ASS.CUR.CAS.BAN",
+    "name": "Bank Account 1",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2001",
+    "reportingCode": "ASS.CUR.CAS.BAN",
+    "name": "Bank Account 2",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2050",
+    "reportingCode": "ASS.CUR.CAS.FLO",
+    "name": "Cash on Hand",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2101",
+    "reportingCode": "ASS.CUR.REC.TRA",
+    "name": "Trade Debtors",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2101A",
+    "reportingCode": "ASS.CUR.REC.TRA",
+    "name": "Trade Debtors A",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2119",
+    "reportingCode": "ASS.CUR.REC.ADA",
+    "name": "Less: Provision Doubtful Debts",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2120",
+    "reportingCode": "ASS.CUR",
+    "name": "Bills of Exchange",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2140",
+    "reportingCode": "ASS.CUR.DIR",
+    "name": "Loans to Directors",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2150",
+    "reportingCode": "ASS.CUR.REL",
+    "name": "Loans to Shareholders",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2160",
+    "reportingCode": "ASS.CUR.REL",
+    "name": "Loans to Holding Company",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2180",
+    "reportingCode": "ASS.CUR.REL",
+    "name": "Loans Other Related Companies",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2198",
+    "reportingCode": "ASS.CUR",
+    "name": "Right of indemnity from Trust",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2199",
+    "reportingCode": "ASS.CUR",
+    "name": "Right of indemnity from Trust (Less: Provision for Deficiency)",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2200",
+    "reportingCode": "ASS.CUR",
+    "name": "Government & Semi-Govt Stocks",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2210",
+    "reportingCode": "ASS.CUR",
+    "name": "Debentures in Other Companies",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2220",
+    "reportingCode": "ASS.CUR",
+    "name": "Shares in Other Companies",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2230",
+    "reportingCode": "ASS.CUR",
+    "name": "Options in Other Companies",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2239",
+    "reportingCode": "ASS.CUR",
+    "name": "Options in Other Companies 1 (Less: Prov Diminution in Value)",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2240",
+    "reportingCode": "ASS.CUR",
+    "name": "Shares in Other Companies 1",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2249",
+    "reportingCode": "ASS.CUR",
+    "name": "Shares in Other Companies 1 (Less: Prov Diminution in Value)",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2250",
+    "reportingCode": "ASS.CUR",
+    "name": "Government & Semi-Govt Stocks 1",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2270",
+    "reportingCode": "ASS.CUR",
+    "name": "Debentures in Other Companies 1",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2280",
+    "reportingCode": "ASS.CUR",
+    "name": "Options in Other Companies 1",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2289",
+    "reportingCode": "ASS.CUR",
+    "name": "Less: Prov for Diminution in Value",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2305",
+    "reportingCode": "ASS.CUR.INY",
+    "name": "Raw Materials - At Cost",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2330",
+    "reportingCode": "ASS.CUR.INY.WIP",
+    "name": "Work in Progress - At Cost",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2335",
+    "reportingCode": "ASS.CUR.INY",
+    "name": "Finished Goods - At Cost",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2363",
+    "reportingCode": "ASS.CUR.INY",
+    "name": "Finished Goods - At Real Value",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2375",
+    "reportingCode": "ASS.CUR",
+    "name": "Land Held for Resale Cost",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2400",
+    "reportingCode": "ASS.CUR.TER",
+    "name": "Short Term Deposits",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2425",
+    "reportingCode": "ASS.CUR.REC.PRE",
+    "name": "Prepayments",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2430",
+    "reportingCode": "ASS.CUR",
+    "name": "Prepaid Borrowing Expenses",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2431",
+    "reportingCode": "ASS.CUR",
+    "name": "Prepaid Borrowing Expenses (Less: Accumulated Amortisation)",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2450",
+    "reportingCode": "ASS.CUR",
+    "name": "Future Income Tax Benefit",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2475",
+    "reportingCode": "ASS.CUR",
+    "name": "Other Current Asset",
+    "type": "Current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2500",
+    "reportingCode": "ASS.NCA.INV",
+    "name": "Bills of Exchange - NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2520",
+    "reportingCode": "ASS.NCA.DIR",
+    "name": "Loans to Directors NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2530",
+    "reportingCode": "ASS.NCA.REL",
+    "name": "Loans to Shareholders NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2540",
+    "reportingCode": "ASS.NCA.REL",
+    "name": "Loans to Holding Company NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2560",
+    "reportingCode": "ASS.NCA.REL",
+    "name": "Loans Other Related Companies NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2580",
+    "reportingCode": "ASS.NCA.LOA",
+    "name": "Loans to Other Persons",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2600",
+    "reportingCode": "ASS.NCA.INV.SHA",
+    "name": "Government & Semi-Govt Stocks NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2609",
+    "reportingCode": "ASS.NCA.INV.SHA",
+    "name": "Debentures 1 NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2618",
+    "reportingCode": "ASS.NCA.INV.SHA",
+    "name": "Shares in Other Companies NCA (2618)",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2627",
+    "reportingCode": "ASS.NCA.INV.SHA",
+    "name": "Options in Other Companies NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2636",
+    "reportingCode": "ASS.NCA.INV.SHA",
+    "name": "Debentures 2 NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2645",
+    "reportingCode": "ASS.NCA.INV",
+    "name": "Shares in Subsidiary Companies",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2654",
+    "reportingCode": "ASS.NCA.INV",
+    "name": "Shares in Related Companies",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2663",
+    "reportingCode": "ASS.NCA.INV",
+    "name": "Shares in Associated Companies",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2672",
+    "reportingCode": "ASS.NCA.INV.SHA",
+    "name": "Shares in Other Companies NCA (2672)",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2680",
+    "reportingCode": "ASS.NCA.INV.SHA",
+    "name": "Shares in Other Companies (Less: Prov Diminution in Value)",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2681",
+    "reportingCode": "ASS.NCA.INV.SHA",
+    "name": "Options in Other Companies 1 NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2691",
+    "reportingCode": "ASS.NCA.INV",
+    "name": "Interest in Partnership",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2695",
+    "reportingCode": "ASS.NCA.INV",
+    "name": "Other Investments",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2700",
+    "reportingCode": "ASS.NCA",
+    "name": "Raw Materials - At Cost NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2725",
+    "reportingCode": "ASS.NCA",
+    "name": "Work in Progress - At Cost NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2750",
+    "reportingCode": "ASS.NCA",
+    "name": "Finished Goods - At Cost NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2763",
+    "reportingCode": "ASS.NCA",
+    "name": "Finished Goods - At Real Value NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2775",
+    "reportingCode": "ASS.NCA",
+    "name": "Land Held for Resale",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2800",
+    "reportingCode": "ASS.NCA.FIX.LAC",
+    "name": "Freehold Land - At Cost",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2805",
+    "reportingCode": "ASS.NCA.FIX.LAC",
+    "name": "Freehold Land - Director Value",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2810",
+    "reportingCode": "ASS.NCA.FIX.LAC",
+    "name": "Freehold Land - independ Value",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2815",
+    "reportingCode": "ASS.NCA.FIX.BUC",
+    "name": "Buildings - At Cost",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2820",
+    "reportingCode": "ASS.NCA.FIX.BUC",
+    "name": "Buildings - Directors Value",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2825",
+    "reportingCode": "ASS.NCA.FIX.BUC",
+    "name": "Buildings - independent Value",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2829",
+    "reportingCode": "ASS.NCA.FIX.LEA",
+    "name": "Leasehold Improvements",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2830",
+    "reportingCode": "ASS.NCA.FIX.LEA.ACC",
+    "name": "Less Accumulated Depreciation on Leasehold Improvements",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2831",
+    "reportingCode": "ASS.NCA.FIX",
+    "name": "Fixtures & Fittings",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2834",
+    "reportingCode": "ASS.NCA.FIX",
+    "name": "Less Accumulated Depreciation on Fixtures & Fittings",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2835",
+    "reportingCode": "ASS.NCA.FIX",
+    "name": "Floor Coverings",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2839",
+    "reportingCode": "ASS.NCA.FIX",
+    "name": "Less Accumulated Depreciation on Floor Coverings",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2840",
+    "reportingCode": "ASS.NCA.FIX.LEA",
+    "name": "Lease Improvements 1",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2843",
+    "reportingCode": "ASS.NCA.FIX.LEA.ACC",
+    "name": "Less Accumulated Depreciation on Lease Improvements 1",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2844",
+    "reportingCode": "ASS.NCA.FIX.LEA",
+    "name": "Lease Improvements",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2849",
+    "reportingCode": "ASS.NCA.FIX.LEA.ACC",
+    "name": "Less Accumulated Depreciation on Lease Improvements",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2860",
+    "reportingCode": "ASS.NCA.FIX.PLA",
+    "name": "Plant & Equipment",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2869",
+    "reportingCode": "ASS.NCA.FIX.PLA.ACC",
+    "name": "Less Accumulated Depreciation on Plant & Equipment",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2870",
+    "reportingCode": "ASS.NCA.FIX.PLA",
+    "name": "Office Equipment",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2875",
+    "reportingCode": "ASS.NCA.FIX.PLA.ACC",
+    "name": "Less Accumulated Depreciation on Office Equipment",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2876",
+    "reportingCode": "ASS.NCA.FIX.PLA",
+    "name": "Plant - Other",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2880",
+    "reportingCode": "ASS.NCA.FIX.PLA.ACC",
+    "name": "Less Accumulated Depreciation on Plant - Other",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2881",
+    "reportingCode": "ASS.NCA.FIX.PLA",
+    "name": "Plant - Other 1",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2885",
+    "reportingCode": "ASS.NCA.FIX.PLA.ACC",
+    "name": "Less Accumulated Depreciation on Plant - Other 1",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2886",
+    "reportingCode": "ASS.NCA.FIX.PLA",
+    "name": "Plant - Other 2",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2889",
+    "reportingCode": "ASS.NCA.FIX.PLA.ACC",
+    "name": "Less Accumulated Depreciation on Plant - Other 2",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2890",
+    "reportingCode": "ASS.NCA.FIX.VEH",
+    "name": "Motor Vehicles",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2895",
+    "reportingCode": "ASS.NCA.FIX.VEH.ACC",
+    "name": "Less Accumulated Depreciation on Motor Vehicles",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2896",
+    "reportingCode": "ASS.NCA.FIX.VEH",
+    "name": "Motor Vehicles 1",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2897",
+    "reportingCode": "ASS.NCA.FIX.VEH.ACC",
+    "name": "Less Accumulated Depreciation on Motor Vehicles 1",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2898",
+    "reportingCode": "ASS.NCA.FIX.VEH",
+    "name": "Motor Vehicles 2",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2899",
+    "reportingCode": "ASS.NCA.FIX.VEH.ACC",
+    "name": "Less Accumulated Depreciation on Motor Vehicles 2",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2900",
+    "reportingCode": "ASS.NCA.FIX",
+    "name": "Other Fixed Assets",
+    "type": "Fixed Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2924",
+    "reportingCode": "ASS.NCA.FIX",
+    "name": "Less Accumulated Depreciation on Other Fixed Assets",
+    "type": "Fixed Asset",
+    "reportingName": "Less Accumulated Depreciation"
+  },
+  {
+    "code": "2925",
+    "reportingCode": "ASS.NCA.INT.GOO",
+    "name": "Goodwill",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2929",
+    "reportingCode": "ASS.NCA.INT.GOO.IMP",
+    "name": "Goodwill (Less: Accumulated Amortisation)",
+    "type": "Non-current Asset",
+    "reportingName": "Less Accumulated Amortisation"
+  },
+  {
+    "code": "2930",
+    "reportingCode": "ASS.NCA.INT",
+    "name": "Patents & Trademarks",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2934",
+    "reportingCode": "ASS.NCA.INT.AMO",
+    "name": "Patents & Trademarks (Less: Accumulated Amortisation)",
+    "type": "Non-current Asset",
+    "reportingName": "Less Accumulated Amortisation"
+  },
+  {
+    "code": "2935",
+    "reportingCode": "ASS.NCA.INT",
+    "name": "Other Intangibles",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2939",
+    "reportingCode": "ASS.NCA.INT.AMO",
+    "name": "Other Intangibles (Less: Accumulated Amortisation)",
+    "type": "Non-current Asset",
+    "reportingName": "Less Accumulated Amortisation"
+  },
+  {
+    "code": "2940",
+    "reportingCode": "ASS.NCA.INT",
+    "name": "Other Intangibles 1",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2949",
+    "reportingCode": "ASS.NCA.INT.AMO",
+    "name": "Other Intangibles 1 (Less: Other Intangibles Amortisation)",
+    "type": "Non-current Asset",
+    "reportingName": "Less Accumulated Amortisation"
+  },
+  {
+    "code": "2950",
+    "reportingCode": "ASS.NCA.INT",
+    "name": "Preliminary Expenses",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2959",
+    "reportingCode": "ASS.NCA.INT",
+    "name": "Preliminary Expenses (Less: Accumulated Amortisation)",
+    "type": "Non-current Asset",
+    "reportingName": "Less Accumulated Amortisation"
+  },
+  {
+    "code": "2960",
+    "reportingCode": "ASS.NCA.INT",
+    "name": "Share Issue Expenses",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2965",
+    "reportingCode": "ASS.NCA.INT.AMO",
+    "name": "Share Issue Expenses (Less: Accumulated Amortisation)",
+    "type": "Non-current Asset",
+    "reportingName": "Less Accumulated Amortisation"
+  },
+  {
+    "code": "2966",
+    "reportingCode": "ASS.NCA.INT",
+    "name": "Debenture Issue Expenses Capitalised",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2969",
+    "reportingCode": "ASS.NCA.INT.AMO",
+    "name": "Debenture Issue Expenses (Less: Accumulated Amortisation)",
+    "type": "Non-current Asset",
+    "reportingName": "Less Accumulated Amortisation"
+  },
+  {
+    "code": "2970",
+    "reportingCode": "ASS.NCA",
+    "name": "Future Income Tax Benefit NCA",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2975",
+    "reportingCode": "ASS.NCA.REA",
+    "name": "Research & Development Capitalised",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2979",
+    "reportingCode": "ASS.NCA.REA",
+    "name": "Research & Development Capitalised (Less: Accumulated Amortisation)",
+    "type": "Non-current Asset",
+    "reportingName": "Less Accumulated Amortisation"
+  },
+  {
+    "code": "2980",
+    "reportingCode": "ASS.NCA.INT",
+    "name": "Borrowing Expenses Capitalised",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2989",
+    "reportingCode": "ASS.NCA.INT.AMO",
+    "name": "Borrowing Expenses Capitalised (Less: Accumulated Amortisation)",
+    "type": "Non-current Asset",
+    "reportingName": "Less Accumulated Amortisation"
+  },
+  {
+    "code": "2990",
+    "reportingCode": "ASS.NCA",
+    "name": "Other Non Current Asset",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "2999",
+    "reportingCode": "ASS.NCA",
+    "name": "Investment Property",
+    "type": "Non-current Asset",
+    "reportingName": ""
+  },
+  {
+    "code": "300",
+    "reportingCode": "REV.TRA.FAR",
+    "name": "Agistment Income",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "3000",
+    "reportingCode": "LIA.CUR.PAY",
+    "name": "Credit Card 1",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3001",
+    "reportingCode": "LIA.CUR.PAY",
+    "name": "Credit Card 2",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3048",
+    "reportingCode": "LIA.CUR.PAY.TRA",
+    "name": "Trade Creditors",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3048A",
+    "reportingCode": "LIA.CUR.PAY.TRA",
+    "name": "Trade Creditors A",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3084",
+    "reportingCode": "LIA.CUR.LOA",
+    "name": "Other Loans",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3100",
+    "reportingCode": "LIA.CUR.HPA",
+    "name": "Hire Purchase",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3101",
+    "reportingCode": "LIA.CUR.HPA.UEI",
+    "name": "Hire Purchase (Less: Unexp Interest Charges)",
+    "type": "Current Liability",
+    "reportingName": "Less Unexpired Interest Charges"
+  },
+  {
+    "code": "3102",
+    "reportingCode": "LIA.CUR.PAY",
+    "name": "Other Creditors",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3120",
+    "reportingCode": "LIA.CUR.PAY",
+    "name": "Debentures",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3138",
+    "reportingCode": "LIA.CUR.PAY",
+    "name": "Lease Liabilities",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "315",
+    "reportingCode": "REV.OTH",
+    "name": "Distribution from Partnerships (315)",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "3155",
+    "reportingCode": "LIA.CUR.PAY",
+    "name": "Liability As Trustee of Trust",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "317",
+    "reportingCode": "REV.OTH",
+    "name": "Distribution from Trusts (317)",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "320",
+    "reportingCode": "REV.GRA",
+    "name": "Assessable Gov. Industry Paymt (320)",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "3228",
+    "reportingCode": "LIA.CUR.LOA",
+    "name": "Other Loans 1",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3244",
+    "reportingCode": "LIA.CUR.HPA",
+    "name": "Hire Purchase 1",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3245",
+    "reportingCode": "LIA.CUR.HPA.UEI",
+    "name": "Hire Purchase 1 (Less: Unexp Interest Charges)",
+    "type": "Current Liability",
+    "reportingName": "Less Unexpired Interest Charges"
+  },
+  {
+    "code": "3246",
+    "reportingCode": "LIA.CUR.PAY",
+    "name": "Other Creditors 1",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3264",
+    "reportingCode": "LIA.CUR.PAY",
+    "name": "Debentures 1",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3282",
+    "reportingCode": "LIA.CUR.PAY",
+    "name": "Lease Liabilities 1",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3299",
+    "reportingCode": "LIA.CUR.PAY",
+    "name": "Liability As Trustee of Trust 1",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "330",
+    "reportingCode": "REV.TRA.SER",
+    "name": "Contract Income",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "3300",
+    "reportingCode": "LIA.CUR.PAY.DIV",
+    "name": "Dividends",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3325",
+    "reportingCode": "LIA.CUR.TAX",
+    "name": "Taxation",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3350",
+    "reportingCode": "LIA.CUR.PAY.EMP",
+    "name": "Employee Entitlements",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3375",
+    "reportingCode": "LIA.CUR",
+    "name": "Sundry Provisions",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3380",
+    "reportingCode": "LIA.CUR.TAX.GST",
+    "name": "Gst Payable Control Account",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3382",
+    "reportingCode": "LIA.CUR.TAX.GST",
+    "name": "Gst Payable Adjustment Control Account",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3384",
+    "reportingCode": "LIA.CUR.TAX.GST",
+    "name": "Input Tax Credit Control Account",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3386",
+    "reportingCode": "LIA.CUR.TAX.GST",
+    "name": "Input Tax Credit Adjustment Control",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3389",
+    "reportingCode": "LIA.CUR.TAX.GST",
+    "name": "Gst Clearing",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3390",
+    "reportingCode": "LIA.CUR",
+    "name": "ABN Withholding Tax",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3392",
+    "reportingCode": "LIA.CUR",
+    "name": "Tfn Withholding Tax",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3394",
+    "reportingCode": "LIA.CUR.PAY.PAY",
+    "name": "Amounts Withheld from Salary & Wages",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3396",
+    "reportingCode": "LIA.CUR",
+    "name": "Wine Equalisation Tax",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3398",
+    "reportingCode": "LIA.CUR",
+    "name": "Luxury Car Tax",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3399",
+    "reportingCode": "LIA.CUR",
+    "name": "Liability As Trustee of Trust 2",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3400",
+    "reportingCode": "LIA.CUR",
+    "name": "Advance Payments",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3450",
+    "reportingCode": "LIA.CUR",
+    "name": "Sundry",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3499",
+    "reportingCode": "LIA.CUR",
+    "name": "Liability As Trustee of Trust 3",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3500",
+    "reportingCode": "LIA.NCL.LOA.SEC",
+    "name": "Secured Bank Loan 1",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3501",
+    "reportingCode": "LIA.NCL.LOA.SEC",
+    "name": "Secured Bank Loan 2",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3523",
+    "reportingCode": "LIA.NCL.HPA",
+    "name": "Hire Purchase NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3524",
+    "reportingCode": "LIA.NCL.HPA.UEI",
+    "name": "Hire Purchase NCL (Less: Unexp Interest Charges)",
+    "type": "Non-current Liability",
+    "reportingName": "Less Unexpired Interest Charges"
+  },
+  {
+    "code": "3525",
+    "reportingCode": "LIA.NCL.LOA",
+    "name": "Loans from Holding Company NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3545",
+    "reportingCode": "LIA.NCL.LOA",
+    "name": "Loans from Related Companies NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3565",
+    "reportingCode": "LIA.NCL.LOA",
+    "name": "Loans from Other Persons NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3585",
+    "reportingCode": "LIA.NCL",
+    "name": "Debentures 1 NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3605",
+    "reportingCode": "LIA.NCL",
+    "name": "Lease Liabilities NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3624",
+    "reportingCode": "LIA.NCL",
+    "name": "Liability As Trustee of Trust 4 NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3648",
+    "reportingCode": "LIA.NCL.HPA",
+    "name": "Hire Purchase 1 NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3649",
+    "reportingCode": "LIA.NCL.HPA.UEI",
+    "name": "Hire Purchase 1 NCL (Less: Unexp Interest Charges)",
+    "type": "Non-current Liability",
+    "reportingName": "Less Unexpired Interest Charges"
+  },
+  {
+    "code": "3650",
+    "reportingCode": "LIA.NCL.LOA",
+    "name": "Loans from Holding Company 1 NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3670",
+    "reportingCode": "LIA.NCL.LOA",
+    "name": "Loans from Related Companies 1 NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3690",
+    "reportingCode": "LIA.NCL.LOA",
+    "name": "Loans from Other Persons 1 NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "370",
+    "reportingCode": "REV.TRA.FAR",
+    "name": "Harvesting Revenue",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "3710",
+    "reportingCode": "LIA.NCL",
+    "name": "Debentures 2 NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3720",
+    "reportingCode": "LIA.NCL",
+    "name": "Lease Liabilities 1 NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3749",
+    "reportingCode": "LIA.NCL",
+    "name": "Liability As Trustee of Trust 1 NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "375",
+    "reportingCode": "REV",
+    "name": "Subsidies",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "3750",
+    "reportingCode": "LIA.NCL",
+    "name": "Employees Entitlements",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "380",
+    "reportingCode": "REV",
+    "name": "Pps Income",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "3840",
+    "reportingCode": "LIA.NCL",
+    "name": "Deferred Income Tax",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "385",
+    "reportingCode": "REV",
+    "name": "Rps Income",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "3920",
+    "reportingCode": "LIA.NCL",
+    "name": "Sundry Provisions NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3959",
+    "reportingCode": "LIA.NCL",
+    "name": "Liability As Trustee of Trust 2 NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "3999",
+    "reportingCode": "LIA.NCL",
+    "name": "Liability As Trustee of Trust 3 NCL",
+    "type": "Non-current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "4110",
+    "reportingCode": "EXP.INC",
+    "name": "Income Tax on Profit",
+    "type": "Expense",
+    "reportingName": ""
+  },
+  {
+    "code": "4115",
+    "reportingCode": "EQU",
+    "name": "Profit - Extraordinary",
+    "type": "Equity",
+    "reportingName": ""
+  },
+  {
+    "code": "4120",
+    "reportingCode": "EQU",
+    "name": "Tax on Extraordinary Item",
+    "type": "Equity",
+    "reportingName": ""
+  },
+  {
+    "code": "4135",
+    "reportingCode": "EQU",
+    "name": "Over-Provision of Tax",
+    "type": "Equity",
+    "reportingName": ""
+  },
+  {
+    "code": "4160",
+    "reportingCode": "EQU",
+    "name": "Dividends Provided for Or Paid",
+    "type": "Equity",
+    "reportingName": ""
+  },
+  {
+    "code": "4190",
+    "reportingCode": "EQU",
+    "name": "Under-Provision of Tax",
+    "type": "Equity",
+    "reportingName": ""
+  },
+  {
+    "code": "4199",
+    "reportingCode": "EQU",
+    "name": "Unappropriated Profits",
+    "type": "Equity",
+    "reportingName": ""
+  },
+  {
+    "code": "4200",
+    "reportingCode": "EQU.SHA",
+    "name": "Issued & Paid Up Capital",
+    "type": "Equity",
+    "reportingName": ""
+  },
+  {
+    "code": "4350",
+    "reportingCode": "EQU.RES",
+    "name": "Capital Profit Reserve",
+    "type": "Equity",
+    "reportingName": ""
+  },
+  {
+    "code": "4375",
+    "reportingCode": "EQU.RES.REV",
+    "name": "Assets Revaluation Reserve",
+    "type": "Equity",
+    "reportingName": ""
+  },
+  {
+    "code": "4380",
+    "reportingCode": "EQU.RES",
+    "name": "General Reserve",
+    "type": "Equity",
+    "reportingName": ""
+  },
+  {
+    "code": "482",
+    "reportingCode": "REV.OTH",
+    "name": "Income Where ABN Not Quoted (482)",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "483",
+    "reportingCode": "REV.OTH",
+    "name": "Income Under Voluntary Agreements (483)",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "484",
+    "reportingCode": "REV.OTH",
+    "name": "Income from Labour Hire (484)",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "500",
+    "reportingCode": "REV.TRA.GOO",
+    "name": "Sales - Category 1",
+    "type": "Sales",
+    "reportingName": ""
+  },
+  {
+    "code": "510",
+    "reportingCode": "REV.TRA.GOO",
+    "name": "Sales - Category 2",
+    "type": "Sales",
+    "reportingName": ""
+  },
+  {
+    "code": "519",
+    "reportingCode": "REV.TRA.GOO",
+    "name": "Sales - Category 3",
+    "type": "Sales",
+    "reportingName": ""
+  },
+  {
+    "code": "520",
+    "reportingCode": "REV.OTH",
+    "name": "Bad Debts Recovered",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "525",
+    "reportingCode": "REV.GRA.GOV",
+    "name": "Assessable Gov. Industry Paymt (525)",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "530",
+    "reportingCode": "REV.OTH.COM",
+    "name": "Commissions Received",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "540",
+    "reportingCode": "REV.OTH",
+    "name": "Discounts Received",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "550",
+    "reportingCode": "REV.INV.DIV",
+    "name": "Dividends - Franked",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "551",
+    "reportingCode": "REV.INV.DIV",
+    "name": "Dividends - Unfranked",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "558",
+    "reportingCode": "REV.OTH",
+    "name": "Income where ABN Not Quoted (558)",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "559",
+    "reportingCode": "REV.OTH",
+    "name": "Income Under Voluntary Agreements (559)",
+    "type": "Other income",
+    "reportingName": ""
+  },
+  {
+    "code": "560",
+    "reportingCode": "REV.OTH",
+    "name": "Gross Receipts",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "561",
+    "reportingCode": "REV.OTH",
+    "name": "Income from Labour Hire (561)",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "562",
+    "reportingCode": "REV.OTH",
+    "name": "Hire Income",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "565",
+    "reportingCode": "REV.OTH",
+    "name": "Distribution from Partnerships (565)",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "567",
+    "reportingCode": "REV.OTH",
+    "name": "Distribution from Trusts (567)",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "570",
+    "reportingCode": "REV.OTH",
+    "name": "Insurance Recoveries",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "575",
+    "reportingCode": "REV.INV.INT",
+    "name": "Interest Received",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "578",
+    "reportingCode": "REV.OTH",
+    "name": "Net Foreign Income",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "579",
+    "reportingCode": "REV.OTH",
+    "name": "Attributed Foreign Income",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "580",
+    "reportingCode": "REV.OTH",
+    "name": "Foreign Exchange Profit",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "584",
+    "reportingCode": "REV.OTH",
+    "name": "Other Income",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "585",
+    "reportingCode": "REV.OTH",
+    "name": "Lease Income",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "590",
+    "reportingCode": "REV.TRA.SER",
+    "name": "Professional Fees",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "597",
+    "reportingCode": "REV.OTH.CAP",
+    "name": "Profit on Sale of Receivables",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "598",
+    "reportingCode": "REV.OTH.CAP",
+    "name": "Profit on Sale of Investments",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "599",
+    "reportingCode": "REV.OTH.CAP",
+    "name": "Profit on Sale of Intangibles",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "600",
+    "reportingCode": "REV.OTH.CAP",
+    "name": "Profit on Sale of Property, Plant, Equip",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "601",
+    "reportingCode": "REV.OTH.CAP",
+    "name": "Capital Gains",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "602",
+    "reportingCode": "REV.OTH",
+    "name": "Other Non-Operating Revenue",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "610",
+    "reportingCode": "REV.OTH",
+    "name": "Rebates & Refunds",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "610Ac",
+    "reportingCode": "ASS.CUR.REC.TRA",
+    "name": "Accounts Receivable",
+    "type": "Accounts Receivable",
+    "reportingName": ""
+  },
+  {
+    "code": "625",
+    "reportingCode": "REV.OTH",
+    "name": "Royalties Received",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "630",
+    "reportingCode": "REV.TRA.GOO",
+    "name": "Sales - Category 4",
+    "type": "Sales",
+    "reportingName": ""
+  },
+  {
+    "code": "640",
+    "reportingCode": "REV.OTH",
+    "name": "Subsidies Received",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "700",
+    "reportingCode": "REV.INV.REN",
+    "name": "Rent Received",
+    "type": "Revenue",
+    "reportingName": ""
+  },
+  {
+    "code": "800",
+    "reportingCode": "LIA.CUR.PAY.TRA",
+    "name": "Accounts Payable",
+    "type": "Accounts Payable",
+    "reportingName": ""
+  },
+  {
+    "code": "801",
+    "reportingCode": "LIA.CUR.PAY.EMP",
+    "name": "Unpaid Expense Claims",
+    "type": "Unpaid Expense Claims",
+    "reportingName": ""
+  },
+  {
+    "code": "804",
+    "reportingCode": "LIA.CUR.PAY.EMP",
+    "name": "Wages Payable - Payroll",
+    "type": "Current Liability",
+    "reportingName": ""
+  },
+  {
+    "code": "820",
+    "reportingCode": "LIA.CUR.TAX.GST",
+    "name": "GST",
+    "type": "GST",
+    "reportingName": ""
+  },
+  {
+    "code": "840H",
+    "reportingCode": "LIA.CUR",
+    "name": "Historical Adjustment",
+    "type": "Historical",
+    "reportingName": ""
+  },
+  {
+    "code": "860",
+    "reportingCode": "LIA.CUR",
+    "name": "Rounding",
+    "type": "Rounding",
+    "reportingName": ""
+  },
+  {
+    "code": "877",
+    "reportingCode": "LIA.CUR",
+    "name": "Tracking Transfers",
+    "type": "Tracking",
+    "reportingName": ""
+  },
+  {
+    "code": "9101",
+    "reportingCode": "LIA.NCL.ADV.1",
+    "name": "Capital Contributed - Shareholder 1",
+    "type": "Non-current Liability",
+    "reportingName": "Capital Contributed"
+  },
+  {
+    "code": "9102",
+    "reportingCode": "LIA.NCL.ADV.2",
+    "name": "Capital Contributed - Shareholder 2",
+    "type": "Non-current Liability",
+    "reportingName": "Capital Contributed"
+  },
+  {
+    "code": "9103",
+    "reportingCode": "LIA.NCL.ADV.3",
+    "name": "Capital Contributed - Shareholder 3",
+    "type": "Non-current Liability",
+    "reportingName": "Capital Contributed"
+  },
+  {
+    "code": "9104",
+    "reportingCode": "LIA.NCL.ADV.4",
+    "name": "Capital Contributed - Shareholder 4",
+    "type": "Non-current Liability",
+    "reportingName": "Capital Contributed"
+  },
+  {
+    "code": "9105",
+    "reportingCode": "LIA.NCL.ADV.5",
+    "name": "Capital Contributed - Shareholder 5",
+    "type": "Non-current Liability",
+    "reportingName": "Capital Contributed"
+  },
+  {
+    "code": "9106",
+    "reportingCode": "LIA.NCL.ADV.6",
+    "name": "Capital Contributed - Shareholder 6",
+    "type": "Non-current Liability",
+    "reportingName": "Capital Contributed"
+  },
+  {
+    "code": "9107",
+    "reportingCode": "LIA.NCL.ADV.7",
+    "name": "Capital Contributed - Shareholder 7",
+    "type": "Non-current Liability",
+    "reportingName": "Capital Contributed"
+  },
+  {
+    "code": "9108",
+    "reportingCode": "LIA.NCL.ADV.8",
+    "name": "Capital Contributed - Shareholder 8",
+    "type": "Non-current Liability",
+    "reportingName": "Capital Contributed"
+  },
+  {
+    "code": "9109",
+    "reportingCode": "LIA.NCL.ADV.9",
+    "name": "Capital Contributed - Shareholder 9",
+    "type": "Non-current Liability",
+    "reportingName": "Capital Contributed"
+  },
+  {
+    "code": "9110",
+    "reportingCode": "LIA.NCL.ADV.10",
+    "name": "Capital Contributed - Shareholder 10",
+    "type": "Non-current Liability",
+    "reportingName": "Capital Contributed"
+  },
+  {
+    "code": "9201",
+    "reportingCode": "LIA.NCL.DRA.1",
+    "name": "Drawings - Shareholder 1",
+    "type": "Non-current Liability",
+    "reportingName": "Drawings"
+  },
+  {
+    "code": "9202",
+    "reportingCode": "LIA.NCL.DRA.2",
+    "name": "Drawings - Shareholder 2",
+    "type": "Non-current Liability",
+    "reportingName": "Drawings"
+  },
+  {
+    "code": "9203",
+    "reportingCode": "LIA.NCL.DRA.3",
+    "name": "Drawings - Shareholder 3",
+    "type": "Non-current Liability",
+    "reportingName": "Drawings"
+  },
+  {
+    "code": "9204",
+    "reportingCode": "LIA.NCL.DRA.4",
+    "name": "Drawings - Shareholder 4",
+    "type": "Non-current Liability",
+    "reportingName": "Drawings"
+  },
+  {
+    "code": "9205",
+    "reportingCode": "LIA.NCL.DRA.5",
+    "name": "Drawings - Shareholder 5",
+    "type": "Non-current Liability",
+    "reportingName": "Drawings"
+  },
+  {
+    "code": "9206",
+    "reportingCode": "LIA.NCL.DRA.6",
+    "name": "Drawings - Shareholder  6",
+    "type": "Non-current Liability",
+    "reportingName": "Drawings"
+  },
+  {
+    "code": "9207",
+    "reportingCode": "LIA.NCL.DRA.7",
+    "name": "Drawings - Shareholder 7",
+    "type": "Non-current Liability",
+    "reportingName": "Drawings"
+  },
+  {
+    "code": "9208",
+    "reportingCode": "LIA.NCL.DRA.8",
+    "name": "Drawings - Shareholder 8",
+    "type": "Non-current Liability",
+    "reportingName": "Drawings"
+  },
+  {
+    "code": "9209",
+    "reportingCode": "LIA.NCL.DRA.9",
+    "name": "Drawings - Shareholder 9",
+    "type": "Non-current Liability",
+    "reportingName": "Drawings"
+  },
+  {
+    "code": "9210",
+    "reportingCode": "LIA.NCL.DRA.10",
+    "name": "Drawings - Shareholder 10",
+    "type": "Non-current Liability",
+    "reportingName": "Drawings"
+  },
+  {
+    "code": "9301",
+    "reportingCode": "LIA.NCL.PFT.1",
+    "name": "Dividends Paid - Shareholder 1",
+    "type": "Non-current Liability",
+    "reportingName": "Dividends Paid"
+  },
+  {
+    "code": "9302",
+    "reportingCode": "LIA.NCL.PFT.2",
+    "name": "Dividends Paid - Shareholder 2",
+    "type": "Non-current Liability",
+    "reportingName": "Dividends Paid"
+  },
+  {
+    "code": "9303",
+    "reportingCode": "LIA.NCL.PFT.3",
+    "name": "Dividends Paid - Shareholder 3",
+    "type": "Non-current Liability",
+    "reportingName": "Dividends Paid"
+  },
+  {
+    "code": "9304",
+    "reportingCode": "LIA.NCL.PFT.4",
+    "name": "Dividends Paid - Shareholder 4",
+    "type": "Non-current Liability",
+    "reportingName": "Dividends Paid"
+  },
+  {
+    "code": "9305",
+    "reportingCode": "LIA.NCL.PFT.5",
+    "name": "Dividends Paid - Shareholder 5",
+    "type": "Non-current Liability",
+    "reportingName": "Dividends Paid"
+  },
+  {
+    "code": "9306",
+    "reportingCode": "LIA.NCL.PFT.6",
+    "name": "Dividends Paid - Shareholder 6",
+    "type": "Non-current Liability",
+    "reportingName": "Dividends Paid"
+  },
+  {
+    "code": "9307",
+    "reportingCode": "LIA.NCL.PFT.7",
+    "name": "Dividends Paid - Shareholder 7",
+    "type": "Non-current Liability",
+    "reportingName": "Dividends Paid"
+  },
+  {
+    "code": "9308",
+    "reportingCode": "LIA.NCL.PFT.8",
+    "name": "Dividends Paid - Shareholder 8",
+    "type": "Non-current Liability",
+    "reportingName": "Dividends Paid"
+  },
+  {
+    "code": "9309",
+    "reportingCode": "LIA.NCL.PFT.9",
+    "name": "Dividends Paid - Shareholder 9",
+    "type": "Non-current Liability",
+    "reportingName": "Dividends Paid"
+  },
+  {
+    "code": "9310",
+    "reportingCode": "LIA.NCL.PFT.10",
+    "name": "Dividends Paid - Shareholder 10",
+    "type": "Non-current Liability",
+    "reportingName": "Dividends Paid"
+  },
+  {
+    "code": "9401",
+    "reportingCode": "LIA.NCL.ADV.1",
+    "name": "Conversion Balances - Shareholder 1",
+    "type": "Non-current Liability",
+    "reportingName": "Dividends Paid"
+  },
+  {
+    "code": "9402",
+    "reportingCode": "LIA.NCL.ADV.2",
+    "name": "Conversion Balances - Shareholder 2",
+    "type": "Non-current Liability",
+    "reportingName": "Conversion Balances"
+  },
+  {
+    "code": "9403",
+    "reportingCode": "LIA.NCL.ADV.3",
+    "name": "Conversion Balances - Shareholder 3",
+    "type": "Non-current Liability",
+    "reportingName": "Conversion Balances"
+  },
+  {
+    "code": "9404",
+    "reportingCode": "LIA.NCL.ADV.4",
+    "name": "Conversion Balances - Shareholder 4",
+    "type": "Non-current Liability",
+    "reportingName": "Conversion Balances"
+  },
+  {
+    "code": "9405",
+    "reportingCode": "LIA.NCL.ADV.5",
+    "name": "Conversion Balances - Shareholder 5",
+    "type": "Non-current Liability",
+    "reportingName": "Conversion Balances"
+  },
+  {
+    "code": "9406",
+    "reportingCode": "LIA.NCL.ADV.6",
+    "name": "Conversion Balances - Shareholder 6",
+    "type": "Non-current Liability",
+    "reportingName": "Conversion Balances"
+  },
+  {
+    "code": "9407",
+    "reportingCode": "LIA.NCL.ADV.7",
+    "name": "Conversion Balances - Shareholder 7",
+    "type": "Non-current Liability",
+    "reportingName": "Conversion Balances"
+  },
+  {
+    "code": "9408",
+    "reportingCode": "LIA.NCL.ADV.8",
+    "name": "Conversion Balances - Shareholder 8",
+    "type": "Non-current Liability",
+    "reportingName": "Conversion Balances"
+  },
+  {
+    "code": "9409",
+    "reportingCode": "LIA.NCL.ADV.9",
+    "name": "Conversion Balances - Shareholder 9",
+    "type": "Non-current Liability",
+    "reportingName": "Conversion Balances"
+  },
+  {
+    "code": "9410",
+    "reportingCode": "LIA.NCL.ADV.10",
+    "name": "Conversion Balances - Shareholder 10",
+    "type": "Non-current Liability",
+    "reportingName": "Conversion Balances"
+  },
+  {
+    "code": "960",
+    "reportingCode": "EQU.RET",
+    "name": "Retained Earnings",
+    "type": "Retained Earnings",
+    "reportingName": ""
+  }
+]
