@@ -17,11 +17,29 @@ import type { SystemMapping } from '../types';
 const allMappings = systemMappings as SystemMapping[];
 const leafMappings = allMappings.filter((m) => m.isLeaf);
 
+/** Head groups in display order. */
+const HEAD_ORDER = ['ASS', 'LIA', 'EQU', 'REV', 'EXP'];
+const HEAD_LABELS: Record<string, string> = {
+  ASS: 'Assets (ASS)',
+  LIA: 'Liabilities (LIA)',
+  EQU: 'Equity (EQU)',
+  REV: 'Revenue (REV)',
+  EXP: 'Expenses (EXP)',
+};
+
 /**
  * Extract the head group (first segment) from a reporting code.
  */
 function headFromCode(code: string): string {
   return code.split('.')[0];
+}
+
+/** Group leaf mappings by head. */
+const leafByHead: Record<string, SystemMapping[]> = {};
+for (const m of leafMappings) {
+  const head = headFromCode(m.reportingCode);
+  if (!leafByHead[head]) leafByHead[head] = [];
+  leafByHead[head].push(m);
 }
 
 // ---------------------------------------------------------------------------
@@ -75,20 +93,29 @@ export default function AccountDetailPanel({
     );
   }, [groupRelationships, chartCheckData]);
 
-  // Compatible leaf codes (same head group as the predicted code)
-  const expectedHead = headFromCode(account.predictedCode);
-  const compatibleCodes = useMemo(() => {
+  // All leaf codes grouped by head, filtered by search
+  const groupedCodes = useMemo(() => {
     const search = codeSearch.toLowerCase();
-    return leafMappings.filter((m) => {
-      const matchesHead = headFromCode(m.reportingCode) === expectedHead;
-      if (!search) return matchesHead;
-      return (
-        matchesHead &&
-        (m.reportingCode.toLowerCase().includes(search) ||
-          m.name.toLowerCase().includes(search))
-      );
-    });
-  }, [expectedHead, codeSearch]);
+    const groups: { head: string; label: string; codes: SystemMapping[] }[] = [];
+    for (const head of HEAD_ORDER) {
+      const mappings = leafByHead[head] ?? [];
+      const filtered = search
+        ? mappings.filter(
+            (m) =>
+              m.reportingCode.toLowerCase().includes(search) ||
+              m.name.toLowerCase().includes(search),
+          )
+        : mappings;
+      if (filtered.length > 0) {
+        groups.push({
+          head,
+          label: HEAD_LABELS[head] ?? head,
+          codes: filtered,
+        });
+      }
+    }
+    return groups;
+  }, [codeSearch]);
 
   const handleApplyOverride = useCallback(() => {
     if (!overrideCode) return;
@@ -291,7 +318,7 @@ export default function AccountDetailPanel({
             className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
 
-          {/* Code dropdown */}
+          {/* Code dropdown — all leaf codes grouped by head */}
           <select
             value={overrideCode}
             onChange={(e) => setOverrideCode(e.target.value)}
@@ -299,10 +326,14 @@ export default function AccountDetailPanel({
             size={6}
           >
             <option value="">-- Select code --</option>
-            {compatibleCodes.map((m) => (
-              <option key={m.reportingCode} value={m.reportingCode}>
-                {m.reportingCode} - {m.name}
-              </option>
+            {groupedCodes.map((group) => (
+              <optgroup key={group.head} label={group.label}>
+                {group.codes.map((m) => (
+                  <option key={m.reportingCode} value={m.reportingCode}>
+                    {m.reportingCode} - {m.name}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
 

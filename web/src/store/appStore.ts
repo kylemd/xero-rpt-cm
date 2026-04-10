@@ -30,6 +30,7 @@ interface AppState {
   // Outputs
   mappedAccounts: MappedAccount[];
   isProcessing: boolean;
+  codeTypeMap: Record<string, string>;
 
   // Rules
   rulesData: RulesData | null;
@@ -49,7 +50,10 @@ interface AppState {
   setRulesData: (data: RulesData) => void;
   setRulesLoading: (loading: boolean) => void;
   setGithubToken: (token: string | null) => void;
+  setCodeTypeMap: (map: Record<string, string>) => void;
   overrideAccount: (index: number, code: string, reason: string) => void;
+  approveAccount: (index: number) => void;
+  overrideAccountType: (index: number, newType: string) => void;
   reset: () => void;
 }
 
@@ -92,6 +96,7 @@ const initialState = {
 
   mappedAccounts: [] as MappedAccount[],
   isProcessing: false,
+  codeTypeMap: {} as Record<string, string>,
 
   rulesData: null as RulesData | null,
   rulesLoading: false,
@@ -124,6 +129,8 @@ export const useAppStore = create<AppState>()((set) => ({
 
   setRulesLoading: (loading) => set({ rulesLoading: loading }),
 
+  setCodeTypeMap: (map) => set({ codeTypeMap: map }),
+
   setGithubToken: (token) => {
     saveGithubToken(token);
     set({ githubToken: token });
@@ -137,6 +144,30 @@ export const useAppStore = create<AppState>()((set) => ({
           ...updated[index],
           overrideCode: code,
           overrideReason: reason,
+        };
+      }
+      return { mappedAccounts: updated };
+    }),
+
+  approveAccount: (index) =>
+    set((state) => {
+      const updated = [...state.mappedAccounts];
+      if (index >= 0 && index < updated.length) {
+        updated[index] = {
+          ...updated[index],
+          approved: true,
+        };
+      }
+      return { mappedAccounts: updated };
+    }),
+
+  overrideAccountType: (index, newType) =>
+    set((state) => {
+      const updated = [...state.mappedAccounts];
+      if (index >= 0 && index < updated.length) {
+        updated[index] = {
+          ...updated[index],
+          typeOverride: newType,
         };
       }
       return { mappedAccounts: updated };
