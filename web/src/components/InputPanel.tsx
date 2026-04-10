@@ -11,6 +11,7 @@ import { parseChartFile } from '../parsers/chartParser';
 import { parseChartCheckReport } from '../parsers/chartCheckParser';
 import { parseGroupRelationshipsFile } from '../parsers/groupParser';
 import { runPipeline } from '../pipeline/pipeline';
+import { buildCodeTypeMap } from '../pipeline/typePredict';
 import systemMappings from '../data/systemMappings.json';
 import type { TemplateName, SystemMapping } from '../types';
 
@@ -34,6 +35,7 @@ export default function InputPanel() {
   const isProcessing = useAppStore((s) => s.isProcessing);
   const setIsProcessing = useAppStore((s) => s.setIsProcessing);
   const setMappedAccounts = useAppStore((s) => s.setMappedAccounts);
+  const setCodeTypeMap = useAppStore((s) => s.setCodeTypeMap);
   const industry = useAppStore((s) => s.industry);
 
   const [chartFileName, setChartFileName] = useState<string>();
@@ -111,6 +113,9 @@ export default function InputPanel() {
       );
       const templateEntries = templateModule.default;
 
+      // Build and store the codeTypeMap for type mismatch detection
+      setCodeTypeMap(buildCodeTypeMap(templateEntries));
+
       const result = runPipeline({
         accounts,
         rulesData,
@@ -135,6 +140,7 @@ export default function InputPanel() {
     industry,
     setIsProcessing,
     setMappedAccounts,
+    setCodeTypeMap,
   ]);
 
   const clientParams = chartCheckData?.clientParams;
