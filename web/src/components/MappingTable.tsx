@@ -2,6 +2,7 @@
  * Main mapping results table using TanStack Table.
  *
  * Displays mapped accounts with colour-coded confidence, filtering, and export.
+ * Includes original code comparison, type mismatch detection, and quick-approve.
  */
 
 import { useMemo, useState, useCallback } from 'react';
@@ -15,13 +16,30 @@ import {
   type SortingState,
 } from '@tanstack/react-table';
 import { useAppStore } from '../store/appStore';
-import type { MappedAccount } from '../types';
+import {
+  predictTypeFromCode,
+  HEAD_FROM_TYPE,
+  SYSTEM_TYPES,
+  ALLOWED_TYPES_BY_HEAD,
+} from '../pipeline/typePredict';
+import systemMappings from '../data/systemMappings.json';
+import type { MappedAccount, SystemMapping } from '../types';
 
 // ---------------------------------------------------------------------------
 // Filter types
 // ---------------------------------------------------------------------------
 
-type FilterMode = 'all' | 'review' | 'fallback' | 'active';
+type FilterMode = 'all' | 'review' | 'fallback' | 'active' | 'typeMismatch';
+
+// ---------------------------------------------------------------------------
+// System mappings code-to-name lookup
+// ---------------------------------------------------------------------------
+
+const allMappings = systemMappings as SystemMapping[];
+const codeToName: Record<string, string> = {};
+for (const m of allMappings) {
+  codeToName[m.reportingCode] = m.name;
+}
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -37,26 +55,21 @@ function codeBadgeClass(source: string): string {
   return 'text-green-600 bg-green-50 border border-green-200';
 }
 
-function statusLabel(acct: MappedAccount): { text: string; cls: string } {
-  if (acct.overrideCode) {
-    return { text: 'Overridden', cls: 'text-blue-600' };
-  }
-  if (acct.needsReview) {
-    return { text: 'Review', cls: 'text-amber-600' };
-  }
-  return { text: 'OK', cls: 'text-green-600' };
-}
-
-function generateExportCSV(accounts: MappedAccount[]): string {
+function generateExportCSV(
+  accounts: MappedAccount[],
+  codeTypeMap: Record<string, string>,
+): string {
   const header = '*Code,*Name,*Type,*Tax Code,Report Code';
   const rows = accounts.map((a) => {
     const reportCode = a.overrideCode ?? a.predictedCode;
+    const finalType =
+      a.typeOverride || predictTypeFromCode(reportCode, a.type, codeTypeMap);
     const escape = (s: string) =>
       s.includes(',') || s.includes('"') ? `"${s.replace(/"/g, '""')}"` : s;
     return [
       escape(a.code),
       escape(a.name),
-      escape(a.type),
+      escape(finalType),
       escape(a.taxCode ?? ''),
       escape(reportCode),
     ].join(',');
@@ -64,16 +77,28 @@ function generateExportCSV(accounts: MappedAccount[]): string {
   return [header, ...rows].join('\n');
 }
 
-function generateDecisionsJSON(accounts: MappedAccount[]): string {
+function generateDecisionsJSON(
+  accounts: MappedAccount[],
+  codeTypeMap: Record<string, string>,
+): string {
   const decisions = accounts
-    .filter((a) => a.overrideCode)
-    .map((a) => ({
-      accountCode: a.code,
-      accountName: a.name,
-      originalCode: a.predictedCode,
-      newCode: a.overrideCode!,
-      reason: a.overrideReason ?? '',
-    }));
+    .filter((a) => a.overrideCode || a.typeOverride)
+    .map((a) => {
+      const finalCode = a.overrideCode ?? a.predictedCode;
+      const predictedType = predictTypeFromCode(finalCode, a.type, codeTypeMap);
+      const hasTypeChange =
+        a.typeOverride || (predictedType !== a.type && !SYSTEM_TYPES.has(a.type));
+      return {
+        accountCode: a.code,
+        accountName: a.name,
+        originalCode: a.predictedCode,
+        newCode: a.overrideCode ?? a.predictedCode,
+        reason: a.overrideReason ?? '',
+        ...(hasTypeChange
+          ? { typeChange: { from: a.type, to: a.typeOverride || predictedType } }
+          : {}),
+      };
+    });
   return JSON.stringify({ decisions }, null, 2);
 }
 
@@ -85,6 +110,14 @@ function downloadFile(content: string, filename: string, mime: string) {
   a.download = filename;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+/** Check if a given account has a type mismatch. */
+function hasTypeMismatchForAccount(acct: MappedAccount): boolean {
+  const finalCode = acct.overrideCode || acct.predictedCode;
+  const currentHead = HEAD_FROM_TYPE[acct.type] || '';
+  const codeHead = finalCode.split('.')[0];
+  return !SYSTEM_TYPES.has(acct.type) && !!currentHead && currentHead !== codeHead;
 }
 
 // ---------------------------------------------------------------------------
@@ -101,6 +134,9 @@ interface MappingTableProps {
 
 export default function MappingTable({ onSelectAccount }: MappingTableProps) {
   const mappedAccounts = useAppStore((s) => s.mappedAccounts);
+  const codeTypeMap = useAppStore((s) => s.codeTypeMap);
+  const approveAccount = useAppStore((s) => s.approveAccount);
+  const overrideAccountType = useAppStore((s) => s.overrideAccountType);
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
@@ -120,6 +156,9 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
       case 'active':
         data = data.filter((a) => a.hasActivity);
         break;
+      case 'typeMismatch':
+        data = data.filter((a) => hasTypeMismatchForAccount(a));
+        break;
     }
     return data;
   }, [mappedAccounts, filterMode]);
@@ -135,7 +174,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
       {
         accessorKey: 'name',
         header: 'Account Name',
-        size: 240,
+        size: 220,
         enableSorting: true,
         cell: ({ row }) => (
           <span className="truncate block" title={row.original.name}>
@@ -151,9 +190,108 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
         ),
       },
       {
-        accessorKey: 'type',
+        id: 'type',
         header: 'Type',
-        size: 120,
+        size: 140,
+        accessorFn: (row) => row.typeOverride ?? row.type,
+        cell: ({ row }) => {
+          const acct = row.original;
+          const finalCode = acct.overrideCode || acct.predictedCode;
+          const predictedType = predictTypeFromCode(
+            finalCode,
+            acct.type,
+            codeTypeMap,
+          );
+          const currentHead = HEAD_FROM_TYPE[acct.type] || '';
+          const codeHead = finalCode.split('.')[0];
+          const hasMismatch =
+            !SYSTEM_TYPES.has(acct.type) &&
+            !!currentHead &&
+            currentHead !== codeHead;
+          const originalIndex = mappedAccounts.indexOf(acct);
+
+          if (acct.typeOverride) {
+            return (
+              <div>
+                <span className="line-through text-gray-400 text-xs">
+                  {acct.type}
+                </span>{' '}
+                <span className="text-blue-600 font-bold text-xs">
+                  {acct.typeOverride}
+                </span>
+              </div>
+            );
+          }
+
+          if (hasMismatch) {
+            const allowedTypes =
+              ALLOWED_TYPES_BY_HEAD[codeHead] ?? [];
+            return (
+              <div className="space-y-1">
+                <div>
+                  <span className="line-through text-gray-400 text-xs">
+                    {acct.type}
+                  </span>{' '}
+                  <span className="text-red-600 font-bold text-xs">
+                    {predictedType}
+                  </span>
+                </div>
+                {allowedTypes.length > 0 && (
+                  <select
+                    className="text-xs border border-red-300 rounded px-1 py-0.5 bg-white w-full"
+                    value=""
+                    onClick={(e) => e.stopPropagation()}
+                    onChange={(e) => {
+                      if (e.target.value && originalIndex >= 0) {
+                        overrideAccountType(originalIndex, e.target.value);
+                      }
+                    }}
+                  >
+                    <option value="">Override type...</option>
+                    {allowedTypes.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            );
+          }
+
+          return <span className="text-xs">{acct.type}</span>;
+        },
+      },
+      {
+        id: 'originalCode',
+        header: 'Original Code',
+        size: 140,
+        accessorFn: (row) => row.reportCode ?? '',
+        cell: ({ row }) => {
+          const acct = row.original;
+          const rc = acct.reportCode;
+          if (!rc) {
+            return (
+              <span className="text-gray-300 font-mono text-xs">{'\u2014'}</span>
+            );
+          }
+          const name = codeToName[rc];
+          return (
+            <div>
+              <span
+                className="inline-block font-mono text-xs"
+                style={{ color: '#6b7280' }}
+              >
+                {rc}
+              </span>
+              {name && (
+                <div className="text-xs text-gray-400 truncate" title={name}>
+                  {name}
+                </div>
+              )}
+            </div>
+          );
+        },
       },
       {
         id: 'mappedCode',
@@ -166,19 +304,27 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
           const badgeCls = acct.overrideCode
             ? 'text-blue-600 bg-blue-50 border border-blue-200'
             : codeBadgeClass(acct.source);
+          const name = codeToName[displayCode];
           return (
-            <span
-              className={`inline-block px-1.5 py-0.5 rounded text-xs font-mono ${badgeCls}`}
-            >
-              {displayCode}
-            </span>
+            <div>
+              <span
+                className={`inline-block px-1.5 py-0.5 rounded text-xs font-mono ${badgeCls}`}
+              >
+                {displayCode}
+              </span>
+              {name && (
+                <div className="text-xs text-gray-400 truncate" title={name}>
+                  {name}
+                </div>
+              )}
+            </div>
           );
         },
       },
       {
         accessorKey: 'source',
         header: 'Source',
-        size: 140,
+        size: 130,
         cell: ({ getValue }) => (
           <span className="text-gray-500 text-xs">{getValue() as string}</span>
         ),
@@ -186,7 +332,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
       {
         id: 'active',
         header: 'Active',
-        size: 60,
+        size: 55,
         accessorFn: (row) => row.hasActivity,
         cell: ({ row }) => (
           <span
@@ -197,16 +343,61 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
         ),
       },
       {
-        id: 'status',
-        header: 'Status',
-        size: 90,
+        id: 'decision',
+        header: 'Decision',
+        size: 100,
         cell: ({ row }) => {
-          const { text, cls } = statusLabel(row.original);
-          return <span className={`text-xs font-medium ${cls}`}>{text}</span>;
+          const acct = row.original;
+          const originalIndex = mappedAccounts.indexOf(acct);
+
+          // Already overridden
+          if (acct.overrideCode) {
+            return (
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-medium text-blue-600 bg-blue-50 border border-blue-200">
+                {'\u2713'} Overridden
+              </span>
+            );
+          }
+
+          // Already approved
+          if (acct.approved) {
+            return (
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-medium text-green-600 bg-green-50 border border-green-200">
+                {'\u2713'} Approved
+              </span>
+            );
+          }
+
+          // Auto-confirmed: predicted matches original (or no original)
+          if (
+            !acct.reportCode ||
+            acct.predictedCode === acct.reportCode
+          ) {
+            return (
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-medium text-green-600 bg-green-50 border border-green-200">
+                {'\u2713'} Auto
+              </span>
+            );
+          }
+
+          // Needs approval: predicted differs from original
+          return (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                if (originalIndex >= 0) {
+                  approveAccount(originalIndex);
+                }
+              }}
+              className="px-2 py-0.5 text-xs font-medium rounded bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+            >
+              Accept
+            </button>
+          );
         },
       },
     ],
-    [],
+    [mappedAccounts, codeTypeMap, approveAccount, overrideAccountType],
   );
 
   const table = useReactTable({
@@ -242,25 +433,29 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
   );
 
   const handleExportCSV = useCallback(() => {
-    const csv = generateExportCSV(mappedAccounts);
+    const csv = generateExportCSV(mappedAccounts, codeTypeMap);
     downloadFile(csv, 'MappedChartOfAccounts.csv', 'text/csv');
-  }, [mappedAccounts]);
+  }, [mappedAccounts, codeTypeMap]);
 
   const handleExportDecisions = useCallback(() => {
-    const json = generateDecisionsJSON(mappedAccounts);
+    const json = generateDecisionsJSON(mappedAccounts, codeTypeMap);
     downloadFile(json, 'decisions.json', 'application/json');
-  }, [mappedAccounts]);
+  }, [mappedAccounts, codeTypeMap]);
 
   const filterChips: { mode: FilterMode; label: string }[] = [
     { mode: 'all', label: 'All' },
     { mode: 'review', label: 'Needs Review' },
     { mode: 'fallback', label: 'Fallback Only' },
     { mode: 'active', label: 'Active' },
+    { mode: 'typeMismatch', label: 'Type Mismatch' },
   ];
 
   const reviewCount = mappedAccounts.filter((a) => a.needsReview).length;
   const fallbackCount = mappedAccounts.filter(
     (a) => a.source === 'FallbackParent',
+  ).length;
+  const typeMismatchCount = mappedAccounts.filter((a) =>
+    hasTypeMismatchForAccount(a),
   ).length;
 
   if (mappedAccounts.length === 0) {
@@ -307,6 +502,9 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
               )}
               {mode === 'fallback' && fallbackCount > 0 && (
                 <span className="ml-1 text-red-600">({fallbackCount})</span>
+              )}
+              {mode === 'typeMismatch' && typeMismatchCount > 0 && (
+                <span className="ml-1 text-red-600">({typeMismatchCount})</span>
               )}
             </button>
           ))}
@@ -358,23 +556,45 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
             ))}
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {table.getRowModel().rows.map((row) => (
-              <tr
-                key={row.id}
-                onClick={() => handleRowClick(row.index)}
-                className={`cursor-pointer transition-colors ${
-                  selectedRowIndex === row.index
-                    ? 'bg-blue-50'
-                    : 'hover:bg-gray-50'
-                }`}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-3 py-2">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
+            {table.getRowModel().rows.map((row) => {
+              const acct = row.original;
+              const finalCode = acct.overrideCode || acct.predictedCode;
+              const currentHead = HEAD_FROM_TYPE[acct.type] || '';
+              const codeHead = finalCode.split('.')[0];
+              const hasMismatch =
+                !SYSTEM_TYPES.has(acct.type) &&
+                !!currentHead &&
+                currentHead !== codeHead;
+
+              return (
+                <tr
+                  key={row.id}
+                  onClick={() => handleRowClick(row.index)}
+                  className={`cursor-pointer transition-colors ${
+                    selectedRowIndex === row.index
+                      ? 'bg-blue-50'
+                      : hasMismatch
+                        ? 'hover:bg-red-50'
+                        : 'hover:bg-gray-50'
+                  }`}
+                >
+                  {row.getVisibleCells().map((cell) => {
+                    const isTypeCell = cell.column.id === 'type';
+                    return (
+                      <td
+                        key={cell.id}
+                        className={`px-3 py-2 ${isTypeCell && hasMismatch && !acct.typeOverride ? 'bg-red-100' : ''}`}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

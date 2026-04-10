@@ -20,6 +20,8 @@ export interface MappedAccount extends Account {
   correctedName?: string;
   overrideCode?: string;
   overrideReason?: string;
+  approved?: boolean;
+  typeOverride?: string;
 }
 
 // Rule engine
