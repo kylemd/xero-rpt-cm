@@ -42,6 +42,11 @@ for (const m of leafMappings) {
   leafByHead[head].push(m);
 }
 
+const codeToDescription: Record<string, string> = {};
+for (const m of allMappings) {
+  codeToDescription[m.reportingCode] = m.name;
+}
+
 // ---------------------------------------------------------------------------
 // Props
 // ---------------------------------------------------------------------------
@@ -338,8 +343,13 @@ export default function AccountDetailPanel({
           </select>
 
           {overrideCode && (
-            <div className="text-xs text-blue-600 mb-2 font-mono">
-              Selected: {overrideCode}
+            <div className="mb-2 text-xs">
+              <div className="text-blue-600 font-mono">Selected: {overrideCode}</div>
+              {codeToDescription[overrideCode] && (
+                <div className="text-gray-500 mt-0.5">
+                  {codeToDescription[overrideCode]}
+                </div>
+              )}
             </div>
           )}
 
