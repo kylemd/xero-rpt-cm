@@ -264,3 +264,32 @@ describe('runPipeline + autoConfirm integration', () => {
     expect(out[0].auto).toBe(true);
   });
 });
+
+describe('Inventory synonym handling', () => {
+  it('maps "Inventory" on a Current Asset account to ASS.CUR.INY', async () => {
+    const rulesData = (await import('../../../data/rules.json')).default;
+    const templateEntries = (await import('../../data/templates/Company.json')).default;
+    const systemMappings = (await import('../../data/systemMappings.json')).default;
+
+    const out = runPipeline({
+      accounts: [
+        {
+          code: '630',
+          name: 'Inventory',
+          type: 'Current Asset',
+          canonType: 'current asset',
+          reportCode: 'ASS.CUR.INY',
+        },
+      ],
+      rulesData: rulesData as never,
+      templateEntries: templateEntries as never,
+      systemMappings: systemMappings as never,
+      glSummary: [],
+      industry: '',
+      templateName: 'Company',
+    });
+
+    expect(out[0].predictedCode).toBe('ASS.CUR.INY');
+    expect(out[0].source).not.toBe('FallbackParent');
+  });
+});

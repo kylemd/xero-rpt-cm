@@ -2414,8 +2414,11 @@ _remaining_rules = [
         code="ASS.CUR.INY",
         priority=80,
         keywords=["inventory"],
-        raw_types={"inventory"},
-        notes="Inventory type accounts -> inventory assets",
+        keywords_exclude=["closing", "opening", "movement", "adjust", "prepaid", "transit"],
+        canon_types={"current asset", "inventory"},
+        notes="'Inventory' name on Current Asset or Inventory type -> ASS.CUR.INY. "
+              "Synonym pair with stock_on_hand; covers Xero charts where 'Inventory' "
+              "is typed Current Asset rather than Inventory.",
     ),
 
     # Preliminary expenses

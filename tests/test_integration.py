@@ -172,6 +172,11 @@ ANONYMIZATION_XFAILS = {
     ("client_182_validated_final.csv", "310"): "Rule improvement: EXP.COS.PUR > EXP.COS for cost of goods sold",
     # Integrated Client Account → LIA.CUR.TAX (validated as LIA.CUR; TAX is more specific)
     ("client_234_validated_final.csv", "21401"): "Rule improvement: LIA.CUR.TAX > LIA.CUR for ICA",
+    # Inventory (Current Asset) → ASS.CUR.INY (validated as ASS.CUR.CAS.BAN — bank-default
+    # rule misfired on these inventory accounts; the relaxed inventory_asset rule catches them.)
+    ("client_255_validated_final.csv", "NoCode40"): "Validation error: ASS.CUR.CAS.BAN wrong for Inventory (deleted); ASS.CUR.INY correct",
+    ("client_255_validated_final.csv", "NoCode41"): "Validation error: ASS.CUR.CAS.BAN wrong for Inventory Asset; ASS.CUR.INY correct",
+    ("client_255_validated_final.csv", "NoCode42"): "Validation error: ASS.CUR.CAS.BAN wrong for Inventory Asset (deleted); ASS.CUR.INY correct",
 }
 
 
