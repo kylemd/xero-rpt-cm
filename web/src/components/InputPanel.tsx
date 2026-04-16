@@ -18,7 +18,12 @@ async function parseChartCheckReport(_f: File): Promise<never> {
 import { runPipeline } from '../pipeline/pipeline';
 import { buildCodeTypeMap } from '../pipeline/typePredict';
 import systemMappings from '../data/systemMappings.json';
-import type { TemplateName, SystemMapping } from '../types';
+import type {
+  TemplateName,
+  SystemMapping,
+  Account,
+  ChartCheckData,
+} from '../types';
 
 const TEMPLATE_OPTIONS: TemplateName[] = [
   'Company',
@@ -31,10 +36,17 @@ const TEMPLATE_OPTIONS: TemplateName[] = [
 export default function InputPanel() {
   const templateName = useAppStore((s) => s.templateName);
   const setTemplateName = useAppStore((s) => s.setTemplateName);
-  const accounts = useAppStore((s) => s.accounts);
-  const setAccounts = useAppStore((s) => s.setAccounts);
-  const chartCheckData = useAppStore((s) => s.chartCheckData);
-  const setChartCheckData = useAppStore((s) => s.setChartCheckData);
+  // Task 12: InputPanel will be rewritten to derive accounts and chart-check
+  // data from the new verificationReport store field. Until then, these are
+  // stubs so the file type-checks after the Task 10 store rewrite.
+  const accounts: Account[] = [];
+  const setAccounts = (_: Account[]) => {
+    /* Task 12 stub */
+  };
+  const chartCheckData: ChartCheckData | null = null;
+  const setChartCheckData = (_: ChartCheckData) => {
+    /* Task 12 stub */
+  };
   const setGroupRelationships = useAppStore((s) => s.setGroupRelationships);
   const rulesData = useAppStore((s) => s.rulesData);
   const isProcessing = useAppStore((s) => s.isProcessing);

@@ -60,7 +60,7 @@ export default function AccountDetailPanel({
   onClose,
 }: AccountDetailPanelProps) {
   const mappedAccounts = useAppStore((s) => s.mappedAccounts);
-  const chartCheckData = useAppStore((s) => s.chartCheckData);
+  const verificationReport = useAppStore((s) => s.verificationReport);
   const groupRelationships = useAppStore((s) => s.groupRelationships);
   const overrideAccount = useAppStore((s) => s.overrideAccount);
 
@@ -72,26 +72,26 @@ export default function AccountDetailPanel({
   if (!account) return null;
 
   // GL entry for this account
-  const glEntry = chartCheckData?.glSummary.find(
+  const glEntry = verificationReport?.glSummary.find(
     (gl) => gl.accountCode === account.code,
   );
 
   // Depreciation links
-  const depAssets = chartCheckData?.depSchedule.filter(
+  const depAssets = verificationReport?.depSchedule.filter(
     (d) => d.costAccount === account.code,
   );
 
   // Group relationships matching this entity
   const entityRelationships = useMemo(() => {
-    if (!groupRelationships || !chartCheckData) return [];
-    const entityName = chartCheckData.clientParams.displayName;
+    if (!groupRelationships || !verificationReport) return [];
+    const entityName = verificationReport.clientParams.displayName;
     if (!entityName) return [];
     return groupRelationships.relationships.filter(
       (r) =>
         r.entityName.toLowerCase().includes(entityName.toLowerCase()) ||
         r.relatedClient.toLowerCase().includes(entityName.toLowerCase()),
     );
-  }, [groupRelationships, chartCheckData]);
+  }, [groupRelationships, verificationReport]);
 
   // All leaf codes grouped by head, filtered by search
   const groupedCodes = useMemo(() => {

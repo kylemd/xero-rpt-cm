@@ -9,10 +9,10 @@ interface StatusBarProps {
 }
 
 export default function StatusBar({ onToggleRulesAdmin }: StatusBarProps) {
-  const chartCheckData = useAppStore((s) => s.chartCheckData);
+  const verificationReport = useAppStore((s) => s.verificationReport);
   const mappedAccounts = useAppStore((s) => s.mappedAccounts);
 
-  const entityName = chartCheckData?.clientParams?.displayName;
+  const entityName = verificationReport?.clientParams?.displayName;
 
   const totalCount = mappedAccounts.length;
   const reviewCount = mappedAccounts.filter((a) => a.needsReview).length;
