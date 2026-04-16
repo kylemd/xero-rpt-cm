@@ -18,9 +18,9 @@ import {
 import { useAppStore } from '../store/appStore';
 import {
   predictTypeFromCode,
-  HEAD_FROM_TYPE,
   SYSTEM_TYPES,
   ALLOWED_TYPES_BY_HEAD,
+  hasTypeMismatch,
 } from '../pipeline/typePredict';
 import systemMappings from '../data/systemMappings.json';
 import type { MappedAccount, SystemMapping } from '../types';
@@ -114,10 +114,7 @@ function downloadFile(content: string, filename: string, mime: string) {
 
 /** Check if a given account has a type mismatch. */
 function hasTypeMismatchForAccount(acct: MappedAccount): boolean {
-  const finalCode = acct.overrideCode || acct.predictedCode;
-  const currentHead = HEAD_FROM_TYPE[acct.type] || '';
-  const codeHead = finalCode.split('.')[0];
-  return !SYSTEM_TYPES.has(acct.type) && !!currentHead && currentHead !== codeHead;
+  return hasTypeMismatch(acct.type, acct.overrideCode || acct.predictedCode);
 }
 
 // ---------------------------------------------------------------------------
@@ -202,12 +199,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
             acct.type,
             codeTypeMap,
           );
-          const currentHead = HEAD_FROM_TYPE[acct.type] || '';
-          const codeHead = finalCode.split('.')[0];
-          const hasMismatch =
-            !SYSTEM_TYPES.has(acct.type) &&
-            !!currentHead &&
-            currentHead !== codeHead;
+          const hasMismatch = hasTypeMismatchForAccount(acct);
           const originalIndex = mappedAccounts.indexOf(acct);
 
           if (acct.typeOverride) {
@@ -224,6 +216,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
           }
 
           if (hasMismatch) {
+            const codeHead = finalCode.split('.')[0];
             const allowedTypes =
               ALLOWED_TYPES_BY_HEAD[codeHead] ?? [];
             return (
@@ -558,13 +551,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
           <tbody className="divide-y divide-gray-100">
             {table.getRowModel().rows.map((row) => {
               const acct = row.original;
-              const finalCode = acct.overrideCode || acct.predictedCode;
-              const currentHead = HEAD_FROM_TYPE[acct.type] || '';
-              const codeHead = finalCode.split('.')[0];
-              const hasMismatch =
-                !SYSTEM_TYPES.has(acct.type) &&
-                !!currentHead &&
-                currentHead !== codeHead;
+              const hasMismatch = hasTypeMismatchForAccount(acct);
 
               return (
                 <tr
