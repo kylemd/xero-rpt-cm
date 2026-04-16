@@ -116,7 +116,7 @@ describe('parseTypeAndClassSheet', () => {
   });
 });
 
-import { parseReportingCodesSheet } from '../verificationReportParser';
+import { parseReportingCodesSheet, parseVerificationReportFromWorkbook } from '../verificationReportParser';
 
 describe('parseReportingCodesSheet', () => {
   it('extracts code + name + reporting code from grouped rows', () => {
@@ -212,5 +212,132 @@ describe('parseReportingCodesSheet', () => {
     const sheet = findRequiredSheet(wb, 'Chart of Accounts - Reportin')!;
     const rows = parseReportingCodesSheet(sheet);
     expect(rows.map((r) => r.code)).toEqual(['400']);
+  });
+});
+
+function makeFullDemoWorkbook(): XLSX.WorkBook {
+  return makeWorkbook({
+    'Client File Parameters Report': [
+      ['Client File Parameters Report'],
+      ['Demo Company (AU)'],
+      ['For the year ended 30 June 2026'],
+    ],
+    'Chart of Accounts - Reportin...': [
+      ['Chart of Accounts - Reporting Codes'],
+      [], [], [],
+      [null, 'Account', '2026'],
+      [],
+      ['Chart of Accounts'],
+      [null, 'ASS.CUR.CAS.BAN'],
+      [null, '090 - Business Bank Account', -17849],
+      [null, '091 - Business Savings Account', 6878],
+      [null, 'Total ASS.CUR.CAS.BAN', 0],
+      [null, 'EXP'],
+      [null, '400 - Advertising', 500],
+      [null, '404 - Bank Fees', 0],
+      [null, 'Total EXP', 0],
+      [null, 'EQU.RET.CUR'],
+      [null, 'Current Year Earnings', 1234],
+      [null, 'Total EQU.RET.CUR', 0],
+      ['Total Chart of Accounts', null, 0],
+    ],
+    'Chart of Accounts - Type and...': [
+      ['Chart of Accounts - Type and Class'],
+      [], [], [],
+      ['Account Code', 'Account', 'Account Type', 'Account Class'],
+      ['090', 'Business Bank Account', 'Bank', 'Asset'],
+      ['091', 'Business Savings Account', 'Bank', 'Asset'],
+      ['400', 'Advertising', 'Expense', 'Expense'],
+      ['404', 'Bank Fees', 'Expense', 'Expense'],
+      ['CURRADJUST', 'Currency Adjustment', 'Bank', 'Asset'],
+      ['Total', null, null, null],
+    ],
+    'Account Movements - Current FY': [
+      ['Account Movements - Current FY'], [], [], [],
+      ['Account', 'Account Code', 'Opening Balance', 'Debit', 'Credit', 'Net Movement', 'Closing Balance', 'Account Type'],
+      ['Business Bank Account', '090', 0, 100, 200, -100, -17849, 'Bank'],
+      ['Advertising', '400', 0, 500, 0, 500, 500, 'Expense'],
+      ['Total', null, 0, 0, 0, 0, 0, null],
+    ],
+    'Account Movements - Comparative': [
+      ['Account Movements - Comparative'], [], [], [],
+      ['Account', 'Account Code', 'Opening Balance', 'Debit', 'Credit', 'Net Movement', 'Closing Balance', 'Account Type'],
+      ['Business Bank Account', '090', 0, 100, 200, -100, -17849, 'Bank'],
+      ['Advertising', '400', 0, 500, 0, 500, 500, 'Expense'],
+      ['Total', null, 0, 0, 0, 0, 0, null],
+    ],
+    'Account Movements - Considered': [
+      ['Account Movements - Considered Active'], [], [], [],
+      ['Account', 'Account Code', 'Opening Balance', 'Debit', 'Credit', 'Net Movement', 'Closing Balance', 'Account Type'],
+      ['Business Bank Account', '090', 0, 100, 200, -100, -17849, 'Bank'],
+      ['Business Savings Account', '091', 0, 50, 0, 50, 6878, 'Bank'],
+      ['Advertising', '400', 0, 500, 0, 500, 500, 'Expense'],
+      ['Total', null, 0, 0, 0, 0, 0, null],
+    ],
+    'Depreciation Schedule': [
+      ['Depreciation Schedule'],
+      ['Demo Company (AU)'],
+      ['For the year ended 30 June 2026'],
+    ],
+    'Beneficiary Accounts': [
+      ['Beneficiary Accounts'],
+      ['Demo Company (AU)'],
+      ['For the year ended 30 June 2026'],
+    ],
+  });
+}
+
+describe('parseVerificationReportFromWorkbook', () => {
+  it('throws when a required sheet is missing', () => {
+    const wb = makeFullDemoWorkbook();
+    delete (wb.Sheets as Record<string, unknown>)['Beneficiary Accounts'];
+    wb.SheetNames = wb.SheetNames.filter((n) => n !== 'Beneficiary Accounts');
+    expect(() => parseVerificationReportFromWorkbook(wb)).toThrowError(
+      /Beneficiary Accounts/i,
+    );
+  });
+
+  it('parses a full demo workbook', () => {
+    const wb = makeFullDemoWorkbook();
+    const data = parseVerificationReportFromWorkbook(wb);
+    expect(data.clientParams.displayName).toBe('Demo Company (AU)');
+    // Current Year Earnings has no code on Type and Class -> excluded.
+    // CURRADJUST is on Type and Class but not on Reporting Codes -> excluded.
+    // 404 Bank Fees: not in Considered -> archived.
+    expect(data.accounts.map((a) => a.code).sort()).toEqual(['090', '091', '400']);
+  });
+
+  it('tags accounts as mandatory when present in Comparative', () => {
+    const wb = makeFullDemoWorkbook();
+    const data = parseVerificationReportFromWorkbook(wb);
+    const bank = data.accounts.find((a) => a.code === '090');
+    expect(bank?.activity).toBe('mandatory');
+    const advertising = data.accounts.find((a) => a.code === '400');
+    expect(advertising?.activity).toBe('mandatory');
+  });
+
+  it('tags accounts as optional when in Considered but not Comparative', () => {
+    const wb = makeFullDemoWorkbook();
+    const data = parseVerificationReportFromWorkbook(wb);
+    const savings = data.accounts.find((a) => a.code === '091');
+    expect(savings?.activity).toBe('optional');
+  });
+
+  it('fills type and class from the Type and Class sheet', () => {
+    const wb = makeFullDemoWorkbook();
+    const data = parseVerificationReportFromWorkbook(wb);
+    const advertising = data.accounts.find((a) => a.code === '400');
+    expect(advertising?.type).toBe('Expense');
+    expect(advertising?.class).toBe('Expense');
+    expect(advertising?.reportCode).toBe('EXP');
+    expect(advertising?.canonType).toBe('expense');
+  });
+
+  it('populates glSummary, glSummaryComparative, glSummaryConsidered from their sheets', () => {
+    const wb = makeFullDemoWorkbook();
+    const data = parseVerificationReportFromWorkbook(wb);
+    expect(data.glSummary.map((g) => g.accountCode)).toEqual(['090', '400']);
+    expect(data.glSummaryComparative.map((g) => g.accountCode)).toEqual(['090', '400']);
+    expect(data.glSummaryConsidered.map((g) => g.accountCode)).toEqual(['090', '091', '400']);
   });
 });
