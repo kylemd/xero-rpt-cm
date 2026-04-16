@@ -33,6 +33,8 @@ type FilterMode = 'all' | 'review' | 'fallback' | 'active' | 'typeMismatch';
 
 type ActivityFilter = 'mandatory' | 'optional' | 'all';
 
+type StatusFilter = 'all' | 'pending' | 'accepted' | 'overridden';
+
 // ---------------------------------------------------------------------------
 // System mappings code-to-name lookup
 // ---------------------------------------------------------------------------
@@ -119,6 +121,14 @@ function hasTypeMismatchForAccount(acct: MappedAccount): boolean {
   return hasTypeMismatch(acct.type, acct.overrideCode || acct.predictedCode);
 }
 
+function decisionStatus(a: MappedAccount): 'accepted' | 'overridden' | 'pending' {
+  if (a.overrideCode) return 'overridden';
+  if (a.approved) return 'accepted';
+  // Predicted === original without a user click: counts as accepted (Auto).
+  if (!a.reportCode || a.predictedCode === a.reportCode) return 'accepted';
+  return 'pending';
+}
+
 // ---------------------------------------------------------------------------
 // Props
 // ---------------------------------------------------------------------------
@@ -141,6 +151,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
   const [globalFilter, setGlobalFilter] = useState('');
   const [filterMode, setFilterMode] = useState<FilterMode>('all');
   const [activityFilter, setActivityFilter] = useState<ActivityFilter>('mandatory');
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
   const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
 
   // Apply filter mode
@@ -153,6 +164,9 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
       data = data.filter((a) => a.activity === 'optional');
     }
     // 'all' falls through — no filter.
+    if (statusFilter !== 'all') {
+      data = data.filter((a) => decisionStatus(a) === statusFilter);
+    }
     switch (filterMode) {
       case 'review':
         data = data.filter((a) => a.needsReview);
@@ -168,7 +182,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
         break;
     }
     return data;
-  }, [mappedAccounts, filterMode, activityFilter]);
+  }, [mappedAccounts, filterMode, activityFilter, statusFilter]);
 
   const columns = useMemo<ColumnDef<MappedAccount>[]>(
     () => [
@@ -503,6 +517,17 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
             </button>
           ))}
         </div>
+
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value as StatusFilter)}
+          className="px-2 py-1 text-xs border border-gray-300 rounded-md bg-white"
+        >
+          <option value="all">Status: All</option>
+          <option value="pending">Pending</option>
+          <option value="accepted">Accepted</option>
+          <option value="overridden">Overridden</option>
+        </select>
 
         {/* Filter chips */}
         <div className="flex gap-1.5">
