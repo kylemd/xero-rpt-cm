@@ -50,6 +50,16 @@ function cellStr(v: unknown): string {
   return String(v).trim();
 }
 
+function cellNum(v: unknown): number {
+  if (v === null || v === undefined || v === '') return 0;
+  if (typeof v === 'number') return v;
+  const s = String(v).trim().replace(/,/g, '');
+  const isNeg = s.startsWith('(') && s.endsWith(')');
+  const n = parseFloat(isNeg ? s.slice(1, -1) : s);
+  if (isNaN(n)) return 0;
+  return isNeg ? -n : n;
+}
+
 // ---------------------------------------------------------------------------
 // Chart of Accounts - Type and Class
 // ---------------------------------------------------------------------------
@@ -86,6 +96,81 @@ export function parseTypeAndClassSheet(
     const type = cellStr(row[2]);
     const cls = cellStr(row[3]);
     out.set(code, { code, name, type, class: cls });
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------
+// Chart of Accounts - Reporting Codes
+// ---------------------------------------------------------------------------
+
+export interface ReportingCodeRow {
+  code: string;
+  name: string;
+  reportCode: string;
+  currentBalance: number;
+}
+
+// Matches "NNN - Name" where NNN is any non-space token (alphanumeric).
+const CODE_NAME_RE = /^(\S+)\s*-\s*(.+)$/;
+
+// Reporting-code group header: starts with a known head.
+const KNOWN_HEADS = new Set(['ASS', 'LIA', 'EQU', 'REV', 'EXP']);
+
+function isGroupHeader(row: Row): string | null {
+  const a = cellStr(row[0]);
+  const b = cellStr(row[1]);
+  if (a) return null; // group headers have col A empty
+  if (!b) return null;
+  if (b.toLowerCase().startsWith('total ')) return null;
+  if (b.toLowerCase() === 'account') return null;
+  const head = b.split('.')[0];
+  if (!KNOWN_HEADS.has(head)) return null;
+  return b;
+}
+
+function isAccountRow(row: Row): boolean {
+  const a = cellStr(row[0]);
+  const b = cellStr(row[1]);
+  if (a) return false;
+  if (!b) return false;
+  if (b.toLowerCase().startsWith('total ')) return false;
+  if (b.toLowerCase() === 'account') return false;
+  const head = b.split('.')[0];
+  if (KNOWN_HEADS.has(head)) return false; // that's a group header
+  return true;
+}
+
+export function parseReportingCodesSheet(
+  sheet: XLSX.WorkSheet,
+): ReportingCodeRow[] {
+  const rows = sheetRows(sheet);
+  const out: ReportingCodeRow[] = [];
+  let currentReportCode = '';
+
+  for (const row of rows) {
+    const topTotal = cellStr(row[0]);
+    if (topTotal.toLowerCase().startsWith('total chart of accounts')) {
+      break; // end of data
+    }
+    const header = isGroupHeader(row);
+    if (header) {
+      currentReportCode = header;
+      continue;
+    }
+    if (!isAccountRow(row)) continue;
+    if (!currentReportCode) continue;
+
+    const text = cellStr(row[1]);
+    const m = text.match(CODE_NAME_RE);
+    let code = '';
+    let name = text;
+    if (m) {
+      code = m[1].trim();
+      name = m[2].trim();
+    }
+    const currentBalance = cellNum(row[2]);
+    out.push({ code, name, reportCode: currentReportCode, currentBalance });
   }
   return out;
 }

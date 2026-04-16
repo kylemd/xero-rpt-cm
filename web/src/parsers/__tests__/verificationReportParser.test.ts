@@ -115,3 +115,79 @@ describe('parseTypeAndClassSheet', () => {
     expect(map.size).toBe(2);
   });
 });
+
+import { parseReportingCodesSheet } from '../verificationReportParser';
+
+describe('parseReportingCodesSheet', () => {
+  it('extracts code + name + reporting code from grouped rows', () => {
+    const wb = makeWorkbook({
+      'Chart of Accounts - Reportin...': [
+        ['Chart of Accounts - Reporting Codes'],
+        [],
+        [],
+        [],
+        [null, 'Account', '2026', '2025', '2024', '2023', '2022', '2021'],
+        [],
+        ['Chart of Accounts'],
+        [null, 'ASS.CUR.CAS.BAN'],
+        [null, '090 - Business Bank Account', -17849.87, -8703.2, 0, 0, 0, 0],
+        [null, '091 - Business Savings Account', 6878.28, 0, 0, 0, 0, 0],
+        [null, 'Total ASS.CUR.CAS.BAN', 0, 0, 0, 0, 0, 0],
+        [null, 'REV.TRA.GOO'],
+        [null, '200 - Sales', -53378.32, -4200.0, 0, 0, 0, 0],
+        [null, 'Total REV.TRA.GOO', 0, 0, 0, 0, 0, 0],
+        ['Total Chart of Accounts', null, 0, 0, 0, 0, 0, 0],
+      ],
+    });
+    const sheet = findRequiredSheet(wb, 'Chart of Accounts - Reportin')!;
+    const rows = parseReportingCodesSheet(sheet);
+    expect(rows).toEqual([
+      { code: '090', name: 'Business Bank Account', reportCode: 'ASS.CUR.CAS.BAN', currentBalance: -17849.87 },
+      { code: '091', name: 'Business Savings Account', reportCode: 'ASS.CUR.CAS.BAN', currentBalance: 6878.28 },
+      { code: '200', name: 'Sales', reportCode: 'REV.TRA.GOO', currentBalance: -53378.32 },
+    ]);
+  });
+
+  it('keeps rows without a numeric code prefix (e.g. unnumbered bank accounts)', () => {
+    const wb = makeWorkbook({
+      'Chart of Accounts - Reportin...': [
+        ['Chart of Accounts - Reporting Codes'],
+        [],
+        [],
+        [],
+        [null, 'Account', '2026'],
+        [],
+        ['Chart of Accounts'],
+        [null, 'ASS.CUR.CAS.BAN'],
+        [null, 'Old Bank', 100],
+        [null, 'Total ASS.CUR.CAS.BAN', 0],
+      ],
+    });
+    const sheet = findRequiredSheet(wb, 'Chart of Accounts - Reportin')!;
+    const rows = parseReportingCodesSheet(sheet);
+    expect(rows).toEqual([
+      { code: '', name: 'Old Bank', reportCode: 'ASS.CUR.CAS.BAN', currentBalance: 100 },
+    ]);
+  });
+
+  it('skips the grand Total Chart of Accounts row', () => {
+    const wb = makeWorkbook({
+      'Chart of Accounts - Reportin...': [
+        ['Chart of Accounts - Reporting Codes'],
+        [],
+        [],
+        [],
+        [null, 'Account', '2026'],
+        [],
+        ['Chart of Accounts'],
+        [null, 'EXP'],
+        [null, '400 - Advertising', 500],
+        [null, 'Total EXP', 0],
+        ['Total Chart of Accounts', null, 0],
+      ],
+    });
+    const sheet = findRequiredSheet(wb, 'Chart of Accounts - Reportin')!;
+    const rows = parseReportingCodesSheet(sheet);
+    expect(rows.map((r) => r.code)).toEqual(['400']);
+  });
+});
