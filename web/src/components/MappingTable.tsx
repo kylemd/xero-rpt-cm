@@ -146,6 +146,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
   const codeTypeMap = useAppStore((s) => s.codeTypeMap);
   const approveAccount = useAppStore((s) => s.approveAccount);
   const overrideAccountType = useAppStore((s) => s.overrideAccountType);
+  const clearAllDecisions = useAppStore((s) => s.clearAllDecisions);
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
@@ -485,6 +486,14 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
     downloadFile(json, 'decisions.json', 'application/json');
   }, [mappedAccounts, codeTypeMap]);
 
+  const handleClearAll = useCallback(() => {
+    const confirmed = window.confirm(
+      'Reset all decisions for this client? This cannot be undone.',
+    );
+    if (!confirmed) return;
+    clearAllDecisions();
+  }, [clearAllDecisions]);
+
   const filterChips: { mode: FilterMode; label: string }[] = [
     { mode: 'all', label: 'All' },
     { mode: 'review', label: 'Needs Review' },
@@ -605,6 +614,12 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
         </div>
 
         {/* Export buttons */}
+        <button
+          onClick={handleClearAll}
+          className="px-3 py-1.5 text-xs font-medium bg-white border border-gray-300 rounded-md hover:bg-red-50 hover:border-red-300 hover:text-red-700 text-gray-700"
+        >
+          Clear All
+        </button>
         <button
           onClick={handleExportCSV}
           className="px-3 py-1.5 text-xs font-medium bg-white border border-gray-300 rounded-md hover:bg-gray-50 text-gray-700"
