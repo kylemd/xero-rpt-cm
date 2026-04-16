@@ -186,6 +186,18 @@ export function parseReportingCodesSheet(
 // Client File Parameters
 // ---------------------------------------------------------------------------
 
+function applyArrayValue(
+  defaults: EntityParams,
+  key: string,
+  items: string[],
+): void {
+  const clean = items
+    .map((s) => s.replace(/^["']|["']$/g, '').trim())
+    .filter(Boolean);
+  if (key === 'DIRECTOR_NAMES') defaults.directors.push(...clean);
+  else if (key === 'TRUSTEE_NAMES') defaults.trustees.push(...clean);
+}
+
 function parseClientParams(sheet: XLSX.WorkSheet): EntityParams {
   const rows = sheetRows(sheet);
   const defaults: EntityParams = {
@@ -196,16 +208,64 @@ function parseClientParams(sheet: XLSX.WorkSheet): EntityParams {
     trustees: [],
     signatories: [],
   };
-  // Title is row 0; display name is typically row 1 (entity name).
+
+  // Row 1 (second row) conventionally holds the entity name.
   if (rows[1]) defaults.displayName = cellStr(rows[1][0]);
 
-  // Key-value lines embedded in the sheet (JSON-ish).
+  // Pseudo-JSON key lines look like:  [em-space]"KEY": value,
+  // Array values may span cells:      "KEY": [first,   →  then cells  →  last]
+  const KEY_RE = /"([A-Z_0-9]+)"\s*:\s*(.*?)\s*,?\s*$/;
+
+  let openArrayKey: string | null = null;
+  let openArrayAcc: string[] = [];
+
+  const closeArray = () => {
+    if (openArrayKey) {
+      applyArrayValue(defaults, openArrayKey, openArrayAcc);
+      openArrayKey = null;
+      openArrayAcc = [];
+    }
+  };
+
   for (const row of rows) {
     const raw = cellStr(row[0]);
-    const m = raw.match(/"([A-Z_]+)"\s*:\s*(.+?),?\s*$/);
+    if (!raw) continue;
+
+    // Inside an open array — collect cells until we hit `]`.
+    if (openArrayKey) {
+      const endIdx = raw.indexOf(']');
+      if (endIdx >= 0) {
+        const piece = raw.slice(0, endIdx).trim();
+        if (piece) openArrayAcc.push(piece);
+        closeArray();
+      } else {
+        openArrayAcc.push(raw);
+      }
+      continue;
+    }
+
+    const m = raw.match(KEY_RE);
     if (!m) continue;
     const key = m[1];
-    const value = m[2].trim().replace(/^"|"$|,$/g, '');
+    const rawValue = m[2].trim();
+
+    // Array-valued key?
+    if (rawValue.startsWith('[')) {
+      const inner = rawValue.slice(1);
+      const endIdx = inner.indexOf(']');
+      if (endIdx >= 0) {
+        // Single-line array
+        const content = inner.slice(0, endIdx).trim();
+        applyArrayValue(defaults, key, content ? [content] : []);
+      } else {
+        openArrayKey = key;
+        openArrayAcc = inner.trim() ? [inner.trim()] : [];
+      }
+      continue;
+    }
+
+    // Scalar string value — strip surrounding quotes if any.
+    const value = rawValue.replace(/^"|"$/g, '');
     switch (key) {
       case 'DISPLAY_NAME':
         if (value) defaults.displayName = value;
@@ -222,6 +282,10 @@ function parseClientParams(sheet: XLSX.WorkSheet): EntityParams {
         break;
     }
   }
+
+  // Safety: close any dangling open array at EOF.
+  closeArray();
+
   return defaults;
 }
 

@@ -287,6 +287,53 @@ function makeFullDemoWorkbook(): XLSX.WorkBook {
   });
 }
 
+describe('parseClientParams (via parseVerificationReportFromWorkbook)', () => {
+  it('extracts directors from a multi-cell array', () => {
+    const wb = makeFullDemoWorkbook();
+    // Overwrite the params sheet with a realistic multi-cell directors block
+    const params = XLSX.utils.aoa_to_sheet([
+      ['Client File Parameters Report'],
+      ['Demo Company (AU)'],
+      ['For the year ended 30 June 2026'],
+      [],
+      ['{'],
+      ['\u2003"DISPLAY_NAME": "Demo Company (AU)",'],
+      ['\u2003"AUSTRALIAN_BUSINESS_NUMBER": 11 111 111 138,'],
+      ['\u2003"DIRECTOR_NAMES": [John Smith'],
+      ['Aurelia Guigaro'],
+      ['Enzo de Tomaso]'],
+      ['\u2003"TRUSTEE_NAMES": [Demo Trustee Pty Ltd]'],
+      ['}'],
+    ]);
+    wb.Sheets['Client File Parameters Report'] = params;
+    const data = parseVerificationReportFromWorkbook(wb);
+    expect(data.clientParams.displayName).toBe('Demo Company (AU)');
+    expect(data.clientParams.abn).toBe('11 111 111 138');
+    expect(data.clientParams.directors).toEqual([
+      'John Smith',
+      'Aurelia Guigaro',
+      'Enzo de Tomaso',
+    ]);
+    expect(data.clientParams.trustees).toEqual(['Demo Trustee Pty Ltd']);
+  });
+
+  it('handles an empty array value gracefully', () => {
+    const wb = makeFullDemoWorkbook();
+    const params = XLSX.utils.aoa_to_sheet([
+      ['Client File Parameters Report'],
+      ['Solo Trader'],
+      [],
+      ['{'],
+      ['\u2003"DISPLAY_NAME": "Solo Trader",'],
+      ['\u2003"DIRECTOR_NAMES": []'],
+      ['}'],
+    ]);
+    wb.Sheets['Client File Parameters Report'] = params;
+    const data = parseVerificationReportFromWorkbook(wb);
+    expect(data.clientParams.directors).toEqual([]);
+  });
+});
+
 describe('parseVerificationReportFromWorkbook', () => {
   it('throws when a required sheet is missing', () => {
     const wb = makeFullDemoWorkbook();
