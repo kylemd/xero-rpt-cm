@@ -7,9 +7,14 @@
 import { useCallback, useState } from 'react';
 import FileDropZone from './FileDropZone';
 import { useAppStore } from '../store/appStore';
-import { parseChartFile } from '../parsers/chartParser';
-import { parseChartCheckReport } from '../parsers/chartCheckParser';
 import { parseGroupRelationshipsFile } from '../parsers/groupParser';
+// Legacy parser imports removed — Task 12 rewires to verificationReportParser.
+async function parseChartFile(_f: File): Promise<never> {
+  throw new Error('Legacy parser removed — re-run after Task 12.');
+}
+async function parseChartCheckReport(_f: File): Promise<never> {
+  throw new Error('Legacy parser removed — re-run after Task 12.');
+}
 import { runPipeline } from '../pipeline/pipeline';
 import { buildCodeTypeMap } from '../pipeline/typePredict';
 import systemMappings from '../data/systemMappings.json';
