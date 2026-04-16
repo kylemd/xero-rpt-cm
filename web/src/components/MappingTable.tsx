@@ -152,6 +152,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
   const [filterMode, setFilterMode] = useState<FilterMode>('all');
   const [activityFilter, setActivityFilter] = useState<ActivityFilter>('mandatory');
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
+  const [sourceFilter, setSourceFilter] = useState<string>('all');
   const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
 
   // Apply filter mode
@@ -166,6 +167,9 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
     // 'all' falls through — no filter.
     if (statusFilter !== 'all') {
       data = data.filter((a) => decisionStatus(a) === statusFilter);
+    }
+    if (sourceFilter !== 'all') {
+      data = data.filter((a) => a.source === sourceFilter);
     }
     switch (filterMode) {
       case 'review':
@@ -182,7 +186,15 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
         break;
     }
     return data;
-  }, [mappedAccounts, filterMode, activityFilter, statusFilter]);
+  }, [mappedAccounts, filterMode, activityFilter, statusFilter, sourceFilter]);
+
+  const sourceCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const a of mappedAccounts) {
+      counts.set(a.source, (counts.get(a.source) ?? 0) + 1);
+    }
+    return counts;
+  }, [mappedAccounts]);
 
   const columns = useMemo<ColumnDef<MappedAccount>[]>(
     () => [
@@ -527,6 +539,19 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
           <option value="pending">Pending</option>
           <option value="accepted">Accepted</option>
           <option value="overridden">Overridden</option>
+        </select>
+
+        <select
+          value={sourceFilter}
+          onChange={(e) => setSourceFilter(e.target.value)}
+          className="px-2 py-1 text-xs border border-gray-300 rounded-md bg-white"
+        >
+          <option value="all">Source: All</option>
+          {Array.from(sourceCounts.entries())
+            .sort((a, b) => a[0].localeCompare(b[0]))
+            .map(([src, n]) => (
+              <option key={src} value={src}>{src} ({n})</option>
+            ))}
         </select>
 
         {/* Filter chips */}
