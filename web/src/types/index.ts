@@ -8,6 +8,8 @@ export interface Account {
   reportCode?: string;
   taxCode?: string;
   description?: string;
+  activity?: 'mandatory' | 'optional';
+  class?: string;
 }
 
 export interface MappedAccount extends Account {
@@ -21,6 +23,7 @@ export interface MappedAccount extends Account {
   overrideCode?: string;
   overrideReason?: string;
   approved?: boolean;
+  auto?: boolean;
   typeOverride?: string;
 }
 
@@ -105,6 +108,37 @@ export interface ChartCheckData {
   depSchedule: DepAsset[];
   clientParams: EntityParams;
   beneficiaryAccounts: BeneficiaryEntry[];
+}
+
+// Verification Report
+
+export interface VerificationReportData {
+  accounts: Account[];
+  clientParams: EntityParams;
+  glSummary: GLEntry[];
+  glSummaryComparative: GLEntry[];
+  glSummaryConsidered: GLEntry[];
+  depSchedule: DepAsset[];
+  beneficiaryAccounts: BeneficiaryEntry[];
+}
+
+// Persisted per-account decision
+
+export interface AccountDecision {
+  overrideCode?: string;
+  overrideReason?: string;
+  typeOverride?: string;
+  approved?: boolean;
+  auto?: boolean;
+}
+
+export type DecisionMap = Record<string, AccountDecision>;
+
+export interface ClientDecisionsFile {
+  version: 1;
+  clientKey: string;
+  savedAt: string;
+  decisions: DecisionMap;
 }
 
 // Group Relationships
