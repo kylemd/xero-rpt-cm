@@ -22,6 +22,7 @@ import {
   ALLOWED_TYPES_BY_HEAD,
   hasTypeMismatch,
 } from '../pipeline/typePredict';
+import { deriveReportingName } from '../pipeline/reportingName';
 import systemMappings from '../data/systemMappings.json';
 import type { MappedAccount, SystemMapping } from '../types';
 
@@ -63,11 +64,12 @@ function generateExportCSV(
   accounts: MappedAccount[],
   codeTypeMap: Record<string, string>,
 ): string {
-  const header = '*Code,*Name,*Type,*Tax Code,Report Code';
+  const header = '*Code,*Name,*Type,*Tax Code,Report Code,Reporting Name';
   const rows = accounts.map((a) => {
     const reportCode = a.overrideCode ?? a.predictedCode;
     const finalType =
       a.typeOverride || predictTypeFromCode(reportCode, a.type, codeTypeMap);
+    const reportingName = deriveReportingName(a.name) ?? '';
     const escape = (s: string) =>
       s.includes(',') || s.includes('"') ? `"${s.replace(/"/g, '""')}"` : s;
     return [
@@ -76,6 +78,7 @@ function generateExportCSV(
       escape(finalType),
       escape(a.taxCode ?? ''),
       escape(reportCode),
+      escape(reportingName),
     ].join(',');
   });
   return [header, ...rows].join('\n');
