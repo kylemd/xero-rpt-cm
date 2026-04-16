@@ -1,29 +1,20 @@
 /**
  * Left sidebar panel for pipeline inputs.
  *
- * Contains template selector, file drop zones, run button, and entity context.
+ * Single Verification Report drop zone (replaces the legacy two-file
+ * intake) plus an optional Group Relationships file and the template
+ * selector.
  */
 
 import { useCallback, useState } from 'react';
 import FileDropZone from './FileDropZone';
 import { useAppStore } from '../store/appStore';
+import { parseVerificationReport } from '../parsers/verificationReportParser';
 import { parseGroupRelationshipsFile } from '../parsers/groupParser';
-// Legacy parser imports removed — Task 12 rewires to verificationReportParser.
-async function parseChartFile(_f: File): Promise<never> {
-  throw new Error('Legacy parser removed — re-run after Task 12.');
-}
-async function parseChartCheckReport(_f: File): Promise<never> {
-  throw new Error('Legacy parser removed — re-run after Task 12.');
-}
 import { runPipeline } from '../pipeline/pipeline';
 import { buildCodeTypeMap } from '../pipeline/typePredict';
 import systemMappings from '../data/systemMappings.json';
-import type {
-  TemplateName,
-  SystemMapping,
-  Account,
-  ChartCheckData,
-} from '../types';
+import type { TemplateName, SystemMapping } from '../types';
 
 const TEMPLATE_OPTIONS: TemplateName[] = [
   'Company',
@@ -36,17 +27,8 @@ const TEMPLATE_OPTIONS: TemplateName[] = [
 export default function InputPanel() {
   const templateName = useAppStore((s) => s.templateName);
   const setTemplateName = useAppStore((s) => s.setTemplateName);
-  // Task 12: InputPanel will be rewritten to derive accounts and chart-check
-  // data from the new verificationReport store field. Until then, these are
-  // stubs so the file type-checks after the Task 10 store rewrite.
-  const accounts: Account[] = [];
-  const setAccounts = (_: Account[]) => {
-    /* Task 12 stub */
-  };
-  const chartCheckData: ChartCheckData | null = null;
-  const setChartCheckData = (_: ChartCheckData) => {
-    /* Task 12 stub */
-  };
+  const verificationReport = useAppStore((s) => s.verificationReport);
+  const setVerificationReport = useAppStore((s) => s.setVerificationReport);
   const setGroupRelationships = useAppStore((s) => s.setGroupRelationships);
   const rulesData = useAppStore((s) => s.rulesData);
   const isProcessing = useAppStore((s) => s.isProcessing);
@@ -55,52 +37,38 @@ export default function InputPanel() {
   const setCodeTypeMap = useAppStore((s) => s.setCodeTypeMap);
   const industry = useAppStore((s) => s.industry);
 
-  const [chartFileName, setChartFileName] = useState<string>();
-  const [chartCheckFileName, setChartCheckFileName] = useState<string>();
+  const [reportFileName, setReportFileName] = useState<string>();
   const [groupFileName, setGroupFileName] = useState<string>();
-  const [chartStatus, setChartStatus] = useState<string>();
-  const [chartCheckStatus, setChartCheckStatus] = useState<string>();
+  const [reportStatus, setReportStatus] = useState<string>();
   const [error, setError] = useState<string>();
 
   const canRun =
-    accounts.length > 0 && chartCheckData !== null && rulesData !== null && !isProcessing;
+    verificationReport !== null && rulesData !== null && !isProcessing;
 
-  const handleChartFile = useCallback(
+  const handleReportFile = useCallback(
     async (file: File) => {
       setError(undefined);
-      setChartFileName(file.name);
-      setChartStatus('Parsing...');
+      setReportFileName(file.name);
+      setReportStatus('Parsing...');
       try {
-        const parsed = await parseChartFile(file);
-        setAccounts(parsed);
-        setChartStatus(`${parsed.length} accounts`);
+        const data = await parseVerificationReport(file);
+        setVerificationReport(data);
+        const mandatory = data.accounts.filter((a) => a.activity === 'mandatory').length;
+        const optional = data.accounts.filter((a) => a.activity === 'optional').length;
+        setReportStatus(
+          `${data.accounts.length} accounts \u00B7 ${mandatory} mandatory \u00B7 ${optional} optional`,
+        );
       } catch (e) {
-        setChartStatus(undefined);
-        setChartFileName(undefined);
-        setError(e instanceof Error ? e.message : 'Failed to parse chart file');
-      }
-    },
-    [setAccounts],
-  );
-
-  const handleChartCheckFile = useCallback(
-    async (file: File) => {
-      setError(undefined);
-      setChartCheckFileName(file.name);
-      setChartCheckStatus('Parsing...');
-      try {
-        const data = await parseChartCheckReport(file);
-        setChartCheckData(data);
-        setChartCheckStatus(`${data.glSummary.length} GL entries`);
-      } catch (e) {
-        setChartCheckStatus(undefined);
-        setChartCheckFileName(undefined);
+        setReportStatus(undefined);
+        setReportFileName(undefined);
         setError(
-          e instanceof Error ? e.message : 'Failed to parse chart check report',
+          e instanceof Error
+            ? e.message
+            : 'Failed to parse Verification Report',
         );
       }
     },
-    [setChartCheckData],
+    [setVerificationReport],
   );
 
   const handleGroupFile = useCallback(
@@ -121,7 +89,7 @@ export default function InputPanel() {
   );
 
   const handleRunMapping = useCallback(async () => {
-    if (!canRun || !rulesData || !chartCheckData) return;
+    if (!canRun || !rulesData || !verificationReport) return;
     setError(undefined);
     setIsProcessing(true);
     try {
@@ -129,16 +97,14 @@ export default function InputPanel() {
         `../data/templates/${templateName}.json`
       );
       const templateEntries = templateModule.default;
-
-      // Build and store the codeTypeMap for type mismatch detection
       setCodeTypeMap(buildCodeTypeMap(templateEntries));
 
       const result = runPipeline({
-        accounts,
+        accounts: verificationReport.accounts,
         rulesData,
         templateEntries,
         systemMappings: systemMappings as SystemMapping[],
-        glSummary: chartCheckData.glSummary,
+        glSummary: verificationReport.glSummary,
         industry,
         templateName,
       });
@@ -151,22 +117,27 @@ export default function InputPanel() {
   }, [
     canRun,
     rulesData,
-    chartCheckData,
+    verificationReport,
     templateName,
-    accounts,
     industry,
     setIsProcessing,
     setMappedAccounts,
     setCodeTypeMap,
   ]);
 
-  const clientParams = chartCheckData?.clientParams;
+  const clientParams = verificationReport?.clientParams;
 
   return (
     <aside className="w-72 shrink-0 border-r border-gray-200 bg-gray-50 p-4 overflow-y-auto">
       <h2 className="text-sm font-semibold text-gray-700 mb-3">
         Pipeline Inputs
       </h2>
+
+      {/* Safety banner */}
+      <div className="mb-3 p-2 bg-yellow-50 border border-yellow-200 rounded text-xs text-yellow-800">
+        Before using this report, make sure you've exported a fresh
+        Verification Report from Xero \u2014 stale data produces stale mappings.
+      </div>
 
       {/* Template selector */}
       <div className="mb-3">
@@ -186,25 +157,17 @@ export default function InputPanel() {
         </select>
       </div>
 
-      {/* File inputs */}
+      {/* Verification Report */}
       <FileDropZone
-        label="Chart of Accounts"
+        label="Verification Report"
         required
-        accept=".csv,.xlsx,.xls"
-        onFile={handleChartFile}
-        fileName={chartFileName}
-        status={chartStatus}
+        accept=".xlsx"
+        onFile={handleReportFile}
+        fileName={reportFileName}
+        status={reportStatus}
       />
 
-      <FileDropZone
-        label="Chart Check Report"
-        required
-        accept=".xlsx,.xls"
-        onFile={handleChartCheckFile}
-        fileName={chartCheckFileName}
-        status={chartCheckStatus}
-      />
-
+      {/* Group Relationships (optional) */}
       <FileDropZone
         label="Group Relationships"
         accept=".csv"
@@ -212,7 +175,7 @@ export default function InputPanel() {
         fileName={groupFileName}
       />
 
-      {/* Error display */}
+      {/* Error */}
       {error && (
         <div className="mb-3 p-2 bg-red-50 border border-red-200 rounded text-xs text-red-700">
           {error}
@@ -229,32 +192,7 @@ export default function InputPanel() {
             : 'bg-gray-200 text-gray-400 cursor-not-allowed'
         }`}
       >
-        {isProcessing ? (
-          <span className="flex items-center justify-center gap-2">
-            <svg
-              className="animate-spin h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              />
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-              />
-            </svg>
-            Processing...
-          </span>
-        ) : (
-          'Run Mapping'
-        )}
+        {isProcessing ? 'Processing...' : 'Run Mapping'}
       </button>
 
       {/* Rules status */}
@@ -271,14 +209,12 @@ export default function InputPanel() {
             Entity Context
           </h3>
           <dl className="space-y-1.5 text-xs">
-            {clientParams.displayName && (
-              <div>
-                <dt className="text-gray-400">Name</dt>
-                <dd className="text-gray-700 font-medium">
-                  {clientParams.displayName}
-                </dd>
-              </div>
-            )}
+            <div>
+              <dt className="text-gray-400">Name</dt>
+              <dd className="text-gray-700 font-medium">
+                {clientParams.displayName}
+              </dd>
+            </div>
             {clientParams.abn && (
               <div>
                 <dt className="text-gray-400">ABN</dt>
@@ -290,14 +226,6 @@ export default function InputPanel() {
                 <dt className="text-gray-400">Directors</dt>
                 <dd className="text-gray-700">
                   {clientParams.directors.join(', ')}
-                </dd>
-              </div>
-            )}
-            {chartCheckData.glSummary.length > 0 && (
-              <div>
-                <dt className="text-gray-400">GL Entries</dt>
-                <dd className="text-gray-700">
-                  {chartCheckData.glSummary.length}
                 </dd>
               </div>
             )}
