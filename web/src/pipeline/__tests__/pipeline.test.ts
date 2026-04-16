@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { runPipeline } from '../pipeline';
+import { runPipeline, type PipelineInput } from '../pipeline';
 import type { Account, RulesData, TemplateEntry, SystemMapping, GLEntry } from '../../types';
 
 // ---------------------------------------------------------------------------
@@ -236,5 +236,31 @@ describe('runPipeline', () => {
     // Cross-head guard should revert to EXP fallback
     expect(result[0].predictedCode).toBe('EXP');
     expect(result[0].source).toBe('FallbackParent');
+  });
+});
+
+describe('runPipeline + autoConfirm integration', () => {
+  it('auto-approves compatible predicted===reportCode rows', () => {
+    const input: PipelineInput = {
+      accounts: [
+        {
+          code: '404',
+          name: 'Bank Fees',
+          type: 'Expense',
+          canonType: 'expense',
+          reportCode: 'EXP',
+        },
+      ],
+      rulesData: { version: 1, updatedAt: '', dictionaries: {}, rules: [] },
+      templateEntries: [],
+      systemMappings: [],
+      glSummary: [],
+      industry: '',
+      templateName: 'Company',
+    };
+    const out = runPipeline(input);
+    expect(out[0].predictedCode).toBe('EXP');
+    expect(out[0].approved).toBe(true);
+    expect(out[0].auto).toBe(true);
   });
 });

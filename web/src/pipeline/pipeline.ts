@@ -23,6 +23,7 @@ import { extractAccumBaseKey } from './accumDep';
 import { inferFromContext, inferSection } from './contextRules';
 import { serviceOnlyReclass, autoIndustryReclass, typeRangeCorrection } from './postProcess';
 import { correctAccountName } from './spellCorrections';
+import { autoConfirmMatches } from './autoConfirm';
 
 // ---------------------------------------------------------------------------
 // Public interface
@@ -469,5 +470,5 @@ export function runPipeline(input: PipelineInput): MappedAccount[] {
   // 5e. Type range correction
   typeRangeCorrection(mapped);
 
-  return mapped;
+  return autoConfirmMatches(mapped);
 }

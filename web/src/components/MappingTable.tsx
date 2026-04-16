@@ -18,10 +18,11 @@ import {
 import { useAppStore } from '../store/appStore';
 import {
   predictTypeFromCode,
-  HEAD_FROM_TYPE,
   SYSTEM_TYPES,
   ALLOWED_TYPES_BY_HEAD,
+  hasTypeMismatch,
 } from '../pipeline/typePredict';
+import { deriveReportingName } from '../pipeline/reportingName';
 import systemMappings from '../data/systemMappings.json';
 import type { MappedAccount, SystemMapping } from '../types';
 
@@ -30,6 +31,10 @@ import type { MappedAccount, SystemMapping } from '../types';
 // ---------------------------------------------------------------------------
 
 type FilterMode = 'all' | 'review' | 'fallback' | 'active' | 'typeMismatch';
+
+type ActivityFilter = 'mandatory' | 'optional' | 'all';
+
+type StatusFilter = 'all' | 'pending' | 'accepted' | 'overridden';
 
 // ---------------------------------------------------------------------------
 // System mappings code-to-name lookup
@@ -59,11 +64,12 @@ function generateExportCSV(
   accounts: MappedAccount[],
   codeTypeMap: Record<string, string>,
 ): string {
-  const header = '*Code,*Name,*Type,*Tax Code,Report Code';
+  const header = '*Code,*Name,*Type,*Tax Code,Report Code,Reporting Name';
   const rows = accounts.map((a) => {
     const reportCode = a.overrideCode ?? a.predictedCode;
     const finalType =
       a.typeOverride || predictTypeFromCode(reportCode, a.type, codeTypeMap);
+    const reportingName = deriveReportingName(a.name) ?? '';
     const escape = (s: string) =>
       s.includes(',') || s.includes('"') ? `"${s.replace(/"/g, '""')}"` : s;
     return [
@@ -72,6 +78,7 @@ function generateExportCSV(
       escape(finalType),
       escape(a.taxCode ?? ''),
       escape(reportCode),
+      escape(reportingName),
     ].join(',');
   });
   return [header, ...rows].join('\n');
@@ -114,10 +121,15 @@ function downloadFile(content: string, filename: string, mime: string) {
 
 /** Check if a given account has a type mismatch. */
 function hasTypeMismatchForAccount(acct: MappedAccount): boolean {
-  const finalCode = acct.overrideCode || acct.predictedCode;
-  const currentHead = HEAD_FROM_TYPE[acct.type] || '';
-  const codeHead = finalCode.split('.')[0];
-  return !SYSTEM_TYPES.has(acct.type) && !!currentHead && currentHead !== codeHead;
+  return hasTypeMismatch(acct.type, acct.overrideCode || acct.predictedCode);
+}
+
+function decisionStatus(a: MappedAccount): 'accepted' | 'overridden' | 'pending' {
+  if (a.overrideCode) return 'overridden';
+  if (a.approved) return 'accepted';
+  // Predicted === original without a user click: counts as accepted (Auto).
+  if (!a.reportCode || a.predictedCode === a.reportCode) return 'accepted';
+  return 'pending';
 }
 
 // ---------------------------------------------------------------------------
@@ -137,15 +149,32 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
   const codeTypeMap = useAppStore((s) => s.codeTypeMap);
   const approveAccount = useAppStore((s) => s.approveAccount);
   const overrideAccountType = useAppStore((s) => s.overrideAccountType);
+  const clearAllDecisions = useAppStore((s) => s.clearAllDecisions);
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
   const [filterMode, setFilterMode] = useState<FilterMode>('all');
+  const [activityFilter, setActivityFilter] = useState<ActivityFilter>('mandatory');
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
+  const [sourceFilter, setSourceFilter] = useState<string>('all');
   const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
 
   // Apply filter mode
   const filteredData = useMemo(() => {
     let data = mappedAccounts;
+    // Activity filter
+    if (activityFilter === 'mandatory') {
+      data = data.filter((a) => a.activity !== 'optional');
+    } else if (activityFilter === 'optional') {
+      data = data.filter((a) => a.activity === 'optional');
+    }
+    // 'all' falls through — no filter.
+    if (statusFilter !== 'all') {
+      data = data.filter((a) => decisionStatus(a) === statusFilter);
+    }
+    if (sourceFilter !== 'all') {
+      data = data.filter((a) => a.source === sourceFilter);
+    }
     switch (filterMode) {
       case 'review':
         data = data.filter((a) => a.needsReview);
@@ -161,7 +190,29 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
         break;
     }
     return data;
-  }, [mappedAccounts, filterMode]);
+  }, [mappedAccounts, filterMode, activityFilter, statusFilter, sourceFilter]);
+
+  const sourceCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const a of mappedAccounts) {
+      counts.set(a.source, (counts.get(a.source) ?? 0) + 1);
+    }
+    return counts;
+  }, [mappedAccounts]);
+
+  const progressCounts = useMemo(() => {
+    let accepted = 0, overridden = 0, pending = 0;
+    for (const a of mappedAccounts) {
+      const s = decisionStatus(a);
+      if (s === 'accepted') accepted++;
+      else if (s === 'overridden') overridden++;
+      else pending++;
+    }
+    const total = mappedAccounts.length;
+    const done = accepted + overridden;
+    const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+    return { accepted, overridden, pending, total, pct };
+  }, [mappedAccounts]);
 
   const columns = useMemo<ColumnDef<MappedAccount>[]>(
     () => [
@@ -202,12 +253,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
             acct.type,
             codeTypeMap,
           );
-          const currentHead = HEAD_FROM_TYPE[acct.type] || '';
-          const codeHead = finalCode.split('.')[0];
-          const hasMismatch =
-            !SYSTEM_TYPES.has(acct.type) &&
-            !!currentHead &&
-            currentHead !== codeHead;
+          const hasMismatch = hasTypeMismatchForAccount(acct);
           const originalIndex = mappedAccounts.indexOf(acct);
 
           if (acct.typeOverride) {
@@ -224,6 +270,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
           }
 
           if (hasMismatch) {
+            const codeHead = finalCode.split('.')[0];
             const allowedTypes =
               ALLOWED_TYPES_BY_HEAD[codeHead] ?? [];
             return (
@@ -442,6 +489,14 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
     downloadFile(json, 'decisions.json', 'application/json');
   }, [mappedAccounts, codeTypeMap]);
 
+  const handleClearAll = useCallback(() => {
+    const confirmed = window.confirm(
+      'Reset all decisions for this client? This cannot be undone.',
+    );
+    if (!confirmed) return;
+    clearAllDecisions();
+  }, [clearAllDecisions]);
+
   const filterChips: { mode: FilterMode; label: string }[] = [
     { mode: 'all', label: 'All' },
     { mode: 'review', label: 'Needs Review' },
@@ -484,6 +539,47 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
           className="px-3 py-1.5 text-sm border border-gray-300 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
 
+        {/* Activity filter */}
+        <div className="flex gap-1">
+          {(['mandatory', 'optional', 'all'] as ActivityFilter[]).map((mode) => (
+            <button
+              key={mode}
+              onClick={() => setActivityFilter(mode)}
+              className={`px-2.5 py-1 text-xs rounded-md font-medium transition-colors capitalize ${
+                activityFilter === mode
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              {mode}
+            </button>
+          ))}
+        </div>
+
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value as StatusFilter)}
+          className="px-2 py-1 text-xs border border-gray-300 rounded-md bg-white"
+        >
+          <option value="all">Status: All</option>
+          <option value="pending">Pending</option>
+          <option value="accepted">Accepted</option>
+          <option value="overridden">Overridden</option>
+        </select>
+
+        <select
+          value={sourceFilter}
+          onChange={(e) => setSourceFilter(e.target.value)}
+          className="px-2 py-1 text-xs border border-gray-300 rounded-md bg-white"
+        >
+          <option value="all">Source: All</option>
+          {Array.from(sourceCounts.entries())
+            .sort((a, b) => a[0].localeCompare(b[0]))
+            .map(([src, n]) => (
+              <option key={src} value={src}>{src} ({n})</option>
+            ))}
+        </select>
+
         {/* Filter chips */}
         <div className="flex gap-1.5">
           {filterChips.map(({ mode, label }) => (
@@ -512,7 +608,21 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
 
         <div className="flex-1" />
 
+        <div className="flex items-center gap-3 text-xs text-gray-600 px-2 py-1 bg-gray-50 border border-gray-200 rounded-md">
+          <span><span className="font-semibold text-green-600">{progressCounts.accepted}</span> accepted</span>
+          <span><span className="font-semibold text-blue-600">{progressCounts.overridden}</span> overridden</span>
+          <span><span className="font-semibold text-amber-600">{progressCounts.pending}</span> pending</span>
+          <span className="text-gray-400">|</span>
+          <span className="font-semibold">{progressCounts.pct}%</span>
+        </div>
+
         {/* Export buttons */}
+        <button
+          onClick={handleClearAll}
+          className="px-3 py-1.5 text-xs font-medium bg-white border border-gray-300 rounded-md hover:bg-red-50 hover:border-red-300 hover:text-red-700 text-gray-700"
+        >
+          Clear All
+        </button>
         <button
           onClick={handleExportCSV}
           className="px-3 py-1.5 text-xs font-medium bg-white border border-gray-300 rounded-md hover:bg-gray-50 text-gray-700"
@@ -558,13 +668,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
           <tbody className="divide-y divide-gray-100">
             {table.getRowModel().rows.map((row) => {
               const acct = row.original;
-              const finalCode = acct.overrideCode || acct.predictedCode;
-              const currentHead = HEAD_FROM_TYPE[acct.type] || '';
-              const codeHead = finalCode.split('.')[0];
-              const hasMismatch =
-                !SYSTEM_TYPES.has(acct.type) &&
-                !!currentHead &&
-                currentHead !== codeHead;
+              const hasMismatch = hasTypeMismatchForAccount(acct);
 
               return (
                 <tr
