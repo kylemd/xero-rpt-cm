@@ -7,6 +7,7 @@
 
 import { useState, useMemo, useCallback } from 'react';
 import { useAppStore } from '../store/appStore';
+import { headFromType, headGroup } from '../pipeline/normalise';
 import systemMappings from '../data/systemMappings.json';
 import type { SystemMapping } from '../types';
 
@@ -25,6 +26,15 @@ const HEAD_LABELS: Record<string, string> = {
   EQU: 'Equity (EQU)',
   REV: 'Revenue (REV)',
   EXP: 'Expenses (EXP)',
+};
+
+/**
+ * User-facing label for each group used in the override restriction hint.
+ */
+const GROUP_LABELS: Record<string, string> = {
+  BS: 'Balance Sheet (ASS, LIA)',
+  PL: 'Profit & Loss (REV, EXP)',
+  EQ: 'Equity (EQU)',
 };
 
 /**
@@ -98,11 +108,22 @@ export default function AccountDetailPanel({
     );
   }, [groupRelationships, verificationReport]);
 
-  // All leaf codes grouped by head, filtered by search
+  // Determine which group the account belongs to (BS, PL, or EQ).
+  // Override targets are restricted to heads in the same group — a Balance
+  // Sheet account cannot be recoded as Profit & Loss, etc. If the user has
+  // retyped the account, use the new type.
+  const accountGroup = useMemo(
+    () => headGroup(headFromType(account.typeOverride ?? account.type)),
+    [account.type, account.typeOverride],
+  );
+
+  // All leaf codes grouped by head, filtered by search AND by allowed group.
   const groupedCodes = useMemo(() => {
     const search = codeSearch.toLowerCase();
     const groups: { head: string; label: string; codes: SystemMapping[] }[] = [];
     for (const head of HEAD_ORDER) {
+      // Skip heads outside the account's group (when group is known).
+      if (accountGroup && headGroup(head) !== accountGroup) continue;
       const mappings = leafByHead[head] ?? [];
       const filtered = search
         ? mappings.filter(
@@ -120,7 +141,7 @@ export default function AccountDetailPanel({
       }
     }
     return groups;
-  }, [codeSearch]);
+  }, [codeSearch, accountGroup]);
 
   const handleApplyOverride = useCallback(() => {
     if (!overrideCode) return;
@@ -313,6 +334,13 @@ export default function AccountDetailPanel({
           <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
             Override Code
           </h4>
+
+          {/* Group restriction hint */}
+          {accountGroup && GROUP_LABELS[accountGroup] && (
+            <div className="mb-2 text-xs text-gray-500">
+              Restricted to {GROUP_LABELS[accountGroup]} codes
+            </div>
+          )}
 
           {/* Code search */}
           <input
