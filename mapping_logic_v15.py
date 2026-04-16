@@ -1,11 +1,21 @@
 
 """mapping_logic_v15.py – Reporting Code mapper for Xero-style Chart of Accounts.
 
-Run (updated CLI):
-    python mapping_logic_v15.py <ClientChartOfAccounts.csv> <ClientTrialBalance.csv> --chart <CHARTNAME> [--industry <Industry>]
+⚠️  DEPRECATED (as of 2026-04-16): This CLI entrypoint is no longer the
+    supported path for running mappings. The web app at ``web/`` now
+    consumes a single Verification Report workbook and is the sole
+    maintained pipeline.
+
+    This module is retained as a reference implementation of the rule
+    engine and post-processing passes for the Python test suite; do not
+    add new features here. Run ``cd web && npm run dev`` to use the
+    current tool.
+
+Run (legacy CLI, for reference only):
+    python mapping_logic_v15.py <ClientChartOfAccounts.csv> <ClientTrialBalance.csv> --chart <CHARTNAME>
 
 Where:
-    --chart selects a template CSV in ChartOfAccounts/ by filename (without extension), e.g. --chart Company
+    --chart selects a template CSV in ChartOfAccounts/ by filename (without extension).
 
 Outputs:
     - AugmentedChartOfAccounts.csv alongside the client chart
