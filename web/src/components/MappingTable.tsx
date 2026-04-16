@@ -196,6 +196,20 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
     return counts;
   }, [mappedAccounts]);
 
+  const progressCounts = useMemo(() => {
+    let accepted = 0, overridden = 0, pending = 0;
+    for (const a of mappedAccounts) {
+      const s = decisionStatus(a);
+      if (s === 'accepted') accepted++;
+      else if (s === 'overridden') overridden++;
+      else pending++;
+    }
+    const total = mappedAccounts.length;
+    const done = accepted + overridden;
+    const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+    return { accepted, overridden, pending, total, pct };
+  }, [mappedAccounts]);
+
   const columns = useMemo<ColumnDef<MappedAccount>[]>(
     () => [
       {
@@ -581,6 +595,14 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
         </div>
 
         <div className="flex-1" />
+
+        <div className="flex items-center gap-3 text-xs text-gray-600 px-2 py-1 bg-gray-50 border border-gray-200 rounded-md">
+          <span><span className="font-semibold text-green-600">{progressCounts.accepted}</span> accepted</span>
+          <span><span className="font-semibold text-blue-600">{progressCounts.overridden}</span> overridden</span>
+          <span><span className="font-semibold text-amber-600">{progressCounts.pending}</span> pending</span>
+          <span className="text-gray-400">|</span>
+          <span className="font-semibold">{progressCounts.pct}%</span>
+        </div>
 
         {/* Export buttons */}
         <button
