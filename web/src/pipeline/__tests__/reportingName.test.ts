@@ -29,6 +29,13 @@ describe('deriveReportingName', () => {
     expect(deriveReportingName('Div7A 2020-2021')).toBe('Div7A 2020');
   });
 
+  it('does not match loose "7a" unit/bay/lot tokens (false-positive guard)', () => {
+    expect(deriveReportingName('Bay 7a 2024')).toBeNull();
+    expect(deriveReportingName('Unit 7A 2023 rent')).toBeNull();
+    expect(deriveReportingName('Lot 7a 2022 deposit')).toBeNull();
+    expect(deriveReportingName('Locker 7a 2021')).toBeNull();
+  });
+
   it('ignores years outside 1900..2099', () => {
     expect(deriveReportingName('Div7A 1850 loan')).toBeNull();
   });
