@@ -10,6 +10,7 @@
  */
 
 import * as XLSX from 'xlsx';
+import { REPORTING_HEADS_SET } from '../pipeline/heads';
 
 // ---------------------------------------------------------------------------
 // Required sheets
@@ -114,9 +115,6 @@ export interface ReportingCodeRow {
 // Matches "NNN - Name" where NNN is any non-space token (alphanumeric).
 const CODE_NAME_RE = /^(\S+)\s*-\s*(.+)$/;
 
-// Reporting-code group header: starts with a known head.
-const KNOWN_HEADS = new Set(['ASS', 'LIA', 'EQU', 'REV', 'EXP']);
-
 function isGroupHeader(row: Row): string | null {
   const a = cellStr(row[0]);
   const b = cellStr(row[1]);
@@ -125,7 +123,7 @@ function isGroupHeader(row: Row): string | null {
   if (b.toLowerCase().startsWith('total ')) return null;
   if (b.toLowerCase() === 'account') return null;
   const head = b.split('.')[0];
-  if (!KNOWN_HEADS.has(head)) return null;
+  if (!REPORTING_HEADS_SET.has(head)) return null;
   return b;
 }
 
@@ -137,7 +135,7 @@ function isAccountRow(row: Row): boolean {
   if (b.toLowerCase().startsWith('total ')) return false;
   if (b.toLowerCase() === 'account') return false;
   const head = b.split('.')[0];
-  if (KNOWN_HEADS.has(head)) return false; // that's a group header
+  if (REPORTING_HEADS_SET.has(head)) return false; // that's a group header
   return true;
 }
 

@@ -5,6 +5,7 @@
  */
 
 import type { MappedAccount } from '../types';
+import { REPORTING_HEADS_SET } from './heads';
 import { headFromType, headGroup, normalise } from './normalise';
 
 // Sources that should be skipped by typeRangeCorrection
@@ -115,8 +116,7 @@ export function typeRangeCorrection(accounts: MappedAccount[]): void {
     if (codeGroup === expectedGroup) continue;
 
     // Head-only codes or FallbackParent: correct to expected head
-    const HEAD_ONLY = new Set(['ASS', 'EXP', 'REV', 'LIA', 'EQU']);
-    if (HEAD_ONLY.has(a.predictedCode) || a.source === 'FallbackParent') {
+    if (REPORTING_HEADS_SET.has(a.predictedCode) || a.source === 'FallbackParent') {
       a.predictedCode = expectedHead;
       a.source = 'TypeRangeCorrection';
       a.needsReview = true;

@@ -190,4 +190,27 @@ describe('parseReportingCodesSheet', () => {
     const rows = parseReportingCodesSheet(sheet);
     expect(rows.map((r) => r.code)).toEqual(['400']);
   });
+
+  it('silently skips account rows appearing before any group header', () => {
+    const wb = makeWorkbook({
+      'Chart of Accounts - Reportin...': [
+        ['Chart of Accounts - Reporting Codes'],
+        [],
+        [],
+        [],
+        [null, 'Account', '2026'],
+        [],
+        ['Chart of Accounts'],
+        // Stray account row before any group header — must be dropped.
+        [null, '999 - Stray Account', 42],
+        [null, 'EXP'],
+        [null, '400 - Advertising', 500],
+        [null, 'Total EXP', 0],
+        ['Total Chart of Accounts', null, 0],
+      ],
+    });
+    const sheet = findRequiredSheet(wb, 'Chart of Accounts - Reportin')!;
+    const rows = parseReportingCodesSheet(sheet);
+    expect(rows.map((r) => r.code)).toEqual(['400']);
+  });
 });
