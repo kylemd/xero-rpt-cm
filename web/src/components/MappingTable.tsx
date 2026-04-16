@@ -31,6 +31,8 @@ import type { MappedAccount, SystemMapping } from '../types';
 
 type FilterMode = 'all' | 'review' | 'fallback' | 'active' | 'typeMismatch';
 
+type ActivityFilter = 'mandatory' | 'optional' | 'all';
+
 // ---------------------------------------------------------------------------
 // System mappings code-to-name lookup
 // ---------------------------------------------------------------------------
@@ -138,11 +140,19 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
   const [filterMode, setFilterMode] = useState<FilterMode>('all');
+  const [activityFilter, setActivityFilter] = useState<ActivityFilter>('mandatory');
   const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
 
   // Apply filter mode
   const filteredData = useMemo(() => {
     let data = mappedAccounts;
+    // Activity filter
+    if (activityFilter === 'mandatory') {
+      data = data.filter((a) => a.activity !== 'optional');
+    } else if (activityFilter === 'optional') {
+      data = data.filter((a) => a.activity === 'optional');
+    }
+    // 'all' falls through — no filter.
     switch (filterMode) {
       case 'review':
         data = data.filter((a) => a.needsReview);
@@ -158,7 +168,7 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
         break;
     }
     return data;
-  }, [mappedAccounts, filterMode]);
+  }, [mappedAccounts, filterMode, activityFilter]);
 
   const columns = useMemo<ColumnDef<MappedAccount>[]>(
     () => [
@@ -476,6 +486,23 @@ export default function MappingTable({ onSelectAccount }: MappingTableProps) {
           onChange={(e) => setGlobalFilter(e.target.value)}
           className="px-3 py-1.5 text-sm border border-gray-300 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
+
+        {/* Activity filter */}
+        <div className="flex gap-1">
+          {(['mandatory', 'optional', 'all'] as ActivityFilter[]).map((mode) => (
+            <button
+              key={mode}
+              onClick={() => setActivityFilter(mode)}
+              className={`px-2.5 py-1 text-xs rounded-md font-medium transition-colors capitalize ${
+                activityFilter === mode
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              {mode}
+            </button>
+          ))}
+        </div>
 
         {/* Filter chips */}
         <div className="flex gap-1.5">
