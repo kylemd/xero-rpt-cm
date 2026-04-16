@@ -33,6 +33,23 @@ describe('deriveClientKey', () => {
     const b = deriveClientKey('', ['200']);
     expect(a).not.toBe(b);
   });
+
+  it('produces the same key regardless of code ordering', () => {
+    const a = deriveClientKey('', ['300', '100', '200']);
+    const b = deriveClientKey('', ['100', '200', '300']);
+    expect(a).toBe(b);
+  });
+
+  it('preserves Unicode letters in display names', () => {
+    const key = deriveClientKey('株式会社');
+    expect(key).toBe('株式会社');
+  });
+
+  it('produces distinct keys for distinct non-ASCII names', () => {
+    // Names that previously all collapsed to empty → identical fallback
+    expect(deriveClientKey('###', ['1'])).not.toBe(deriveClientKey('株式会社', ['1']));
+    expect(deriveClientKey('🎉🎉🎉', ['1'])).not.toBe(deriveClientKey('###', ['1']));
+  });
 });
 
 describe('saveDecisions / loadDecisions / clearDecisions', () => {

@@ -11,27 +11,30 @@ import type { ClientDecisionsFile, DecisionMap } from '../types';
 export const STORAGE_KEY_PREFIX = 'xrcm:decisions:v1:';
 
 /**
- * FNV-1a 32-bit hash, base36-encoded. Stable across sessions.
+ * FNV-1a 32-bit hash over `seed` then each code in sorted order.
+ * Base36-encoded. Stable across sessions. Non-mutating.
  */
-function hashCodes(codes: string[]): string {
+function fallbackHash(seed: string, codes: string[]): string {
   let h = 0x811c9dc5;
-  for (const code of codes) {
-    for (let i = 0; i < code.length; i++) {
-      h ^= code.charCodeAt(i);
+  const mix = (s: string) => {
+    for (let i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
       h = Math.imul(h, 0x01000193);
     }
-    h ^= 0x7c;
-  }
+    h ^= 0x7c; // '|' separator — ensures ['ab','cd'] ≠ ['abcd']
+  };
+  mix(seed);
+  for (const code of [...codes].sort()) mix(code);
   return (h >>> 0).toString(36);
 }
 
 export function deriveClientKey(displayName: string, codes: string[] = []): string {
   const normalized = displayName
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/[^\p{L}\p{N}]+/gu, '_')
     .replace(/^_+|_+$/g, '');
   if (normalized) return normalized;
-  return `codes_${hashCodes(codes)}`;
+  return `codes_${fallbackHash(displayName, codes)}`;
 }
 
 export function loadDecisions(clientKey: string): DecisionMap {
