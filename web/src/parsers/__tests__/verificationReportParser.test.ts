@@ -40,7 +40,7 @@ describe('findRequiredSheet', () => {
     expect(REQUIRED_SHEET_PREFIXES).toContain('Chart of Accounts - Reportin');
     expect(REQUIRED_SHEET_PREFIXES).toContain('Chart of Accounts - Type and');
     expect(REQUIRED_SHEET_PREFIXES).toContain('Account Movements - Current');
-    expect(REQUIRED_SHEET_PREFIXES).toContain('Account Movements - Comparat');
+    expect(REQUIRED_SHEET_PREFIXES).toContain('Account Movements - Prior Ye');
     expect(REQUIRED_SHEET_PREFIXES).toContain('Account Movements - Consider');
     expect(REQUIRED_SHEET_PREFIXES).toContain('Depreciation Schedule');
     expect(REQUIRED_SHEET_PREFIXES).toContain('Beneficiary Accounts');
@@ -259,8 +259,8 @@ function makeFullDemoWorkbook(): XLSX.WorkBook {
       ['Advertising', '400', 0, 500, 0, 500, 500, 'Expense'],
       ['Total', null, 0, 0, 0, 0, 0, null],
     ],
-    'Account Movements - Comparative': [
-      ['Account Movements - Comparative'], [], [], [],
+    'Account Movements - Prior Year': [
+      ['Account Movements - Prior Year'], [], [], [],
       ['Account', 'Account Code', 'Opening Balance', 'Debit', 'Credit', 'Net Movement', 'Closing Balance', 'Account Type'],
       ['Business Bank Account', '090', 0, 100, 200, -100, -17849, 'Bank'],
       ['Advertising', '400', 0, 500, 0, 500, 500, 'Expense'],

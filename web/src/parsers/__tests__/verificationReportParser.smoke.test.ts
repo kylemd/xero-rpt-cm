@@ -1,12 +1,4 @@
-/**
- * Smoke test against the real demo workbook.
- *
- * Currently skipped: the demo file `.dev-info/Demo_Company__AU__-_Chart_of_Accounts_Verification_Report.xlsx`
- * still uses the legacy movement-sheet names (`Account Movement Report - Cu...` /
- * `Account Movement Report - Co...`). Once Xero regenerates it with the new
- * three-sheet layout (`Account Movements - Current / Comparat / Consider`),
- * change `it.skip` to `it` and the test will validate the parser end-to-end.
- */
+/* Smoke test: parses the on-disk demo Verification Report end-to-end. */
 
 import { describe, it, expect } from 'vitest';
 import * as XLSX from 'xlsx';
@@ -21,7 +13,7 @@ const DEMO = resolve(
 );
 
 describe('smoke: real demo workbook', () => {
-  it.skip('parses without throwing (re-enable after demo regeneration)', () => {
+  it('parses without throwing', () => {
     const buf = readFileSync(DEMO);
     const wb = XLSX.read(buf, { type: 'buffer' });
     const data = parseVerificationReportFromWorkbook(wb);

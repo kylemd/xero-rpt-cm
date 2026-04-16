@@ -30,7 +30,7 @@ export const REQUIRED_SHEET_PREFIXES = [
   'Chart of Accounts - Reportin',
   'Chart of Accounts - Type and',
   'Account Movements - Current',
-  'Account Movements - Comparat',
+  'Account Movements - Prior Ye',
   'Account Movements - Consider',
   'Depreciation Schedule',
   'Beneficiary Accounts',
@@ -471,7 +471,7 @@ export function parseVerificationReportFromWorkbook(
   const reportingSheet = findRequiredSheet(wb, 'Chart of Accounts - Reportin')!;
   const typeAndClassSheet = findRequiredSheet(wb, 'Chart of Accounts - Type and')!;
   const currentSheet = findRequiredSheet(wb, 'Account Movements - Current')!;
-  const comparativeSheet = findRequiredSheet(wb, 'Account Movements - Comparat')!;
+  const comparativeSheet = findRequiredSheet(wb, 'Account Movements - Prior Ye')!;
   const consideredSheet = findRequiredSheet(wb, 'Account Movements - Consider')!;
   const depSheet = findRequiredSheet(wb, 'Depreciation Schedule')!;
   const benSheet = findRequiredSheet(wb, 'Beneficiary Accounts')!;
