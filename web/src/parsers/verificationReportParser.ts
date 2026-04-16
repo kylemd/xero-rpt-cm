@@ -10,19 +10,6 @@
  */
 
 import * as XLSX from 'xlsx';
-// These imports will be consumed by Tasks 7 (Reporting Codes sheet) and
-// Task 8 (orchestrator). They are re-exported here so the file skeleton
-// is ready to grow without restructuring and so tsc's `noUnusedLocals`
-// rule is satisfied without suppression comments.
-export type {
-  VerificationReportData,
-  Account,
-  GLEntry,
-  DepAsset,
-  EntityParams,
-  BeneficiaryEntry,
-} from '../types';
-export { canonicalType } from '../pipeline/normalise';
 
 // ---------------------------------------------------------------------------
 // Required sheets
@@ -61,18 +48,6 @@ function sheetRows(sheet: XLSX.WorkSheet): Row[] {
 function cellStr(v: unknown): string {
   if (v === null || v === undefined) return '';
   return String(v).trim();
-}
-
-// Exported for Tasks 7 and 8 (GL and depreciation sheet parsers consume
-// numeric cells via this helper).
-export function cellNum(v: unknown): number {
-  if (v === null || v === undefined || v === '') return 0;
-  if (typeof v === 'number') return v;
-  const s = String(v).trim().replace(/,/g, '');
-  const isNeg = s.startsWith('(') && s.endsWith(')');
-  const n = parseFloat(isNeg ? s.slice(1, -1) : s);
-  if (isNaN(n)) return 0;
-  return isNeg ? -n : n;
 }
 
 // ---------------------------------------------------------------------------

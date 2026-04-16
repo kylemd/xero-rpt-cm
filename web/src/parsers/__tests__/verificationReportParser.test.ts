@@ -36,6 +36,7 @@ describe('findRequiredSheet', () => {
   });
 
   it('exposes the full list of required prefixes', () => {
+    expect(REQUIRED_SHEET_PREFIXES).toHaveLength(8);
     expect(REQUIRED_SHEET_PREFIXES).toContain('Chart of Accounts - Reportin');
     expect(REQUIRED_SHEET_PREFIXES).toContain('Chart of Accounts - Type and');
     expect(REQUIRED_SHEET_PREFIXES).toContain('Account Movements - Current');
