@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-10T01:37:52.469Z",
+  "updatedAt": "2026-04-17T00:00:00.000Z",
   "dictionaries": {
     "OWNER_KEYWORDS": [
       "owner a",
@@ -4544,13 +4544,21 @@
         "inventory"
       ],
       "keywordsAll": [],
-      "keywordsExclude": [],
-      "rawTypes": [
+      "keywordsExclude": [
+        "closing",
+        "opening",
+        "movement",
+        "adjust",
+        "prepaid",
+        "transit"
+      ],
+      "rawTypes": [],
+      "canonTypes": [
+        "current asset",
         "inventory"
       ],
-      "canonTypes": [],
       "typeExclude": [],
-      "notes": "Inventory type accounts -> inventory assets"
+      "notes": "'Inventory' name on Current Asset or Inventory type -> ASS.CUR.INY. Synonym pair with stock_on_hand; covers Xero charts where 'Inventory' is typed Current Asset rather than Inventory."
     },
     {
       "name": "preliminary_expenses",
