@@ -16,7 +16,6 @@ import type { SystemMapping } from '../types';
 // ---------------------------------------------------------------------------
 
 const allMappings = systemMappings as SystemMapping[];
-const leafMappings = allMappings.filter((m) => m.isLeaf);
 
 /** Head groups in display order. */
 const HEAD_ORDER = ['ASS', 'LIA', 'EQU', 'REV', 'EXP'];
@@ -44,12 +43,12 @@ function headFromCode(code: string): string {
   return code.split('.')[0];
 }
 
-/** Group leaf mappings by head. */
-const leafByHead: Record<string, SystemMapping[]> = {};
-for (const m of leafMappings) {
+/** Group all mappings by head (includes both leaves and parents). */
+const codesByHead: Record<string, SystemMapping[]> = {};
+for (const m of allMappings) {
   const head = headFromCode(m.reportingCode);
-  if (!leafByHead[head]) leafByHead[head] = [];
-  leafByHead[head].push(m);
+  if (!codesByHead[head]) codesByHead[head] = [];
+  codesByHead[head].push(m);
 }
 
 const codeToDescription: Record<string, string> = {};
@@ -124,7 +123,7 @@ export default function AccountDetailPanel({
     for (const head of HEAD_ORDER) {
       // Skip heads outside the account's group (when group is known).
       if (accountGroup && headGroup(head) !== accountGroup) continue;
-      const mappings = leafByHead[head] ?? [];
+      const mappings = codesByHead[head] ?? [];
       const filtered = search
         ? mappings.filter(
             (m) =>
