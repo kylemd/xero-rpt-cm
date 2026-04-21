@@ -9,6 +9,8 @@ import { useState, useMemo, useCallback } from 'react';
 import { useAppStore } from '../store/appStore';
 import { saveRules } from '../services/rulesService';
 import type { Rule, RulesData } from '../types';
+import { TypeMultiSelect } from './TypeMultiSelect';
+import { RAW_TYPE_OPTIONS, CANON_TYPE_OPTIONS } from '../constants/ruleTypes';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -459,53 +461,51 @@ export default function RulesAdmin({ onClose }: RulesAdminProps) {
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1">
-                        Raw Types (comma-separated)
+                        Raw Types
                       </label>
-                      <input
-                        type="text"
-                        value={arrayToString(editingRule.rawTypes)}
-                        onChange={(e) =>
-                          updateField(
-                            'rawTypes',
-                            stringToArray(e.target.value),
-                          )
-                        }
-                        className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      <TypeMultiSelect
+                        value={editingRule.rawTypes}
+                        options={RAW_TYPE_OPTIONS}
+                        onChange={(next) => updateField('rawTypes', next)}
+                        placeholder="e.g. current asset"
                       />
+                      <p className="mt-1 text-[11px] text-gray-500">
+                        Match when Xero's raw account type is one of these
+                        (pre-canonicalisation). Leave empty to match any type.
+                      </p>
                     </div>
                     <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1">
-                        Canon Types (comma-separated)
+                        Canon Types
                       </label>
-                      <input
-                        type="text"
-                        value={arrayToString(editingRule.canonTypes)}
-                        onChange={(e) =>
-                          updateField(
-                            'canonTypes',
-                            stringToArray(e.target.value),
-                          )
-                        }
-                        className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      <TypeMultiSelect
+                        value={editingRule.canonTypes}
+                        options={CANON_TYPE_OPTIONS}
+                        onChange={(next) => updateField('canonTypes', next)}
+                        placeholder="e.g. expense"
                       />
+                      <p className="mt-1 text-[11px] text-gray-500">
+                        Match when the canonicalised type is one of these
+                        (purchases/overhead → expense, etc.). Prefer this over
+                        Raw Types.
+                      </p>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">
-                      Type Exclude (comma-separated)
+                      Type Exclude
                     </label>
-                    <input
-                      type="text"
-                      value={arrayToString(editingRule.typeExclude)}
-                      onChange={(e) =>
-                        updateField(
-                          'typeExclude',
-                          stringToArray(e.target.value),
-                        )
-                      }
-                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    <TypeMultiSelect
+                      value={editingRule.typeExclude}
+                      options={CANON_TYPE_OPTIONS}
+                      onChange={(next) => updateField('typeExclude', next)}
+                      placeholder="e.g. revenue"
                     />
+                    <p className="mt-1 text-[11px] text-gray-500">
+                      Skip this rule if the canonicalised type is one of these.
+                      Useful to prevent cross-type leakage.
+                    </p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
@@ -549,29 +549,41 @@ export default function RulesAdmin({ onClose }: RulesAdminProps) {
                     </div>
                   </div>
 
-                  <div className="flex gap-4">
-                    <label className="flex items-center gap-1.5 text-sm text-gray-600">
-                      <input
-                        type="checkbox"
-                        checked={editingRule.ownerContext ?? false}
-                        onChange={(e) =>
-                          updateField('ownerContext', e.target.checked)
-                        }
-                        className="rounded border-gray-300"
-                      />
-                      Owner Context
-                    </label>
-                    <label className="flex items-center gap-1.5 text-sm text-gray-600">
-                      <input
-                        type="checkbox"
-                        checked={editingRule.nameOnly ?? false}
-                        onChange={(e) =>
-                          updateField('nameOnly', e.target.checked)
-                        }
-                        className="rounded border-gray-300"
-                      />
-                      Name Only
-                    </label>
+                  <div className="flex flex-col gap-2">
+                    <div>
+                      <label className="flex items-center gap-1.5 text-sm text-gray-600">
+                        <input
+                          type="checkbox"
+                          checked={editingRule.ownerContext ?? false}
+                          onChange={(e) =>
+                            updateField('ownerContext', e.target.checked)
+                          }
+                          className="rounded border-gray-300"
+                        />
+                        Owner Context
+                      </label>
+                      <p className="mt-0.5 ml-6 text-[11px] text-gray-500">
+                        Require owner/director keywords (e.g. director surname)
+                        to also appear in the account text.
+                      </p>
+                    </div>
+                    <div>
+                      <label className="flex items-center gap-1.5 text-sm text-gray-600">
+                        <input
+                          type="checkbox"
+                          checked={editingRule.nameOnly ?? false}
+                          onChange={(e) =>
+                            updateField('nameOnly', e.target.checked)
+                          }
+                          className="rounded border-gray-300"
+                        />
+                        Name Only
+                      </label>
+                      <p className="mt-0.5 ml-6 text-[11px] text-gray-500">
+                        Match against the account name only, ignoring
+                        description/code. Use for precise name-based overrides.
+                      </p>
+                    </div>
                   </div>
 
                   <div>
